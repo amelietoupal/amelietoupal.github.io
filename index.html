@@ -172,15 +172,30 @@ border-bottom-color: var(–accent);
 }
 
 /* COLOR CODING A / B / P */
-.card-a .card-header { background: var(–color-a); }
-.card-b .card-header { background: var(–color-b); }
-.card-p .card-header { background: var(–color-p); }
-.card-a .phase-label { border-left-color: var(–color-a); color: var(–color-a); }
-.card-b .phase-label { border-left-color: var(–color-b); color: var(–color-b); }
-.card-p .phase-label { border-left-color: var(–color-p); color: var(–color-p); }
-.card-a .ex-row:hover td { background: var(–color-a-light); }
-.card-b .ex-row:hover td { background: var(–color-b-light); }
-.card-p .ex-row:hover td { background: var(–color-p-light); }
+.card-a .card-header { background: #2d5246; }
+.card-b .card-header { background: #3d2f5c; }
+.card-p .card-header { background: #5c3d1e; }
+.card-a .phase-label { border-left-color: #3d6b5e; color: #2d5246; }
+.card-b .phase-label { border-left-color: #5a4a7a; color: #3d2f5c; }
+.card-p .phase-label { border-left-color: #8a5a2a; color: #5c3d1e; }
+.card-a .ex-row:hover td { background: rgba(61,107,94,0.06); }
+.card-b .ex-row:hover td { background: rgba(90,74,122,0.06); }
+.card-p .ex-row:hover td { background: rgba(140,90,42,0.06); }
+
+/* Dark mode card overrides */
+body.dark .card-a .card-header { background: #1e3830; }
+body.dark .card-b .card-header { background: #261c40; }
+body.dark .card-p .card-header { background: #3a2210; }
+body.dark .card-a .phase-label { color: #6aaa96; }
+body.dark .card-b .phase-label { color: #9a84c8; }
+body.dark .card-p .phase-label { color: #c89060; }
+body.dark .info-box { background: var(–cream); }
+body.dark .ex-detail-box { background: #2a231a; }
+body.dark .today-body { background: var(–card-bg); }
+body.dark .tracker-card { background: var(–card-bg); }
+body.dark .week-cell { background: var(–card-bg); }
+body.dark .week-cell:hover { background: var(–cream); }
+body.dark .weight-row { background: rgba(200,168,130,0.08); }
 
 /* SECTIONS */
 .section { display: none; }
@@ -388,7 +403,7 @@ font-size: 12px;
 color: var(–mid);
 line-height: 1.5;
 }
-.week-cell.deload { background: #f0ece4; }
+.week-cell.deload { background: var(–cream); }
 .week-cell.deload .week-num { color: var(–light); }
 
 /* TRAINING CARDS */
@@ -538,7 +553,7 @@ margin: 24px 0;
 border-left: 3px solid var(–accent);
 background: var(–cream);
 }
-.info-box.warn { border-left-color: #c4956a; background: #fdf5ec; }
+.info-box.warn { border-left-color: var(–accent-dark); background: var(–cream); }
 .info-box h4 {
 font-size: 11px;
 letter-spacing: 2px;
@@ -792,7 +807,17 @@ border-left: 2px solid var(–accent);
 .hero { padding: 60px 24px 50px; }
 .hero-stats { gap: 24px; }
 .ex-table th:nth-child(3), .ex-table td:nth-child(3) { display: none; }
+.theme-toggle { top: 8px; right: 8px; padding: 5px 10px; font-size: 10px; }
 }
+
+/* DARK MODE — global element overrides */
+body.dark .ex-table tr:hover td { background: var(–cream); }
+body.dark .hero { background: #0e0c0a; }
+body.dark .nav-tabs { background: var(–nav-bg); border-bottom-color: var(–soft); }
+body.dark .tab-btn.active { color: var(–accent); }
+body.dark .mistake-icon { background: #0e0c0a; }
+body.dark .footer { background: #0e0c0a; }
+body.dark .timer-widget { background: #0e0c0a; }
 </style>
 
 </head>
@@ -821,9 +846,9 @@ border-left: 2px solid var(–accent);
 <div class="hero">
   <div class="hero-label">Fitness Program</div>
   <h1>Modelka <em>Style</em><br>Training System</h1>
-  <p>Pevné tělo, dlouhé linie a výrazně lepší držení těla — 8 týdnů, bez přepínání</p>
+  <p>Pevné tělo, dlouhé linie a výrazně lepší držení těla — 24 týdnů, bez selhání</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="num">8</span><span class="lbl">Týdnů</span></div>
+    <div class="hero-stat"><span class="num">24</span><span class="lbl">Týdnů</span></div>
     <div class="hero-stat"><span class="num">2–3×</span><span class="lbl">Týdně trénink</span></div>
     <div class="hero-stat"><span class="num">RPE 6–8</span><span class="lbl">Intenzita</span></div>
     <div class="hero-stat"><span class="num">10 min</span><span class="lbl">Denní rutina</span></div>
