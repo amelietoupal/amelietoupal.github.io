@@ -31,7 +31,7 @@
     --warm-white: #1e1a16;
     --charcoal: #f0ebe0;
     --mid: #c8bfb0;
-    --light: #7a7068;
+    --light: #9a9088;
     --accent: #c8a882;
     --accent-dark: #d4b890;
     --soft: #3a3228;
@@ -39,6 +39,17 @@
     --nav-bg: #2a2520;
     --table-head: #2f2820;
   }
+
+/* Hero is always dark regardless of mode */
+.hero {
+background: #1a1814 !important;
+color: #f5f0e8;
+}
+.hero h1 { color: #f5f0e8 !important; }
+.hero p { color: rgba(245,240,232,0.6) !important; }
+.hero-label { color: #c8a882 !important; }
+.hero-stat .num { color: #c8a882 !important; }
+.hero-stat .lbl { color: rgba(245,240,232,0.45) !important; }
 
 - { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -767,7 +778,7 @@ vertical-align: middle;
 .ex-detail-row.open { display: table-row; }
 .ex-detail-box {
 padding: 14px 20px 16px 20px;
-background: #f7f3ec;
+background: var(–cream);
 border-bottom: 1px solid var(–soft);
 }
 .ex-detail-box h5 {
@@ -802,6 +813,10 @@ border-left: 2px solid var(–accent);
 .section.active { animation: fadeIn 0.35s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+/* FORCE LIGHT MODE BY DEFAULT */
+:root { color-scheme: light only; }
+body.dark { color-scheme: dark; }
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
 .hero { padding: 60px 24px 50px; }
@@ -810,14 +825,15 @@ border-left: 2px solid var(–accent);
 .theme-toggle { top: 8px; right: 8px; padding: 5px 10px; font-size: 10px; }
 }
 
-/* DARK MODE — global element overrides */
-body.dark .ex-table tr:hover td { background: var(–cream); }
-body.dark .hero { background: #0e0c0a; }
-body.dark .nav-tabs { background: var(–nav-bg); border-bottom-color: var(–soft); }
-body.dark .tab-btn.active { color: var(–accent); }
-body.dark .mistake-icon { background: #0e0c0a; }
+/* DARK MODE — all overrides */
+body.dark .hero { background: #0e0c0a !important; }
 body.dark .footer { background: #0e0c0a; }
+body.dark .mistake-icon { background: #0e0c0a; }
 body.dark .timer-widget { background: #0e0c0a; }
+body.dark .ex-table thead { background: var(–soft); }
+body.dark .card-a .phase-label { color: #6aaa96; }
+body.dark .card-b .phase-label { color: #9a84c8; }
+body.dark .card-p .phase-label { color: #c89060; }
 </style>
 
 </head>
