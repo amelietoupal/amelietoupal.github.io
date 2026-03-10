@@ -5,84 +5,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Modelka Style — Tréninkový Systém</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ============================================================
-   MODELKA TRAINING SYSTEM — CSS v4 (čistý, bez duplikátů)
-   ============================================================ */
 :root {
-  --bg: #f7f5f2; --surface: #ffffff;
-  --border: #e8e4dd; --border2: #d4cfc7;
-  --text: #111111; --text2: #555555; --text3: #999999;
-  --accent: #c8a882; --accent2: #9e7d5a;
-  --green: #2d5246; --purple: #3d2f5c; --brown: #5c3d1e;
-  --red: #c0392b; --ink: #1a1814;
-  --radius: 12px; --rad-sm: 8px;
+  --bg: #f7f5f2;
+  --surface: #ffffff;
+  --border: #e8e4dd;
+  --border2: #d4cfc7;
+  --text: #111111;
+  --text2: #555555;
+  --text3: #999999;
+  --accent: #c4845a;
+  --accent2: #8b5e3c;
+  --green: #2d5246;
+  --purple: #3d2f5c;
+  --brown: #5c3d1e;
+  --red: #c0392b;
+  --ink: #1a1814;
+  --radius: 12px;
+  --rad-sm: 8px;
+  color-scheme: light;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
-body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; color-scheme: light; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
 
 /* ── HERO ── */
-.hero { background: var(–ink); padding: 52px 24px 44px; text-align: center; position: relative; overflow: hidden; }
-.hero::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 30% 100%, rgba(200,168,130,.14), transparent 70%); pointer-events: none; }
+.hero { background: var(–ink); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+.hero::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 20% 110%, rgba(196,132,90,.22), transparent 60%), radial-gradient(ellipse 50% 40% at 80% 0%, rgba(196,132,90,.08), transparent 50%); pointer-events: none; }
 .hero-label { display: inline-block; font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(–accent); margin-bottom: 14px; font-weight: 500; }
-.hero h1 { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(38px, 8vw, 72px); font-weight: 300; line-height: 1.05; color: #fff; margin-bottom: 12px; }
+.hero h1 { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(40px, 8vw, 74px); font-weight: 300; line-height: 1.05; color: #fff; margin-bottom: 12px; }
 .hero h1 em { font-style: italic; color: var(–accent); }
-.hero-sub { font-size: 13px; color: rgba(255,255,255,.45); margin-bottom: 30px; }
-.hero-stats { display: inline-flex; border: 1px solid rgba(255,255,255,.10); }
-.hero-stat { padding: 14px 24px; border-right: 1px solid rgba(255,255,255,.10); text-align: center; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,.4); margin-bottom: 30px; }
+.hero-stats { display: inline-flex; border: 1px solid rgba(255,255,255,.1); }
+.hero-stat { padding: 14px 24px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
 .hero-stat:last-child { border-right: none; }
-.hero-stat .n { font-family: ‘Cormorant Garamond’, serif; font-size: 26px; color: var(–accent); display: block; line-height: 1; font-weight: 400; }
-.hero-stat .l { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 3px; display: block; }
-
-/* ── WEEK PROGRESS ── */
-.week-bar-wrap { background: var(–ink); border-bottom: 1px solid rgba(255,255,255,.06); padding: 0 24px 16px; display: flex; align-items: center; gap: 12px; }
-.week-bar-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.35); white-space: nowrap; }
-.week-bar-track { flex: 1; height: 3px; background: rgba(255,255,255,.12); border-radius: 2px; overflow: hidden; }
-.week-bar-fill { height: 100%; background: var(–accent); border-radius: 2px; transition: width .5s ease; width: 4.17%; }
-.week-bar-input { background: none; border: none; outline: none; font-family: inherit; font-size: 13px; color: var(–accent); width: 28px; text-align: right; cursor: pointer; font-weight: 500; }
-.week-bar-max { font-size: 12px; color: rgba(255,255,255,.3); }
+.hero-stat .num { font-family: ‘Cormorant Garamond’, serif; font-size: 26px; color: var(–accent); display: block; line-height: 1; font-weight: 400; }
+.hero-stat .lbl { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: 3px; display: block; }
 
 /* ── NAV ── */
 .nav { position: sticky; top: 0; z-index: 200; background: var(–surface); border-bottom: 1px solid var(–border); display: flex; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 .nav::-webkit-scrollbar { display: none; }
 .nav-btn { flex-shrink: 0; padding: 0 20px; height: 52px; border: none; background: none; font-family: inherit; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(–text3); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: color .18s, border-color .18s; font-weight: 400; }
 .nav-btn:hover { color: var(–text2); }
-.nav-btn.active { color: var(–text); border-bottom-color: var(–accent); font-weight: 500; }
+.nav-btn.active { color: var(–text); border-bottom: 3px solid var(–accent); font-weight: 600; }
 
 /* ── SECTIONS ── */
 .section { display: none; }
-.section.active { display: block; animation: up .28s ease; }
-@keyframes up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; } }
-.content { max-width: 780px; margin: 0 auto; padding: 40px 20px 80px; }
+.section.active { display: block !important; animation: fadeUp .28s ease; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.content { max-width: 780px; margin: 0 auto; padding: 44px 20px 80px; }
 
-/* ── PAGE HEADER ── */
+/* ── HEADINGS ── */
 .page-hd-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(–text3); margin-bottom: 8px; }
-.section-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(28px, 5vw, 42px); font-weight: 300; line-height: 1.1; margin-bottom: 32px; }
+.section-title { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(28px, 5vw, 44px); font-weight: 300; line-height: 1.1; margin-bottom: 32px; }
+.section-title em { font-style: italic; color: var(–accent2); }
 
-/* ── TODAY WIDGET ── */
-.today { background: var(–ink); border-radius: var(–radius); padding: 24px; margin-bottom: 32px; position: relative; overflow: hidden; }
-.today::before { content: ‘’; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(200,168,130,.12), transparent 70%); pointer-events: none; }
-.today-date-str { font-size: 11px; color: rgba(200,168,130,.7); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
-.today-heading { font-family: ‘Cormorant Garamond’, serif; font-size: 20px; color: #fff; font-weight: 300; margin-bottom: 16px; }
-.today-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 16px; }
-.today-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08); border-radius: var(–rad-sm); padding: 16px 14px; cursor: pointer; transition: all .18s; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 80px; justify-content: center; user-select: none; }
-.today-card:hover { background: rgba(255,255,255,.09); }
-.today-card.sel-a { background: rgba(45,82,70,.25); border-color: rgba(106,170,150,.5); }
-.today-card.sel-b { background: rgba(61,47,92,.25); border-color: rgba(130,100,200,.5); }
-.today-card.sel-p { background: rgba(92,61,30,.25); border-color: rgba(200,168,130,.5); }
-.today-card.sel-rest { background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.2); }
-.today-card-icon { font-size: 22px; line-height: 1; }
-.today-card-name { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.6); font-weight: 500; }
-.today-info { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.6; border-top: 1px solid rgba(255,255,255,.07); padding-top: 14px; min-height: 30px; }
-.today-info strong { color: rgba(255,255,255,.85); }
-.btn-open { display: inline-block; margin-top: 12px; padding: 10px 20px; border-radius: var(–rad-sm); background: var(–accent); color: var(–ink); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 500; font-family: inherit; transition: background .18s; }
-.btn-open:hover { background: #d4b88a; }
+/* ── TODAY ── */
+.today { background: var(–ink); border-radius: var(–radius); padding: 24px; margin-bottom: 32px; }
+.today-date { font-size: 11px; color: rgba(196,132,90,.7); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 4px; }
+.today-title { font-family: ‘Cormorant Garamond’, serif; font-size: 22px; color: #fff; font-weight: 300; margin-bottom: 16px; }
+.today-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 16px; }
+.today-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: var(–rad-sm); padding: 14px 8px; cursor: pointer; transition: all .18s; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 78px; justify-content: center; user-select: none; }
+.today-card:hover { background: rgba(255,255,255,.1); }
+.today-card.sel-a { background: rgba(45,82,70,.35); border-color: rgba(106,170,150,.6); }
+.today-card.sel-b { background: rgba(61,47,92,.35); border-color: rgba(140,110,210,.6); }
+.today-card.sel-p { background: rgba(92,61,30,.35); border-color: rgba(196,132,90,.6); }
+.today-card.sel-rest { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.3); }
+.tc-icon { font-size: 20px; line-height: 1; }
+.tc-name { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.5); font-weight: 500; }
+.today-card.sel-a .tc-name { color: #6aaa96; }
+.today-card.sel-b .tc-name { color: #9a84c8; }
+.today-card.sel-p .tc-name { color: var(–accent); }
+.today-card.sel-rest .tc-name { color: rgba(255,255,255,.85); }
+.today-info { font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.7; border-top: 1px solid rgba(255,255,255,.07); padding-top: 14px; min-height: 32px; }
+.today-info strong { color: rgba(255,255,255,.9); }
+.today-info small { color: rgba(255,255,255,.4); }
+.btn-open { display: inline-block; margin-top: 12px; padding: 10px 22px; border-radius: var(–rad-sm); background: var(–accent); color: var(–ink); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; border: none; cursor: pointer; font-weight: 600; font-family: inherit; transition: background .18s; }
+.btn-open:hover { background: #d49060; }
 
 /* ── PHASE GRID ── */
-.phase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 8px; margin-bottom: 32px; }
-.phase-cell { background: var(–surface); border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 16px 14px; transition: border-color .15s; }
+.phase-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; margin-bottom: 32px; }
+.phase-cell { background: var(–surface); border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 16px 14px; }
 .phase-cell:hover { border-color: var(–accent); }
 .phase-cell.deload { background: #faf8f4; }
 .phase-cell.milestone { border-top: 3px solid var(–accent); }
@@ -91,87 +95,96 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 .phase-name { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); margin: 4px 0 6px; font-weight: 500; }
 .phase-desc { font-size: 11px; color: var(–text2); line-height: 1.5; }
 
+/* ── WEEK BAR ── */
+.week-bar-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; background: var(–surface); border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 14px 18px; }
+.week-bar-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); flex-shrink: 0; }
+.week-bar-track { flex: 1; height: 4px; background: var(–border); border-radius: 2px; overflow: hidden; }
+.week-bar-fill { height: 100%; background: var(–accent); border-radius: 2px; transition: width .3s ease; }
+#weekInput { width: 44px; border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 4px 8px; font-size: 13px; font-family: inherit; text-align: center; outline: none; background: var(–bg); }
+#weekInput:focus { border-color: var(–accent); }
+.week-bar-max { font-size: 12px; color: var(–text3); }
+
 /* ── INFO BOX ── */
 .info-box { background: var(–surface); border: 1px solid var(–border); border-left: 3px solid var(–accent); border-radius: 0 var(–rad-sm) var(–rad-sm) 0; padding: 16px 20px; margin: 20px 0; }
-.info-box.warn { border-left-color: var(–accent2); }
 .info-box h4 { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(–accent2); margin-bottom: 6px; font-weight: 500; }
-.info-box p { font-size: 13px; color: var(–text2); line-height: 1.7; }
+.info-box p, .info-box ul { font-size: 13px; color: var(–text2); line-height: 1.7; }
+.info-box ul { padding-left: 18px; }
+.info-box li { margin-bottom: 4px; }
 
 /* ── WORKOUT CARDS ── */
-.wcard { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); overflow: hidden; margin-bottom: 24px; }
-.wcard-head { padding: 20px 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; color: #fff; flex-wrap: wrap; }
+.wcard { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); overflow: hidden; margin-bottom: 28px; }
+.wcard-head { padding: 20px 24px; display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
 .wcard-a .wcard-head { background: var(–green); }
 .wcard-b .wcard-head { background: var(–purple); }
 .wcard-p .wcard-head { background: var(–brown); }
-.wcard-title { font-family: ‘Cormorant Garamond’, serif; font-size: 22px; font-weight: 300; color: #fff; line-height: 1.1; margin-bottom: 4px; }
-.wcard-sub { font-size: 11px; color: rgba(255,255,255,.55); }
-.wcard-badge { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 20px; padding: 5px 12px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.8); white-space: nowrap; align-self: flex-start; }
+.wcard-head h3 { font-family: ‘Cormorant Garamond’, serif; font-size: 22px; font-weight: 300; color: #fff; line-height: 1.15; }
+.wcard-badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: 5px 12px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.85); white-space: nowrap; align-self: flex-start; }
+.tag { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.25); border-radius: 20px; padding: 5px 12px; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,.85); white-space: nowrap; }
 
-/* ── PHASE LABEL ── */
-.phase-lbl { padding: 9px 20px; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(–border); display: flex; align-items: center; gap: 8px; }
+/* ── PHASE LABELS ── */
+.phase-lbl { padding: 10px 20px; font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 600; border-bottom: 1px solid var(–border); display: flex; align-items: center; gap: 8px; color: var(–text3); background: var(–bg); }
 .phase-lbl::before { content: ‘’; display: inline-block; width: 3px; height: 14px; border-radius: 2px; flex-shrink: 0; }
-.wcard-a .phase-lbl { color: var(–green); background: rgba(45,82,70,.05); }
+.wcard-a .phase-lbl { color: var(–green); background: rgba(45,82,70,.04); }
 .wcard-a .phase-lbl::before { background: var(–green); }
-.wcard-b .phase-lbl { color: var(–purple); background: rgba(61,47,92,.05); }
+.wcard-b .phase-lbl { color: var(–purple); background: rgba(61,47,92,.04); }
 .wcard-b .phase-lbl::before { background: var(–purple); }
-.wcard-p .phase-lbl { color: var(–brown); background: rgba(92,61,30,.05); }
+.wcard-p .phase-lbl { color: var(–brown); background: rgba(92,61,30,.04); }
 .wcard-p .phase-lbl::before { background: var(–brown); }
-.phase-lbl { color: var(–accent2); background: rgba(200,168,130,.05); }
-.phase-lbl::before { background: var(–accent2); }
 
-/* ── EX-LIST + EX-ROW ACCORDION ── */
+/* ── ACCORDION ── */
 .ex-list { border-top: 1px solid var(–border); }
 .ex-row { display: block; cursor: pointer; border-bottom: 1px solid var(–border); transition: background .15s; }
 .ex-row:hover, .ex-row.open { background: #f9f7f4; }
-.ex-row-inner { display: flex; align-items: center; gap: 10px; padding: 14px 16px 14px 18px; min-height: 60px; }
-.ex-chevron { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(–bg); border: 1.5px solid var(–border2); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; color: var(–text3); transition: all .2s; user-select: none; font-style: normal; }
-.ex-row.open .ex-chevron { background: var(–accent); border-color: var(–accent); color: white; transform: rotate(45deg); }
+.ex-row-inner { display: flex; align-items: center; gap: 10px; padding: 14px 18px; min-height: 60px; }
+.ex-chevron { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; background: var(–bg); border: 1.5px solid var(–border2); display: inline-flex; align-items: center; justify-content: center; font-size: 16px; line-height: 1; color: var(–text3); transition: all .2s; user-select: none; }
+.ex-row.open .ex-chevron { background: var(–accent); border-color: var(–accent); color: white; }
 .wcard-a .ex-row:hover .ex-chevron { border-color: var(–green); color: var(–green); }
 .wcard-b .ex-row:hover .ex-chevron { border-color: var(–purple); color: var(–purple); }
 .wcard-p .ex-row:hover .ex-chevron { border-color: var(–brown); color: var(–brown); }
 .ex-main { flex: 1; min-width: 0; }
 .ex-name { font-size: 14px; font-weight: 600; color: var(–text); line-height: 1.3; }
-.ex-detail-sub { font-size: 11px; color: var(–text3); margin-top: 2px; }
-.ex-sets-inline { font-size: 12px; color: var(–text2); white-space: nowrap; flex-shrink: 0; max-width: 160px; text-align: right; line-height: 1.4; }
+.ex-sub { font-size: 11px; color: var(–text3); margin-top: 2px; }
+.ex-sets-inline { font-size: 12px; color: var(–text2); white-space: nowrap; flex-shrink: 0; text-align: right; line-height: 1.4; }
 .rpe-pill { display: inline-flex; align-items: center; background: var(–bg); border: 1px solid var(–border); border-radius: 20px; padding: 3px 10px; font-size: 10px; font-weight: 600; color: var(–text2); white-space: nowrap; flex-shrink: 0; }
 
-/* ── EX-DETAIL (rozbalený obsah) ── */
+/* ── EXERCISE DETAIL ── */
 .ex-detail { display: none; border-bottom: 1px solid var(–border); }
-.ex-detail.open { display: block; animation: up .2s ease; }
-.ex-detail-inner { padding: 18px 20px 20px 20px; background: #faf8f4; }
-.ex-weight-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: white; border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 10px 14px; margin-bottom: 14px; }
-.ew-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); font-weight: 500; }
-.ew-val { font-size: 14px; font-weight: 600; }
-.ew-note { font-size: 11px; color: var(–text3); margin-left: auto; }
+.ex-detail.open { display: block; animation: fadeUp .2s ease; }
+.ex-detail-inner { padding: 18px 22px; background: #faf8f4; }
 .ex-detail-inner h5 { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–accent2); margin-bottom: 8px; font-weight: 600; margin-top: 14px; }
 .ex-detail-inner h5:first-child { margin-top: 0; }
-.ex-detail-inner ol { padding-left: 18px; margin-bottom: 10px; }
+.ex-detail-inner ol, .ex-detail-inner ul { padding-left: 18px; margin-bottom: 8px; }
 .ex-detail-inner li { font-size: 13px; color: var(–text2); line-height: 1.7; margin-bottom: 4px; }
-.tip-box { background: rgba(200,168,130,.1); border-left: 2px solid var(–accent); padding: 8px 12px; margin-top: 10px; font-size: 12px; color: var(–accent2); border-radius: 0 var(–rad-sm) var(–rad-sm) 0; }
+.ex-detail-inner p { font-size: 13px; color: var(–text2); line-height: 1.7; margin-bottom: 8px; }
+.tip-box { background: rgba(196,132,90,.1); border-left: 2px solid var(–accent); padding: 8px 12px; margin-top: 10px; font-size: 12px; color: var(–accent2); border-radius: 0 var(–rad-sm) var(–rad-sm) 0; }
+.weight-row, .ex-weight-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; background: white; border: 1px solid var(–border); border-radius: var(–rad-sm); padding: 10px 14px; margin-bottom: 14px; }
+.weight-label, .ew-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); font-weight: 500; }
+.weight-val, .ew-val { font-size: 14px; font-weight: 600; color: var(–text); }
+.weight-note, .ew-note { font-size: 11px; color: var(–text3); margin-left: auto; }
 .btn-timer { display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 8px 14px; border-radius: var(–rad-sm); background: white; border: 1px solid var(–border); font-size: 11px; text-transform: uppercase; color: var(–text2); cursor: pointer; font-family: inherit; transition: all .18s; }
 .btn-timer:hover { border-color: var(–accent); color: var(–accent2); }
-.yt-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 8px 14px; border-radius: var(–rad-sm); background: #ff0000; color: white !important; font-size: 11px; font-weight: 600; text-decoration: none; font-family: inherit; transition: background .18s; }
-.yt-link:hover { background: #cc0000; }
+.yt-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 8px 14px; border-radius: var(–rad-sm); background: #cc0000; color: #fff !important; text-decoration: none; font-size: 11px; font-weight: 600; font-family: inherit; transition: background .18s; }
+.yt-link:hover { background: #990000; }
 
-/* ── VERSION TOGGLE (Pilates) ── */
-.ver-toggle { padding: 14px 20px; background: var(–bg); border-bottom: 1px solid var(–border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+/* ── PILATES TOGGLE ── */
+.ver-toggle { padding: 12px 18px; background: var(–bg); border-bottom: 1px solid var(–border); display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .ver-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); margin-right: 4px; }
 .ver-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(–border); background: white; font-size: 12px; color: var(–text2); cursor: pointer; font-family: inherit; transition: all .18s; }
 .ver-btn.active { background: var(–brown); border-color: var(–brown); color: white; }
 
-/* ── DAILY ROUTINE ── */
+/* ── ROUTINE ── */
 .routine-list { border-radius: var(–radius); overflow: hidden; border: 1px solid var(–border); margin-bottom: 24px; }
-.routine-item { display: flex; background: var(–surface); border-bottom: 1px solid var(–border); }
-.routine-item:last-child { border-bottom: none; }
-.routine-time { flex-shrink: 0; width: 80px; padding: 18px 14px; background: var(–bg); border-right: 1px solid var(–border); font-family: ‘Cormorant Garamond’, serif; font-size: 17px; color: var(–accent); font-weight: 400; }
-.routine-time span { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(–text3); display: block; margin-top: 2px; font-family: inherit; }
-.routine-body { padding: 18px 20px; flex: 1; }
-.routine-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
-.routine-body p { font-size: 13px; color: var(–text2); line-height: 1.65; }
+.routine-step { display: flex; background: var(–surface); border-bottom: 1px solid var(–border); }
+.routine-step:last-child { border-bottom: none; }
+.step-time { flex-shrink: 0; width: 80px; padding: 18px 14px; background: var(–bg); border-right: 1px solid var(–border); font-family: ‘Cormorant Garamond’, serif; font-size: 18px; color: var(–accent); font-weight: 400; line-height: 1; }
+.step-time span { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(–text3); display: block; margin-top: 3px; font-family: inherit; }
+.step-body { padding: 18px 20px; flex: 1; }
+.step-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
+.step-body p { font-size: 13px; color: var(–text2); line-height: 1.65; }
 
 /* ── CHECKLIST ── */
 .checklist { border-radius: var(–radius); overflow: hidden; border: 1px solid var(–border); margin-bottom: 24px; }
-.check-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; background: var(–surface); border-bottom: 1px solid var(–border); cursor: pointer; transition: background .15s; min-height: 56px; }
+.check-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 20px; background: var(–surface); border-bottom: 1px solid var(–border); cursor: pointer; transition: background .15s; }
 .check-item:last-child { border-bottom: none; }
 .check-item:hover { background: #f9f7f4; }
 .check-item.done { background: #f4f9f6; }
@@ -191,20 +204,31 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 .cardio-body p { font-size: 13px; color: var(–text2); line-height: 1.5; }
 .cardio-chip { flex-shrink: 0; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; background: var(–bg); color: var(–text3); border: 1px solid var(–border); white-space: nowrap; align-self: flex-start; }
 
-/* ── CHYBY ── */
+/* ── MISTAKES ── */
 .mistake-card { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); overflow: hidden; margin-bottom: 10px; display: flex; }
-.mistake-icon-col { width: 56px; flex-shrink: 0; background: var(–bg); display: flex; align-items: flex-start; justify-content: center; padding-top: 18px; font-size: 22px; border-right: 1px solid var(–border); }
+.mistake-icon { width: 56px; flex-shrink: 0; background: var(–bg); display: flex; align-items: flex-start; justify-content: center; padding-top: 18px; font-size: 22px; border-right: 1px solid var(–border); }
 .mistake-body { padding: 16px 18px; flex: 1; }
 .mistake-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; }
 .mistake-body p { font-size: 13px; color: var(–text2); line-height: 1.55; }
 .mistake-fix { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(–green); background: rgba(45,82,70,.07); padding: 6px 10px; border-radius: var(–rad-sm); display: inline-block; }
 
-/* ── MACRO / FOOD ── */
-.macro-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 20px; }
+/* ── MACROS ── */
+.macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
 .macro-card { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); padding: 16px; text-align: center; }
-.macro-val { font-family: ‘Cormorant Garamond’, serif; font-size: 30px; color: var(–accent); line-height: 1; display: block; font-weight: 400; }
-.macro-unit { font-size: 11px; color: var(–text3); margin-top: 2px; display: block; }
+.macro-val { font-family: ‘Cormorant Garamond’, serif; font-size: 32px; color: var(–accent); line-height: 1; display: block; font-weight: 400; }
+.macro-unit { font-size: 11px; color: var(–text3); display: block; margin-top: 2px; }
 .macro-name { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(–text3); margin-top: 6px; font-weight: 500; }
+
+/* ── TABLES ── */
+.safety-table, .sched-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+.safety-table th, .sched-table th { background: var(–bg); padding: 10px 16px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); text-align: left; border-bottom: 1px solid var(–border); font-weight: 500; }
+.safety-table td, .sched-table td { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid var(–border); vertical-align: top; }
+.safety-table tr:last-child td, .sched-table tr:last-child td { border-bottom: none; }
+.safety-action { font-size: 12px; color: var(–red); font-weight: 600; }
+.chip { display: inline-block; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-left: 4px; vertical-align: middle; }
+.chip-a { background: rgba(45,82,70,.1); color: var(–green); }
+.chip-b { background: rgba(61,47,92,.1); color: var(–purple); }
+.chip-p { background: rgba(92,61,30,.1); color: var(–brown); }
 
 /* ── TRACKER ── */
 .tracker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
@@ -220,69 +244,45 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 .star::after { content: ‘★’; font-size: 13px; color: var(–border2); }
 .star.active { background: var(–accent); border-color: var(–accent); }
 .star.active::after { color: white; }
+.milestone-list { list-style: none; }
+.milestone-list li { padding: 12px 16px; background: var(–surface); border: 1px solid var(–border); border-radius: var(–rad-sm); margin-bottom: 8px; font-size: 13px; display: flex; align-items: center; gap: 12px; }
+.milestone-list li input[type=“checkbox”] { width: 16px; height: 16px; accent-color: var(–green); }
 
-/* ── REST TIMER ── */
-.timer-widget { position: fixed; bottom: 24px; right: 20px; z-index: 400; background: var(–ink); color: white; border-radius: var(–radius); padding: 18px 20px; min-width: 170px; box-shadow: 0 8px 40px rgba(0,0,0,.3); display: none; border: 1px solid rgba(255,255,255,.08); }
-.timer-widget.visible { display: block; animation: up .2s ease; }
+/* ── TIMER ── */
+.timer-widget { position: fixed; bottom: 24px; right: 20px; z-index: 400; background: var(–ink); color: white; border-radius: var(–radius); padding: 18px 20px; min-width: 172px; box-shadow: 0 8px 40px rgba(0,0,0,.3); display: none; border: 1px solid rgba(255,255,255,.08); }
+.timer-widget.visible { display: block; animation: fadeUp .2s ease; }
 .timer-top { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–accent); margin-bottom: 8px; }
 .timer-track { height: 2px; background: rgba(255,255,255,.12); border-radius: 1px; overflow: hidden; margin-bottom: 6px; }
-.timer-fill { height: 100%; background: var(–accent); transition: width 1s linear; }
+.timer-fill { height: 100%; background: var(–accent); transition: width 1s linear; width: 100%; }
 .timer-disp { font-family: ‘Cormorant Garamond’, serif; font-size: 50px; line-height: 1; margin-bottom: 12px; color: white; }
 .timer-disp.done { color: var(–accent); }
 .timer-btns { display: flex; gap: 6px; align-items: center; }
-.tbtn { padding: 6px 10px; border-radius: var(–rad-sm); border: 1px solid rgba(200,168,130,.3); background: none; color: var(–accent); font-size: 10px; cursor: pointer; font-family: inherit; transition: all .15s; }
+.tbtn { padding: 6px 10px; border-radius: var(–rad-sm); border: 1px solid rgba(196,132,90,.3); background: none; color: var(–accent); font-size: 10px; cursor: pointer; font-family: inherit; transition: all .15s; }
 .tbtn:hover { background: var(–accent); color: var(–ink); }
 .tbtn-close { color: rgba(255,255,255,.3); border-color: rgba(255,255,255,.12); margin-left: auto; }
-
-/* ── SCHED TABLE ── */
-.sched-card { background: var(–surface); border: 1px solid var(–border); border-radius: var(–radius); overflow: hidden; margin-bottom: 16px; }
-.sched-row { display: flex; padding: 13px 20px; border-bottom: 1px solid var(–border); font-size: 13px; }
-.sched-row:last-child { border-bottom: none; }
-.sched-day { font-weight: 600; min-width: 90px; }
-.sched-what { color: var(–text2); flex: 1; }
-.sched-time { font-size: 11px; color: var(–text3); margin-left: 12px; }
-.chip { display: inline-block; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 2px 8px; border-radius: 20px; font-weight: 500; margin-left: 6px; vertical-align: middle; }
-.chip-a { background: rgba(45,82,70,.1); color: var(–green); }
-.chip-b { background: rgba(61,47,92,.1); color: var(–purple); }
-.chip-p { background: rgba(92,61,30,.1); color: var(–brown); }
-
-/* ── SAFETY TABLE ── */
-.safety-table { width: 100%; border-collapse: collapse; }
-.safety-table th { background: var(–bg); padding: 10px 16px; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–text3); text-align: left; border-bottom: 1px solid var(–border); font-weight: 500; }
-.safety-table td { padding: 13px 16px; font-size: 13px; border-bottom: 1px solid var(–border); vertical-align: top; }
-.safety-table tr:last-child td { border-bottom: none; }
-.safety-action { font-size: 12px; color: var(–red); font-weight: 600; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 600px) {
 .hero { padding: 44px 18px 36px; }
+.hero-stats { flex-wrap: wrap; }
 .hero-stat { padding: 10px 14px; }
-.hero-stat .n { font-size: 22px; }
+.hero-stat .num { font-size: 22px; }
 .content { padding: 28px 14px 64px; }
-.nav-btn { padding: 0 14px; height: 48px; font-size: 10px; }
+.nav-btn { padding: 0 14px; height: 46px; font-size: 10px; }
 .today-grid { grid-template-columns: 1fr 1fr; }
 .phase-grid { grid-template-columns: 1fr 1fr; }
 .tracker-grid { grid-template-columns: 1fr; }
 .macro-grid { grid-template-columns: 1fr 1fr; }
-.ex-row-inner { padding: 12px 12px 12px 14px; }
 .ex-sets-inline { display: none; }
-.ex-detail-inner { padding: 14px; }
-.routine-time { width: 62px; }
-.sched-time { display: none; }
 }
 @media (min-width: 601px) and (max-width: 1024px) {
 .content { padding: 36px 28px 80px; max-width: 100%; }
-.phase-grid { grid-template-columns: repeat(4,1fr); }
-.today-grid { grid-template-columns: repeat(4,1fr); }
+.today-grid { grid-template-columns: repeat(4, 1fr); }
 }
-</style>
 
+</style>
 </head>
 <body>
-
-<!-- THEME TOGGLE -->
-
-<button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Tmavý</button>
 
 <!-- REST TIMER WIDGET -->
 
@@ -294,23 +294,25 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
     <button class="tbtn" data-seconds="60">60s</button>
     <button class="tbtn" data-seconds="90">90s</button>
     <button class="tbtn" data-seconds="120">2 min</button>
-    <button class="tbtn tbtn-close" id="closeTimerBtn">✕</button>
+    <button class="tbtn tbtn-close" id="closeTimerBtn" id="closeTimerBtn">✕</button>
   </div>
 </div>
 
 <!-- HERO -->
 
 <div class="hero">
-  <div class="hero-label">Modelka Style &middot; 24 tydnu</div>
-  <h1>Treningovy <em>system</em></h1>
-  <p class="hero-sub">Sila &middot; Postura &middot; Proporce</p>
+  <div class="hero-label">Modelka Style · 24 týdnů</div>
+  <h1>Modelka <em>Style</em><br>Training System</h1>
+  <p>Pevné tělo, dlouhé linie a výrazně lepší držení těla — 24 týdnů, bez selhání</p>
   <div class="hero-stats">
-    <div class="hero-stat"><span class="n">24</span><span class="l">tydnu</span></div>
-    <div class="hero-stat"><span class="n">167</span><span class="l">cm</span></div>
-    <div class="hero-stat"><span class="n">51</span><span class="l">kg</span></div>
-    <div class="hero-stat"><span class="n">3x</span><span class="l">tydne</span></div>
+    <div class="hero-stat"><span class="num">24</span><span class="lbl">Týdnů</span></div>
+    <div class="hero-stat"><span class="num">2–3×</span><span class="lbl">Týdně trénink</span></div>
+    <div class="hero-stat"><span class="num">RPE 6–8</span><span class="lbl">Intenzita</span></div>
+    <div class="hero-stat"><span class="num">10 min</span><span class="lbl">Denní rutina</span></div>
   </div>
 </div>
+
+<!-- NAV -->
 
 <nav class="nav">
   <button class="nav-btn active" data-tab="plan">Plán</button>
@@ -330,18 +332,18 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 ```
 <!-- TODAY'S WORKOUT -->
 <div class="today">
-  <div class="today-date-str" id="todayDate"></div>
-  <div class="today-heading">Co dnes tréninuješ?</div>
+  <div class="today-date" id="todayDate"></div>
+  <div class="today-title">Co dnes trénuješ?</div>
   <div class="today-grid">
-    <div class="today-card" data-type="a"><div class="today-card-icon">🟢</div><div class="today-card-name">Síla A</div></div>
-    <div class="today-card" data-type="b"><div class="today-card-icon">🟣</div><div class="today-card-name">Síla B</div></div>
-    <div class="today-card" data-type="p"><div class="today-card-icon">🟤</div><div class="today-card-name">Pilates</div></div>
-    <div class="today-card" data-type="rest"><div class="today-card-icon">💤</div><div class="today-card-name">Volno</div></div>
+    <div class="today-card" data-type="a"><span class="tc-icon">💚</span><span class="tc-name">Síla A</span></div>
+    <div class="today-card" data-type="b"><span class="tc-icon">💜</span><span class="tc-name">Síla B</span></div>
+    <div class="today-card" data-type="p"><span class="tc-icon">🟤</span><span class="tc-name">Pilates</span></div>
+    <div class="today-card" data-type="rest"><span class="tc-icon">😴</span><span class="tc-name">Volno</span></div>
   </div>
   <div class="today-info" id="todaySummary">Klepni na trénink výše ↑</div>
 </div>
 
-<div class="page-hd-label"><div class="page-hd-label">24týdenní periodizace — půl roku</div>
+<div class="page-hd-label"<div class="page-hd-label">24týdenní periodizace — půl roku</div>
 <h2 class="section-title">Jak to <em>celé funguje</em></h2>
 
 <div class="phase-grid">
@@ -458,8 +460,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- Weekly schedule -->
 <div class="page-hd-label" style="margin-top:48px">Týdenní rozvrh</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Varianta 2× týdně — základ</h3><span class="wcard-badge">Doporučeno</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Varianta 2× týdně — základ</h3><span class="tag">Doporučeno</span></div>
   <div class="ex-table" style="display:block">
     <div style="padding:0">
       <div class="phase-lbl">Týdenní struktura</div>
@@ -477,8 +479,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
   </div>
 </div>
 
-<div class="wcard">
-  <div class="wcard-head"><h3>Varianta 3× týdně — ideál</h3><span class="wcard-badge">Pokročilá</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Varianta 3× týdně — ideál</h3><span class="tag">Pokročilá</span></div>
   <div class="ex-table" style="display:block">
     <div style="padding:0">
       <table class="ex-table">
@@ -498,6 +500,7 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
   </div>
 </div>
+</div>
 
 <!-- ===== TAB: TRÉNINKY ===== -->
 
@@ -511,101 +514,101 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <div class="wcard wcard-a">
   <div class="wcard-head">
     <h3>Síla A — Glute / Nohy / Postura</h3>
-    <span class="wcard-badge">Full-body</span>
+    <span class="tag">Full-body</span>
   </div>
-  <div>
+  <div class="wcard-body">
     <div class="phase-lbl">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-detail-sub">zahřátí — lehce, rozhýbat tělo</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
+    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-sub">zahřátí — lehce, rozhýbat tělo</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-detail-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže natažené kolmo nahoru, nohy do 90° (stehna kolmo k zemi)</li><li>Pomalu spusť pravou ruku k zemi nad hlavou + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá na zemi — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět do startu</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu, nejdi nohou tak nízko</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže natažené kolmo nahoru, nohy do 90° (stehna kolmo k zemi)</li><li>Pomalu spusť pravou ruku k zemi nad hlavou + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá na zemi — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět do startu</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu, nejdi nohou tak nízko</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow + Open book</div></div><span class="ex-sets-inline">6× + 5×/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Cat-cow</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru jako kočka, hlava dolů (cat)</li><li>Plynulý pohyb, pomalu</li></ol><h5 style="margin-top:10px">Open book</h5><ol><li>Leh na bok, kolena pokrčena v 90°, ruce natažené před sebou na zemi</li><li>Horní ruku zvedni a otoč se do rotace — jako otevíráš knihu</li><li>Pohled sleduje ruku, výdech v rotaci</li><li>Pomalu zpět a opakuj</li></ol><div class="tip-box">💡 Open book uvolní hrudní páteř — klíč pro držení těla</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=cat%20cow%20open%20book%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge (aktivace) + Wall slides</div></div><span class="ex-sets-inline">2×10 (pauza 2s) + 1×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Glute bridge</h5><ol><li>Leh na záda, chodidla na zemi, kolena pokrčena</li><li>Zatlač do pat a zvedni pánev nahoru — zatnout hýždě nahoře</li><li>Drž 2 sekundy nahoře, pak pomalu dolů</li><li>Bedra nezaklánět — pohyb jde z hýždí</li></ol><h5 style="margin-top:10px">Wall slides</h5><ol><li>Stoupni si zády ke zdi, záda a lokty přiložené ke zdi</li><li>Pomalu taháš ruce nahoru po zdi — lokty a zápěstí se nesmí odlepit</li><li>Jdi jen tak vysoko dokud se záda a lokty drží u zdi</li></ol><div class="tip-box">💡 Wall slides aktivují lopatky a připraví záda na silový trénink</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20activation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20activation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Hlavní část — 45–50 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Goblet squat</div><div class="ex-detail-sub">Tvoje varianta: Pendulum squat / hack squat / leg press</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 90–120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">8–12 kg činka</span><span class="ew-note">Pendulum squat: začni bez zátěže</span></div><h5>Jak na to</h5><ol><li>Drž jednoručku nebo kettlebell oběma rukama u hrudníku (jako pohár — proto goblet)</li><li>Nohy na šířku ramen nebo o trochu víc, špičky mírně ven</li><li>Pomalu jdi dolů 3 sekundy — kolena jdou ve směru špičky, hrudník nahoru</li><li>Pauza dole 1 sekundu, pak nahoru</li><li>Nehrbíš se — zátěž u hrudníku ti pomůže držet hrudník vzpřímený</li></ol><div class="tip-box">💡 Lepší než air squat — nutí tě držet hrudník nahoře = trénuješ posturu zároveň</div><button class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
-<a href="https://www.youtube.com/results?search_query=goblet%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Goblet squat</div><div class="ex-sub">Tvoje varianta: Pendulum squat / hack squat / leg press</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 90–120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–12 kg činka</span><span class="weight-note">Pendulum squat: začni bez zátěže</span></div><h5>Jak na to</h5><ol><li>Drž jednoručku nebo kettlebell oběma rukama u hrudníku (jako pohár — proto goblet)</li><li>Nohy na šířku ramen nebo o trochu víc, špičky mírně ven</li><li>Pomalu jdi dolů 3 sekundy — kolena jdou ve směru špičky, hrudník nahoru</li><li>Pauza dole 1 sekundu, pak nahoru</li><li>Nehrbíš se — zátěž u hrudníku ti pomůže držet hrudník vzpřímený</li></ol><div class="tip-box">💡 Lepší než air squat — nutí tě držet hrudník nahoře = trénuješ posturu zároveň</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
+<a href="https://www.youtube.com/results?search_query=goblet%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Rumunský mrtvý tah (RDL)</div><div class="ex-detail-sub">Fitko: RDL s činkami nebo Smith</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">2× 8–10 kg činky</span><span class="ew-note">Technika nejdůležitější ze všech cviků</span></div><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, činky v rukou před stehny</li><li>Mírně pokrč kolena — to zůstane po celou dobu stejné</li><li>Pomalu předkloň trup — činky jedou blízko těla dolů po stehnech</li><li>Cítíš tah v zadní straně stehen (hamstringy) — to je správně</li><li>Jdi jen tak nízko dokud záda zůstávají rovná, pak zpět nahoru</li></ol><div class="tip-box">💡 Pohyb je z kyčlí, ne z kolen. Záda rovná celou dobu — nezaobluj je.</div><button class="btn-timer" data-seconds="120">⏱ Spustit pauzu 120s</button>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Rumunský mrtvý tah (RDL)</div><div class="ex-sub">Fitko: RDL s činkami nebo Smith</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">2× 8–10 kg činky</span><span class="weight-note">Technika nejdůležitější ze všech cviků</span></div><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, činky v rukou před stehny</li><li>Mírně pokrč kolena — to zůstane po celou dobu stejné</li><li>Pomalu předkloň trup — činky jedou blízko těla dolů po stehnech</li><li>Cítíš tah v zadní straně stehen (hamstringy) — to je správně</li><li>Jdi jen tak nízko dokud záda zůstávají rovná, pak zpět nahoru</li></ol><div class="tip-box">💡 Pohyb je z kyčlí, ne z kolen. Záda rovná celou dobu — nezaobluj je.</div><button class="btn-timer" class="btn-timer" data-seconds="120">⏱ Spustit pauzu 120s</button>
 ```
 
-<a href="https://www.youtube.com/results?search_query=romanian%20deadlift%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=romanian%20deadlift%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Bulharský split squat / Walking Lunge with Rotation</div><div class="ex-detail-sub">Vyber jedno — obě varianty jsou vhodné</div></div><span class="ex-sets-inline">2×8–10/noha / 2-1-1 / 90s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">Bez zátěže → 2× 5–8 kg</span><span class="ew-note">Nejdřív zvládni techniku bez váhy</span></div><h5>Bulharský split squat</h5><ol><li>Zadní noha položená na lavici za tebou, přední noha krok dopředu</li><li>Pomalu jdi dolů — přední koleno jde dopředu ve směru špičky</li><li>Zadní koleno míří k zemi ale nedotkne se</li><li>Hrudník vzpřímený, nezakláníš se</li></ol><h5 style="margin-top:10px">Walking Lunge with Rotation</h5><ol><li>Udělej krok dopředu do výpadu</li><li>V dolní pozici otoč trup na stranu přední nohy — ruce před sebou nebo s činkou</li><li>Otočit zpět, odraziž vpřed do dalšího kroku</li><li>Koleno nepřekračuje špičku</li></ol><div class="tip-box">💡 Split squat = více na zadek. Lunge with rotation = přidává práci pro hrudní páteř</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Bulharský split squat / Walking Lunge with Rotation</div><div class="ex-sub">Vyber jedno — obě varianty jsou vhodné</div></div><span class="ex-sets-inline">2×8–10/noha / 2-1-1 / 90s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Bez zátěže → 2× 5–8 kg</span><span class="weight-note">Nejdřív zvládni techniku bez váhy</span></div><h5>Bulharský split squat</h5><ol><li>Zadní noha položená na lavici za tebou, přední noha krok dopředu</li><li>Pomalu jdi dolů — přední koleno jde dopředu ve směru špičky</li><li>Zadní koleno míří k zemi ale nedotkne se</li><li>Hrudník vzpřímený, nezakláníš se</li></ol><h5 style="margin-top:10px">Walking Lunge with Rotation</h5><ol><li>Udělej krok dopředu do výpadu</li><li>V dolní pozici otoč trup na stranu přední nohy — ruce před sebou nebo s činkou</li><li>Otočit zpět, odraziž vpřed do dalšího kroku</li><li>Koleno nepřekračuje špičku</li></ol><div class="tip-box">💡 Split squat = více na zadek. Lunge with rotation = přidává práci pro hrudní páteř</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=bulgarian%20split%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=bulgarian%20split%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Seated Cable Row</div><div class="ex-detail-sub">Alternativa: TRX Low Row</div></div><span class="ex-sets-inline">3×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">15–20 kg na stroji</span><span class="ew-note">+1 dílko když zvládneš 3×10 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Sedíš na stroji, nohy opřené, záda rovná</li><li>Chyť úchop, mírně se naloň dopředu — to je start</li><li>Táhni k břichu — lopatky jdou k sobě a dolů, lokty blízko těla</li><li>Pauza 1s v zatažené pozici, pak pomalu zpět</li><li>Nezakláníš celý trup dozadu — pohyb je jen v ramenním kloubu</li></ol><div class="tip-box">💡 Mysli na to že "mačkáš" lopatky k sobě — ne že jen ohýbáš lokty</div><button class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Seated Cable Row</div><div class="ex-sub">Alternativa: TRX Low Row</div></div><span class="ex-sets-inline">3×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">15–20 kg na stroji</span><span class="weight-note">+1 dílko když zvládneš 3×10 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Sedíš na stroji, nohy opřené, záda rovná</li><li>Chyť úchop, mírně se naloň dopředu — to je start</li><li>Táhni k břichu — lopatky jdou k sobě a dolů, lokty blízko těla</li><li>Pauza 1s v zatažené pozici, pak pomalu zpět</li><li>Nezakláníš celý trup dozadu — pohyb je jen v ramenním kloubu</li></ol><div class="tip-box">💡 Mysli na to že "mačkáš" lopatky k sobě — ne že jen ohýbáš lokty</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
 ```
 
-<a href="https://www.youtube.com/results?search_query=seated%20cable%20row%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=seated%20cable%20row%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Tlak na šikmé lavici / Kneeling Landmine Press</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">Jen tyč (bez přidané zátěže)</span><span class="ew-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press (primární)</h5><ol><li>Klekni na jedno nebo obě kolena, drž konec tyče oběma rukama u hrudníku</li><li>Zatlač tyč šikmo dopředu a nahoru — plný rozsah</li><li>Pomalu zpět k hrudníku</li><li>Core zatažený, nezaklánět záda</li></ol><h5 style="margin-top:10px">Incline DB Press (alternativa)</h5><ol><li>Lavice nastavena na 30–45°, leh na ní</li><li>Činky v rukou na úrovni hrudníku, lokty mírně pod 90°</li><li>Zatlač nahoru, na vrcholu skoro propnuté paže</li><li>Pomalu dolů 2 sekundy</li></ol><div class="tip-box">💡 Landmine press je šetrnější k ramenům — preferuj ho pokud máš slabší ramena</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Tlak na šikmé lavici / Kneeling Landmine Press</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Jen tyč (bez přidané zátěže)</span><span class="weight-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press (primární)</h5><ol><li>Klekni na jedno nebo obě kolena, drž konec tyče oběma rukama u hrudníku</li><li>Zatlač tyč šikmo dopředu a nahoru — plný rozsah</li><li>Pomalu zpět k hrudníku</li><li>Core zatažený, nezaklánět záda</li></ol><h5 style="margin-top:10px">Incline DB Press (alternativa)</h5><ol><li>Lavice nastavena na 30–45°, leh na ní</li><li>Činky v rukou na úrovni hrudníku, lokty mírně pod 90°</li><li>Zatlač nahoru, na vrcholu skoro propnuté paže</li><li>Pomalu dolů 2 sekundy</li></ol><div class="tip-box">💡 Landmine press je šetrnější k ramenům — preferuj ho pokud máš slabší ramena</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=incline%20press%20kneeling%20landmine%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=incline%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pulls / rear-delt fly</div><div class="ex-detail-sub">Fitko: kabel | Doma: DB</div></div><span class="ex-sets-inline">2×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB</h5><ol><li>Předkloň trup do 45°, paže dolů s činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena a vzpřímený postoj — nepřeskakuj tento cvik</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pulls / rear-delt fly</div><div class="ex-sub">Fitko: kabel | Doma: DB</div></div><span class="ex-sets-inline">2×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB</h5><ol><li>Předkloň trup do 45°, paže dolů s činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena a vzpřímený postoj — nepřeskakuj tento cvik</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Core finisher — 8 min</div>
 <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×20–30s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí — loket přímo pod ramenem</li><li>Zvedni pánev od země — tělo tvoří rovnou linii od hlavy po kotníky</li><li>Drž — nezapadej pánví dolů ani ji nevystrkuj nahoru</li><li>Pohled dopředu, dýchej normálně</li></ol><div class="tip-box">💡 Pokud je to moc těžké — pokrč kolena a opři se o ně místo chodidel</div>
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press</div><div class="ex-detail-sub">kabel / guma</div></div><span class="ex-sets-inline">2×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj bokem ke kabelu nebo gumě, drž úchop oběma rukama u hrudníku</li><li>Zatlač ruce přímo dopředu — plně natažené paže</li><li>Drž 1–2 sekundy, pak zpět k hrudníku</li><li>Trup se nesmí otočit — to je celý smysl cviku</li><li>Core zatažený po celou dobu</li></ol><div class="tip-box">💡 Anti-rotační cvik — posiluje hluboký core jinak než planky, velmi efektivní pro pas</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press</div><div class="ex-sub">kabel / guma</div></div><span class="ex-sets-inline">2×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj bokem ke kabelu nebo gumě, drž úchop oběma rukama u hrudníku</li><li>Zatlač ruce přímo dopředu — plně natažené paže</li><li>Drž 1–2 sekundy, pak zpět k hrudníku</li><li>Trup se nesmí otočit — to je celý smysl cviku</li><li>Core zatažený po celou dobu</li></ol><div class="tip-box">💡 Anti-rotační cvik — posiluje hluboký core jinak než planky, velmi efektivní pro pas</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Cooldown + strečink — 10 min</div>
 <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">45–60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klekni na jedno koleno — jako rytíř</li><li>Přední noha v 90°, zadní koleno na zemi</li><li>Mírně podsaď pánev (zatáhni ji pod sebe), zatnout hýždě zadní nohy</li><li>Nakloň se mírně dopředu — cítíš tah v přední části stehna zadní nohy</li><li>Žebra dolů, nezaklánět záda</li></ol><div class="tip-box">💡 Jeden z nejdůležitějších strečů pro správnou posturu — dělej každý den</div>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hamstring stretch</div></div><span class="ex-sets-inline">45s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedna noha natažená na zemi</li><li>Druhou nohu zvedni nahoru, drž za lýtko nebo stehno</li><li>Jemně táhni nohu k sobě — cítíš tah v zadní straně stehna</li><li>Noha nemusí být úplně rovná — jen jdi do příjemného tahu</li></ol><div class="tip-box">💡 Nestrkej nohu přes bolest — jemné pravidelné protahování funguje lépe než brutální</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Quad stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj na jedné noze, druhou pokrč za sebou</li><li>Drž kotník rukou, kolena u sebe</li><li>Mírně zatnout hýždě — zvýší intenzitu protažení</li><li>Pokud neudržíš rovnováhu — drž se zdi</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=quad%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=quad%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hrudník — doorway stretch</div></div><span class="ex-sets-inline">45s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stoupni do dveřního rámu, ruce opři o zárubeň ve výšce ramen</li><li>Udělej malý krok dopředu — hrudník jde dopředu, ramena zůstávají vzadu</li><li>Cítíš tah v hrudníku a předních deltech</li></ol><div class="tip-box">💡 Skvělé po celodenním sezení — otevírá hrudník a napravuje "hrbatou" posturu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=doorway%20chest%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=doorway%20chest%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div><span class="ex-sets-inline">45s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty</li><li>Natáhni paže dopředu na zem co nejdál</li><li>Čelo na zemi nebo blízko ní</li><li>Uvolni celá záda, ramena a boky</li><li>Dýchej pomalu a hluboce</li></ol><div class="tip-box">💡 Nejlepší zakončení tréninku — uvolní celou páteř a zklidní nervový systém</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 </div>
 </div>
 
@@ -614,107 +617,107 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <div class="wcard wcard-b">
   <div class="wcard-head">
     <h3>Síla B — Zadek / Záda / Paže</h3>
-    <span class="wcard-badge">Full-body</span>
+    <span class="tag">Full-body</span>
   </div>
-  <div>
+  <div class="wcard-body">
     <div class="phase-lbl">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-detail-sub">zahřátí</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
+    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-sub">zahřátí</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-detail-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Pomalu spusť pravou ruku nahoru za hlavu + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Pomalu spusť pravou ruku nahoru za hlavu + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hrudní extenze (pěnový válec) + kotníky</div></div><span class="ex-sets-inline">6× + 8×/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Hrudní extenze na válci</h5><ol><li>Válec polož napříč pod hrudní páteř (ne bedra)</li><li>Ruce za hlavou nebo zkřížené na hrudníku</li><li>Pomalu se zaklop dozadu přes válec — hrudní páteř se otevírá</li><li>Posuň válec o kus výš a opakuj</li></ol><h5 style="margin-top:10px">Kotníky (zeď)</h5><ol><li>Stůj čelem ke zdi, přilož špičku nohy ke zdi</li><li>Pokus se kolenem dotknout zdi — pata zůstává na zemi</li><li>Postupně přibližuj nohu blíž ke zdi</li></ol><div class="tip-box">💡 Mobilita kotníků ovlivňuje hloubku dřepu a hip thrustu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=thoracic%20foam%20roller%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=thoracic%20foam%20roller%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Band lateral walk + Scapular retraction hold</div></div><span class="ex-sets-inline">2×8 kroků/str + 2×15s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Band lateral walk</h5><ol><li>Guma kolem kotníků nebo kolen</li><li>Mírně pokrč kolena, mírný předklon</li><li>Krok do strany — drž napětí gumy, nohy nedávej k sobě</li><li>8 kroků na jednu stranu, pak zpět</li></ol><h5 style="margin-top:10px">Scapular retraction hold</h5><ol><li>Stůj vzpřímeně, paže volně podél těla</li><li>Stáhni lopatky k sobě a dolů — jako bys chtěla dát lopatky do zadních kapes kalhot</li><li>Drž 15 sekund, ramena nepokrčuj nahoru</li></ol><div class="tip-box">💡 Retraction hold aktivuje lopatky před tréninkem zad a ramen</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=band%20lateral%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=band%20lateral%20walk%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Hlavní část — 45–50 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip thrust</div><div class="ex-detail-sub">Fitko: stroj / osa | Doma: o gauč s DB</div></div><span class="ex-sets-inline">3×8–12 / 2-1-2 (1s nahoře) / 90–120s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">Vlastní váha → 10–20 kg</span><span class="ew-note">+5 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Záda opři o lavici (střední část zad — ne krk), chodidla na zemi na šířku boků</li><li>Zátěž (osa/DB) polož na boky, drž ji rukama</li><li>Zatlač do pat, zvedni pánev nahoru — hýždě zatnout na vrcholu</li><li>Drž 1 sekundu nahoře, pak pomalu dolů</li><li>Kolena nestlačuj k sobě — drž je nad špičkami</li></ol><div class="tip-box">💡 Nejlepší cvik pro zadek — priorita číslo 1. Pauza nahoře = více práce pro hýždě</div><button class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
-<a href="https://www.youtube.com/results?search_query=hip%20thrust%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip thrust</div><div class="ex-sub">Fitko: stroj / osa | Doma: o gauč s DB</div></div><span class="ex-sets-inline">3×8–12 / 2-1-2 (1s nahoře) / 90–120s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Vlastní váha → 10–20 kg</span><span class="weight-note">+5 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Záda opři o lavici (střední část zad — ne krk), chodidla na zemi na šířku boků</li><li>Zátěž (osa/DB) polož na boky, drž ji rukama</li><li>Zatlač do pat, zvedni pánev nahoru — hýždě zatnout na vrcholu</li><li>Drž 1 sekundu nahoře, pak pomalu dolů</li><li>Kolena nestlačuj k sobě — drž je nad špičkami</li></ol><div class="tip-box">💡 Nejlepší cvik pro zadek — priorita číslo 1. Pauza nahoře = více práce pro hýždě</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
+<a href="https://www.youtube.com/results?search_query=hip%20thrust%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pendulum squat / Step-up</div></div><span class="ex-sets-inline">3×6–8 / 3-1-1 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">Bez zátěže (jen stroj)</span><span class="ew-note">+5 kg kotouč když zvládneš 3×8 čistě</span></div><h5>Pendulum squat</h5><ol><li>Nastav stroj, opři ramena o polštáře</li><li>Nohy na plošině na šířku boků</li><li>Pomalu jdi dolů 3 sekundy — plný rozsah</li><li>Pauza dole, pak nahoru</li><li>Začni bez zátěže nebo s minimální — priorita je plný rozsah</li></ol><h5 style="margin-top:10px">Step-up (alternativa)</h5><ol><li>Stůj před lavicí nebo stepem střední výšky</li><li>Šlápni celým chodidlem na step, přitlač do paty a zvedni se</li><li>Kontrolovaně dolů — nedovolíš tělu "padnout"</li><li>Koleno sleduje směr špičky</li></ol>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pendulum squat / Step-up</div></div><span class="ex-sets-inline">3×6–8 / 3-1-1 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Bez zátěže (jen stroj)</span><span class="weight-note">+5 kg kotouč když zvládneš 3×8 čistě</span></div><h5>Pendulum squat</h5><ol><li>Nastav stroj, opři ramena o polštáře</li><li>Nohy na plošině na šířku boků</li><li>Pomalu jdi dolů 3 sekundy — plný rozsah</li><li>Pauza dole, pak nahoru</li><li>Začni bez zátěže nebo s minimální — priorita je plný rozsah</li></ol><h5 style="margin-top:10px">Step-up (alternativa)</h5><ol><li>Stůj před lavicí nebo stepem střední výšky</li><li>Šlápni celým chodidlem na step, přitlač do paty a zvedni se</li><li>Kontrolovaně dolů — nedovolíš tělu "padnout"</li><li>Koleno sleduje směr špičky</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pendulum%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pendulum%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pull (kabel) / rear delt fly</div></div><span class="ex-sets-inline">3×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">5–8 kg na kabelu</span><span class="ew-note">Lehčí než si myslíš — forma je vše</span></div><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy, lokty výše než zápěstí</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB (alternativa)</h5><ol><li>Předkloň trup do 45°, paže dolů s lehkými činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena — udrží tě vzpřímené a zabrání "hrbení"</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pull (kabel) / rear delt fly</div></div><span class="ex-sets-inline">3×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–8 kg na kabelu</span><span class="weight-note">Lehčí než si myslíš — forma je vše</span></div><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy, lokty výše než zápěstí</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB (alternativa)</h5><ol><li>Předkloň trup do 45°, paže dolů s lehkými činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena — udrží tě vzpřímené a zabrání "hrbení"</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Kneeling Landmine Press / Overhead press DB</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">Jen tyč (bez přidané zátěže)</span><span class="ew-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press</h5><ol><li>Klekni na jedno nebo obě kolena před tyčí zasunutou v rohu</li><li>Drž konec tyče oběma rukama u hrudníku</li><li>Zatlač šikmo dopředu a nahoru — plný rozsah</li><li>Core zatažený, záda neprohýbej</li><li>Pomalu zpět k hrudníku</li></ol><div class="tip-box">💡 Šetrnější k ramenům než klasický overhead press — preferuj ho</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Kneeling Landmine Press / Overhead press DB</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Jen tyč (bez přidané zátěže)</span><span class="weight-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press</h5><ol><li>Klekni na jedno nebo obě kolena před tyčí zasunutou v rohu</li><li>Drž konec tyče oběma rukama u hrudníku</li><li>Zatlač šikmo dopředu a nahoru — plný rozsah</li><li>Core zatažený, záda neprohýbej</li><li>Pomalu zpět k hrudníku</li></ol><div class="tip-box">💡 Šetrnější k ramenům než klasický overhead press — preferuj ho</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=kneeling%20landmine%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=kneeling%20landmine%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Banded Biceps Curl</div></div><span class="ex-sets-inline">2×10–12 / 2-1-3 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">5–7 kg činky / lehká guma</span><span class="ew-note">+1 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stoupni na gumy, drž konce v rukou, dlaně nahoru</li><li>Lokty u těla — to se nesmí měnit po celou dobu</li><li>Curl nahoru — výdech</li><li>Pomalu dolů 3 sekundy — to je klíč pro definici</li></ol><div class="tip-box">💡 Pomalý excentrik (dolů) = větší efekt pro definici paží než rychlé pumpy</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Banded Biceps Curl</div></div><span class="ex-sets-inline">2×10–12 / 2-1-3 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–7 kg činky / lehká guma</span><span class="weight-note">+1 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stoupni na gumy, drž konce v rukou, dlaně nahoru</li><li>Lokty u těla — to se nesmí měnit po celou dobu</li><li>Curl nahoru — výdech</li><li>Pomalu dolů 3 sekundy — to je klíč pro definici</li></ol><div class="tip-box">💡 Pomalý excentrik (dolů) = větší efekt pro definici paží než rychlé pumpy</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=bicep%20curl%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=banded%20bicep%20curl%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Triceps Pushdown (kabel / guma)</div></div><span class="ex-sets-inline">2×10–12 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">8–10 kg na kabelu</span><span class="ew-note">+1 dílko když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stůj u kabelu, uchop lano nebo tyčku</li><li>Lokty u těla — zůstanou tak celou dobu</li><li>Zatlač dolů — plné propnutí loktů dole</li><li>Výdech při tlaku dolů</li><li>Pomalu zpět nahoru</li></ol><div class="tip-box">💡 Triceps tvoří větší část paže než biceps — klíčový pro definici paží</div>
+        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Triceps Pushdown (kabel / guma)</div></div><span class="ex-sets-inline">2×10–12 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–10 kg na kabelu</span><span class="weight-note">+1 dílko když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stůj u kabelu, uchop lano nebo tyčku</li><li>Lokty u těla — zůstanou tak celou dobu</li><li>Zatlač dolů — plné propnutí loktů dole</li><li>Výdech při tlaku dolů</li><li>Pomalu zpět nahoru</li></ol><div class="tip-box">💡 Triceps tvoří větší část paže než biceps — klíčový pro definici paží</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=triceps%20pushdown%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=triceps%20pushdown%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Core finisher + Boky — 10 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip abduction (kabel vestoje / lying s gumou)</div><div class="ex-detail-sub">Glute medius — tvar boků a hourglass silueta</div></div><span class="ex-sets-inline">3×15 / pomalé / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="ex-weight-row"><span class="ew-label">Startovní váha</span><span class="ew-val">5–10 kg na kabelu / lehká guma</span><span class="ew-note">+1 dílko když zvládneš 3×15 čistě</span></div><h5>Cable hip abduction vestoje (primární)</h5><ol><li>Připoj kabel na kotník, stůj bokem ke stroji</li><li>Mírně se naloň dopředu 10–15° — to je klíč pro aktivaci glute medius místo TFL</li><li>Zvedni nohu do strany — pohyb jde z kyčle, ne ze záklonu trupu</li><li>Pomalu zpět — nespouštěj nohu s plesknutím</li><li>Drž se stojanu volnou rukou pro rovnováhu</li></ol><h5 style="margin-top:10px">Lying side abduction s gumou (alternativa)</h5><ol><li>Leh na bok, guma kolem kolen nebo kotníků</li><li>Zvedni horní nohu nahoru — pomalu, kontrolovaně</li><li>Pauza nahoře 1 sekundu, pak pomalu dolů</li><li>Chodidlo míří rovně dopředu, ne ke stropu</li></ol><div class="tip-box">💡 Mírný předklon při stojící variantě je klíčový — bez něj pracuje více TFL místo glute medius. Buduje “booty shelf” a hourglass proporce.</div>
-<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip abduction (kabel vestoje / lying s gumou)</div><div class="ex-sub">Glute medius — tvar boků a hourglass silueta</div></div><span class="ex-sets-inline">3×15 / pomalé / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–10 kg na kabelu / lehká guma</span><span class="weight-note">+1 dílko když zvládneš 3×15 čistě</span></div><h5>Cable hip abduction vestoje (primární)</h5><ol><li>Připoj kabel na kotník, stůj bokem ke stroji</li><li>Mírně se naloň dopředu 10–15° — to je klíč pro aktivaci glute medius místo TFL</li><li>Zvedni nohu do strany — pohyb jde z kyčle, ne ze záklonu trupu</li><li>Pomalu zpět — nespouštěj nohu s plesknutím</li><li>Drž se stojanu volnou rukou pro rovnováhu</li></ol><h5 style="margin-top:10px">Lying side abduction s gumou (alternativa)</h5><ol><li>Leh na bok, guma kolem kolen nebo kotníků</li><li>Zvedni horní nohu nahoru — pomalu, kontrolovaně</li><li>Pauza nahoře 1 sekundu, pak pomalu dolů</li><li>Chodidlo míří rovně dopředu, ne ke stropu</li></ol><div class="tip-box">💡 Mírný předklon při stojící variantě je klíčový — bez něj pracuje více TFL místo glute medius. Buduje “booty shelf” a hourglass proporce.</div>
+<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div><span class="ex-sets-inline">3×15–25s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže natažené za hlavou, nohy natažené</li><li>Zvedni ramena a nohy pár centimetrů od země</li><li>Záda zůstávají plochá — bederní páteř přitisknuta k zemi</li><li>Drž pozici a dýchej normálně</li></ol><div class="tip-box">💡 Pokud je to příliš těžké — pokrč kolena nebo zvedni paže vzhůru (kratší páka)</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge march</div></div><span class="ex-sets-inline">2×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Udělej glute bridge — pánev nahoře, hýždě zatnuty</li><li>V této pozici pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí spadnout ani otočit — zůstává rovná</li><li>Nohu zpět, pak druhá strana</li></ol><div class="tip-box">💡 Trénuje stabilitu pánve — klíčové pro správný hip thrust a chůzi</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 <div class="phase-lbl">Cooldown + strečink — 10 min</div>
 <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hamstring stretch</div></div><span class="ex-sets-inline">45s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedna noha natažená na zemi</li><li>Druhou zvedni nahoru, drž za lýtko nebo stehno</li><li>Jemně táhni k sobě — tah v zadní straně stehna</li><li>Noha nemusí být úplně rovná</li></ol><div class="tip-box">💡 Důležité po hip thrustu a dřepech — uvolní zadní stranu stehen</div>
-<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pigeon pose / Figure-4 stretch</div></div><span class="ex-sets-inline">45–60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Figure-4 (jednodušší varianta)</h5><ol><li>Leh na záda, kolena pokrčena</li><li>Přilož kotník pravé nohy přes koleno levé</li><li>Uchop levé stehno oběma rukama a přitáhni k hrudníku</li><li>Cítíš tah v hýždi pravé nohy</li></ol><h5 style="margin-top:10px">Pigeon pose (náročnější)</h5><ol><li>Z kleku — přesuň přední nohu zkříženě před sebe, zadní natáhni dozadu</li><li>Snaž se položit boky rovnoměrně k zemi</li><li>Předkloň se nad přední nohu</li></ol><div class="tip-box">💡 Nejlepší strečink po hip thrustu — uvolní hýžďové svaly které byly nejvíce zatíženy</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Lat stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stoupni ke stojanu nebo dveřnímu rámu</li><li>Chyť se jednou rukou ve výšce ramen</li><li>Mírně se posaď dozadu a do strany — cítíš tah podél boku od podpaží dolů</li></ol><div class="tip-box">💡 Uvolní záda po rowing cvicích</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=lat%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=lat%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Triceps stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Zvedni ruku nahoru, ohni v lokti za hlavu</li><li>Druhou rukou jemně tlač loket dolů a dozadu</li><li>Cítíš tah v zadní části paže</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=triceps%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=triceps%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div><span class="ex-sets-inline">60s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty</li><li>Natáhni paže dopředu na zem co nejdál</li><li>Čelo na zemi nebo blízko ní</li><li>Uvolni celá záda, ramena a boky</li><li>Dýchej pomalu a hluboce</li></ol><div class="tip-box">💡 Nejlepší zakončení tréninku — uvolní celou páteř a zklidní nervový systém</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 </div>
 </div>
 
@@ -723,60 +726,60 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <div class="wcard wcard-p">
   <div class="wcard-head">
     <h3>Pilates / Core — Den P</h3>
-    <span class="wcard-badge">3. den — volitelný</span>
+    <span class="tag">3. den — volitelný</span>
   </div>
-  <div>
-    <div class="ver-toggle">
-      <span class="ver-lbl">Verze:</span>
-      <button class="ver-btn active" id="pilShortBtn" data-version="short" style="padding:6px 14px;font-size:10px;">⚡ Krátká 25 min</button>
-      <button class="today-card" data-type="p" id="pilFullBtn" data-version="full" style="padding:6px 14px;font-size:10px;">🌿 Plná 60 min</button>
+  <div class="wcard-body">
+    <div style="padding:14px 16px;background:var(--card-bg);border-bottom:1px solid var(--soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);">Verze:</span>
+      <button class="today-btn btn-p active" id="pilShortBtn" data-version="short" style="padding:6px 14px;font-size:10px;">⚡ Krátká 25 min</button>
+      <button class="today-btn btn-p" id="pilFullBtn" data-version="full" style="padding:6px 14px;font-size:10px;">🌿 Plná 60 min</button>
     </div>
 
     <!-- SHORT VERSION -->
     <div id="pilatesShort">
       <div class="phase-lbl">Blok A — Dech + aktivace (6 min)</div>
-      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-detail-sub">aktivace bránice a core</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90° na stoličce nebo u zdi</li><li>Ruka na břicho, ruka na hrudník — hrudní ruka se nesmí hýbat</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>5–6 opakování</li></ol><div class="tip-box">💡 Aktivuje hluboký core a uvolní flexory kyčle — i sám o sobě má efekt</div>
+      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-sub">aktivace bránice a core</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90° na stoličce nebo u zdi</li><li>Ruka na břicho, ruka na hrudník — hrudní ruka se nesmí hýbat</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>5–6 opakování</li></ol><div class="tip-box">💡 Aktivuje hluboký core a uvolní flexory kyčle — i sám o sobě má efekt</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div></div><span class="ex-sets-inline">2×6/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá</li><li>Výdech při extenzi</li></ol>
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 
 ```
       <div class="phase-lbl">Blok B — Kyčle + core (10 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge s pauzou</div></div><span class="ex-sets-inline">3×10, 2s nahoře</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, chodidla na zemi</li><li>Zatlač do pat, zvedni pánev — hýždě zatnout</li><li>Drž 2 sekundy, pak pomalu dolů</li></ol><div class="tip-box">💡 Pauza nahoře = skutečná práce hýždí</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20pause%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20pause%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Clamshell s gumou</div></div><span class="ex-sets-inline">2×15/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad koleny, kolena v 45°</li><li>Zvedni horní koleno — chodidla u sebe</li><li>Pauza nahoře 1s, pomalu dolů</li><li>Boky se nesmí otočit dozadu</li></ol><div class="tip-box">💡 Glute medius — doplňuje hip abduction ze Síly B</div>
-<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×25s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí</li><li>Zvedni pánev — přímá linie od hlavy po kotníky</li><li>Dýchej normálně, nezapadej pánví</li></ol>
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 
 ```
       <div class="phase-lbl">Blok C — Mobilita (8 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Open book</div></div><span class="ex-sets-inline">2×6/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, kolena 90°</li><li>Horní ruku zvedni a otoč hrudník — pohled sleduje ruku</li><li>Výdech v rotaci</li></ol><div class="tip-box">💡 Klíčový pro modelka posturu — otevírá hrudník</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling — jedno koleno na zemi</li><li>Podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li></ol>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child’s pose</div></div><span class="ex-sets-inline">60s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty, paže dopředu</li><li>Uvolni celá záda a boky</li><li>Dýchej pomalu</li></ol>
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 </div>
 
 ```
     <!-- FULL VERSION -->
     <div id="pilatesFull" style="display:none">
       <div class="phase-lbl">Blok A — Dech + aktivace core (12 min)</div>
-      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-detail-sub">aktivace bránice</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90°</li><li>Ruka na břicho, ruka na hrudník</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>8 opakování — každý výdech delší</li></ol><div class="tip-box">💡 Základ pilates — nikdy nevynechávej</div>
+      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-sub">aktivace bránice</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90°</li><li>Ruka na břicho, ruka na hrudník</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>8 opakování — každý výdech delší</li></ol><div class="tip-box">💡 Základ pilates — nikdy nevynechávej</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug — progrese</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá celou dobu</li><li>Výdech při extenzi, pomalu zpět</li><li>Náročnější verze: drž 2s v dolní poloze</li></ol>
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div><span class="ex-sets-inline">3×20–30s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže za hlavou, nohy natažené</li><li>Zvedni ramena a nohy pár cm od země</li><li>Záda plochá — bederní páteř přitisknuta</li></ol><div class="tip-box">💡 Pokud záda odlézají — pokrč kolena nebo zvedni paže</div>
-<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 
 ```
       <div class="phase-lbl">Blok B — Kyčle + zadek (15 min)</div>
@@ -784,43 +787,42 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Clamshell s gumou</div></div><span class="ex-sets-inline">3×15/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad koleny</li><li>Zvedni horní koleno, chodidla u sebe</li><li>Pauza nahoře 2s, pomalu dolů</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side lying hip abduction s gumou</div></div><span class="ex-sets-inline">3×12/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad kotníky</li><li>Zvedni horní nohu nahoru — chodidlo míří dopředu, ne ke stropu</li><li>Pauza nahoře 1s, pomalu dolů</li></ol><div class="tip-box">💡 Glute medius — buduje tvar boků</div>
-<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Donkey kick + Fire hydrant</div></div><span class="ex-sets-inline">2×12/strana každý</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Donkey kick</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Jedno koleno zvedni dozadu a nahoru — chodidlo míří ke stropu</li><li>Hýždi zatnout nahoře, záda rovná</li></ol><h5 style="margin-top:8px">Fire hydrant</h5><ol><li>Ze stejné pozice — zvedni koleno do strany jako pes u hydrantu</li><li>Koleno v 90°, pohyb jde z kyčle</li></ol>
-<a href="https://www.youtube.com/results?search_query=donkey%20kick%20fire%20hydrant" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip hinge drill</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, mírně pokrč kolena</li><li>Odtlač boky dozadu — jako zavíráš dveře zadkem</li><li>Záda rovná, trup se nakloní dopředu</li><li>Cítíš tah v hamstrinzích — zpět nahoru</li></ol>
-<a href="https://www.youtube.com/results?search_query=hip%20hinge%20drill%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=donkey%20kick%20fire%20hydrant%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip hinge drill</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, mírně pokrč kolena</li><li>Odtlač boky dozadu — jako zavíráš dveře zadkem</li><li>Záda rovná, trup se nakloní dopředu</li><li>Cítíš tah v hamstrinzích — zpět nahoru</li></ol></div></div></div>
 
 ```
       <div class="phase-lbl">Blok C — Core + stabilita (12 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank + variace</div></div><span class="ex-sets-inline">3×30s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Základní verze</h5><ol><li>Leh na bok, opři na předloktí, zvedni pánev</li><li>Přímá linie — dýchej normálně</li></ol><h5 style="margin-top:8px">Pokročilá verze (od týdne 5)</h5><ol><li>Ze side planku zvedni horní nohu nahoru — drž 2s</li><li>Nebo: ze side planku spusť pánev k zemi a zvedni zpět</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press s gumou</div></div><span class="ex-sets-inline">3×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Gumu přichyť na pevný bod ve výšce hrudníku, stůj bokem</li><li>Drž oběma rukama u hrudníku</li><li>Zatlač dopředu — plně natažené paže</li><li>Trup se nesmí otočit — drž 2s, pak zpět</li></ol><div class="tip-box">💡 Anti-rotace — posiluje hluboký core pro plochý pas</div>
-<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge march</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Glute bridge pozice, pánev nahoře</li><li>Pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí pohybovat</li></ol>
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 
 ```
       <div class="phase-lbl">Blok D — Hrudník + mobilita + cooldown (20 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow</div></div><span class="ex-sets-inline">2 min — plynule</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek na čtyři</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru, hlava dolů (cat)</li><li>Plynulý rytmický pohyb</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=cat%20cow%20open%20book%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Open book — prodloužená</div></div><span class="ex-sets-inline">3×6/strana — drž 3s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, kolena 90°</li><li>Horní ruku otočíš dozadu — drž 3 sekundy v maximální rotaci</li><li>Snaž se dotknout záda/ramene země</li></ol><div class="tip-box">💡 Prodloužené držení = hlubší uvolnění hrudní páteře</div>
-<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Wall slides</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Záda ke zdi, lokty a zápěstí přiložené</li><li>Pomalu taháš ruce nahoru — nesmí se nic odlepit</li><li>Pomalu zpět dolů</li></ol>
-<a href="https://www.youtube.com/results?search_query=wall%20slides%20posture%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=wall%20slides%20shoulder%20posture%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pigeon pose</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Z kleku přesuň přední nohu zkříženě před sebe</li><li>Zadní nohu natáhni dozadu</li><li>Boky rovnoměrně k zemi, předkloň se</li><li>Dýchej do tahu — nekroť se</li></ol><div class="tip-box">💡 90 sekund = hluboké uvolnění fascie, ne jen povrchní strečink</div>
-<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling, podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li><li>Výdech každých 20–30s — tah se prohloubí</li></ol>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Supine twist</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedno koleno přitáhni k hrudníku</li><li>Přetočit ho přes tělo na druhou stranu — ramena zůstávají na zemi</li><li>Paže rozloženy do stran, pohled opačným směrem</li><li>Uvolni a dýchej</li></ol>
-<a href="https://www.youtube.com/results?search_query=supine%20spinal%20twist%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div>
+<a href="https://www.youtube.com/results?search_query=supine%20spinal%20twist%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Savasana / Child’s pose</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda nebo child’s pose — jak ti je příjemnější</li><li>Uvolni každou část těla vědomě od prstů nahoru</li><li>Dýchej přirozeně, nemysli na nic</li></ol><div class="tip-box">💡 Nervový systém potřebuje čas na zpracování tréninku — nevynechávej závěrečné uvolnění</div>
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoril</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
 </div>
 
 ```
@@ -895,35 +897,35 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <!-- Checklist denní rutina -->
 <div class="page-hd-label" style="margin-top:48px">Denní checklist</div>
 <div id="daily-checklist">
-  <div class="check-item" >
+  <div class="check-item">
     <div class="check-box"></div>
     <div class="check-text">
       <div class="check-text-title">Ranní 10min rutina držení těla</div>
       <div class="check-text-sub">Dýchání → chin tuck → wall slides → open book → hip flexor</div>
     </div>
   </div>
-  <div class="check-item" >
+  <div class="check-item">
     <div class="check-box"></div>
     <div class="check-text">
       <div class="check-text-title">Vědomé držení těla při sezení</div>
       <div class="check-text-sub">Hrudník nahoře, lopatky dolů, nekrčit se nad telefonem</div>
     </div>
   </div>
-  <div class="check-item" >
+  <div class="check-item">
     <div class="check-box"></div>
     <div class="check-text">
       <div class="check-text-title">Trénink / kardio (tréninkový den)</div>
       <div class="check-text-sub">Síla A nebo B + core finisher, nebo kardio Z2</div>
     </div>
   </div>
-  <div class="check-item" >
+  <div class="check-item">
     <div class="check-box"></div>
     <div class="check-text">
       <div class="check-text-title">Kroky — dostat se ven</div>
       <div class="check-text-sub">Krátká procházka alespoň 15–20 min = bonus pro regeneraci i posturu</div>
     </div>
   </div>
-  <div class="check-item" >
+  <div class="check-item">
     <div class="check-box"></div>
     <div class="check-text">
       <div class="check-text-title">Večerní protažení / mobilita</div>
@@ -951,8 +953,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <div class="page-hd-label" style="margin-top:40px">Jak poznat správnou intenzitu</div>
 
-<div class="wcard" style="margin-bottom:24px">
-  <div class="wcard-head"><h3>Talk Test — nejjednodušší metoda</h3><span class="wcard-badge">Doporučeno</span></div>
+<div class="training-card" style="margin-bottom:24px">
+  <div class="wcard-head"><h3>Talk Test — nejjednodušší metoda</h3><span class="tag">Doporučeno</span></div>
   <table class="ex-table">
     <thead><tr><th>Pásmo</th><th>Co cítíš</th><th>Kdy</th></tr></thead>
     <tbody>
@@ -1056,8 +1058,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- VAROVNÉ SIGNÁLY -->
 <div class="page-hd-label" style="margin-top:48px">Varovné signály — stop a řešit</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Kdy jít k fyzioterapeutovi nebo lékaři</h3><span class="wcard-badge">Bezpečnost</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Kdy jít k fyzioterapeutovi nebo lékaři</h3><span class="tag">Bezpečnost</span></div>
   <table class="ex-table">
     <thead><tr><th>Signál</th><th>Akce</th></tr></thead>
     <tbody>
@@ -1245,8 +1247,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- KALORIE & MAKRA -->
 <div class="page-hd-label" style="margin-top:40px">Orientační potřeby — tvůj profil</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Kalorie & makronutrienty</h3><span class="wcard-badge">Orientační odhad</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Kalorie & makronutrienty</h3><span class="tag">Orientační odhad</span></div>
   <table class="ex-table">
     <thead><tr><th>Živina</th><th>Denní cíl</th><th>Proč</th></tr></thead>
     <tbody>
@@ -1265,8 +1267,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- TALÍŘ -->
 <div class="page-hd-label" style="margin-top:40px">Modelka talíř — pravidlo bez počítání</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Jak sestavit každé hlavní jídlo</h3><span class="wcard-badge">Jednoduché pravidlo</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Jak sestavit každé hlavní jídlo</h3><span class="tag">Jednoduché pravidlo</span></div>
   <table class="ex-table">
     <thead><tr><th>Část talíře</th><th>Co tam patří</th><th>Příklady</th></tr></thead>
     <tbody>
@@ -1280,8 +1282,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- TIMING -->
 <div class="page-hd-label" style="margin-top:40px">Jídla a trénink — kdy co jíst</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Timing kolem tréninku</h3><span class="wcard-badge">Praktický přehled</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Timing kolem tréninku</h3><span class="tag">Praktický přehled</span></div>
   <table class="ex-table">
     <thead><tr><th>Kdy</th><th>Co jíst</th><th>Proč</th></tr></thead>
     <tbody>
@@ -1335,8 +1337,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- KLÍČOVÉ MIKROŽIVINY -->
 <div class="page-hd-label" style="margin-top:40px">Klíčové mikroživiny pro tebe — 17 let</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Co nesmí chybět</h3><span class="wcard-badge">Pro mladé sportovkyně</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Co nesmí chybět</h3><span class="tag">Pro mladé sportovkyně</span></div>
   <table class="ex-table">
     <thead><tr><th>Živina</th><th>Proč důležitá</th><th>Kde ji najdeš</th></tr></thead>
     <tbody>
@@ -1358,8 +1360,8 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <!-- CO OMEZIT -->
 <div class="page-hd-label" style="margin-top:40px">Co omezit (ale ne zakazovat)</div>
-<div class="wcard">
-  <div class="wcard-head"><h3>Smyslný přístup — žádná zakázaná jídla</h3><span class="wcard-badge">Psychologie jídla</span></div>
+<div class="training-card">
+  <div class="wcard-head"><h3>Smyslný přístup — žádná zakázaná jídla</h3><span class="tag">Psychologie jídla</span></div>
   <table class="ex-table">
     <thead><tr><th>Potravina</th><th>Proč omezit</th><th>Jak na to</th></tr></thead>
     <tbody>
@@ -1384,139 +1386,181 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // TABS
-  document.querySelectorAll('.nav-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ── TABS ──────────────────────────────────────────────────
+  document.querySelectorAll('.nav-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       var id = this.dataset.tab;
-      document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
-      document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+      document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
       var sec = document.getElementById(id);
       if (sec) sec.classList.add('active');
       this.classList.add('active');
+      window.scrollTo(0, 0);
     });
   });
-  // ACCORDION
-  document.addEventListener('click', function(e) {
-    var row = e.target.closest('.ex-row');
-    if (!row) return;
-    var detail = row.nextElementSibling;
-    if (!detail || !detail.classList.contains('ex-detail')) return;
-    var ch = row.querySelector('.ex-chevron');
-    var open = detail.classList.contains('open');
-    var parent = row.parentElement;
-    if (parent) {
-      parent.querySelectorAll('.ex-detail.open').forEach(function(d) {
-        if (d !== detail) {
-          d.classList.remove('open');
-          var p = d.previousElementSibling;
-          if (p) { p.classList.remove('open'); var c = p.querySelector('.ex-chevron'); if (c) c.textContent = '+'; }
-        }
-      });
-    }
-    detail.classList.toggle('open', !open);
-    row.classList.toggle('open', !open);
-    if (ch) ch.textContent = open ? '+' : '-';
+
+  // ── ACCORDION ─────────────────────────────────────────────
+  document.querySelectorAll('.ex-row').forEach(function (row) {
+    row.addEventListener('click', function () {
+      var detail = this.nextElementSibling;
+      if (!detail || !detail.classList.contains('ex-detail')) return;
+      var ch = this.querySelector('.ex-chevron');
+      var isOpen = detail.classList.contains('open');
+      // zavři ostatní ve stejném ex-listu
+      var parent = this.parentElement;
+      if (parent) {
+        parent.querySelectorAll('.ex-detail.open').forEach(function (d) {
+          if (d !== detail) {
+            d.classList.remove('open');
+            var prev = d.previousElementSibling;
+            if (prev && prev.classList.contains('ex-row')) {
+              prev.classList.remove('open');
+              var c2 = prev.querySelector('.ex-chevron');
+              if (c2) c2.textContent = '+';
+            }
+          }
+        });
+      }
+      detail.classList.toggle('open', !isOpen);
+      this.classList.toggle('open', !isOpen);
+      if (ch) ch.textContent = isOpen ? '+' : '−';
+    });
   });
-  // CHECKLIST
-  document.addEventListener('click', function(e) {
-    var item = e.target.closest('.check-item');
-    if (!item) return;
-    item.classList.toggle('done');
-    var box = item.querySelector('.check-box');
-    if (box) box.classList.toggle('checked');
+
+  // ── CHECKLIST ─────────────────────────────────────────────
+  document.querySelectorAll('.check-item').forEach(function (item) {
+    item.addEventListener('click', function () { this.classList.toggle('done'); });
   });
-  // MOOD
-  document.querySelectorAll('.star').forEach(function(star) {
-    star.addEventListener('click', function() {
-      var id = this.dataset.id, r = parseInt(this.dataset.rating);
+
+  // ── MOOD STARS ────────────────────────────────────────────
+  document.querySelectorAll('.star').forEach(function (star) {
+    star.addEventListener('click', function () {
+      var id = this.dataset.id, rating = parseInt(this.dataset.rating);
       var cont = document.getElementById(id);
-      if (cont) cont.querySelectorAll('.star').forEach(function(s,i) { s.classList.toggle('active', i < r); });
+      if (cont) cont.querySelectorAll('.star').forEach(function (s, i) {
+        s.classList.toggle('active', i < rating);
+      });
     });
   });
-  // PILATES
-  document.querySelectorAll('[data-version]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
+
+  // ── PILATES VERZE ─────────────────────────────────────────
+  document.querySelectorAll('[data-version]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
       var v = this.dataset.version;
-      var se = document.getElementById('pilatesShort'), fe = document.getElementById('pilatesFull');
-      var sb = document.getElementById('pilShortBtn'), fb = document.getElementById('pilFullBtn');
-      if (se) se.style.display = v==='short'?'block':'none';
-      if (fe) fe.style.display = v==='full'?'block':'none';
-      if (sb) sb.classList.toggle('active', v==='short');
-      if (fb) fb.classList.toggle('active', v==='full');
+      var se = document.getElementById('pilatesShort');
+      var fe = document.getElementById('pilatesFull');
+      var sb = document.getElementById('pilShortBtn');
+      var fb = document.getElementById('pilFullBtn');
+      if (se) se.style.display = v === 'short' ? 'block' : 'none';
+      if (fe) fe.style.display = v === 'full' ? 'block' : 'none';
+      if (sb) sb.classList.toggle('active', v === 'short');
+      if (fb) fb.classList.toggle('active', v === 'full');
     });
   });
-  // WEEK PROGRESS
+
+  // ── WEEK BAR ──────────────────────────────────────────────
   var wi = document.getElementById('weekInput');
-  if (wi) wi.addEventListener('input', function() {
-    var w = Math.max(1, Math.min(24, parseInt(this.value)||1));
-    this.value = w;
-    var f = document.getElementById('weekFill');
-    if (f) f.style.width = (w/24*100)+'%';
-  });
-  // DATE
-  var days=['Ned.','Pond.','Utery','Streda','Ctvrtek','Patek','Sobota'];
-  var months=['ledna','unora','brezna','dubna','kvetna','cervna','cervence','srpna','zari','rijna','listopadu','prosince'];
+  if (wi) {
+    wi.addEventListener('input', function () {
+      var w = Math.max(1, Math.min(24, parseInt(this.value) || 1));
+      this.value = w;
+      var f = document.getElementById('weekFill');
+      if (f) f.style.width = (w / 24 * 100) + '%';
+    });
+  }
+
+  // ── DATUM ─────────────────────────────────────────────────
+  var days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
+  var months = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
   var now = new Date();
   var de = document.getElementById('todayDate');
-  if (de) de.textContent = days[now.getDay()]+', '+now.getDate()+'. '+months[now.getMonth()];
-  // TODAY WORKOUT
-  var sum = {
-    a: '<strong>Sila A</strong> &mdash; Glute / Nohy / Postura<br>Warm-up &rarr; Goblet squat &middot; RDL &middot; Split squat &middot; Cable Row &middot; Face pull &rarr; Core &rarr; Cooldown<br><small>~60&ndash;70 min</small>',
-    b: '<strong>Sila B</strong> &mdash; Zadek / Zada / Paze<br>Warm-up &rarr; Hip thrust &middot; Squat &middot; Face pull &middot; Press &middot; Biceps &middot; Triceps &rarr; Core &rarr; Cooldown<br><small>~60&ndash;70 min</small>',
-    p: '<strong>Pilates / Core</strong> &mdash; Den P<br>Vyber delku: 25 min nebo 60 min.',
-    rest: '<strong>Odpocinku</strong> &#10003;<br>10 min rutina drzeni tela + prochazka.'
-  };
-  document.querySelectorAll('.today-card').forEach(function(card) {
-    card.addEventListener('click', function() {
-      var type = this.dataset.type;
-      document.querySelectorAll('.today-card').forEach(function(c) { c.className='today-card'; });
-      this.classList.add('sel-'+type);
-      var html = sum[type]||'';
-      if (type==='a'||type==='b'||type==='p') {
-        html += '<br><button class="btn-open" data-goto="'+type+'">'+(type==='p'?'Otevrit pilates':'Otevrit trenink')+' &rarr;</button>';
-      }
-      var el = document.getElementById('todaySummary');
-      if (el) {
-        el.innerHTML = html;
-        var gb = el.querySelector('[data-goto]');
-        if (gb) gb.addEventListener('click', function() { goToWorkout(this.dataset.goto); });
-      }
-    });
-  });
+  if (de) de.textContent = days[now.getDay()] + ', ' + now.getDate() + '. ' + months[now.getMonth()];
+
+  // ── PŘECHOD NA TRÉNINK ────────────────────────────────────
   function goToWorkout(type) {
-    document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active');});
-    document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
+    document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
     var sec = document.getElementById('treninky');
     if (sec) sec.classList.add('active');
     var tb = document.querySelector('[data-tab="treninky"]');
     if (tb) tb.classList.add('active');
-    try { setTimeout(function(){ var c=document.querySelector('.wcard-'+type); if(c) c.scrollIntoView({behavior:'smooth',block:'start'}); },150); } catch(e){}
+    window.scrollTo(0, 0);
+    try {
+      setTimeout(function () {
+        var card = document.querySelector('.wcard-' + type);
+        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 200);
+    } catch (e) {}
   }
-  // TIMER
-  var tInt=null, tTotal=90, tLeft=90;
+
+  // ── DNEŠNÍ TRÉNINK ────────────────────────────────────────
+  var SUM = {
+    a: '<strong>Síla A</strong> — Glute / Nohy / Postura<br>Warm-up → Goblet squat · RDL · Split squat · Cable Row · Face pull → Core → Cooldown<br><small>⏱ ~60–70 min</small>',
+    b: '<strong>Síla B</strong> — Zadek / Záda / Paže<br>Warm-up → Hip thrust · Pendulum squat · Face pull · Press · Biceps · Triceps → Core → Cooldown<br><small>⏱ ~60–70 min</small>',
+    p: '<strong>Pilates / Core</strong> — Den P<br>Vyber délku: krátká 25 min nebo plná 60 min.',
+    rest: '<strong>Odpočinkový den</strong> ✓<br>10 min ranní rutina držení těla + krátká procházka.'
+  };
+  document.querySelectorAll('.today-card').forEach(function (card) {
+    card.addEventListener('click', function () {
+      var type = this.dataset.type;
+      if (!type) return;
+      document.querySelectorAll('.today-card').forEach(function (c) { c.className = 'today-card'; });
+      this.classList.add('sel-' + type);
+      var html = SUM[type] || '';
+      if (type === 'a' || type === 'b' || type === 'p') {
+        html += '<br><button class="btn-open" id="gotoBtn">' + (type === 'p' ? 'Otevřít pilates →' : 'Otevřít trénink →') + '</button>';
+      }
+      var el = document.getElementById('todaySummary');
+      if (el) {
+        el.innerHTML = html;
+        var gb = document.getElementById('gotoBtn');
+        if (gb) { var t2 = type; gb.addEventListener('click', function () { goToWorkout(t2); }); }
+      }
+    });
+  });
+
+  // ── ODPOČINKOVÝ TIMER ─────────────────────────────────────
+  var tInt = null, tTotal = 90, tLeft = 90;
   function startTimer(s) {
-    clearInterval(tInt); tTotal=s; tLeft=s;
-    var w=document.getElementById('timerWidget'); if(w) w.classList.add('visible');
+    clearInterval(tInt);
+    tTotal = s; tLeft = s;
+    var w = document.getElementById('timerWidget');
+    if (w) w.classList.add('visible');
     updateTimer();
-    tInt=setInterval(function(){ tLeft--; if(tLeft<0){clearInterval(tInt);var d=document.getElementById('timerDisplay');var b=document.getElementById('timerBar');if(d){d.classList.add('done');d.textContent='Jdi!';}if(b)b.style.width='0%';return;}updateTimer();},1000);
+    tInt = setInterval(function () {
+      tLeft--;
+      if (tLeft < 0) {
+        clearInterval(tInt);
+        var d = document.getElementById('timerDisplay');
+        var b = document.getElementById('timerBar');
+        if (d) { d.classList.add('done'); d.textContent = 'Jdi!'; }
+        if (b) b.style.width = '0%';
+        return;
+      }
+      updateTimer();
+    }, 1000);
   }
   function updateTimer() {
-    var m=Math.floor(tLeft/60),s=tLeft%60;
-    var d=document.getElementById('timerDisplay'),b=document.getElementById('timerBar');
-    if(d){d.classList.remove('done');d.textContent=m+':'+(s<10?'0':'')+s;}
-    if(b)b.style.width=(tLeft/tTotal*100)+'%';
+    var m = Math.floor(tLeft / 60), s = tLeft % 60;
+    var d = document.getElementById('timerDisplay');
+    var b = document.getElementById('timerBar');
+    if (d) { d.classList.remove('done'); d.textContent = m + ':' + (s < 10 ? '0' : '') + s; }
+    if (b) b.style.width = (tLeft / tTotal * 100) + '%';
   }
-  document.querySelectorAll('.tbtn[data-seconds]').forEach(function(btn){
-    btn.addEventListener('click',function(){startTimer(parseInt(this.dataset.seconds));});
+  document.querySelectorAll('.tbtn[data-seconds], .btn-timer[data-seconds]').forEach(function (btn) {
+    btn.addEventListener('click', function () { startTimer(parseInt(this.dataset.seconds)); });
   });
-  document.addEventListener('click',function(e){
-    var btn=e.target.closest('.btn-timer[data-seconds]');
-    if(btn) startTimer(parseInt(btn.dataset.seconds));
+  var cb = document.getElementById('closeTimerBtn');
+  if (cb) cb.addEventListener('click', function () {
+    clearInterval(tInt);
+    var w = document.getElementById('timerWidget');
+    if (w) w.classList.remove('visible');
   });
-  var cb=document.getElementById('closeTimerBtn');
-  if(cb) cb.addEventListener('click',function(){clearInterval(tInt);var w=document.getElementById('timerWidget');if(w)w.classList.remove('visible');});
+
 });
+
 </script>
 
 </body>
