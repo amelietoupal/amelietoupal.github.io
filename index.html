@@ -282,12 +282,18 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 .phase-grid { grid-template-columns: 1fr 1fr; }
 .tracker-grid { grid-template-columns: 1fr; }
 .macro-grid { grid-template-columns: 1fr 1fr; }
-.ex-sets-inline { display: none; }
 }
 @media (min-width: 601px) and (max-width: 1024px) {
 .content { padding: 36px 28px 80px; max-width: 100%; }
 .today-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* ── EX TIMER TRIGGER ── */
+.ex-timer-trigger { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 14px; background: #1a1814; border-radius: var(–rad-sm); }
+.ex-timer-ico { font-size: 14px; flex-shrink: 0; }
+.ex-timer-lbl { font-size: 12px; color: rgba(255,255,255,.55); flex: 1; letter-spacing: .5px; }
+.ex-timer-go { padding: 6px 14px; border-radius: var(–rad-sm); border: none; background: #c4845a; color: #1a1814; font-size: 10px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: .3px; transition: background .15s; flex-shrink: 0; }
+.ex-timer-go:hover { background: #8b5e3c; color: white; }
 
 </style>
 </head>
@@ -296,13 +302,14 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <!-- REST TIMER WIDGET -->
 
 <div class="timer-widget" id="timerWidget">
-  <div class="timer-top">Pauza mezi sériemi</div>
+  <div class="timer-top" id="timerLabel">Pauza mezi sériemi</div>
   <div class="timer-track"><div class="timer-fill" id="timerBar" style="width:100%"></div></div>
   <div class="timer-disp" id="timerDisplay">1:30</div>
   <div class="timer-btns">
     <button class="tbtn" data-seconds="60">60s</button>
     <button class="tbtn" data-seconds="90">90s</button>
     <button class="tbtn" data-seconds="120">2 min</button>
+    <button class="tbtn" data-seconds="300">5 min</button>
     <button class="tbtn tbtn-close" id="closeTimerBtn" id="closeTimerBtn">✕</button>
   </div>
 </div>
@@ -527,99 +534,132 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
   </div>
   <div class="wcard-body">
     <div class="phase-lbl">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-sub">zahřátí — lehce, rozhýbat tělo</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
+    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-sub">zahřátí — lehce, rozhýbat tělo</div></div><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="300" data-label="3 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min</span><button class="ex-timer-go" data-seconds="300" data-label="3 min">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže natažené kolmo nahoru, nohy do 90° (stehna kolmo k zemi)</li><li>Pomalu spusť pravou ruku k zemi nad hlavou + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá na zemi — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět do startu</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu, nejdi nohou tak nízko</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow + Open book</div></div><span class="ex-sets-inline">6× + 5×/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Cat-cow</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru jako kočka, hlava dolů (cat)</li><li>Plynulý pohyb, pomalu</li></ol><h5 style="margin-top:10px">Open book</h5><ol><li>Leh na bok, kolena pokrčena v 90°, ruce natažené před sebou na zemi</li><li>Horní ruku zvedni a otoč se do rotace — jako otevíráš knihu</li><li>Pohled sleduje ruku, výdech v rotaci</li><li>Pomalu zpět a opakuj</li></ol><div class="tip-box">💡 Open book uvolní hrudní páteř — klíč pro držení těla</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge (aktivace) + Wall slides</div></div><span class="ex-sets-inline">2×10 (pauza 2s) + 1×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Glute bridge</h5><ol><li>Leh na záda, chodidla na zemi, kolena pokrčena</li><li>Zatlač do pat a zvedni pánev nahoru — zatnout hýždě nahoře</li><li>Drž 2 sekundy nahoře, pak pomalu dolů</li><li>Bedra nezaklánět — pohyb jde z hýždí</li></ol><h5 style="margin-top:10px">Wall slides</h5><ol><li>Stoupni si zády ke zdi, záda a lokty přiložené ke zdi</li><li>Pomalu taháš ruce nahoru po zdi — lokty a zápěstí se nesmí odlepit</li><li>Jdi jen tak vysoko dokud se záda a lokty drží u zdi</li></ol><div class="tip-box">💡 Wall slides aktivují lopatky a připraví záda na silový trénink</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20activation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Hlavní část — 45–50 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Goblet squat</div><div class="ex-sub">Tvoje varianta: Pendulum squat / hack squat / leg press</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 90–120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–12 kg činka</span><span class="weight-note">Pendulum squat: začni bez zátěže</span></div><h5>Jak na to</h5><ol><li>Drž jednoručku nebo kettlebell oběma rukama u hrudníku (jako pohár — proto goblet)</li><li>Nohy na šířku ramen nebo o trochu víc, špičky mírně ven</li><li>Pomalu jdi dolů 3 sekundy — kolena jdou ve směru špičky, hrudník nahoru</li><li>Pauza dole 1 sekundu, pak nahoru</li><li>Nehrbíš se — zátěž u hrudníku ti pomůže držet hrudník vzpřímený</li></ol><div class="tip-box">💡 Lepší než air squat — nutí tě držet hrudník nahoře = trénuješ posturu zároveň</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
-<a href="https://www.youtube.com/results?search_query=goblet%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20activation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Hlavní část — 45–50 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Goblet squat</div><div class="ex-sub">Tvoje varianta: Pendulum squat / hack squat / leg press</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 90–120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–12 kg činka</span><span class="weight-note">Pendulum squat: začni bez zátěže</span></div><h5>Jak na to</h5><ol><li>Drž jednoručku nebo kettlebell oběma rukama u hrudníku (jako pohár — proto goblet)</li><li>Nohy na šířku ramen nebo o trochu víc, špičky mírně ven</li><li>Pomalu jdi dolů 3 sekundy — kolena jdou ve směru špičky, hrudník nahoru</li><li>Pauza dole 1 sekundu, pak nahoru</li><li>Nehrbíš se — zátěž u hrudníku ti pomůže držet hrudník vzpřímený</li></ol><div class="tip-box">💡 Lepší než air squat — nutí tě držet hrudník nahoře = trénuješ posturu zároveň</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
+<a href="https://www.youtube.com/results?search_query=goblet%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Rumunský mrtvý tah (RDL)</div><div class="ex-sub">Fitko: RDL s činkami nebo Smith</div></div><span class="ex-sets-inline">3×8–10 / 3-1-1 / 120s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">2× 8–10 kg činky</span><span class="weight-note">Technika nejdůležitější ze všech cviků</span></div><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, činky v rukou před stehny</li><li>Mírně pokrč kolena — to zůstane po celou dobu stejné</li><li>Pomalu předkloň trup — činky jedou blízko těla dolů po stehnech</li><li>Cítíš tah v zadní straně stehen (hamstringy) — to je správně</li><li>Jdi jen tak nízko dokud záda zůstávají rovná, pak zpět nahoru</li></ol><div class="tip-box">💡 Pohyb je z kyčlí, ne z kolen. Záda rovná celou dobu — nezaobluj je.</div><button class="btn-timer" class="btn-timer" data-seconds="120">⏱ Spustit pauzu 120s</button>
 ```
 
-<a href="https://www.youtube.com/results?search_query=romanian%20deadlift%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=romanian%20deadlift%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Bulharský split squat / Walking Lunge with Rotation</div><div class="ex-sub">Vyber jedno — obě varianty jsou vhodné</div></div><span class="ex-sets-inline">2×8–10/noha / 2-1-1 / 90s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Bez zátěže → 2× 5–8 kg</span><span class="weight-note">Nejdřív zvládni techniku bez váhy</span></div><h5>Bulharský split squat</h5><ol><li>Zadní noha položená na lavici za tebou, přední noha krok dopředu</li><li>Pomalu jdi dolů — přední koleno jde dopředu ve směru špičky</li><li>Zadní koleno míří k zemi ale nedotkne se</li><li>Hrudník vzpřímený, nezakláníš se</li></ol><h5 style="margin-top:10px">Walking Lunge with Rotation</h5><ol><li>Udělej krok dopředu do výpadu</li><li>V dolní pozici otoč trup na stranu přední nohy — ruce před sebou nebo s činkou</li><li>Otočit zpět, odraziž vpřed do dalšího kroku</li><li>Koleno nepřekračuje špičku</li></ol><div class="tip-box">💡 Split squat = více na zadek. Lunge with rotation = přidává práci pro hrudní páteř</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=bulgarian%20split%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=bulgarian%20split%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Seated Cable Row</div><div class="ex-sub">Alternativa: TRX Low Row</div></div><span class="ex-sets-inline">3×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">15–20 kg na stroji</span><span class="weight-note">+1 dílko když zvládneš 3×10 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Sedíš na stroji, nohy opřené, záda rovná</li><li>Chyť úchop, mírně se naloň dopředu — to je start</li><li>Táhni k břichu — lopatky jdou k sobě a dolů, lokty blízko těla</li><li>Pauza 1s v zatažené pozici, pak pomalu zpět</li><li>Nezakláníš celý trup dozadu — pohyb je jen v ramenním kloubu</li></ol><div class="tip-box">💡 Mysli na to že "mačkáš" lopatky k sobě — ne že jen ohýbáš lokty</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
 ```
 
-<a href="https://www.youtube.com/results?search_query=seated%20cable%20row%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=seated%20cable%20row%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Tlak na šikmé lavici / Kneeling Landmine Press</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 75–90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Jen tyč (bez přidané zátěže)</span><span class="weight-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press (primární)</h5><ol><li>Klekni na jedno nebo obě kolena, drž konec tyče oběma rukama u hrudníku</li><li>Zatlač tyč šikmo dopředu a nahoru — plný rozsah</li><li>Pomalu zpět k hrudníku</li><li>Core zatažený, nezaklánět záda</li></ol><h5 style="margin-top:10px">Incline DB Press (alternativa)</h5><ol><li>Lavice nastavena na 30–45°, leh na ní</li><li>Činky v rukou na úrovni hrudníku, lokty mírně pod 90°</li><li>Zatlač nahoru, na vrcholu skoro propnuté paže</li><li>Pomalu dolů 2 sekundy</li></ol><div class="tip-box">💡 Landmine press je šetrnější k ramenům — preferuj ho pokud máš slabší ramena</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=incline%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=incline%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pulls / rear-delt fly</div><div class="ex-sub">Fitko: kabel | Doma: DB</div></div><span class="ex-sets-inline">2×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB</h5><ol><li>Předkloň trup do 45°, paže dolů s činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena a vzpřímený postoj — nepřeskakuj tento cvik</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Core finisher — 8 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×20–30s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí — loket přímo pod ramenem</li><li>Zvedni pánev od země — tělo tvoří rovnou linii od hlavy po kotníky</li><li>Drž — nezapadej pánví dolů ani ji nevystrkuj nahoru</li><li>Pohled dopředu, dýchej normálně</li></ol><div class="tip-box">💡 Pokud je to moc těžké — pokrč kolena a opři se o ně místo chodidel</div>
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Core finisher — 8 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×20–30s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí — loket přímo pod ramenem</li><li>Zvedni pánev od země — tělo tvoří rovnou linii od hlavy po kotníky</li><li>Drž — nezapadej pánví dolů ani ji nevystrkuj nahoru</li><li>Pohled dopředu, dýchej normálně</li></ol><div class="tip-box">💡 Pokud je to moc těžké — pokrč kolena a opři se o ně místo chodidel</div>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="25" data-label="2×20–30s/strana"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2×20–30s/strana</span><button class="ex-timer-go" data-seconds="25" data-label="2×20–30s/strana">&#9654; Spustit</button></div>
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press</div><div class="ex-sub">kabel / guma</div></div><span class="ex-sets-inline">2×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj bokem ke kabelu nebo gumě, drž úchop oběma rukama u hrudníku</li><li>Zatlač ruce přímo dopředu — plně natažené paže</li><li>Drž 1–2 sekundy, pak zpět k hrudníku</li><li>Trup se nesmí otočit — to je celý smysl cviku</li><li>Core zatažený po celou dobu</li></ol><div class="tip-box">💡 Anti-rotační cvik — posiluje hluboký core jinak než planky, velmi efektivní pro pas</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Cooldown + strečink — 10 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">45–60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klekni na jedno koleno — jako rytíř</li><li>Přední noha v 90°, zadní koleno na zemi</li><li>Mírně podsaď pánev (zatáhni ji pod sebe), zatnout hýždě zadní nohy</li><li>Nakloň se mírně dopředu — cítíš tah v přední části stehna zadní nohy</li><li>Žebra dolů, nezaklánět záda</li></ol><div class="tip-box">💡 Jeden z nejdůležitějších strečů pro správnou posturu — dělej každý den</div>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Cooldown + strečink — 10 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">45–60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klekni na jedno koleno — jako rytíř</li><li>Přední noha v 90°, zadní koleno na zemi</li><li>Mírně podsaď pánev (zatáhni ji pod sebe), zatnout hýždě zadní nohy</li><li>Nakloň se mírně dopředu — cítíš tah v přední části stehna zadní nohy</li><li>Žebra dolů, nezaklánět záda</li></ol><div class="tip-box">💡 Jeden z nejdůležitějších strečů pro správnou posturu — dělej každý den</div>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="220" data-label="3 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 40 s</span><button class="ex-timer-go" data-seconds="220" data-label="3 min 40 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hamstring stretch</div></div><span class="ex-sets-inline">45s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedna noha natažená na zemi</li><li>Druhou nohu zvedni nahoru, drž za lýtko nebo stehno</li><li>Jemně táhni nohu k sobě — cítíš tah v zadní straně stehna</li><li>Noha nemusí být úplně rovná — jen jdi do příjemného tahu</li></ol><div class="tip-box">💡 Nestrkej nohu přes bolest — jemné pravidelné protahování funguje lépe než brutální</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="220" data-label="3 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 40 s</span><button class="ex-timer-go" data-seconds="220" data-label="3 min 40 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Quad stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj na jedné noze, druhou pokrč za sebou</li><li>Drž kotník rukou, kolena u sebe</li><li>Mírně zatnout hýždě — zvýší intenzitu protažení</li><li>Pokud neudržíš rovnováhu — drž se zdi</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=quad%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=quad%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="200" data-label="3 min 20 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 20 s</span><button class="ex-timer-go" data-seconds="200" data-label="3 min 20 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hrudník — doorway stretch</div></div><span class="ex-sets-inline">45s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stoupni do dveřního rámu, ruce opři o zárubeň ve výšce ramen</li><li>Udělej malý krok dopředu — hrudník jde dopředu, ramena zůstávají vzadu</li><li>Cítíš tah v hrudníku a předních deltech</li></ol><div class="tip-box">💡 Skvělé po celodenním sezení — otevírá hrudník a napravuje "hrbatou" posturu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=doorway%20chest%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=doorway%20chest%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div><span class="ex-sets-inline">45s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty</li><li>Natáhni paže dopředu na zem co nejdál</li><li>Čelo na zemi nebo blízko ní</li><li>Uvolni celá záda, ramena a boky</li><li>Dýchej pomalu a hluboce</li></ol><div class="tip-box">💡 Nejlepší zakončení tréninku — uvolní celou páteř a zklidní nervový systém</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-</div>
-</div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div></div>
+      </div>
+    </div>
 
 ```
 <!-- SÍLA B -->
@@ -630,105 +670,138 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
   </div>
   <div class="wcard-body">
     <div class="phase-lbl">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-sub">zahřátí</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
+    <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-sub">zahřátí</div></div><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="300" data-label="3 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min</span><button class="ex-timer-go" data-seconds="300" data-label="3 min">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-sub">aktivace hlubokého core</div></div><span class="ex-sets-inline">2×6/strana — pomalu</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Pomalu spusť pravou ruku nahoru za hlavu + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět</li><li>Zopakuj druhou stranu</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hrudní extenze (pěnový válec) + kotníky</div></div><span class="ex-sets-inline">6× + 8×/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Hrudní extenze na válci</h5><ol><li>Válec polož napříč pod hrudní páteř (ne bedra)</li><li>Ruce za hlavou nebo zkřížené na hrudníku</li><li>Pomalu se zaklop dozadu přes válec — hrudní páteř se otevírá</li><li>Posuň válec o kus výš a opakuj</li></ol><h5 style="margin-top:10px">Kotníky (zeď)</h5><ol><li>Stůj čelem ke zdi, přilož špičku nohy ke zdi</li><li>Pokus se kolenem dotknout zdi — pata zůstává na zemi</li><li>Postupně přibližuj nohu blíž ke zdi</li></ol><div class="tip-box">💡 Mobilita kotníků ovlivňuje hloubku dřepu a hip thrustu</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=thoracic%20foam%20roller%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=thoracic%20foam%20roller%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Band lateral walk + Scapular retraction hold</div></div><span class="ex-sets-inline">2×8 kroků/str + 2×15s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Band lateral walk</h5><ol><li>Guma kolem kotníků nebo kolen</li><li>Mírně pokrč kolena, mírný předklon</li><li>Krok do strany — drž napětí gumy, nohy nedávej k sobě</li><li>8 kroků na jednu stranu, pak zpět</li></ol><h5 style="margin-top:10px">Scapular retraction hold</h5><ol><li>Stůj vzpřímeně, paže volně podél těla</li><li>Stáhni lopatky k sobě a dolů — jako bys chtěla dát lopatky do zadních kapes kalhot</li><li>Drž 15 sekund, ramena nepokrčuj nahoru</li></ol><div class="tip-box">💡 Retraction hold aktivuje lopatky před tréninkem zad a ramen</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=band%20lateral%20walk%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Hlavní část — 45–50 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip thrust</div><div class="ex-sub">Fitko: stroj / osa | Doma: o gauč s DB</div></div><span class="ex-sets-inline">3×8–12 / 2-1-2 (1s nahoře) / 90–120s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Vlastní váha → 10–20 kg</span><span class="weight-note">+5 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Záda opři o lavici (střední část zad — ne krk), chodidla na zemi na šířku boků</li><li>Zátěž (osa/DB) polož na boky, drž ji rukama</li><li>Zatlač do pat, zvedni pánev nahoru — hýždě zatnout na vrcholu</li><li>Drž 1 sekundu nahoře, pak pomalu dolů</li><li>Kolena nestlačuj k sobě — drž je nad špičkami</li></ol><div class="tip-box">💡 Nejlepší cvik pro zadek — priorita číslo 1. Pauza nahoře = více práce pro hýždě</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
-<a href="https://www.youtube.com/results?search_query=hip%20thrust%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=band%20lateral%20walk%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Hlavní část — 45–50 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip thrust</div><div class="ex-sub">Fitko: stroj / osa | Doma: o gauč s DB</div></div><span class="ex-sets-inline">3×8–12 / 2-1-2 (1s nahoře) / 90–120s</span><span class="rpe-pill">RPE 7–8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Vlastní váha → 10–20 kg</span><span class="weight-note">+5 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Záda opři o lavici (střední část zad — ne krk), chodidla na zemi na šířku boků</li><li>Zátěž (osa/DB) polož na boky, drž ji rukama</li><li>Zatlač do pat, zvedni pánev nahoru — hýždě zatnout na vrcholu</li><li>Drž 1 sekundu nahoře, pak pomalu dolů</li><li>Kolena nestlačuj k sobě — drž je nad špičkami</li></ol><div class="tip-box">💡 Nejlepší cvik pro zadek — priorita číslo 1. Pauza nahoře = více práce pro hýždě</div><button class="btn-timer" class="btn-timer" data-seconds="90">⏱ Spustit pauzu 90s</button>
+<a href="https://www.youtube.com/results?search_query=hip%20thrust%20glute%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pendulum squat / Step-up</div></div><span class="ex-sets-inline">3×6–8 / 3-1-1 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Bez zátěže (jen stroj)</span><span class="weight-note">+5 kg kotouč když zvládneš 3×8 čistě</span></div><h5>Pendulum squat</h5><ol><li>Nastav stroj, opři ramena o polštáře</li><li>Nohy na plošině na šířku boků</li><li>Pomalu jdi dolů 3 sekundy — plný rozsah</li><li>Pauza dole, pak nahoru</li><li>Začni bez zátěže nebo s minimální — priorita je plný rozsah</li></ol><h5 style="margin-top:10px">Step-up (alternativa)</h5><ol><li>Stůj před lavicí nebo stepem střední výšky</li><li>Šlápni celým chodidlem na step, přitlač do paty a zvedni se</li><li>Kontrolovaně dolů — nedovolíš tělu "padnout"</li><li>Koleno sleduje směr špičky</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pendulum%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pendulum%20squat%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pull (kabel) / rear delt fly</div></div><span class="ex-sets-inline">3×12–15 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–8 kg na kabelu</span><span class="weight-note">Lehčí než si myslíš — forma je vše</span></div><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Udělej krok dozadu, mírně se naloň</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy, lokty výše než zápěstí</li><li>Pomalu zpět</li></ol><h5 style="margin-top:10px">Rear delt fly s DB (alternativa)</h5><ol><li>Předkloň trup do 45°, paže dolů s lehkými činkami</li><li>Zvedni paže do stran — jako motýlí křídla</li><li>Lopatky k sobě nahoře, pomalu dolů</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena — udrží tě vzpřímené a zabrání "hrbení"</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=face%20pull%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Kneeling Landmine Press / Overhead press DB</div></div><span class="ex-sets-inline">2×8–10 / 2-1-2 / 90s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Jen tyč (bez přidané zátěže)</span><span class="weight-note">+1.25 kg kotouč když zvládneš 3×10</span></div><h5>Kneeling Landmine Press</h5><ol><li>Klekni na jedno nebo obě kolena před tyčí zasunutou v rohu</li><li>Drž konec tyče oběma rukama u hrudníku</li><li>Zatlač šikmo dopředu a nahoru — plný rozsah</li><li>Core zatažený, záda neprohýbej</li><li>Pomalu zpět k hrudníku</li></ol><div class="tip-box">💡 Šetrnější k ramenům než klasický overhead press — preferuj ho</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=kneeling%20landmine%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=kneeling%20landmine%20press%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Banded Biceps Curl</div></div><span class="ex-sets-inline">2×10–12 / 2-1-3 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–7 kg činky / lehká guma</span><span class="weight-note">+1 kg když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stoupni na gumy, drž konce v rukou, dlaně nahoru</li><li>Lokty u těla — to se nesmí měnit po celou dobu</li><li>Curl nahoru — výdech</li><li>Pomalu dolů 3 sekundy — to je klíč pro definici</li></ol><div class="tip-box">💡 Pomalý excentrik (dolů) = větší efekt pro definici paží než rychlé pumpy</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=banded%20bicep%20curl%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=banded%20bicep%20curl%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Triceps Pushdown (kabel / guma)</div></div><span class="ex-sets-inline">2×10–12 / 2-1-2 / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–10 kg na kabelu</span><span class="weight-note">+1 dílko když zvládneš 3×12 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stůj u kabelu, uchop lano nebo tyčku</li><li>Lokty u těla — zůstanou tak celou dobu</li><li>Zatlač dolů — plné propnutí loktů dole</li><li>Výdech při tlaku dolů</li><li>Pomalu zpět nahoru</li></ol><div class="tip-box">💡 Triceps tvoří větší část paže než biceps — klíčový pro definici paží</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=triceps%20pushdown%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Core finisher + Boky — 10 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip abduction (kabel vestoje / lying s gumou)</div><div class="ex-sub">Glute medius — tvar boků a hourglass silueta</div></div><span class="ex-sets-inline">3×15 / pomalé / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–10 kg na kabelu / lehká guma</span><span class="weight-note">+1 dílko když zvládneš 3×15 čistě</span></div><h5>Cable hip abduction vestoje (primární)</h5><ol><li>Připoj kabel na kotník, stůj bokem ke stroji</li><li>Mírně se naloň dopředu 10–15° — to je klíč pro aktivaci glute medius místo TFL</li><li>Zvedni nohu do strany — pohyb jde z kyčle, ne ze záklonu trupu</li><li>Pomalu zpět — nespouštěj nohu s plesknutím</li><li>Drž se stojanu volnou rukou pro rovnováhu</li></ol><h5 style="margin-top:10px">Lying side abduction s gumou (alternativa)</h5><ol><li>Leh na bok, guma kolem kolen nebo kotníků</li><li>Zvedni horní nohu nahoru — pomalu, kontrolovaně</li><li>Pauza nahoře 1 sekundu, pak pomalu dolů</li><li>Chodidlo míří rovně dopředu, ne ke stropu</li></ol><div class="tip-box">💡 Mírný předklon při stojící variantě je klíčový — bez něj pracuje více TFL místo glute medius. Buduje “booty shelf” a hourglass proporce.</div>
-<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=triceps%20pushdown%20cable%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Core finisher + Boky — 10 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip abduction (kabel vestoje / lying s gumou)</div><div class="ex-sub">Glute medius — tvar boků a hourglass silueta</div></div><span class="ex-sets-inline">3×15 / pomalé / 60s</span><span class="rpe-pill">RPE 7</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–10 kg na kabelu / lehká guma</span><span class="weight-note">+1 dílko když zvládneš 3×15 čistě</span></div><h5>Cable hip abduction vestoje (primární)</h5><ol><li>Připoj kabel na kotník, stůj bokem ke stroji</li><li>Mírně se naloň dopředu 10–15° — to je klíč pro aktivaci glute medius místo TFL</li><li>Zvedni nohu do strany — pohyb jde z kyčle, ne ze záklonu trupu</li><li>Pomalu zpět — nespouštěj nohu s plesknutím</li><li>Drž se stojanu volnou rukou pro rovnováhu</li></ol><h5 style="margin-top:10px">Lying side abduction s gumou (alternativa)</h5><ol><li>Leh na bok, guma kolem kolen nebo kotníků</li><li>Zvedni horní nohu nahoru — pomalu, kontrolovaně</li><li>Pauza nahoře 1 sekundu, pak pomalu dolů</li><li>Chodidlo míří rovně dopředu, ne ke stropu</li></ol><div class="tip-box">💡 Mírný předklon při stojící variantě je klíčový — bez něj pracuje více TFL místo glute medius. Buduje "booty shelf" a hourglass proporce.</div>
+<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div><span class="ex-sets-inline">3×15–25s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže natažené za hlavou, nohy natažené</li><li>Zvedni ramena a nohy pár centimetrů od země</li><li>Záda zůstávají plochá — bederní páteř přitisknuta k zemi</li><li>Drž pozici a dýchej normálně</li></ol><div class="tip-box">💡 Pokud je to příliš těžké — pokrč kolena nebo zvedni paže vzhůru (kratší páka)</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="90" data-label="1 min 30 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">1 min 30 s</span><button class="ex-timer-go" data-seconds="90" data-label="1 min 30 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge march</div></div><span class="ex-sets-inline">2×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Udělej glute bridge — pánev nahoře, hýždě zatnuty</li><li>V této pozici pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí spadnout ani otočit — zůstává rovná</li><li>Nohu zpět, pak druhá strana</li></ol><div class="tip-box">💡 Trénuje stabilitu pánve — klíčové pro správný hip thrust a chůzi</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-<div class="phase-lbl">Cooldown + strečink — 10 min</div>
-<div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hamstring stretch</div></div><span class="ex-sets-inline">45s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedna noha natažená na zemi</li><li>Druhou zvedni nahoru, drž za lýtko nebo stehno</li><li>Jemně táhni k sobě — tah v zadní straně stehna</li><li>Noha nemusí být úplně rovná</li></ol><div class="tip-box">💡 Důležité po hip thrustu a dřepech — uvolní zadní stranu stehen</div>
-<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div></div>
+        <div class="phase-lbl">Cooldown + strečink — 10 min</div>
+        <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hamstring stretch</div></div><span class="ex-sets-inline">45s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedna noha natažená na zemi</li><li>Druhou zvedni nahoru, drž za lýtko nebo stehno</li><li>Jemně táhni k sobě — tah v zadní straně stehna</li><li>Noha nemusí být úplně rovná</li></ol><div class="tip-box">💡 Důležité po hip thrustu a dřepech — uvolní zadní stranu stehen</div>
+<a href="https://www.youtube.com/results?search_query=hamstring%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="220" data-label="3 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 40 s</span><button class="ex-timer-go" data-seconds="220" data-label="3 min 40 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pigeon pose / Figure-4 stretch</div></div><span class="ex-sets-inline">45–60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Figure-4 (jednodušší varianta)</h5><ol><li>Leh na záda, kolena pokrčena</li><li>Přilož kotník pravé nohy přes koleno levé</li><li>Uchop levé stehno oběma rukama a přitáhni k hrudníku</li><li>Cítíš tah v hýždi pravé nohy</li></ol><h5 style="margin-top:10px">Pigeon pose (náročnější)</h5><ol><li>Z kleku — přesuň přední nohu zkříženě před sebe, zadní natáhni dozadu</li><li>Snaž se položit boky rovnoměrně k zemi</li><li>Předkloň se nad přední nohu</li></ol><div class="tip-box">💡 Nejlepší strečink po hip thrustu — uvolní hýžďové svaly které byly nejvíce zatíženy</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="220" data-label="3 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 40 s</span><button class="ex-timer-go" data-seconds="220" data-label="3 min 40 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Lat stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stoupni ke stojanu nebo dveřnímu rámu</li><li>Chyť se jednou rukou ve výšce ramen</li><li>Mírně se posaď dozadu a do strany — cítíš tah podél boku od podpaží dolů</li></ol><div class="tip-box">💡 Uvolní záda po rowing cvicích</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=lat%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=lat%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="200" data-label="3 min 20 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 20 s</span><button class="ex-timer-go" data-seconds="200" data-label="3 min 20 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Triceps stretch</div></div><span class="ex-sets-inline">40s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Zvedni ruku nahoru, ohni v lokti za hlavu</li><li>Druhou rukou jemně tlač loket dolů a dozadu</li><li>Cítíš tah v zadní části paže</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=triceps%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
+<a href="https://www.youtube.com/results?search_query=triceps%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="200" data-label="3 min 20 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min 20 s</span><button class="ex-timer-go" data-seconds="200" data-label="3 min 20 s">&#9654; Spustit</button></div></div></div>
 
 ```
         <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div><span class="ex-sets-inline">60s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty</li><li>Natáhni paže dopředu na zem co nejdál</li><li>Čelo na zemi nebo blízko ní</li><li>Uvolni celá záda, ramena a boky</li><li>Dýchej pomalu a hluboce</li></ol><div class="tip-box">💡 Nejlepší zakončení tréninku — uvolní celou páteř a zklidní nervový systém</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-</div>
-</div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div></div>
+      </div>
+    </div>
 
 ```
 <!-- PILATES -->
@@ -750,9 +823,12 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-sub">aktivace bránice a core</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90° na stoličce nebo u zdi</li><li>Ruka na břicho, ruka na hrudník — hrudní ruka se nesmí hýbat</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>5–6 opakování</li></ol><div class="tip-box">💡 Aktivuje hluboký core a uvolní flexory kyčle — i sám o sobě má efekt</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div></div><span class="ex-sets-inline">2×6/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá</li><li>Výdech při extenzi</li></ol>
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div></div><span class="ex-sets-inline">2×6/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá</li><li>Výdech při extenzi</li></ol>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div></div>
 
 ```
       <div class="phase-lbl">Blok B — Kyčle + core (10 min)</div>
@@ -761,21 +837,30 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 
 <a href="https://www.youtube.com/results?search_query=glute%20bridge%20pause%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
 <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Clamshell s gumou</div></div><span class="ex-sets-inline">2×15/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad koleny, kolena v 45°</li><li>Zvedni horní koleno — chodidla u sebe</li><li>Pauza nahoře 1s, pomalu dolů</li><li>Boky se nesmí otočit dozadu</li></ol><div class="tip-box">💡 Glute medius — doplňuje hip abduction ze Síly B</div>
-<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×25s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí</li><li>Zvedni pánev — přímá linie od hlavy po kotníky</li><li>Dýchej normálně, nezapadej pánví</li></ol>
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank</div></div><span class="ex-sets-inline">2×25s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, opři se na předloktí</li><li>Zvedni pánev — přímá linie od hlavy po kotníky</li><li>Dýchej normálně, nezapadej pánví</li></ol>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="50" data-label="2×25s/strana"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2×25s/strana</span><button class="ex-timer-go" data-seconds="50" data-label="2×25s/strana">&#9654; Spustit</button></div>
+</div></div></div>
 
 ```
       <div class="phase-lbl">Blok C — Mobilita (8 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Open book</div></div><span class="ex-sets-inline">2×6/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, kolena 90°</li><li>Horní ruku zvedni a otoč hrudník — pohled sleduje ruku</li><li>Výdech v rotaci</li></ol><div class="tip-box">💡 Klíčový pro modelka posturu — otevírá hrudník</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling — jedno koleno na zemi</li><li>Podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li></ol>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child’s pose</div></div><span class="ex-sets-inline">60s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty, paže dopředu</li><li>Uvolni celá záda a boky</li><li>Dýchej pomalu</li></ol>
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-</div>
+<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling — jedno koleno na zemi</li><li>Podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li></ol>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="280" data-label="4 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">4 min 40 s</span><button class="ex-timer-go" data-seconds="280" data-label="4 min 40 s">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div><span class="ex-sets-inline">60s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty, paže dopředu</li><li>Uvolni celá záda a boky</li><li>Dýchej pomalu</li></ol>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div></div>
+        </div>
 
 ```
     <!-- FULL VERSION -->
@@ -784,55 +869,77 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">90/90 breathing</div><div class="ex-sub">aktivace bránice</div></div><span class="ex-sets-inline">3 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, nohy do 90°</li><li>Ruka na břicho, ruka na hrudník</li><li>Nádech nosem do stran žeber, dlouhý výdech ústy</li><li>8 opakování — každý výdech delší</li></ol><div class="tip-box">💡 Základ pilates — nikdy nevynechávej</div>
 ```
 
-<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug — progrese</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá celou dobu</li><li>Výdech při extenzi, pomalu zpět</li><li>Náročnější verze: drž 2s v dolní poloze</li></ol>
-<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div><span class="ex-sets-inline">3×20–30s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže za hlavou, nohy natažené</li><li>Zvedni ramena a nohy pár cm od země</li><li>Záda plochá — bederní páteř přitisknuta</li></ol><div class="tip-box">💡 Pokud záda odlézají — pokrč kolena nebo zvedni paže</div>
-<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=90%2090%20breathing%20diaphragm%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="300" data-label="3 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3 min</span><button class="ex-timer-go" data-seconds="300" data-label="3 min">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug — progrese</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Spusť protilehlou ruku a nohu k zemi — záda plochá celou dobu</li><li>Výdech při extenzi, pomalu zpět</li><li>Náročnější verze: drž 2s v dolní poloze</li></ol>
+<a href="https://www.youtube.com/results?search_query=dead%20bug%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div><span class="ex-sets-inline">3×20–30s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže za hlavou, nohy natažené</li><li>Zvedni ramena a nohy pár cm od země</li><li>Záda plochá — bederní páteř přitisknuta</li></ol><div class="tip-box">💡 Pokud záda odlézají — pokrč kolena nebo zvedni paže</div>
+<a href="https://www.youtube.com/results?search_query=hollow%20hold%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="105" data-label="1 min 45 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">1 min 45 s</span><button class="ex-timer-go" data-seconds="105" data-label="1 min 45 s">&#9654; Spustit</button></div></div></div></div>
 
 ```
       <div class="phase-lbl">Blok B — Kyčle + zadek (15 min)</div>
-      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge — single leg</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Glute bridge pozice, jedna noha natažená</li><li>Zvedni pánev silou pouze jedné nohy</li><li>Hýždě zatnuté nahoře, pánev rovná — nesmí se naklánět</li></ol><div class="tip-box">💡 Nejtěžší varianta glute bridge — maximální aktivace hýždí</div></div></div>
-        <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Clamshell s gumou</div></div><span class="ex-sets-inline">3×15/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad koleny</li><li>Zvedni horní koleno, chodidla u sebe</li><li>Pauza nahoře 2s, pomalu dolů</li></ol>
+      <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge — single leg</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Glute bridge pozice, jedna noha natažená</li><li>Zvedni pánev silou pouze jedné nohy</li><li>Hýždě zatnuté nahoře, pánev rovná — nesmí se naklánět</li></ol><div class="tip-box">💡 Nejtěžší varianta glute bridge — maximální aktivace hýždí
 ```
 
-<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side lying hip abduction s gumou</div></div><span class="ex-sets-inline">3×12/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad kotníky</li><li>Zvedni horní nohu nahoru — chodidlo míří dopředu, ne ke stropu</li><li>Pauza nahoře 1s, pomalu dolů</li></ol><div class="tip-box">💡 Glute medius — buduje tvar boků</div>
-<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Donkey kick + Fire hydrant</div></div><span class="ex-sets-inline">2×12/strana každý</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Donkey kick</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Jedno koleno zvedni dozadu a nahoru — chodidlo míří ke stropu</li><li>Hýždi zatnout nahoře, záda rovná</li></ol><h5 style="margin-top:8px">Fire hydrant</h5><ol><li>Ze stejné pozice — zvedni koleno do strany jako pes u hydrantu</li><li>Koleno v 90°, pohyb jde z kyčle</li></ol>
-<a href="https://www.youtube.com/results?search_query=donkey%20kick%20fire%20hydrant%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip hinge drill</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, mírně pokrč kolena</li><li>Odtlač boky dozadu — jako zavíráš dveře zadkem</li><li>Záda rovná, trup se nakloní dopředu</li><li>Cítíš tah v hamstrinzích — zpět nahoru</li></ol></div></div></div>
+</div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Clamshell s gumou</div></div><span class="ex-sets-inline">3×15/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad koleny</li><li>Zvedni horní koleno, chodidla u sebe</li><li>Pauza nahoře 2s, pomalu dolů</li></ol>
+<a href="https://www.youtube.com/results?search_query=clamshell%20exercise%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side lying hip abduction s gumou</div></div><span class="ex-sets-inline">3×12/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, guma nad kotníky</li><li>Zvedni horní nohu nahoru — chodidlo míří dopředu, ne ke stropu</li><li>Pauza nahoře 1s, pomalu dolů</li></ol><div class="tip-box">💡 Glute medius — buduje tvar boků</div>
+<a href="https://www.youtube.com/results?search_query=cable%20hip%20abduction%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Donkey kick + Fire hydrant</div></div><span class="ex-sets-inline">2×12/strana každý</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Donkey kick</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Jedno koleno zvedni dozadu a nahoru — chodidlo míří ke stropu</li><li>Hýždi zatnout nahoře, záda rovná</li></ol><h5 style="margin-top:8px">Fire hydrant</h5><ol><li>Ze stejné pozice — zvedni koleno do strany jako pes u hydrantu</li><li>Koleno v 90°, pohyb jde z kyčle</li></ol>
+<a href="https://www.youtube.com/results?search_query=donkey%20kick%20fire%20hydrant%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip hinge drill</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, mírně pokrč kolena</li><li>Odtlač boky dozadu — jako zavíráš dveře zadkem</li><li>Záda rovná, trup se nakloní dopředu</li><li>Cítíš tah v hamstrinzích — zpět nahoru</li></ol>
+</div></div></div>
 
 ```
       <div class="phase-lbl">Blok C — Core + stabilita (12 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Side plank + variace</div></div><span class="ex-sets-inline">3×30s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Základní verze</h5><ol><li>Leh na bok, opři na předloktí, zvedni pánev</li><li>Přímá linie — dýchej normálně</li></ol><h5 style="margin-top:8px">Pokročilá verze (od týdne 5)</h5><ol><li>Ze side planku zvedni horní nohu nahoru — drž 2s</li><li>Nebo: ze side planku spusť pánev k zemi a zvedni zpět</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press s gumou</div></div><span class="ex-sets-inline">3×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Gumu přichyť na pevný bod ve výšce hrudníku, stůj bokem</li><li>Drž oběma rukama u hrudníku</li><li>Zatlač dopředu — plně natažené paže</li><li>Trup se nesmí otočit — drž 2s, pak zpět</li></ol><div class="tip-box">💡 Anti-rotace — posiluje hluboký core pro plochý pas</div>
-<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge march</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Glute bridge pozice, pánev nahoře</li><li>Pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí pohybovat</li></ol>
-<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
+<a href="https://www.youtube.com/results?search_query=side%20plank%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="90" data-label="3×30s/strana"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">3×30s/strana</span><button class="ex-timer-go" data-seconds="90" data-label="3×30s/strana">&#9654; Spustit</button></div>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pallof press s gumou</div></div><span class="ex-sets-inline">3×10/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Gumu přichyť na pevný bod ve výšce hrudníku, stůj bokem</li><li>Drž oběma rukama u hrudníku</li><li>Zatlač dopředu — plně natažené paže</li><li>Trup se nesmí otočit — drž 2s, pak zpět</li></ol><div class="tip-box">💡 Anti-rotace — posiluje hluboký core pro plochý pas</div>
+<a href="https://www.youtube.com/results?search_query=pallof%20press%20core%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge march</div></div><span class="ex-sets-inline">3×8/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Glute bridge pozice, pánev nahoře</li><li>Pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí pohybovat</li></ol>
+<a href="https://www.youtube.com/results?search_query=glute%20bridge%20march%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div></div>
 
 ```
       <div class="phase-lbl">Blok D — Hrudník + mobilita + cooldown (20 min)</div>
       <div class="ex-list"><div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow</div></div><span class="ex-sets-inline">2 min — plynule</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek na čtyři</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru, hlava dolů (cat)</li><li>Plynulý rytmický pohyb</li></ol>
 ```
 
-<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Open book — prodloužená</div></div><span class="ex-sets-inline">3×6/strana — drž 3s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, kolena 90°</li><li>Horní ruku otočíš dozadu — drž 3 sekundy v maximální rotaci</li><li>Snaž se dotknout záda/ramene země</li></ol><div class="tip-box">💡 Prodloužené držení = hlubší uvolnění hrudní páteře</div>
-<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Wall slides</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Záda ke zdi, lokty a zápěstí přiložené</li><li>Pomalu taháš ruce nahoru — nesmí se nic odlepit</li><li>Pomalu zpět dolů</li></ol>
-<a href="https://www.youtube.com/results?search_query=wall%20slides%20shoulder%20posture%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pigeon pose</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Z kleku přesuň přední nohu zkříženě před sebe</li><li>Zadní nohu natáhni dozadu</li><li>Boky rovnoměrně k zemi, předkloň se</li><li>Dýchej do tahu — nekroť se</li></ol><div class="tip-box">💡 90 sekund = hluboké uvolnění fascie, ne jen povrchní strečink</div>
-<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling, podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li><li>Výdech každých 20–30s — tah se prohloubí</li></ol>
-<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Supine twist</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedno koleno přitáhni k hrudníku</li><li>Přetočit ho přes tělo na druhou stranu — ramena zůstávají na zemi</li><li>Paže rozloženy do stran, pohled opačným směrem</li><li>Uvolni a dýchej</li></ol>
-<a href="https://www.youtube.com/results?search_query=supine%20spinal%20twist%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div>
-<div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Savasana / Child’s pose</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda nebo child’s pose — jak ti je příjemnější</li><li>Uvolni každou část těla vědomě od prstů nahoru</li><li>Dýchej přirozeně, nemysli na nic</li></ol><div class="tip-box">💡 Nervový systém potřebuje čas na zpracování tréninku — nevynechávej závěrečné uvolnění</div>
-<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a></div></div></div>
-</div>
+<a href="https://www.youtube.com/results?search_query=cat%20cow%20spine%20mobilization%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Open book — prodloužená</div></div><span class="ex-sets-inline">3×6/strana — drž 3s</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na bok, kolena 90°</li><li>Horní ruku otočíš dozadu — drž 3 sekundy v maximální rotaci</li><li>Snaž se dotknout záda/ramene země</li></ol><div class="tip-box">💡 Prodloužené držení = hlubší uvolnění hrudní páteře</div>
+<a href="https://www.youtube.com/results?search_query=open%20book%20thoracic%20rotation%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Wall slides</div></div><span class="ex-sets-inline">3×8</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Záda ke zdi, lokty a zápěstí přiložené</li><li>Pomalu taháš ruce nahoru — nesmí se nic odlepit</li><li>Pomalu zpět dolů</li></ol>
+<a href="https://www.youtube.com/results?search_query=wall%20slides%20shoulder%20posture%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+</div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Pigeon pose</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Z kleku přesuň přední nohu zkříženě před sebe</li><li>Zadní nohu natáhni dozadu</li><li>Boky rovnoměrně k zemi, předkloň se</li><li>Dýchej do tahu — nekroť se</li></ol><div class="tip-box">💡 90 sekund = hluboké uvolnění fascie, ne jen povrchní strečink</div>
+<a href="https://www.youtube.com/results?search_query=pigeon%20pose%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="400" data-label="6 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">6 min 40 s</span><button class="ex-timer-go" data-seconds="400" data-label="6 min 40 s">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip flexor stretch</div></div><span class="ex-sets-inline">90s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Half-kneeling, podsaď pánev, zatnout hýždi zadní nohy</li><li>Nakloň se mírně dopředu</li><li>Výdech každých 20–30s — tah se prohloubí</li></ol>
+<a href="https://www.youtube.com/results?search_query=hip%20flexor%20stretch%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="400" data-label="6 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">6 min 40 s</span><button class="ex-timer-go" data-seconds="400" data-label="6 min 40 s">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Supine twist</div></div><span class="ex-sets-inline">60s/strana</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, jedno koleno přitáhni k hrudníku</li><li>Přetočit ho přes tělo na druhou stranu — ramena zůstávají na zemi</li><li>Paže rozloženy do stran, pohled opačným směrem</li><li>Uvolni a dýchej</li></ol>
+<a href="https://www.youtube.com/results?search_query=supine%20spinal%20twist%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="280" data-label="4 min 40 s"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">4 min 40 s</span><button class="ex-timer-go" data-seconds="280" data-label="4 min 40 s">&#9654; Spustit</button></div></div></div>
+            <div class="ex-row"><div class="ex-row-inner"><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Savasana / Child's pose</div></div><span class="ex-sets-inline">2 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda nebo child's pose — jak ti je příjemnější</li><li>Uvolni každou část těla vědomě od prstů nahoru</li><li>Dýchej přirozeně, nemysli na nic</li></ol><div class="tip-box">💡 Nervový systém potřebuje čas na zpracování tréninku — nevynechávej závěrečné uvolnění</div>
+<a href="https://www.youtube.com/results?search_query=childs%20pose%20stretch" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
+<div class="ex-timer-trigger" data-seconds="120" data-label="2 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">2 min</span><button class="ex-timer-go" data-seconds="120" data-label="2 min">&#9654; Spustit</button></div></div></div></div>
+        </div>
 
 ```
   </div>
@@ -1397,12 +1504,12 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 <script>
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ── TABS ──────────────────────────────────────────────────
-  document.querySelectorAll('.nav-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+  // TABS
+  document.querySelectorAll('.nav-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
       var id = this.dataset.tab;
-      document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
-      document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
+      document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+      document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
       var sec = document.getElementById(id);
       if (sec) sec.classList.add('active');
       this.classList.add('active');
@@ -1410,25 +1517,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── ACCORDION ─────────────────────────────────────────────
-  document.querySelectorAll('.ex-row').forEach(function (row) {
-    row.addEventListener('click', function () {
+  // ACCORDION
+  document.querySelectorAll('.ex-row').forEach(function(row) {
+    row.addEventListener('click', function() {
       var detail = this.nextElementSibling;
       if (!detail || !detail.classList.contains('ex-detail')) return;
       var ch = this.querySelector('.ex-chevron');
       var isOpen = detail.classList.contains('open');
-      // zavři ostatní ve stejném ex-listu
       var parent = this.parentElement;
       if (parent) {
-        parent.querySelectorAll('.ex-detail.open').forEach(function (d) {
+        parent.querySelectorAll('.ex-detail.open').forEach(function(d) {
           if (d !== detail) {
             d.classList.remove('open');
             var prev = d.previousElementSibling;
-            if (prev && prev.classList.contains('ex-row')) {
-              prev.classList.remove('open');
-              var c2 = prev.querySelector('.ex-chevron');
-              if (c2) c2.textContent = '+';
-            }
+            if (prev) { prev.classList.remove('open'); var c2 = prev.querySelector('.ex-chevron'); if (c2) c2.textContent = '+'; }
           }
         });
       }
@@ -1438,30 +1540,26 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── CHECKLIST ─────────────────────────────────────────────
-  document.querySelectorAll('.check-item').forEach(function (item) {
-    item.addEventListener('click', function () { this.classList.toggle('done'); });
+  // CHECKLIST
+  document.querySelectorAll('.check-item').forEach(function(item) {
+    item.addEventListener('click', function() { this.classList.toggle('done'); });
   });
 
-  // ── MOOD STARS ────────────────────────────────────────────
-  document.querySelectorAll('.star').forEach(function (star) {
-    star.addEventListener('click', function () {
+  // MOOD STARS
+  document.querySelectorAll('.star').forEach(function(star) {
+    star.addEventListener('click', function() {
       var id = this.dataset.id, rating = parseInt(this.dataset.rating);
       var cont = document.getElementById(id);
-      if (cont) cont.querySelectorAll('.star').forEach(function (s, i) {
-        s.classList.toggle('active', i < rating);
-      });
+      if (cont) cont.querySelectorAll('.star').forEach(function(s, i) { s.classList.toggle('active', i < rating); });
     });
   });
 
-  // ── PILATES VERZE ─────────────────────────────────────────
-  document.querySelectorAll('[data-version]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
+  // PILATES
+  document.querySelectorAll('[data-version]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
       var v = this.dataset.version;
-      var se = document.getElementById('pilatesShort');
-      var fe = document.getElementById('pilatesFull');
-      var sb = document.getElementById('pilShortBtn');
-      var fb = document.getElementById('pilFullBtn');
+      var se = document.getElementById('pilatesShort'), fe = document.getElementById('pilatesFull');
+      var sb = document.getElementById('pilShortBtn'), fb = document.getElementById('pilFullBtn');
       if (se) se.style.display = v === 'short' ? 'block' : 'none';
       if (fe) fe.style.display = v === 'full' ? 'block' : 'none';
       if (sb) sb.classList.toggle('active', v === 'short');
@@ -1469,53 +1567,49 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // ── WEEK BAR ──────────────────────────────────────────────
+  // WEEK BAR
   var wi = document.getElementById('weekInput');
-  if (wi) {
-    wi.addEventListener('input', function () {
-      var w = Math.max(1, Math.min(24, parseInt(this.value) || 1));
-      this.value = w;
-      var f = document.getElementById('weekFill');
-      if (f) f.style.width = (w / 24 * 100) + '%';
-    });
-  }
+  if (wi) wi.addEventListener('input', function() {
+    var w = Math.max(1, Math.min(24, parseInt(this.value) || 1));
+    this.value = w;
+    var f = document.getElementById('weekFill');
+    if (f) f.style.width = (w / 24 * 100) + '%';
+  });
 
-  // ── DATUM ─────────────────────────────────────────────────
-  var days = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
-  var months = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
+  // DATUM
+  var days = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota'];
+  var months = ['ledna','února','března','dubna','května','června','července','srpna','září','října','listopadu','prosince'];
   var now = new Date();
   var de = document.getElementById('todayDate');
   if (de) de.textContent = days[now.getDay()] + ', ' + now.getDate() + '. ' + months[now.getMonth()];
 
-  // ── PŘECHOD NA TRÉNINK ────────────────────────────────────
+  // GOTO
   function goToWorkout(type) {
-    document.querySelectorAll('.section').forEach(function (s) { s.classList.remove('active'); });
-    document.querySelectorAll('.nav-btn').forEach(function (b) { b.classList.remove('active'); });
+    document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+    document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
     var sec = document.getElementById('treninky');
     if (sec) sec.classList.add('active');
     var tb = document.querySelector('[data-tab="treninky"]');
     if (tb) tb.classList.add('active');
     window.scrollTo(0, 0);
-    try {
-      setTimeout(function () {
-        var card = document.querySelector('.wcard-' + type);
-        if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 200);
-    } catch (e) {}
+    setTimeout(function() {
+      var card = document.querySelector('.wcard-' + type);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 200);
   }
 
-  // ── DNEŠNÍ TRÉNINK ────────────────────────────────────────
+  // TODAY WIDGET
   var SUM = {
     a: '<strong>Síla A</strong> — Glute / Nohy / Postura<br>Warm-up → Goblet squat · RDL · Split squat · Cable Row · Face pull → Core → Cooldown<br><small>⏱ ~60–70 min</small>',
     b: '<strong>Síla B</strong> — Zadek / Záda / Paže<br>Warm-up → Hip thrust · Pendulum squat · Face pull · Press · Biceps · Triceps → Core → Cooldown<br><small>⏱ ~60–70 min</small>',
     p: '<strong>Pilates / Core</strong> — Den P<br>Vyber délku: krátká 25 min nebo plná 60 min.',
     rest: '<strong>Odpočinkový den</strong> ✓<br>10 min ranní rutina držení těla + krátká procházka.'
   };
-  document.querySelectorAll('.today-card').forEach(function (card) {
-    card.addEventListener('click', function () {
+  document.querySelectorAll('.today-card').forEach(function(card) {
+    card.addEventListener('click', function() {
       var type = this.dataset.type;
       if (!type) return;
-      document.querySelectorAll('.today-card').forEach(function (c) { c.className = 'today-card'; });
+      document.querySelectorAll('.today-card').forEach(function(c) { c.className = 'today-card'; });
       this.classList.add('sel-' + type);
       var html = SUM[type] || '';
       if (type === 'a' || type === 'b' || type === 'p') {
@@ -1525,52 +1619,87 @@ document.addEventListener('DOMContentLoaded', function () {
       if (el) {
         el.innerHTML = html;
         var gb = document.getElementById('gotoBtn');
-        if (gb) { var t2 = type; gb.addEventListener('click', function () { goToWorkout(t2); }); }
+        if (gb) { var t2 = type; gb.addEventListener('click', function() { goToWorkout(t2); }); }
       }
     });
   });
 
-  // ── ODPOČINKOVÝ TIMER ─────────────────────────────────────
+  // ── SDÍLENÝ TIMER WIDGET ─────────────────────────────────
+  // Používají ho: tlačítka pauzy + tlačítka cviků (Spustit)
   var tInt = null, tTotal = 90, tLeft = 90;
-  function startTimer(s) {
+
+  function playBeep() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      [0, 0.2, 0.4].forEach(function(delay) {
+        var osc = ctx.createOscillator(), gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.type = 'sine'; osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.4, ctx.currentTime + delay);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.15);
+        osc.start(ctx.currentTime + delay);
+        osc.stop(ctx.currentTime + delay + 0.16);
+      });
+    } catch(e) {}
+  }
+
+  function openTimer(seconds, label) {
     clearInterval(tInt);
-    tTotal = s; tLeft = s;
+    tTotal = seconds; tLeft = seconds;
     var w = document.getElementById('timerWidget');
+    var lbl = document.getElementById('timerLabel');
+    if (lbl) lbl.textContent = label || 'Pauza mezi sériemi';
     if (w) w.classList.add('visible');
-    updateTimer();
-    tInt = setInterval(function () {
+    tickTimer();
+    tInt = setInterval(function() {
       tLeft--;
       if (tLeft < 0) {
         clearInterval(tInt);
+        playBeep();
         var d = document.getElementById('timerDisplay');
         var b = document.getElementById('timerBar');
         if (d) { d.classList.add('done'); d.textContent = 'Jdi!'; }
         if (b) b.style.width = '0%';
         return;
       }
-      updateTimer();
+      tickTimer();
     }, 1000);
   }
-  function updateTimer() {
+
+  function tickTimer() {
     var m = Math.floor(tLeft / 60), s = tLeft % 60;
     var d = document.getElementById('timerDisplay');
     var b = document.getElementById('timerBar');
     if (d) { d.classList.remove('done'); d.textContent = m + ':' + (s < 10 ? '0' : '') + s; }
     if (b) b.style.width = (tLeft / tTotal * 100) + '%';
   }
-  document.querySelectorAll('.tbtn[data-seconds], .btn-timer[data-seconds]').forEach(function (btn) {
-    btn.addEventListener('click', function () { startTimer(parseInt(this.dataset.seconds)); });
+
+  // Pauza tlačítka (60s / 90s / 2 min / 5 min)
+  document.querySelectorAll('.tbtn[data-seconds], .btn-timer[data-seconds]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      openTimer(parseInt(this.dataset.seconds), 'Pauza mezi sériemi');
+    });
   });
+
+  // Cvičební tlačítka — event delegation
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('.ex-timer-go');
+    if (!btn) return;
+    e.stopPropagation();
+    var secs  = parseInt(btn.dataset.seconds);
+    var label = btn.dataset.label || '';
+    openTimer(secs, label);
+  });
+
   var cb = document.getElementById('closeTimerBtn');
-  if (cb) cb.addEventListener('click', function () {
+  if (cb) cb.addEventListener('click', function() {
     clearInterval(tInt);
     var w = document.getElementById('timerWidget');
     if (w) w.classList.remove('visible');
   });
 
 });
-
-</script>
+</script>E html>
 
 </body>
 </html>
