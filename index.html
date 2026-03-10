@@ -31,13 +31,16 @@ html { -webkit-text-size-adjust: 100%; }
 body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
 
 /* ── HERO ── */
-.hero { background: var(–ink); padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+.hero { background: #1a1814 !important; padding: 56px 24px 48px; text-align: center; position: relative; overflow: hidden; }
+.hero * { color: #ffffff; }
+.hero h1 em, .hero-label, .hero-stat .num { color: #c4845a !important; }
+.hero-stat .lbl, .hero-sub { color: rgba(255,255,255,.7) !important; }
 .hero::after { content: ‘’; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 20% 110%, rgba(196,132,90,.22), transparent 60%), radial-gradient(ellipse 50% 40% at 80% 0%, rgba(196,132,90,.08), transparent 50%); pointer-events: none; }
-.hero-label { display: inline-block; font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: var(–accent); margin-bottom: 14px; font-weight: 500; }
-.hero h1 { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(40px, 8vw, 74px); font-weight: 300; line-height: 1.05; color: #fff; margin-bottom: 12px; }
-.hero h1 em { font-style: italic; color: var(–accent); }
-.hero-sub { font-size: 13px; color: rgba(255,255,255,.65); margin-bottom: 30px; }
-.hero-stats { display: inline-flex; border: 1px solid rgba(255,255,255,.1); }
+.hero-label { display: inline-block; font-size: 10px; letter-spacing: 3.5px; text-transform: uppercase; color: #c4845a !important; margin-bottom: 14px; font-weight: 500; }
+.hero h1 { font-family: ‘Cormorant Garamond’, serif; font-size: clamp(40px, 8vw, 74px); font-weight: 300; line-height: 1.05; color: #ffffff !important; margin-bottom: 12px; }
+.hero h1 em { font-style: italic; color: #c4845a !important; }
+.hero-sub { font-size: 13px; color: rgba(255,255,255,.8) !important; margin-bottom: 30px; }
+.hero-stats { display: inline-flex; border: 1px solid rgba(255,255,255,.25) !important; }
 .hero-stat { padding: 14px 24px; border-right: 1px solid rgba(255,255,255,.1); text-align: center; }
 .hero-stat:last-child { border-right: none; }
 .hero-stat .num { font-family: ‘Cormorant Garamond’, serif; font-size: 26px; color: var(–accent); display: block; line-height: 1; font-weight: 400; }
