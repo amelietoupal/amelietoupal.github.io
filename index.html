@@ -289,16 +289,18 @@ body { background: var(--bg); color: var(--text); font-family: 'DM Sans', system
 }
 
 /* ── EX TIMER TRIGGER ── */
+/* ⏱ Cvičební timer — tmavý */
 .ex-timer-trigger { display: flex; align-items: center; gap: 10px; margin-top: 14px; padding: 10px 14px; background: #1a1814; border-radius: var(–rad-sm); }
 .ex-timer-ico { font-size: 14px; flex-shrink: 0; }
 .ex-timer-lbl { font-size: 12px; color: rgba(255,255,255,.55); flex: 1; letter-spacing: .5px; }
-.ex-timer-go { padding: 6px 14px; border-radius: var(–rad-sm); border: none; background: #c4845a; color: #1a1814; font-size: 10px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: .3px; transition: background .15s; flex-shrink: 0; }
-.ex-timer-go:hover { background: #8b5e3c; color: white; }
-
-/* ── REST TRIGGER ── */
-.ex-rest-trigger { display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 10px 14px; background: #1a1814; border-radius: var(–rad-sm); }
+.ex-timer-trigger .ex-timer-go { padding: 6px 14px; border-radius: var(–rad-sm); border: none; background: #2d5246; color: #fff; font-size: 10px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: .3px; transition: background .15s; flex-shrink: 0; }
+.ex-timer-trigger .ex-timer-go:hover { background: #1e3a30; }
+/* ☕ Pauza timer — teplý */
+.ex-rest-trigger { display: flex; align-items: center; gap: 10px; margin-top: 8px; padding: 10px 14px; background: rgba(196,132,90,.1); border: 1px solid rgba(196,132,90,.28); border-radius: var(–rad-sm); }
 .ex-rest-ico { font-size: 14px; flex-shrink: 0; }
-.ex-rest-lbl { font-size: 12px; color: rgba(255,255,255,.55); flex: 1; letter-spacing: .3px; }
+.ex-rest-lbl { font-size: 12px; color: #8b5e3c; flex: 1; letter-spacing: .3px; font-weight: 600; }
+.ex-rest-trigger .ex-timer-go { padding: 6px 14px; border-radius: var(–rad-sm); border: none; background: #c4845a; color: #1a1814; font-size: 10px; font-weight: 700; font-family: inherit; cursor: pointer; letter-spacing: .3px; transition: background .15s; flex-shrink: 0; }
+.ex-rest-trigger .ex-timer-go:hover { background: #8b5e3c; color: white; }
 
 </style>
 </head>
@@ -1691,6 +1693,22 @@ document.addEventListener('DOMContentLoaded', function () {
         osc2.start(t); osc2.stop(t + 0.8);
       });
       if (navigator.vibrate) navigator.vibrate([60, 80, 60, 80, 100]);
+    } catch(e) {}
+  }
+
+  // Krátký „tick" při spuštění timeru
+  function playTick() {
+    try {
+      var ctx = getAudioCtx();
+      if (!ctx) return;
+      var osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = 'sine'; osc.frequency.value = 440;
+      gain.gain.setValueAtTime(0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.008);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
+      osc.start(ctx.currentTime);
+      osc.stop(ctx.currentTime + 0.1);
     } catch(e) {}
   }
 
