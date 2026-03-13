@@ -211,17 +211,43 @@ transition: width .3s ease;
 }
 
 #weekInput {
-width: 40px;
-border: 1px solid var(–border2);
-border-radius: var(–r-xs);
-background: var(–surface);
-color: var(–text);
-font-family: ‘Nunito’, sans-serif;
-font-size: 12px;
-text-align: center;
-padding: 3px 4px;
+flex: 1;
+-webkit-appearance: none;
 appearance: none;
--moz-appearance: textfield;
+height: 4px;
+border-radius: 2px;
+background: linear-gradient(90deg, var(–accent) 4.17%, var(–border) 4.17%);
+outline: none;
+cursor: pointer;
+border: none;
+padding: 0;
+}
+#weekInput::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 18px; height: 18px;
+border-radius: 50%;
+background: var(–accent);
+cursor: pointer;
+box-shadow: 0 2px 8px rgba(224,85,133,.4);
+border: 2px solid #fff;
+}
+#weekInput::-moz-range-thumb {
+width: 18px; height: 18px;
+border-radius: 50%;
+background: var(–accent);
+cursor: pointer;
+border: 2px solid #fff;
+box-shadow: 0 2px 8px rgba(224,85,133,.4);
+}
+.week-num {
+font-family: ‘Playfair Display’, serif;
+font-size: 16px;
+font-weight: 700;
+color: var(–accent);
+min-width: 24px;
+text-align: right;
+flex-shrink: 0;
 }
 #weekInput::-webkit-outer-spin-button,
 #weekInput::-webkit-inner-spin-button { -webkit-appearance: none; }
@@ -2100,8 +2126,8 @@ flex-shrink: 0;
 </nav>
 <div class="sticky-week">
   <span class="sticky-week-label">Týden</span>
-  <div class="week-bar-track"><div id="weekFill" style="width:4.17%"></div></div>
-  <input id="weekInput" type="number" min="1" max="24" value="1">
+  <input id="weekInput" type="range" min="1" max="24" value="1" step="1">
+  <span id="weekNum" class="week-num">1</span>
   <span class="week-bar-max">/ 24</span>
 </div>
 <div class="sections-wrap">
@@ -4899,12 +4925,20 @@ switchPilates(‘short’);
 
 // WEEK BAR
 var wi = document.getElementById(‘weekInput’);
-if (wi) wi.addEventListener(‘input’, function() {
-var w = Math.max(1, Math.min(24, parseInt(this.value) || 1));
-this.value = w;
-var f = document.getElementById(‘weekFill’);
-if (f) f.style.width = (w / 24 * 100) + ‘%’;
-});
+var wn = document.getElementById(‘weekNum’);
+function updateWeekBar(w) {
+w = Math.max(1, Math.min(24, parseInt(w) || 1));
+if (wi) wi.value = w;
+if (wn) wn.textContent = w;
+var pct = (w / 24 * 100).toFixed(2);
+if (wi) wi.style.background = ’linear-gradient(90deg, var(–accent) ’ + pct + ’%, var(–border) ’ + pct + ‘%)’;
+localStorage.setItem(‘ms_week’, w);
+}
+if (wi) {
+wi.addEventListener(‘input’, function() { updateWeekBar(parseInt(this.value)); });
+var savedWeek = parseInt(localStorage.getItem(‘ms_week’)) || 1;
+updateWeekBar(savedWeek);
+}
 
 // DATUM
 var days = [‘Neděle’,‘Pondělí’,‘Úterý’,‘Středa’,‘Čtvrtek’,‘Pátek’,‘Sobota’];
