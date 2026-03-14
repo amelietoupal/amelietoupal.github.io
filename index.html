@@ -4825,86 +4825,76 @@ flex-shrink: 0;
 </div>
 <button id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
+document.addEventListener('DOMContentLoaded', function() {
 
-document.addEventListener(‘DOMContentLoaded’, function () {
-
-// TABS
-document.querySelectorAll(’.nav-btn’).forEach(function(btn) {
-btn.addEventListener(‘click’, function() {
-var id = this.dataset.tab;
+// ── TABS ──────────────────────────────────────────────────
+function switchTab(id) {
 document.querySelectorAll(’.section’).forEach(function(s) { s.classList.remove(‘active’); });
 document.querySelectorAll(’.nav-btn’).forEach(function(b) { b.classList.remove(‘active’); });
 var sec = document.getElementById(id);
 if (sec) sec.classList.add(‘active’);
-this.classList.add(‘active’);
+var btn = document.querySelector(’[data-tab=”’ + id + ‘”]’);
+if (btn) btn.classList.add(‘active’);
 window.scrollTo(0, 0);
+}
+document.querySelectorAll(’.nav-btn’).forEach(function(btn) {
+btn.addEventListener(‘click’, function() {
+switchTab(this.dataset.tab);
+// Onboard banner schovat
+if (this.dataset.tab === ‘treninky’) {
+var ob = document.getElementById(‘onboardBanner’);
+if (ob) { ob.style.transition=‘opacity .4s’; ob.style.opacity=‘0’; setTimeout(function(){ ob.style.display=‘none’; }, 400); }
+var badge = document.getElementById(‘startBadge’);
+if (badge) badge.style.display = ‘none’;
+localStorage.setItem(‘ms_onboard_done’, ‘1’);
+}
 });
 });
+// Onboard init
+if (localStorage.getItem(‘ms_onboard_done’)) {
+var ob = document.getElementById(‘onboardBanner’);
+if (ob) ob.style.display = ‘none’;
+}
 
-// WCARD TOGGLE (otevření/zavření workout karet)
+// ── WCARD TOGGLE ──────────────────────────────────────────
 document.querySelectorAll(’.wcard-head’).forEach(function(head) {
-head.addEventListener(‘click’, function() {
+head.addEventListener(‘click’, function(e) {
+if (e.target.closest(’.today-btn’)) return;
 var wcard = this.closest(’.wcard’);
 if (!wcard) return;
 var isOpen = wcard.classList.contains(‘open’);
-// Zavři ostatní karty stejného typu (optional - nechej všechny otevřené)
 wcard.classList.toggle(‘open’, !isOpen);
-// Scroll do karty pokud se otevírá
-if (!isOpen) {
-setTimeout(function() {
-wcard.scrollIntoView({ behavior: ‘smooth’, block: ‘nearest’ });
-}, 100);
-}
+var ch = this.querySelector(’.wcard-toggle’);
+if (ch) ch.textContent = isOpen ? ‘▾’ : ‘▴’;
 });
 });
 
-// ACCORDION
+// ── ACCORDION (cviky) ────────────────────────────────────
 document.querySelectorAll(’.ex-row’).forEach(function(row) {
 row.addEventListener(‘click’, function(e) {
 if (e.target.closest(’.ex-done-btn’) || e.target.closest(’.set-pill’)) return;
-var detail = this.nextElementSibling;
-if (detail && detail.classList.contains(‘ex-sets-block’)) detail = detail.nextElementSibling;
-if (!detail || !detail.classList.contains(‘ex-detail’)) return;
-var ch = this.querySelector(’.ex-chevron’);
-var isOpen = detail.classList.contains(‘open’);
-var parent = this.parentElement;
-if (parent) {
-parent.querySelectorAll(’.ex-detail.open’).forEach(function(d) {
-if (d !== detail) {
-d.classList.remove(‘open’);
-var prev = d.previousElementSibling;
-if (prev) { prev.classList.remove(‘open’); var c2 = prev.querySelector(’.ex-chevron’); if (c2) c2.textContent = ‘+’; }
-}
+var next = this.nextElementSibling;
+if (next && next.classList.contains(‘ex-sets-block’)) next = next.nextElementSibling;
+if (!next || !next.classList.contains(‘ex-detail’)) return;
+var isOpen = next.classList.contains(‘open’);
+// Zavři ostatní ve stejné kartě
+var wcard = this.closest(’.wcard’);
+if (wcard) {
+wcard.querySelectorAll(’.ex-detail.open’).forEach(function(d) {
+if (d !== next) { d.classList.remove(‘open’); var prev = d.previousElementSibling; if (prev && prev.classList.contains(‘ex-sets-block’)) prev = prev.previousElementSibling; if (prev) { var ch2 = prev.querySelector(’.ex-chevron’); if (ch2) ch2.textContent = ‘+’; } }
 });
 }
-detail.classList.toggle(‘open’, !isOpen);
-this.classList.toggle(‘open’, !isOpen);
+next.classList.toggle(‘open’, !isOpen);
+var ch = this.querySelector(’.ex-chevron’);
 if (ch) ch.textContent = isOpen ? ‘+’ : ‘−’;
 });
 });
-
-// SCROLL TO TOP
-var scrollBtn = document.getElementById(‘scrollTopBtn’);
-window.addEventListener(‘scroll’, function() {
-scrollBtn.style.opacity = window.scrollY > 300 ? ‘1’ : ‘0’;
+// ex-sets-block — neklikne accordion, ale pill ano
+document.addEventListener(‘click’, function(e) {
+if (e.target.closest(’.ex-sets-block’) && !e.target.closest(’.set-pill’)) e.stopPropagation();
 });
 
-// CHECKLIST
-
-document.querySelectorAll(’.check-item’).forEach(function(item) {
-item.addEventListener(‘click’, function() { this.classList.toggle(‘done’); });
-});
-
-// MOOD STARS
-document.querySelectorAll(’.star’).forEach(function(star) {
-star.addEventListener(‘click’, function() {
-var id = this.dataset.id, rating = parseInt(this.dataset.rating);
-var cont = document.getElementById(id);
-if (cont) cont.querySelectorAll(’.star’).forEach(function(s, i) { s.classList.toggle(‘active’, i < rating); });
-});
-});
-
-// PILATES TOGGLE
+// ── PILATES TOGGLE ────────────────────────────────────────
 function switchPilates(v) {
 var se = document.getElementById(‘pilatesShort’);
 var fe = document.getElementById(‘pilatesFull’);
@@ -4913,269 +4903,16 @@ var fb = document.getElementById(‘pilFullBtn’);
 if (!se || !fe) return;
 se.style.display = v === ‘short’ ? ‘block’ : ‘none’;
 fe.style.display = v === ‘full’  ? ‘block’ : ‘none’;
-if (sb) { sb.classList.toggle(‘active’, v === ‘short’); }
-if (fb) { fb.classList.toggle(‘active’, v === ‘full’); }
+if (sb) { sb.classList.toggle(‘active’, v===‘short’); }
+if (fb) { fb.classList.toggle(‘active’, v===‘full’); }
+updateProgress(‘p’);
 }
-var _psb = document.getElementById(‘pilShortBtn’);
-var _pfb = document.getElementById(‘pilFullBtn’);
-if (_psb) _psb.addEventListener(‘click’, function(e) { e.stopPropagation(); switchPilates(‘short’); });
-if (_pfb) _pfb.addEventListener(‘click’, function(e) { e.stopPropagation(); switchPilates(‘full’); });
-// Inicializace — zobraz short, skryj full
+window.switchPilates = switchPilates;
 switchPilates(‘short’);
 
-// WEEK BAR
-var wi = document.getElementById(‘weekInput’);
-var wn = document.getElementById(‘weekNum’);
-function updateWeekBar(w) {
-w = Math.max(1, Math.min(24, parseInt(w) || 1));
-if (wi) wi.value = w;
-if (wn) wn.textContent = w;
-var pct = (w / 24 * 100).toFixed(2);
-if (wi) wi.style.background = ’linear-gradient(90deg, var(–accent) ’ + pct + ’%, var(–border) ’ + pct + ‘%)’;
-localStorage.setItem(‘ms_week’, w);
-}
-if (wi) {
-wi.addEventListener(‘input’, function() { updateWeekBar(parseInt(this.value)); });
-var savedWeek = parseInt(localStorage.getItem(‘ms_week’)) || 1;
-updateWeekBar(savedWeek);
-}
-
-// DATUM
-var days = [‘Neděle’,‘Pondělí’,‘Úterý’,‘Středa’,‘Čtvrtek’,‘Pátek’,‘Sobota’];
-var months = [‘ledna’,‘února’,‘března’,‘dubna’,‘května’,‘června’,‘července’,‘srpna’,‘září’,‘října’,‘listopadu’,‘prosince’];
-var now = new Date();
-var de = document.getElementById(‘todayDate’);
-if (de) de.textContent = days[now.getDay()] + ’, ’ + now.getDate() + ’. ’ + months[now.getMonth()];
-
-// GOTO
-function goToWorkout(type) {
-document.querySelectorAll(’.section’).forEach(function(s) { s.classList.remove(‘active’); });
-document.querySelectorAll(’.nav-btn’).forEach(function(b) { b.classList.remove(‘active’); });
-var sec = document.getElementById(‘treninky’);
-if (sec) sec.classList.add(‘active’);
-var tb = document.querySelector(’[data-tab=“treninky”]’);
-if (tb) tb.classList.add(‘active’);
-window.scrollTo(0, 0);
-setTimeout(function() {
-var card = document.querySelector(’.wcard-’ + type);
-if (card) card.scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
-}, 200);
-}
-
-// TODAY WIDGET
-var SUM = {
-a: ‘<strong>Síla A</strong> — Glute / Nohy / Postura<br>Warm-up → Goblet squat · RDL · Split squat · Cable Row · Face pull → Core → Cooldown<br><small>⏱ ~60–70 min</small>’,
-b: ‘<strong>Síla B</strong> — Zadek / Záda / Paže<br>Warm-up → Hip thrust · Pendulum squat · Face pull · Press · Biceps · Triceps → Core → Cooldown<br><small>⏱ ~60–70 min</small>’,
-p: ‘<strong>Pilates / Core</strong> — Den P<br>Vyber délku: krátká 25 min nebo plná 60 min.’,
-rest: ‘<strong>Odpočinkový den</strong> ✓<br>10 min ranní rutina držení těla + krátká procházka.’
-};
-document.querySelectorAll(’.today-card’).forEach(function(card) {
-card.addEventListener(‘click’, function() {
-var type = this.dataset.type;
-if (!type) return;
-document.querySelectorAll(’.today-card’).forEach(function(c) { c.className = ‘today-card’; });
-this.classList.add(‘sel-’ + type);
-var html = SUM[type] || ‘’;
-if (type === ‘a’ || type === ‘b’ || type === ‘p’) {
-html += ‘<br><button class="btn-open" id="gotoBtn">’ + (type === ‘p’ ? ‘Otevřít pilates →’ : ‘Otevřít trénink →’) + ‘</button>’;
-}
-var el = document.getElementById(‘todaySummary’);
-if (el) {
-el.innerHTML = html;
-var gb = document.getElementById(‘gotoBtn’);
-if (gb) { var t2 = type; gb.addEventListener(‘click’, function() { goToWorkout(t2); }); }
-}
-});
-});
-
-// ── SDÍLENÝ TIMER WIDGET ─────────────────────────────────
-// Používají ho: tlačítka pauzy + tlačítka cviků (Spustit)
-var tInt = null, tTotal = 90, tLeft = 90;
-
-// Sdílený AudioContext — odemkne se při první interakci
-var _audioCtx = null;
-function getAudioCtx() {
-if (!_audioCtx) {
-try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
-}
-if (_audioCtx && _audioCtx.state === ‘suspended’) {
-_audioCtx.resume();
-}
-return _audioCtx;
-}
-// Odemkni AudioContext při první interakci uživatele
-document.addEventListener(‘click’, function() { getAudioCtx(); }, { once: false });
-
-// Sdílený AudioContext — odemkne se při první interakci
-var _audioCtx = null;
-function getAudioCtx() {
-if (!_audioCtx) {
-try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
-}
-if (_audioCtx && _audioCtx.state === ‘suspended’) {
-_audioCtx.resume();
-}
-return _audioCtx;
-}
-// Odemkni AudioContext při první interakci uživatele
-document.addEventListener(‘click’, function() { getAudioCtx(); }, { once: false });
-
-// Sdílený AudioContext — odemkne se při první interakci
-var _audioCtx = null;
-function getAudioCtx() {
-if (!_audioCtx) {
-try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
-}
-if (_audioCtx && _audioCtx.state === ‘suspended’) {
-_audioCtx.resume();
-}
-return _audioCtx;
-}
-// Odemkni AudioContext při první interakci uživatele
-
-// Sdílený AudioContext — odemkne se při první interakci
-var _audioCtx = null;
-function getAudioCtx() {
-if (!_audioCtx) {
-try { _audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
-}
-if (_audioCtx && _audioCtx.state === ‘suspended’) {
-_audioCtx.resume();
-}
-return _audioCtx;
-}
-// Odemkni AudioContext při první interakci uživatele
-
-function playBeep() {
-try {
-var ctx = getAudioCtx();
-if (!ctx) return;
-var now = ctx.currentTime;
-// Tři stoupající tóny — C5, E5, G5 (dur akord)
-var notes = [523.25, 659.25, 783.99];
-notes.forEach(function(freq, i) {
-var t = now + i * 0.18;
-var osc  = ctx.createOscillator();
-var gain = ctx.createGain();
-var osc2  = ctx.createOscillator();
-var gain2 = ctx.createGain();
-osc.type  = ‘sine’; osc.frequency.value  = freq;
-osc2.type = ‘sine’; osc2.frequency.value = freq / 2;
-osc.connect(gain);   gain.connect(ctx.destination);
-osc2.connect(gain2); gain2.connect(ctx.destination);
-gain.gain.setValueAtTime(0, t);
-gain.gain.linearRampToValueAtTime(0.35, t + 0.01);
-gain.gain.exponentialRampToValueAtTime(0.001, t + 0.55);
-gain2.gain.setValueAtTime(0, t);
-gain2.gain.linearRampToValueAtTime(0.08, t + 0.02);
-gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.7);
-osc.start(t);  osc.stop(t + 0.7);
-osc2.start(t); osc2.stop(t + 0.8);
-});
-if (navigator.vibrate) navigator.vibrate([60, 80, 60, 80, 100]);
-} catch(e) {}
-}
-
-// Krátký „tick” při spuštění timeru
-function playTick() {
-try {
-var ctx = getAudioCtx();
-if (!ctx) return;
-var osc = ctx.createOscillator(), gain = ctx.createGain();
-osc.connect(gain); gain.connect(ctx.destination);
-osc.type = ‘sine’; osc.frequency.value = 440;
-gain.gain.setValueAtTime(0, ctx.currentTime);
-gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.008);
-gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
-osc.start(ctx.currentTime);
-osc.stop(ctx.currentTime + 0.1);
-} catch(e) {}
-}
-
-// Krátký „tick” při spuštění timeru
-function playTick() {
-try {
-var ctx = getAudioCtx();
-if (!ctx) return;
-var osc = ctx.createOscillator(), gain = ctx.createGain();
-osc.connect(gain); gain.connect(ctx.destination);
-osc.type = ‘sine’; osc.frequency.value = 440;
-gain.gain.setValueAtTime(0, ctx.currentTime);
-gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + 0.008);
-gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.09);
-osc.start(ctx.currentTime);
-osc.stop(ctx.currentTime + 0.1);
-} catch(e) {}
-}
-
-function openTimer(seconds, label) {
-clearInterval(tInt);
-tTotal = seconds; tLeft = seconds;
-var w = document.getElementById(‘timerWidget’);
-var lbl = document.getElementById(‘timerLabel’);
-if (lbl) lbl.textContent = label || ‘Pauza mezi sériemi’;
-if (w) w.classList.add(‘visible’);
-tickTimer();
-tInt = setInterval(function() {
-tLeft–;
-if (tLeft < 0) {
-clearInterval(tInt);
-playBeep();
-var d = document.getElementById(‘timerDisplay’);
-var b = document.getElementById(‘timerBar’);
-if (d) { d.classList.add(‘done’); d.textContent = ‘Jdi!’; }
-if (b) b.style.width = ‘0%’;
-return;
-}
-tickTimer();
-}, 1000);
-}
-
-function tickTimer() {
-var m = Math.floor(tLeft / 60), s = tLeft % 60;
-var d = document.getElementById(‘timerDisplay’);
-var b = document.getElementById(‘timerBar’);
-if (d) { d.classList.remove(‘done’); d.textContent = m + ‘:’ + (s < 10 ? ‘0’ : ‘’) + s; }
-if (b) b.style.width = (tLeft / tTotal * 100) + ‘%’;
-}
-
-// Pauza tlačítka (60s / 90s / 2 min / 5 min)
-document.querySelectorAll(’.tbtn[data-seconds], .btn-timer[data-seconds]’).forEach(function(btn) {
-btn.addEventListener(‘click’, function() {
-openTimer(parseInt(this.dataset.seconds), ‘Pauza mezi sériemi’);
-});
-});
-
-// Cvičební tlačítka — event delegation
+// ── SET PILLS + DONE ──────────────────────────────────────
 document.addEventListener(‘click’, function(e) {
-var btn = e.target.closest(’.ex-timer-go’);
-if (!btn) return;
-e.stopPropagation();
-var secs  = parseInt(btn.dataset.seconds);
-var label = btn.dataset.label || ‘’;
-openTimer(secs, label);
-});
-
-var cb = document.getElementById(‘closeTimerBtn’);
-if (cb) cb.addEventListener(‘click’, function() {
-clearInterval(tInt);
-var w = document.getElementById(‘timerWidget’);
-if (w) w.classList.remove(‘visible’);
-});
-
-// Označení cviku jako hotového
-
-// ex-sets-block neklikne accordion
-document.addEventListener(‘click’, function(e) {
-if (e.target.closest(’.ex-sets-block’)) {
-var pill = e.target.closest(’.set-pill’);
-if (!pill) e.stopPropagation();
-}
-});
-
-// ── OZNAČOVÁNÍ CVIKŮ ──────────────────────────────────────
-document.addEventListener(‘click’, function(e) {
-// Klik na kroužek cviku
+// Kroužek cviku → toggle všechny pills
 var btn = e.target.closest(’.ex-done-btn’);
 if (btn) {
 e.stopPropagation();
@@ -5191,178 +4928,226 @@ p.classList.toggle(‘done’, nowDone);
 p.textContent = nowDone ? ‘✓’ : p.dataset.label;
 });
 }
+setTimeout(function() { [‘a’,‘b’,‘p’].forEach(updateProgress); }, 50);
 return;
 }
-// Klik na set pill
+// Klik na pill
 var pill = e.target.closest(’.set-pill’);
 if (pill) {
 e.stopPropagation();
 if (!pill.dataset.label) pill.dataset.label = pill.textContent;
 pill.classList.toggle(‘done’);
 pill.textContent = pill.classList.contains(‘done’) ? ‘✓’ : pill.dataset.label;
-var block = pill.closest(’.ex-sets-block’);
-if (!block) return;
-var row = block.previousElementSibling;
-if (!row || !row.classList.contains(‘ex-row’)) return;
-var allDone = Array.from(block.querySelectorAll(’.set-pill’)).every(function(p) {
-return p.classList.contains(‘done’);
-});
-row.classList.toggle(‘done’, allDone);
+// Sync row done state
+var block2 = pill.closest(’.ex-sets-block’);
+if (block2) {
+var row2 = block2.previousElementSibling;
+if (row2 && row2.classList.contains(‘ex-row’)) {
+var allDone = Array.from(block2.querySelectorAll(’.set-pill’)).every(function(p) { return p.classList.contains(‘done’); });
+row2.classList.toggle(‘done’, allDone);
+}
+}
+setTimeout(function() { [‘a’,‘b’,‘p’].forEach(updateProgress); }, 50);
+return;
 }
 });
 
-// ── WEEK BAR ──────────────────────────────────────────────
-var wi = document.getElementById(‘weekInput’);
-var wf = document.getElementById(‘weekFill’);
-if (wi) {
-var savedWeek = localStorage.getItem(‘ms_week’) || ‘1’;
-wi.value = savedWeek;
-if (wf) wf.style.width = (parseInt(savedWeek) / 24 * 100) + ‘%’;
-wi.addEventListener(‘input’, function() {
-var w = Math.max(1, Math.min(24, parseInt(this.value) || 1));
-this.value = w;
-if (wf) wf.style.width = (w / 24 * 100) + ‘%’;
-localStorage.setItem(‘ms_last_save’, new Date().toDateString()); localStorage.setItem(‘ms_week’, w);
-});
-}
-
-// ── TRACKER localStorage ───────────────────────────────────
-document.querySelectorAll(’.track-input’).forEach(function(inp, idx) {
-var key = ‘ms_tracker_’ + idx;
-var saved = localStorage.getItem(key);
-if (saved) inp.value = saved;
-inp.addEventListener(‘input’, function() {
-localStorage.setItem(key, this.value);
-});
-});
-
-// ── TODAY WIDGET localStorage ──────────────────────────────
-var savedType = localStorage.getItem(‘ms_today_type’);
-if (savedType) {
-var card = document.querySelector(’.today-card[data-type=”’ + savedType + ‘”]’);
-if (card) card.click();
-}
-document.querySelectorAll(’.today-card’).forEach(function(card) {
-var orig = card.onclick;
-card.addEventListener(‘click’, function() {
-localStorage.setItem(‘ms_today_type’, this.dataset.type);
-});
-});
-
-// ── TIMER PULSE PŘI DOKONČENÍ ──────────────────────────────
-// Přepsání openTimer pro pulse efekt
-var _origOpenTimer = openTimer;
-function openTimerWithPulse(secs, label) {
-openTimer(secs, label);
-var w = document.getElementById(‘timerWidget’);
-if (w) w.classList.remove(‘done-pulse’);
-}
-
-// Sleduj dokončení timeru a přidej pulse
-var _origTickTimer = tickTimer;
-var _pulsed = false;
-setInterval(function() {
-var d = document.getElementById(‘timerDisplay’);
-var w = document.getElementById(‘timerWidget’);
-if (d && w && d.textContent === ‘Jdi!’ && !_pulsed) {
-w.classList.add(‘done-pulse’);
-_pulsed = true;
-setTimeout(function() { _pulsed = false; }, 2000);
-}
-if (d && d.textContent !== ‘Jdi!’) _pulsed = false;
-}, 500);
-
-// ── WORKOUT PROGRESS COUNTER ───────────────────────────────
-function updateProgress(cardType) {
-var card = document.querySelector(’.wcard-’ + cardType);
+// ── PROGRESS BARS ─────────────────────────────────────────
+function updateProgress(type) {
+var card = document.querySelector(’.wcard-’ + type);
 if (!card) return;
-var total = card.querySelectorAll(’.ex-row’).length;
-var done  = card.querySelectorAll(’.ex-row.done’).length;
-var fill  = document.getElementById(‘progressFill-’ + cardType);
-var count = document.getElementById(‘progressCount-’ + cardType);
+// Pro pilates počítej jen viditelnou sekci
+var rows;
+if (type === ‘p’) {
+var active = card.querySelector(’#pilatesShort[style*=“block”], #pilatesFull:not([style*=“none”])’);
+var shortEl = document.getElementById(‘pilatesShort’);
+var fullEl  = document.getElementById(‘pilatesFull’);
+var visEl   = (shortEl && shortEl.style.display !== ‘none’) ? shortEl : fullEl;
+rows = visEl ? visEl.querySelectorAll(’.ex-row’) : card.querySelectorAll(’.ex-row’);
+} else {
+rows = card.querySelectorAll(’.ex-row’);
+}
+var total = rows.length;
+var done  = Array.from(rows).filter(function(r) { return r.classList.contains(‘done’); }).length;
+var fill  = document.getElementById(‘progressFill-’ + type);
+var count = document.getElementById(‘progressCount-’ + type);
 if (fill)  fill.style.width = total ? (done / total * 100) + ‘%’ : ‘0%’;
 if (count) count.textContent = done + ’ / ’ + total + ’ cviků’;
 }
-
-// Inicializace progress barů
 [‘a’,‘b’,‘p’].forEach(updateProgress);
 
-// Update při kliknutí na done btn
-document.addEventListener(‘click’, function(e) {
-if (e.target.closest(’.ex-done-btn’) || e.target.closest(’.set-pill’)) {
+// ── GOTO WORKOUT ──────────────────────────────────────────
+function goToWorkout(type) {
+switchTab(‘treninky’);
 setTimeout(function() {
-[‘a’,‘b’,‘p’].forEach(updateProgress);
-}, 50);
+var card = document.querySelector(’.wcard-’ + type);
+if (card) {
+card.classList.add(‘open’);
+var tog = card.querySelector(’.wcard-toggle’);
+if (tog) tog.textContent = ‘▴’;
+card.scrollIntoView({ behavior: ‘smooth’, block: ‘start’ });
 }
-});
-
-});
-
-// ONBOARD BANNER — schovat po prvním vstupu do tréninků
-var ob = document.getElementById(‘onboardBanner’);
-if (ob && localStorage.getItem(‘ms_onboard_done’)) ob.style.display = ‘none’;
-document.querySelectorAll(’[data-tab]’).forEach(function(btn){
-btn.addEventListener(‘click’, function(){
-if (this.dataset.tab === ‘treninky’ && ob) {
-localStorage.setItem(‘ms_onboard_done’,‘1’);
-ob.style.transition = ‘opacity .4s’;
-ob.style.opacity = ‘0’;
-setTimeout(function(){ ob.style.display=‘none’; }, 400);
+}, 100);
 }
-});
-});
+window.goToWorkout = goToWorkout;
 
-// Progress summary — sync with week input
-function updateProgressSummary() {
+document.querySelectorAll(’.today-card’).forEach(function(card) {
+card.addEventListener(‘click’, function() {
+var type = this.dataset.type;
+if (!type || type === ‘rest’) return;
+this.closest(’.today-grid’) && this.closest(’.today-grid’).querySelectorAll(’.today-card’).forEach(function(c) { c.classList.remove(‘active’); });
+this.classList.add(‘active’);
+localStorage.setItem(‘ms_today_type’, type);
+goToWorkout(type);
+});
+});
+// Restore today
+var savedType = localStorage.getItem(‘ms_today_type’);
+if (savedType) {
+var tc = document.querySelector(’.today-card[data-type=”’ + savedType + ‘”]’);
+if (tc) tc.classList.add(‘active’);
+}
+
+// ── WEEK BAR ──────────────────────────────────────────────
 var wi = document.getElementById(‘weekInput’);
-var psw = document.getElementById(‘ps-week’);
-if (wi && psw) psw.textContent = wi ? wi.value : ‘1’;
-// Count done sets today
-var done = document.querySelectorAll(’.set-pill.done’).length;
-var psd = document.getElementById(‘ps-done’);
-if (psd) psd.textContent = done;
-// Zapsal/a dnes
-var today = new Date().toDateString();
-var saved = localStorage.getItem(‘ms_last_save’);
-var pss = document.getElementById(‘ps-streak’);
-if (pss) pss.textContent = saved === today ? ‘✓’ : ‘—’;
+var wn = document.getElementById(‘weekNum’);
+function updateWeekBar(w) {
+w = Math.max(1, Math.min(24, parseInt(w) || 1));
+if (wi) wi.value = w;
+if (wn) wn.textContent = w;
+var pct = (w / 24 * 100).toFixed(2);
+if (wi) wi.style.background = ’linear-gradient(90deg, var(–accent) ’ + pct + ’%, var(–border) ’ + pct + ‘%)’;
+localStorage.setItem(‘ms_week’, w);
 }
-updateProgressSummary();
-setInterval(updateProgressSummary, 3000);
+if (wi) wi.addEventListener(‘input’, function() { updateWeekBar(parseInt(this.value)); });
+updateWeekBar(parseInt(localStorage.getItem(‘ms_week’)) || 1);
 
-// Rutina progress — count routine-steps checkboxes (odhadem přes klik na step)
-function updateRutinaProgress(done, total) {
-var fill = document.getElementById(‘rutinaFill’);
-var count = document.getElementById(‘rutinaCount’);
-if (fill) fill.style.width = (done/total*100) + ‘%’;
-if (count) count.textContent = done + ’ / ’ + total + ’ hotovo’;
+// ── DATUM ─────────────────────────────────────────────────
+var days = [‘Neděle’,‘Pondělí’,‘Úterý’,‘Středa’,‘Čtvrtek’,‘Pátek’,‘Sobota’];
+var months = [‘ledna’,‘února’,‘března’,‘dubna’,‘května’,‘června’,‘července’,‘srpna’,‘září’,‘října’,‘listopadu’,‘prosince’];
+var now = new Date();
+var de = document.getElementById(‘todayDate’);
+if (de) de.textContent = days[now.getDay()] + ’, ’ + now.getDate() + ’. ’ + months[now.getMonth()];
+
+// ── TIMER ─────────────────────────────────────────────────
+var tInt = null;
+var tRem = 0;
+var tTotal = 0;
+var audioCtx = null;
+
+function getAudioCtx() {
+if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} }
+if (audioCtx && audioCtx.state === ‘suspended’) audioCtx.resume();
+return audioCtx;
 }
 
-// Step-time timery v rutině
+function playTone(freq, start, dur, vol) {
+var ctx = getAudioCtx(); if (!ctx) return;
+var o = ctx.createOscillator(); var g = ctx.createGain();
+o.connect(g); g.connect(ctx.destination);
+o.frequency.value = freq; o.type = ‘sine’;
+g.gain.setValueAtTime(0, ctx.currentTime + start);
+g.gain.linearRampToValueAtTime(vol || 0.3, ctx.currentTime + start + 0.01);
+g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + start + dur);
+o.start(ctx.currentTime + start); o.stop(ctx.currentTime + start + dur + 0.05);
+}
+
+function playBeep() { playTone(523, 0, 0.18); playTone(659, 0.2, 0.18); playTone(784, 0.4, 0.35); }
+function playTick() { playTone(880, 0, 0.06, 0.15); }
+
+function openTimer(seconds, label) {
+clearInterval(tInt);
+tRem = seconds; tTotal = seconds;
+getAudioCtx();
+playTick();
+var tw = document.getElementById(‘timerWidget’);
+var td = document.getElementById(‘timerDisplay’);
+var tb = document.getElementById(‘timerBar’);
+var tl = document.getElementById(‘timerLabel’);
+if (!tw) return;
+tw.classList.add(‘visible’);
+if (tl) tl.textContent = label || ‘Pauza’;
+function tick() {
+if (td) { var m=Math.floor(tRem/60); var s=tRem%60; td.textContent = m+’:’+(s<10?‘0’:’’)+s; }
+if (tb) tb.style.width = (tRem/tTotal*100)+’%’;
+if (tRem <= 0) {
+clearInterval(tInt);
+playBeep();
+if (td) td.textContent = ‘Hotovo!’;
+tw.classList.add(‘done-pulse’);
+setTimeout(function() { tw.classList.remove(‘done-pulse’); }, 800);
+} else { tRem–; }
+}
+tick();
+tInt = setInterval(tick, 1000);
+}
+window.openTimer = openTimer;
+
+var closeBtn = document.getElementById(‘closeTimerBtn’);
+if (closeBtn) closeBtn.addEventListener(‘click’, function() {
+clearInterval(tInt);
+var tw = document.getElementById(‘timerWidget’);
+if (tw) tw.classList.remove(‘visible’);
+});
+
+// Timer tlačítka — pauza
+document.querySelectorAll(’.ex-rest-trigger, .ex-timer-trigger’).forEach(function(el) {
+el.addEventListener(‘click’, function() {
+var s = parseInt(this.dataset.seconds) || 60;
+var l = this.dataset.label || ‘Pauza’;
+openTimer(s, l);
+});
+});
+document.addEventListener(‘click’, function(e) {
+var btn = e.target.closest(’.ex-timer-go’);
+if (btn) { openTimer(parseInt(btn.dataset.seconds)||60, btn.dataset.label||‘Pauza’); }
+});
+// Odemkni audio při první interakci
+document.addEventListener(‘click’, getAudioCtx, { once: true });
+
+// ── CHECKLIST (rutina) ────────────────────────────────────
+document.querySelectorAll(’.check-item’).forEach(function(item) {
+item.addEventListener(‘click’, function() { this.classList.toggle(‘done’); });
+});
+
+// ── TRACKER ───────────────────────────────────────────────
+document.querySelectorAll(’.tracker-input’).forEach(function(inp) {
+var key = ‘ms_tracker_’ + inp.dataset.id;
+inp.value = localStorage.getItem(key) || ‘’;
+inp.addEventListener(‘input’, function() { localStorage.setItem(key, this.value); });
+});
+document.querySelectorAll(’.mood-star’).forEach(function(star) {
+star.addEventListener(‘click’, function() {
+var id = this.dataset.id, rating = parseInt(this.dataset.rating);
+document.querySelectorAll(’[data-id=”’+id+’”]’).forEach(function(s) {
+s.classList.toggle(‘active’, parseInt(s.dataset.rating) <= rating);
+});
+localStorage.setItem(‘ms_mood_’+id, rating);
+});
+var saved = localStorage.getItem(‘ms_mood_’+star.dataset.id);
+if (saved && parseInt(star.dataset.rating) <= parseInt(saved)) star.classList.add(‘active’);
+});
+
+// ── STEP TIMERY (rutina) ──────────────────────────────────
 var stepTimers = [120, 120, 120, 120, 60, 60];
 document.querySelectorAll(’.step-time’).forEach(function(el, i) {
 el.addEventListener(‘click’, function() {
-var sec = stepTimers[i] || 60;
-var label = el.textContent.replace(’ ▶’,’’).trim();
-openTimer(sec, ’Rutina · ’ + label);
+openTimer(stepTimers[i] || 60, ‘Rutina · ’ + el.textContent.replace(’ ▶’,’’).trim());
 });
 });
 
-// Scroll to top
-var scrollTopBtn = document.getElementById(‘scrollTop’);
-if (scrollTopBtn) {
+// ── SCROLL TO TOP ─────────────────────────────────────────
+var stb = document.getElementById(‘scrollTopBtn’);
+if (stb) {
 window.addEventListener(‘scroll’, function() {
-scrollTopBtn.classList.toggle(‘visible’, window.scrollY > 300);
+stb.style.display = window.scrollY > 300 ? ‘flex’ : ‘none’;
 });
-scrollTopBtn.addEventListener(‘click’, function() {
-window.scrollTo({top:0, behavior:‘smooth’});
-});
+stb.addEventListener(‘click’, function() { window.scrollTo({ top: 0, behavior: ‘smooth’ }); });
 }
 
-window.addEventListener(‘scroll’,function(){var b=document.getElementById(‘scrollTopBtn’);if(b)b.classList.toggle(‘visible’,window.scrollY>300);});
-(function(){var ob=document.getElementById(‘onboardBanner’),badge=document.getElementById(‘startBadge’);if(ob&&localStorage.getItem(‘ms_onboard_done’))ob.style.display=‘none’;document.querySelectorAll(’[data-tab]’).forEach(function(btn){btn.addEventListener(‘click’,function(){if(this.dataset.tab===‘treninky’){if(ob){localStorage.setItem(‘ms_onboard_done’,‘1’);ob.style.transition=‘opacity .4s’;ob.style.opacity=‘0’;setTimeout(function(){ob.style.display=‘none’;},400);};if(badge)badge.style.display=‘none’;}});});})();
-</script>
+});
 
+</script>
 </div>
 </div>
 </body>
