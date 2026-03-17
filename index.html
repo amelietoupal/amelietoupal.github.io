@@ -620,6 +620,45 @@ box-shadow: 0 12px 48px rgba(0,0,0,.45);
 .ex-row.detail-open { background: var(–accent-pale); }
 .ex-row.detail-open .ex-name { color: var(–accent2); }
 .ex-row.detail-open .ex-chevron { color: var(–accent); }
+
+/* ─── ZÁLOHA ─────────────────────────────────────────────── */
+.backup-box {
+background: var(–surface); border: 1.5px solid var(–border);
+border-radius: var(–r-lg); padding: 18px;
+margin-bottom: 24px;
+}
+.backup-title {
+font-size: 14px; font-weight: 700; color: var(–text);
+margin-bottom: 6px;
+}
+.backup-desc {
+font-size: 13px; color: var(–text3); line-height: 1.6;
+margin-bottom: 14px;
+}
+.backup-btns {
+display: flex; gap: 10px; flex-wrap: wrap;
+}
+.backup-btn {
+flex: 1; min-width: 140px;
+padding: 11px 16px; border-radius: var(–r-md);
+font-size: 13px; font-weight: 700; cursor: pointer;
+font-family: inherit; transition: all .18s;
+text-align: center; display: block;
+}
+.backup-save {
+background: var(–accent); color: #fff; border: none;
+}
+.backup-save:hover { background: var(–accent2); transform: translateY(-1px); }
+.backup-load {
+background: var(–surface); color: var(–accent);
+border: 1.5px solid var(–accent); cursor: pointer;
+}
+.backup-load:hover { background: var(–accent-bg); }
+.backup-status {
+font-size: 12px; color: var(–green); margin-top: 10px;
+min-height: 16px; font-weight: 600;
+}
+.backup-status.error { color: var(–red); }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -833,7 +872,7 @@ box-shadow: 0 12px 48px rgba(0,0,0,.45);
 ```
 
   </div>
-</div>
+
 </div>
 
 <!-- ===== TAB: TRÉNINKY ===== -->
@@ -1390,194 +1429,171 @@ box-shadow: 0 12px 48px rgba(0,0,0,.45);
 
   </div>
 </div>
-<div id="tracker" class="section">
+<div <div
+</div> id="tracker" class="section">
   <div class="content">
-<div class="pr-section">
-  <div class="page-hd-label">🏆 Osobní rekordy</div>
-  <div class="pr-grid">
-    <div class="pr-card">
-      <div class="pr-name">Hip thrust</div>
-      <div class="pr-inputs">
-        <input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps">
-        <div class="pr-date" id="pr-date-hip_thrust"></div>
-      </div>
-    </div>
-    <div class="pr-card">
-      <div class="pr-name">Goblet squat</div>
-      <div class="pr-inputs">
-        <input class="pr-input" data-pr="goblet" placeholder="Max kg × reps">
-        <div class="pr-date" id="pr-date-goblet"></div>
-      </div>
-    </div>
-    <div class="pr-card">
-      <div class="pr-name">RDL</div>
-      <div class="pr-inputs">
-        <input class="pr-input" data-pr="rdl" placeholder="Max kg × reps">
-        <div class="pr-date" id="pr-date-rdl"></div>
-      </div>
-    </div>
-    <div class="pr-card">
-      <div class="pr-name">Seated Row</div>
-      <div class="pr-inputs">
-        <input class="pr-input" data-pr="row" placeholder="Max kg × reps">
-        <div class="pr-date" id="pr-date-row"></div>
-      </div>
-    </div>
+
+```
+<div class="label">Sledování pokroku</div>
+<h2 class="section-title">Tvůj <em>progress tracker</em></h2>
+<p class="section-intro">Zapiš výkon po každém tréninku — stačí 30 sekund. Sleduj jak každý týden rostou tvoje čísla. <strong>RPE</strong> = jak těžce to bylo (1–10).</p>
+
+<!-- ZÁLOHA -->
+<div class="backup-box">
+  <div class="backup-title">💾 Záloha dat</div>
+  <div class="backup-desc">Ulož všechna svá data (rekordy, záznamy, míry) do souboru. Při příštím otevření na jiném zařízení ho nahraj zpět.</div>
+  <div class="backup-btns">
+    <button class="backup-btn backup-save" onclick="exportData()">⬇️ Stáhnout zálohu</button>
+    <label class="backup-btn backup-load">
+      📂 Načíst zálohu
+      <input type="file" accept=".json" onchange="importData(event)" style="display:none">
+    </label>
+  </div>
+  <div class="backup-status" id="backupStatus"></div>
+</div>
+
+<!-- OSOBNÍ REKORDY -->
+<div class="label" style="margin-top:24px">🏆 Osobní rekordy</div>
+<p style="font-size:13px;color:var(--text3);margin-bottom:12px">Zapiš své maximum — uloží se automaticky. Formát: <strong>40 kg × 10 reps</strong></p>
+<div class="pr-grid">
+  <div class="pr-card">
+    <div class="pr-name">Hip thrust</div>
+    <input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps">
+    <div class="pr-date" id="pr-date-hip_thrust"></div>
+  </div>
+  <div class="pr-card">
+    <div class="pr-name">Goblet squat</div>
+    <input class="pr-input" data-pr="goblet" placeholder="Max kg × reps">
+    <div class="pr-date" id="pr-date-goblet"></div>
+  </div>
+  <div class="pr-card">
+    <div class="pr-name">RDL</div>
+    <input class="pr-input" data-pr="rdl" placeholder="Max kg × reps">
+    <div class="pr-date" id="pr-date-rdl"></div>
+  </div>
+  <div class="pr-card">
+    <div class="pr-name">Seated Row</div>
+    <input class="pr-input" data-pr="row" placeholder="Max kg × reps">
+    <div class="pr-date" id="pr-date-row"></div>
   </div>
 </div>
 
-```
-<div class="page-hd-label">Sledování výsledků</div>
-<h2 class="section-title">Tvůj <em>progress tracker</em></h2>
-```
-
-<div class="page-hd-label" style="margin-top:0">Výkon — každý trénink (30s zápis)</div>
+<!-- VÝKON PO TRÉNINKU -->
+<div class="label" style="margin-top:24px">Výkon — každý trénink</div>
+<p style="font-size:13px;color:var(--text3);margin-bottom:12px">Zapiš poslední sérii klíčového cviku po každém tréninku.</p>
 <div class="tracker-grid">
   <div class="tracker-card">
     <h4>Hip thrust</h4>
-    <input class="track-input" placeholder="Váha (kg)">
-    <input class="track-input" placeholder="Reps">
-    <input class="track-input" placeholder="RPE">
+    <label class="track-label">Váha (kg)</label>
+    <input class="track-input tracker-input" data-id="ht_kg" placeholder="např. 40">
+    <label class="track-label">Reps</label>
+    <input class="track-input tracker-input" data-id="ht_reps" placeholder="např. 10">
+    <label class="track-label">RPE (1–10)</label>
+    <input class="track-input tracker-input" data-id="ht_rpe" placeholder="např. 7">
   </div>
   <div class="tracker-card">
-    <h4>Goblet squat / Leg press</h4>
-    <input class="track-input" placeholder="Váha (kg)">
-    <input class="track-input" placeholder="Reps">
-    <input class="track-input" placeholder="RPE">
-  </div>
-  <div class="tracker-card">
-    <h4>Row / Lat pulldown</h4>
-    <input class="track-input" placeholder="Váha (kg)">
-    <input class="track-input" placeholder="Reps">
-    <input class="track-input" placeholder="RPE">
+    <h4>Goblet squat</h4>
+    <label class="track-label">Váha (kg)</label>
+    <input class="track-input tracker-input" data-id="gs_kg" placeholder="např. 20">
+    <label class="track-label">Reps</label>
+    <input class="track-input tracker-input" data-id="gs_reps" placeholder="např. 10">
+    <label class="track-label">RPE (1–10)</label>
+    <input class="track-input tracker-input" data-id="gs_rpe" placeholder="např. 7">
   </div>
   <div class="tracker-card">
     <h4>RDL</h4>
-    <input class="track-input" placeholder="Váha (kg)">
-    <input class="track-input" placeholder="Reps">
-    <input class="track-input" placeholder="RPE">
+    <label class="track-label">Váha (kg)</label>
+    <input class="track-input tracker-input" data-id="rdl_kg" placeholder="např. 30">
+    <label class="track-label">Reps</label>
+    <input class="track-input tracker-input" data-id="rdl_reps" placeholder="např. 10">
+    <label class="track-label">RPE (1–10)</label>
+    <input class="track-input tracker-input" data-id="rdl_rpe" placeholder="např. 7">
+  </div>
+  <div class="tracker-card">
+    <h4>Seated Row</h4>
+    <label class="track-label">Váha (kg)</label>
+    <input class="track-input tracker-input" data-id="row_kg" placeholder="např. 25">
+    <label class="track-label">Reps</label>
+    <input class="track-input tracker-input" data-id="row_reps" placeholder="např. 10">
+    <label class="track-label">RPE (1–10)</label>
+    <input class="track-input tracker-input" data-id="row_rpe" placeholder="např. 7">
   </div>
 </div>
 
-<div class="page-hd-label">Míry — každé 4 týdny</div>
+<!-- MÍRY -->
+<div class="label" style="margin-top:24px">Míry — každé 4 týdny</div>
+<p style="font-size:13px;color:var(--text3);margin-bottom:12px">Měř ráno nalačno, vždy stejným způsobem.</p>
 <div class="tracker-grid">
   <div class="tracker-card">
-    <h4>Pas (v klidu)</h4>
-    <input class="track-input" placeholder="cm — týden 1">
-    <input class="track-input" placeholder="cm — týden 4">
-    <input class="track-input" placeholder="cm — týden 8">
-    <input class="track-input" placeholder="cm — týden 12">
-    <input class="track-input" placeholder="cm — týden 16">
-    <input class="track-input" placeholder="cm — týden 20">
-    <input class="track-input" placeholder="cm — týden 24 ">
+    <h4>📏 Pas (v klidu)</h4>
+    <label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="pas_1" placeholder="cm">
+    <label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="pas_8" placeholder="cm">
+    <label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="pas_16" placeholder="cm">
+    <label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="pas_24" placeholder="cm">
   </div>
   <div class="tracker-card">
-    <h4>Boky (nejširší)</h4>
-    <input class="track-input" placeholder="cm — týden 1">
-    <input class="track-input" placeholder="cm — týden 4">
-    <input class="track-input" placeholder="cm — týden 8">
-    <input class="track-input" placeholder="cm — týden 12">
-    <input class="track-input" placeholder="cm — týden 16">
-    <input class="track-input" placeholder="cm — týden 20">
-    <input class="track-input" placeholder="cm — týden 24 ">
+    <h4>📏 Boky</h4>
+    <label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="boky_1" placeholder="cm">
+    <label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="boky_8" placeholder="cm">
+    <label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="boky_16" placeholder="cm">
+    <label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="boky_24" placeholder="cm">
   </div>
   <div class="tracker-card">
-    <h4>Stehno (střed)</h4>
-    <input class="track-input" placeholder="cm — týden 1">
-    <input class="track-input" placeholder="cm — týden 4">
-    <input class="track-input" placeholder="cm — týden 8">
-    <input class="track-input" placeholder="cm — týden 12">
-    <input class="track-input" placeholder="cm — týden 16">
-    <input class="track-input" placeholder="cm — týden 20">
-    <input class="track-input" placeholder="cm — týden 24 ">
+    <h4>📏 Stehno</h4>
+    <label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="stehno_1" placeholder="cm">
+    <label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="stehno_8" placeholder="cm">
+    <label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="stehno_16" placeholder="cm">
+    <label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="stehno_24" placeholder="cm">
   </div>
   <div class="tracker-card">
-    <h4>Paže</h4>
-    <input class="track-input" placeholder="cm — týden 1">
-    <input class="track-input" placeholder="cm — týden 4">
-    <input class="track-input" placeholder="cm — týden 8">
-    <input class="track-input" placeholder="cm — týden 12">
-    <input class="track-input" placeholder="cm — týden 16">
-    <input class="track-input" placeholder="cm — týden 20">
-    <input class="track-input" placeholder="cm — týden 24 ">
+    <h4>📏 Paže</h4>
+    <label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="paze_1" placeholder="cm">
+    <label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="paze_8" placeholder="cm">
+    <label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="paze_16" placeholder="cm">
+    <label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="paze_24" placeholder="cm">
   </div>
 </div>
 
-<div class="page-hd-label">Milníky — checkpointy</div>
-<div class="tracker-grid">
-  <div class="tracker-card">
-    <h4>Týden 8 — mini test</h4>
-    <input class="track-input" placeholder="Hip thrust — kg">
-    <input class="track-input" placeholder="Goblet squat — kg">
-    <input class="track-input" placeholder="RDL — kg">
-    <input class="track-input" placeholder="Pocit / poznámka">
-  </div>
-  <div class="tracker-card">
-    <h4>Týden 16 — velký test</h4>
-    <input class="track-input" placeholder="Hip thrust — kg">
-    <input class="track-input" placeholder="Goblet squat — kg">
-    <input class="track-input" placeholder="RDL — kg">
-    <input class="track-input" placeholder="Pocit / poznámka">
-  </div>
-  <div class="tracker-card">
-    <h4>Týden 24 — finální test </h4>
-    <input class="track-input" placeholder="Hip thrust — kg">
-    <input class="track-input" placeholder="Goblet squat — kg">
-    <input class="track-input" placeholder="RDL — kg">
-    <input class="track-input" placeholder="Pocit / poznámka">
-  </div>
-  <div class="tracker-card">
-    <h4>Fotky — porovnání</h4>
-    <input class="track-input" placeholder="Týden 1 — datum">
-    <input class="track-input" placeholder="Týden 8 — datum">
-    <input class="track-input" placeholder="Týden 16 — datum">
-    <input class="track-input" placeholder="Týden 24 — datum">
-  </div>
-</div>
-
-<div class="page-hd-label">Regenerace — jednou týdně</div>
+<!-- NÁLADA -->
+<div class="label" style="margin-top:24px">Regenerace — jak se cítíš?</div>
 <div class="tracker-card" style="margin-bottom:16px">
-  <h4>Jak se cítíš tento týden?</h4>
   <div class="mood-row">
     <span class="mood-lbl">Spánek</span>
-    <div class="stars" id="sleep-stars">
-      <div class="star" data-id="sleep-stars" data-rating="1"></div>
-      <div class="star" data-id="sleep-stars" data-rating="2"></div>
-      <div class="star" data-id="sleep-stars" data-rating="3"></div>
-      <div class="star" data-id="sleep-stars" data-rating="4"></div>
-      <div class="star" data-id="sleep-stars" data-rating="5"></div>
+    <div class="stars">
+      <div class="star" data-id="sleep" data-rating="1"></div>
+      <div class="star" data-id="sleep" data-rating="2"></div>
+      <div class="star" data-id="sleep" data-rating="3"></div>
+      <div class="star" data-id="sleep" data-rating="4"></div>
+      <div class="star" data-id="sleep" data-rating="5"></div>
     </div>
   </div>
   <div class="mood-row">
     <span class="mood-lbl">Energie přes den</span>
-    <div class="stars" id="energy-stars">
-      <div class="star" data-id="energy-stars" data-rating="1"></div>
-      <div class="star" data-id="energy-stars" data-rating="2"></div>
-      <div class="star" data-id="energy-stars" data-rating="3"></div>
-      <div class="star" data-id="energy-stars" data-rating="4"></div>
-      <div class="star" data-id="energy-stars" data-rating="5"></div>
+    <div class="stars">
+      <div class="star" data-id="energy" data-rating="1"></div>
+      <div class="star" data-id="energy" data-rating="2"></div>
+      <div class="star" data-id="energy" data-rating="3"></div>
+      <div class="star" data-id="energy" data-rating="4"></div>
+      <div class="star" data-id="energy" data-rating="5"></div>
     </div>
   </div>
   <div class="mood-row">
     <span class="mood-lbl">Chuť na trénink</span>
-    <div class="stars" id="motivation-stars">
-      <div class="star" data-id="motivation-stars" data-rating="1"></div>
-      <div class="star" data-id="motivation-stars" data-rating="2"></div>
-      <div class="star" data-id="motivation-stars" data-rating="3"></div>
-      <div class="star" data-id="motivation-stars" data-rating="4"></div>
-      <div class="star" data-id="motivation-stars" data-rating="5"></div>
+    <div class="stars">
+      <div class="star" data-id="motivation" data-rating="1"></div>
+      <div class="star" data-id="motivation" data-rating="2"></div>
+      <div class="star" data-id="motivation" data-rating="3"></div>
+      <div class="star" data-id="motivation" data-rating="4"></div>
+      <div class="star" data-id="motivation" data-rating="5"></div>
     </div>
   </div>
 </div>
-
-<div class="info-box warn">
-  <h4>Menstruační cyklus — důležitý ukazatel</h4>
-  <p>Cyklus je "vitální znak" — pokud začneš vynechávat nebo se výrazně změní délka, je to signál řešit regeneraci a energetický příjem. Zvlášť důležité při přidávání tréninku. Pokud dochází k výrazným změnám → lékař.</p>
-</div>
+```
 
   </div>
-</div>
-<div id="jidlo" class="section">
+
+id=“jidlo” class=“section”>
+
   <div class="content">
     <div class="page-hd-label">Výživa pro 17 let, 167 cm, 51 kg</div>
     <h2 class="section-title">Jídelníček <em>bez diet</em></h2>
@@ -2119,6 +2135,16 @@ document.addEventListener('DOMContentLoaded', function() {
     checkDeload();
   })();
 
+  // ── TRACKER INPUTS (výkon + míry) ──────────────────────────
+  document.querySelectorAll('.tracker-input').forEach(function(inp) {
+    var key = 'ms_ti_' + inp.dataset.id;
+    var saved = localStorage.getItem(key);
+    if (saved) inp.value = saved;
+    inp.addEventListener('input', function() {
+      localStorage.setItem('ms_ti_' + this.dataset.id, this.value);
+    });
+  });
+
   // ── 5. PR TRACKER ─────────────────────────────────────────
   (function() {
     var inputs = document.querySelectorAll('.pr-input');
@@ -2165,9 +2191,131 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })();
 
+
+  // ── EXPORT / IMPORT ZÁLOHA ───────────────────────────────
+  function exportData() {
+    // Sbírej všechna ms_* data z localStorage
+    var data = { version: 1, datum: new Date().toISOString(), zaznamy: {} };
+    for (var i = 0; i < localStorage.length; i++) {
+      var key = localStorage.key(i);
+      if (key && key.startsWith('ms_')) {
+        data.zaznamy[key] = localStorage.getItem(key);
+      }
+    }
+
+    // Přidej hodnoty z input polí (tracker, PR)
+    var inputs = document.querySelectorAll('.track-input, .pr-input');
+    inputs.forEach(function(inp) {
+      if (inp.value) {
+        var id = inp.dataset.id || inp.dataset.pr;
+        if (id) data.zaznamy['ms_input_' + id] = inp.value;
+      }
+    });
+
+    // Stáhni jako JSON soubor
+    var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    var url  = URL.createObjectURL(blob);
+    var a    = document.createElement('a');
+    var now  = new Date();
+    a.href     = url;
+    a.download = 'modelka-zaloha-' + now.getFullYear() + '-' +
+                 String(now.getMonth()+1).padStart(2,'0') + '-' +
+                 String(now.getDate()).padStart(2,'0') + '.json';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    var st = document.getElementById('backupStatus');
+    if (st) { st.className = 'backup-status'; st.textContent = '✓ Záloha stažena! Ulož soubor na bezpečné místo.'; }
+  }
+
+  function importData(event) {
+    var file = event.target.files[0];
+    if (!file) return;
+    var st = document.getElementById('backupStatus');
+
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        var data = JSON.parse(e.target.result);
+        if (!data.zaznamy) throw new Error('Neplatný soubor zálohy.');
+
+        // Obnov localStorage
+        var count = 0;
+        Object.keys(data.zaznamy).forEach(function(key) {
+          localStorage.setItem(key, data.zaznamy[key]);
+          count++;
+        });
+
+        // Obnov input pole
+        var inputs = document.querySelectorAll('.track-input, .pr-input');
+        inputs.forEach(function(inp) {
+          var id = inp.dataset.id || inp.dataset.pr;
+          if (id) {
+            var val = localStorage.getItem('ms_input_' + id);
+            if (val) inp.value = val;
+          }
+        });
+
+        // Obnov week slider
+        var wi = document.getElementById('weekInput');
+        var savedWeek = parseInt(localStorage.getItem('ms_week')) || 1;
+        if (wi) { wi.value = savedWeek; if (typeof updateWeekBar === 'function') updateWeekBar(savedWeek); }
+
+        // Obnov PR data
+        var prInputs = document.querySelectorAll('.pr-input');
+        prInputs.forEach(function(inp) {
+          var key = 'ms_pr_' + inp.dataset.pr;
+          var saved = localStorage.getItem(key);
+          if (saved) {
+            try {
+              var obj = JSON.parse(saved);
+              inp.value = obj.val;
+              var dateEl = document.getElementById('pr-date-' + inp.dataset.pr);
+              if (dateEl && obj.date) dateEl.textContent = 'Nastaveno: ' + obj.date;
+            } catch(err) { inp.value = saved; }
+          }
+        });
+
+        if (st) {
+          st.className = 'backup-status';
+          var datum = data.datum ? new Date(data.datum).toLocaleDateString('cs-CZ') : '?';
+          st.textContent = '✓ Načteno ' + count + ' položek ze zálohy ze dne ' + datum + '.';
+        }
+      } catch(err) {
+        if (st) { st.className = 'backup-status error'; st.textContent = '✗ Chyba: ' + err.message; }
+      }
+      // Reset file input
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  }
+
+  // Přidej zálohu button do navigace — připomenutí
+  // Automatická záloha upozornění: pokud data starší 7 dní
+  (function() {
+    var lastBackup = localStorage.getItem('ms_last_backup');
+    if (lastBackup) {
+      var days = Math.floor((Date.now() - parseInt(lastBackup)) / 86400000);
+      if (days >= 7) {
+        var st = document.getElementById('backupStatus');
+        if (st) { st.className = 'backup-status'; st.textContent = '⚠️ Poslední záloha před ' + days + ' dny — doporučujeme stáhnout novou.'; }
+      }
+    }
+    // Ulož čas zálohy při exportu
+    var origExport = window.exportData;
+    if (origExport) {
+      var origRef = exportData;
+      window.exportData = function() {
+        origRef();
+        localStorage.setItem('ms_last_backup', Date.now().toString());
+      };
+    }
+  })();
+
 });
 
 </script>
 
+</div>
 </body>
 </html>
