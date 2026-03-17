@@ -1,11 +1,5 @@
-<!DOC
-<div class="quick-links">
+<!DOCTYPE html>
 
-<button class="ql-btn" onclick="document.querySelector('[data-tab=kardio]').click()">🏃‍♀️ Kardio tipy</button>
-<button class="ql-btn" onclick="document.querySelector('[data-tab=chyby]').click()">💡 Časté chyby</button>
-
-</div>
-TYPE html>
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
@@ -136,11 +130,6 @@ to   { opacity:1; transform:translateY(0); }
 display: block;
 animation: fadeUp .22s ease forwards;
 }
-.content {
-max-width: 640px;
-margin: 0 auto;
-padding: var(–sp-lg) var(–sp-md);
-}
 
 /* ─── NAVIGACE — max 5 položek, čistá ───────────────────── */
 /* Nielsen Norman: bottom nav max 5, labeled icons, active state jasný */
@@ -244,7 +233,7 @@ border-radius: var(–r-xl); pointer-events: none;
 }
 .hero-deco { font-size: 12px; color: var(–accent); letter-spacing: 8px; margin-bottom: 12px; opacity: .5; }
 .hero-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(–accent); margin-bottom: 12px; opacity: .8; }
-.hero-title { font-size: 40px; margin-bottom: 8px; }
+
 .hero-sub { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(–text3); margin-bottom: 24px; }
 .hero-stats {
 display: flex; align-items: center; justify-content: center;
@@ -265,7 +254,7 @@ border-radius: var(–r-xl); padding: 20px 18px; margin-bottom: 16px;
 .today-date { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(240,144,176,.55); margin-bottom: 5px; }
 .today-rec { font-size: 12px; font-weight: 700; color: rgba(240,144,176,.9); margin-bottom: 10px; min-height: 16px; }
 .today-title { font-family: ‘Playfair Display’, serif; font-size: 20px; color: #fce8f0; margin-bottom: 14px; }
-.today-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin-bottom: 12px; }
+
 .today-card {
 display: flex; flex-direction: column; align-items: center; gap: 3px;
 padding: 10px 6px; background: rgba(255,255,255,.07);
@@ -421,7 +410,7 @@ font-weight: 600; font-family: inherit;
 }
 .set-pill:hover { border-color: var(–accent); color: var(–accent); }
 .set-pill.done { background: var(–accent-bg); border-color: var(–accent); color: var(–accent); text-decoration: line-through; }
-.sets-info { font-size: 12px; color: var(–text3); padding-top: 4px; width: 100%; }
+
 .ex-sets-inline { font-size: 12px; color: var(–text3); font-weight: 600; }
 .si-reps, .si-sets { font-weight: 700; color: var(–text2); }
 .si-note, .si-rest, .si-tempo { color: var(–text3); }
@@ -572,7 +561,7 @@ box-shadow: 0 12px 48px rgba(0,0,0,.45);
 .plate-v { background: #3a7a4a; }
 
 /* ─── PLAN — PHASE GRID ──────────────────────────────────── */
-.phase-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 24px; }
+
 .phase-cell { background: var(–surface); border: 1px solid var(–border); border-radius: var(–r-md); padding: 11px; transition: border-color .15s; }
 .phase-cell:hover { border-color: var(–accent); }
 .phase-cell.deload { background: rgba(61,122,106,.05); border-color: rgba(61,122,106,.25); }
@@ -712,11 +701,16 @@ min-height: 16px; font-weight: 600;
     <div class="deload-text" id="deloadText"></div>
   </div>
 </div>
+<div class="quick-links">
+  <button class="ql-btn" onclick="document.querySelector('[data-tab=kardio]').click()">🏃‍♀️ Kardio tipy</button>
+  <button class="ql-btn" onclick="document.querySelector('[data-tab=chyby]').click()">💡 Časté chyby</button>
+</div>
+
 </div>
     </div>
 
 ```
-<div class="page-hd-label"<div class="page-hd-label">24týdenní periodizace — půl roku</div>
+<div class="page-hd-label">24týdenní periodizace — půl roku</div>
 <h2 class="section-title">Jak to <em>celé funguje</em></h2>
 
 <div class="phase-grid">
@@ -871,8 +865,6 @@ min-height: 16px; font-weight: 600;
 </div>
 ```
 
-  </div>
-
 </div>
 
 <!-- ===== TAB: TRÉNINKY ===== -->
@@ -889,13 +881,16 @@ min-height: 16px; font-weight: 600;
     <h3>Síla A — Glute / Nohy / Postura</h3>
     <span class="tag">Full-body</span>
   </div>
-  <div class="wcard-body">
-    <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row" data-uid="ex-65213"><div class="ex-row-inner"><button class="ex-done-btn" data-uid="ex-65213" title="Označit jako hotovo" onclick="event.stopPropagation();toggleDone(this)">&#10003;</button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-sub">zahřátí — lehce, rozhýbat tělo</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
 ```
 
+  <div class="wcard-progress">
+    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-a"></div></div>
+    <span class="wcard-progress-count" id="progressCount-a">0 / 0 cviků</span>
+  </div>
+      <div class="wcard-body">
+        <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
+        <div class="ex-list"><div class="ex-row" data-uid="ex-65213"><div class="ex-row-inner"><button class="ex-done-btn" data-uid="ex-65213" title="Označit jako hotovo" onclick="event.stopPropagation();toggleDone(this)">&#10003;</button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze / bike</div><div class="ex-sub">zahřátí — lehce, rozhýbat tělo</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Nastav pásku / kolo na lehkou úroveň</li><li>Tempo pohodlné — neměla by sis zoufat s dechem</li><li>Postupně zrychluj k rychlejší chůzi</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly, ne se unavit</div>
 <a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
-
 <div class="ex-timer-trigger" data-seconds="300" data-label="5 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">5 min</span><button class="ex-timer-go" data-seconds="300" data-label="5 min">&#9654; Spustit</button></div></div></div>
 
 ```
@@ -1032,13 +1027,16 @@ min-height: 16px; font-weight: 600;
     <h3>Síla B — Zadek / Záda / Paže</h3>
     <span class="tag">Full-body</span>
   </div>
-  <div class="wcard-body">
-    <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
-    <div class="ex-list"><div class="ex-row" data-uid="ex-17840"><div class="ex-row-inner"><button class="ex-done-btn" data-uid="ex-17840" title="Označit jako hotovo" onclick="event.stopPropagation();toggleDone(this)">&#10003;</button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-sub">zahřátí</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
 ```
 
+  <div class="wcard-progress">
+    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-b"></div></div>
+    <span class="wcard-progress-count" id="progressCount-b">0 / 0 cviků</span>
+  </div>
+      <div class="wcard-body">
+        <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
+        <div class="ex-list"><div class="ex-row" data-uid="ex-17840"><div class="ex-row-inner"><button class="ex-done-btn" data-uid="ex-17840" title="Označit jako hotovo" onclick="event.stopPropagation();toggleDone(this)">&#10003;</button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Chůze do kopce / bike</div><div class="ex-sub">zahřátí</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">5 min</span></div></div><div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Pás / kolo na lehkou úroveň, sklon 3–5 % pokud chůze</li><li>Tempo pohodlné — mluvíš bez problémů</li><li>Postupně zrychluj ke konci</li></ol><div class="tip-box">💡 Cíl: zahřát klouby a svaly před silovým tréninkem</div>
 <a href="https://www.youtube.com/results?search_query=treadmill%20incline%20walk%20tutorial" target="_blank" rel="noopener" class="yt-link">▶ YouTube tutoriál</a>
-
 <div class="ex-timer-trigger" data-seconds="300" data-label="5 min"><span class="ex-timer-ico">&#9201;</span><span class="ex-timer-lbl">5 min</span><button class="ex-timer-go" data-seconds="300" data-label="5 min">&#9654; Spustit</button></div></div></div>
 
 ```
@@ -1183,7 +1181,14 @@ min-height: 16px; font-weight: 600;
     <h3>Pilates / Core — Den P</h3>
     <span class="tag">3. den — volitelný</span>
   </div>
+```
 
+  <div class="wcard-progress">
+    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-p"></div></div>
+    <span class="wcard-progress-count" id="progressCount-p">0 / 0 cviků</span>
+  </div>
+
+```
   <div style="padding:14px 16px;background:var(--card-bg);border-bottom:1px solid var(--soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
       <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);">Verze:</span>
       <button class="today-btn btn-p active" id="pilShortBtn" data-version="short" style="padding:6px 14px;font-size:10px;">⚡ Krátká 25 min</button>
@@ -1429,8 +1434,7 @@ min-height: 16px; font-weight: 600;
 
   </div>
 </div>
-<div <div
-</div> id="tracker" class="section">
+<div id="tracker" class="section">
   <div class="content">
 
 ```
@@ -1592,8 +1596,8 @@ min-height: 16px; font-weight: 600;
 
   </div>
 
-id=“jidlo” class=“section”>
-
+  </div>
+<div id="jidlo" class="section">
   <div class="content">
     <div class="page-hd-label">Výživa pro 17 let, 167 cm, 51 kg</div>
     <h2 class="section-title">Jídelníček <em>bez diet</em></h2>
@@ -1756,6 +1760,7 @@ id=“jidlo” class=“section”>
     <button class="tbtn" data-seconds="300">5 min</button>
     <button class="tbtn close-btn" id="closeTimerBtn">✕</button>
   </div>
+</div>
 
 <button id="scrollTopBtn" style="display:none">↑</button>
 
@@ -2312,10 +2317,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   })();
 
+
+  // ── TOGGLE DONE (pro onclick v HTML) ─────────────────────
+  function toggleDone(btn) {
+    var row = btn.closest('.ex-row');
+    if (!row) return;
+    var nowDone = !row.classList.contains('done');
+    row.classList.toggle('done', nowDone);
+    row.classList.toggle('detail-open', false);
+    var block = row.nextElementSibling;
+    if (block && block.classList.contains('ex-sets-block')) {
+      block.querySelectorAll('.set-pill').forEach(function(p) {
+        if (!p.dataset.label) p.dataset.label = p.textContent;
+        p.classList.toggle('done', nowDone);
+        p.textContent = nowDone ? '✓' : p.dataset.label;
+      });
+    }
+    setTimeout(function() { ['a','b','p'].forEach(updateProgress); }, 50);
+  }
+  window.toggleDone = toggleDone;
+
 });
 
 </script>
 
-</div>
 </body>
 </html>
