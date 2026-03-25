@@ -196,10 +196,43 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
 .wcard-body { display: none; }
 .wcard.open .wcard-body { display: block; animation: slideDown .2s ease forwards; }
 
-.wcard-progress { overflow: hidden; border-top: 1px solid var(--border); }
-.wcard-progress-bar { height: 2px; background: var(--border); }
-.wcard-progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width .4s ease; }
-.wcard-progress-count { font-size: 9px; color: var(--ink3); text-align: right; padding: 4px 16px 6px; display: block; letter-spacing: 1px; text-transform: uppercase; }
+.wcard-progress { padding: 12px 16px; display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--border); background: var(--surface2); }
+.progress-ring { flex-shrink: 0; filter: drop-shadow(0 1px 3px rgba(0,0,0,.1)); }
+.progress-ring-track { stroke: var(--border2); fill: none; }
+.progress-ring-fill { fill: none; stroke-linecap: round; transition: stroke-dashoffset .55s cubic-bezier(.4,0,.2,1); transform: rotate(-90deg); transform-origin: 50% 50%; }
+.wcard-a .progress-ring-fill { stroke: var(--green); }
+.wcard-b .progress-ring-fill { stroke: var(--purple); }
+.wcard-p .progress-ring-fill { stroke: var(--brown); }
+.progress-ring-pct { font-family: var(--font-display); font-size: 13px; letter-spacing: 1px; fill: var(--ink); }
+.wcard-progress-info { flex: 1; }
+.wcard-progress-count { font-size: 12px; color: var(--ink2); font-weight: 500; display: block; }
+.wcard-progress-label { font-size: 10px; color: var(--ink3); letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-top: 2px; }
+
+/* Konfetti canvas */
+#confettiCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; display: none; }
+
+/* Rychlý start */
+.quick-start-btn { display: flex; align-items: center; justify-content: space-between; background: var(--accent); color: #fff; border: none; padding: 16px 20px; font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; width: 100%; margin-top: 20px; transition: background .15s, transform .1s; box-shadow: 0 4px 18px rgba(193,57,43,.3); }
+.quick-start-btn:active { transform: scale(.98); }
+.quick-start-btn span { font-size: 14px; opacity: .8; }
+
+/* Sdílení pokroku */
+.share-progress-btn { display: flex; align-items: center; gap: 10px; background: var(--black); color: #fff; border: none; padding: 14px 18px; font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; width: 100%; margin-bottom: 20px; transition: background .15s; }
+.share-progress-btn:hover { background: var(--ink2); }
+.share-progress-btn svg { flex-shrink: 0; }
+
+/* PR sparklines */
+.pr-sparkline { display: block; margin-top: 8px; opacity: .85; }
+.pr-spark-empty { font-size: 10px; color: var(--muted); margin-top: 6px; display: block; }
+
+/* Grafy měr */
+.miry-chart-wrap { margin-top: 12px; }
+.miry-chart-wrap svg { display: block; width: 100%; }
+.miry-chart-label { font-size: 9px; color: var(--ink3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 4px; }
+.miry-trend { font-size: 11px; font-weight: 600; margin-top: 4px; }
+.miry-trend.down { color: var(--green); }
+.miry-trend.up { color: var(--accent); }
+.miry-trend.flat { color: var(--ink3); }
 
 .pilates-toggle { display: flex; gap: 8px; padding: 14px 16px; border-bottom: 1px solid var(--border); }
 .today-btn { padding: 6px 14px; border: 1px solid var(--border2); font-family: var(--font-body); font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); background: transparent; cursor: pointer; transition: all .15s; }
@@ -464,6 +497,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
       <div class="deload-text" id="deloadText"></div>
     </div>
   </div>
+  <button class="quick-start-btn" id="quickStartBtn">
+    <span id="quickStartLabel">Začít trénink</span>
+    <span>→</span>
+  </button>
   <div class="quick-links">
     <button class="ql-btn" onclick="document.querySelector('[data-tab=kardio]').click()">🏃‍♀️ Kardio tipy</button>
     <button class="ql-btn" onclick="document.querySelector('[data-tab=chyby]').click()">💡 Časté chyby</button>
@@ -603,8 +640,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
     <div class="wcard-head-right"><span class="tag">Full-body</span><span class="wcard-toggle">▾</span></div>
   </div>
   <div class="wcard-progress">
-    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-a"></div></div>
-    <span class="wcard-progress-count" id="progressCount-a">0 / 0 cviků</span>
+    <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52">
+      <circle class="progress-ring-track" cx="26" cy="26" r="22" stroke-width="4"/>
+      <circle class="progress-ring-fill" id="progressFill-a" cx="26" cy="26" r="22" stroke-width="4" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+      <text class="progress-ring-pct" id="progressPct-a" x="26" y="30" text-anchor="middle">0%</text>
+    </svg>
+    <div class="wcard-progress-info">
+      <span class="wcard-progress-count" id="progressCount-a">0 / 0 cviků</span>
+      <span class="wcard-progress-label">hotovo</span>
+    </div>
   </div>
   <div class="wcard-body">
     <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
@@ -668,8 +712,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
     <div class="wcard-head-right"><span class="tag">Full-body</span><span class="wcard-toggle">▾</span></div>
   </div>
   <div class="wcard-progress">
-    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-b"></div></div>
-    <span class="wcard-progress-count" id="progressCount-b">0 / 0 cviků</span>
+    <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52">
+      <circle class="progress-ring-track" cx="26" cy="26" r="22" stroke-width="4"/>
+      <circle class="progress-ring-fill" id="progressFill-b" cx="26" cy="26" r="22" stroke-width="4" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+      <text class="progress-ring-pct" id="progressPct-b" x="26" y="30" text-anchor="middle">0%</text>
+    </svg>
+    <div class="wcard-progress-info">
+      <span class="wcard-progress-count" id="progressCount-b">0 / 0 cviků</span>
+      <span class="wcard-progress-label">hotovo</span>
+    </div>
   </div>
   <div class="wcard-body">
     <div class="phase-lbl" data-phase="warmup">Warm-up — 10 min</div>
@@ -727,8 +778,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
     <div class="wcard-head-right"><span class="tag">3. den — volitelný</span><span class="wcard-toggle">▾</span></div>
   </div>
   <div class="wcard-progress">
-    <div class="wcard-progress-bar"><div class="wcard-progress-fill" id="progressFill-p"></div></div>
-    <span class="wcard-progress-count" id="progressCount-p">0 / 0 cviků</span>
+    <svg class="progress-ring" width="52" height="52" viewBox="0 0 52 52">
+      <circle class="progress-ring-track" cx="26" cy="26" r="22" stroke-width="4"/>
+      <circle class="progress-ring-fill" id="progressFill-p" cx="26" cy="26" r="22" stroke-width="4" stroke-dasharray="138.2" stroke-dashoffset="138.2"/>
+      <text class="progress-ring-pct" id="progressPct-p" x="26" y="30" text-anchor="middle">0%</text>
+    </svg>
+    <div class="wcard-progress-info">
+      <span class="wcard-progress-count" id="progressCount-p">0 / 0 cviků</span>
+      <span class="wcard-progress-label">hotovo</span>
+    </div>
   </div>
   <!-- FIX #4: opraveny CSS tokeny var(--card-bg) a var(--soft) -->
   <div style="padding:14px 16px;background:var(--card-bg);border-bottom:1px solid var(--soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
@@ -984,14 +1042,20 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
   <div class="backup-status" id="backupStatus"></div>
 </div>
 
+<!-- SDÍLENÍ POKROKU -->
+<button class="share-progress-btn" id="shareProgressBtn">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+  Sdílet pokrok
+</button>
+
 <!-- OSOBNÍ REKORDY -->
 <div class="label" style="margin-top:24px">🏆 Osobní rekordy</div>
 <p style="font-size:13px;color:var(--ink3);margin-bottom:12px">Formát: <strong>40 kg × 10 reps</strong></p>
 <div class="pr-grid">
-  <div class="pr-card"><div class="pr-name">Hip thrust</div><input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-hip_thrust"></div></div>
-  <div class="pr-card"><div class="pr-name">Goblet squat</div><input class="pr-input" data-pr="goblet" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-goblet"></div></div>
-  <div class="pr-card"><div class="pr-name">RDL</div><input class="pr-input" data-pr="rdl" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-rdl"></div></div>
-  <div class="pr-card"><div class="pr-name">Seated Row</div><input class="pr-input" data-pr="row" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-row"></div></div>
+  <div class="pr-card"><div class="pr-name">Hip thrust</div><input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-hip_thrust"></div><svg class="pr-sparkline" id="spark-hip_thrust" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Goblet squat</div><input class="pr-input" data-pr="goblet" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-goblet"></div><svg class="pr-sparkline" id="spark-goblet" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">RDL</div><input class="pr-input" data-pr="rdl" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-rdl"></div><svg class="pr-sparkline" id="spark-rdl" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Seated Row</div><input class="pr-input" data-pr="row" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-row"></div><svg class="pr-sparkline" id="spark-row" height="32" viewBox="0 0 100 32"></svg></div>
 </div>
 
 <!-- VÝKON PO TRÉNINKU -->
@@ -1010,6 +1074,14 @@ input:focus, textarea:focus { outline: none; border-color: var(--black); }
   <div class="tracker-card"><h4>📏 Boky</h4><label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="boky_1" placeholder="cm"><label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="boky_8" placeholder="cm"><label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="boky_16" placeholder="cm"><label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="boky_24" placeholder="cm"></div>
   <div class="tracker-card"><h4>📏 Stehno</h4><label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="stehno_1" placeholder="cm"><label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="stehno_8" placeholder="cm"><label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="stehno_16" placeholder="cm"><label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="stehno_24" placeholder="cm"></div>
   <div class="tracker-card"><h4>📏 Paže</h4><label class="track-label">Týden 1</label><input class="track-input tracker-input" data-id="paze_1" placeholder="cm"><label class="track-label">Týden 8</label><input class="track-input tracker-input" data-id="paze_8" placeholder="cm"><label class="track-label">Týden 16</label><input class="track-input tracker-input" data-id="paze_16" placeholder="cm"><label class="track-label">Týden 24</label><input class="track-input tracker-input" data-id="paze_24" placeholder="cm"></div>
+</div>
+
+<!-- GRAFY MĚR -->
+<div class="tracker-grid" style="margin-top:8px">
+  <div class="tracker-card"><div class="miry-chart-label">Trend — Pas</div><svg class="miry-chart-wrap" id="miry-chart-pas" height="28" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></div>
+  <div class="tracker-card"><div class="miry-chart-label">Trend — Boky</div><svg class="miry-chart-wrap" id="miry-chart-boky" height="28" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></div>
+  <div class="tracker-card"><div class="miry-chart-label">Trend — Stehno</div><svg class="miry-chart-wrap" id="miry-chart-stehno" height="28" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></div>
+  <div class="tracker-card"><div class="miry-chart-label">Trend — Paže</div><svg class="miry-chart-wrap" id="miry-chart-paze" height="28" viewBox="0 0 100 28" preserveAspectRatio="none"></svg></div>
 </div>
 
 <!-- NÁLADA / REGENERACE -->
@@ -1314,10 +1386,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     var total = rows.length;
     var done  = Array.from(rows).filter(function(r) { return r.classList.contains('done'); }).length;
+    var pct   = total ? Math.round(done / total * 100) : 0;
     var fill  = document.getElementById('progressFill-' + type);
+    var pctEl = document.getElementById('progressPct-' + type);
     var count = document.getElementById('progressCount-' + type);
-    if (fill)  fill.style.width = total ? (done / total * 100) + '%' : '0%';
+    if (fill)  fill.style.strokeDashoffset = (138.2 * (1 - pct / 100)).toFixed(2);
+    if (pctEl) pctEl.textContent = pct + '%';
     if (count) count.textContent = done + ' / ' + total + ' cviků';
+    if (pct === 100 && done > 0) launchConfetti();
   }
   ['a','b','p'].forEach(updateProgress);
 
@@ -1453,6 +1529,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (tRem <= 0) {
         clearInterval(tInt);
         playBeep();
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
         if (td) td.textContent = 'Hotovo!';
         tw.classList.add('done-pulse');
         setTimeout(function() { tw.classList.remove('done-pulse'); }, 800);
@@ -1534,6 +1611,13 @@ document.addEventListener('DOMContentLoaded', function() {
       var dateStr = now.getDate() + '. ' + (now.getMonth()+1) + '. ' + now.getFullYear();
       var obj = { val: val, date: dateStr };
       localStorage.setItem(key, JSON.stringify(obj));
+      // Uložit historii pro sparkline
+      var histKey = 'ms_pr_hist_' + this.dataset.pr;
+      var hist = []; try { hist = JSON.parse(localStorage.getItem(histKey)) || []; } catch(e) {}
+      var kg = parseFloat(val.replace(',','.'));
+      if (!isNaN(kg)) { hist.push({ kg: kg, date: dateStr }); if (hist.length > 20) hist.shift(); }
+      localStorage.setItem(histKey, JSON.stringify(hist));
+      drawSparkline(this.dataset.pr);
       var dateEl = document.getElementById('pr-date-' + this.dataset.pr);
       if (dateEl) dateEl.textContent = 'Nastaveno: ' + dateStr;
       this.classList.add('pr-new-record');
@@ -1714,6 +1798,177 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   })();
 
+  // ── KONFETTI ──────────────────────────────────────────────
+  var confettiActive = false;
+  function launchConfetti() {
+    if (confettiActive) return;
+    var canvas = document.getElementById('confettiCanvas');
+    if (!canvas) return;
+    confettiActive = true;
+    canvas.style.display = 'block';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    var ctx = canvas.getContext('2d');
+    var colors = ['#c1392b','#8b5cf6','#10b981','#f59e0b','#3b82f6','#ec4899'];
+    var particles = [];
+    for (var i = 0; i < 120; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 5 + 3,
+        d: Math.random() * 120 + 60,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        tilt: Math.random() * 10 - 10,
+        tiltInc: Math.random() * 0.07 + 0.05
+      });
+    }
+    var angle = 0, tick = 0;
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      angle += 0.01; tick++;
+      particles.forEach(function(p) {
+        p.tilt += p.tiltInc;
+        p.y += (Math.cos(angle + p.d) + 2) * 1.5;
+        p.x += Math.sin(angle) * 1.2;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.ellipse(p.x, p.y, p.r, p.r * 0.4, p.tilt, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      if (tick < 220) { requestAnimationFrame(drawConfetti); }
+      else { canvas.style.display = 'none'; confettiActive = false; }
+    }
+    drawConfetti();
+    if (navigator.vibrate) navigator.vibrate([150, 80, 150, 80, 300]);
+  }
+  window.launchConfetti = launchConfetti;
+
+  // ── SWIPE GESTA MEZI ZÁLOŽKAMI ────────────────────────────
+  (function() {
+    var tabOrder = ['plan','treninky','rutina','tracker','jidlo'];
+    var txStart = 0, tyStart = 0;
+    document.addEventListener('touchstart', function(e) {
+      txStart = e.changedTouches[0].screenX;
+      tyStart = e.changedTouches[0].screenY;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+      var dx = e.changedTouches[0].screenX - txStart;
+      var dy = e.changedTouches[0].screenY - tyStart;
+      if (Math.abs(dx) < 60 || Math.abs(dy) > Math.abs(dx) * 0.85) return;
+      var activeSection = document.querySelector('.section.active');
+      if (!activeSection) return;
+      var idx = tabOrder.indexOf(activeSection.id);
+      if (idx === -1) return;
+      if (dx < 0 && idx < tabOrder.length - 1) switchTab(tabOrder[idx + 1]);
+      if (dx > 0 && idx > 0) switchTab(tabOrder[idx - 1]);
+    }, { passive: true });
+  })();
+
+  // ── RYCHLÝ START TLAČÍTKO ─────────────────────────────────
+  (function() {
+    var btn = document.getElementById('quickStartBtn');
+    var lbl = document.getElementById('quickStartLabel');
+    if (!btn) return;
+    var daySchedule = {
+      1: { type: 'a', text: 'Síla A — Pondělí' },
+      2: { type: 'p', text: 'Pilates — Úterý' },
+      3: { type: 'b', text: 'Síla B — Středa' },
+      4: { type: 'p', text: 'Pilates — Čtvrtek' },
+      5: { type: 'a', text: 'Síla A — Pátek' },
+      6: { type: 'p', text: 'Pilates — Sobota' },
+      0: { type: null, text: 'Odpočinek — Neděle' }
+    };
+    var today = daySchedule[new Date().getDay()];
+    if (lbl) lbl.textContent = today.text;
+    btn.addEventListener('click', function() {
+      if (today.type) goToWorkout(today.type);
+      else switchTab('rutina');
+    });
+  })();
+
+  // ── PR SPARKLINES ─────────────────────────────────────────
+  function drawSparkline(key) {
+    var svg = document.getElementById('spark-' + key);
+    if (!svg) return;
+    var raw = localStorage.getItem('ms_pr_hist_' + key);
+    if (!raw) return;
+    var hist; try { hist = JSON.parse(raw); } catch(e) { return; }
+    if (!hist || hist.length < 2) return;
+    var vals = hist.map(function(h) { return parseFloat(h.kg) || 0; }).filter(function(v) { return v > 0; });
+    if (vals.length < 2) return;
+    var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    var range = mx - mn || 1;
+    var pts = vals.map(function(v, i) {
+      var x = (i / (vals.length - 1)) * 96 + 2;
+      var y = 28 - 2 - ((v - mn) / range) * 24;
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    svg.innerHTML = '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round"/>';
+  }
+  window.drawSparkline = drawSparkline;
+  ['hip_thrust','goblet','rdl','row'].forEach(drawSparkline);
+
+  // ── GRAFY MĚR ─────────────────────────────────────────────
+  function drawMiryChart(prefix, svgId) {
+    var svg = document.getElementById(svgId);
+    if (!svg) return;
+    var keys = [1, 8, 16, 24];
+    var vals = keys.map(function(k) {
+      var v = parseFloat(localStorage.getItem('ms_ti_' + prefix + '_' + k));
+      return isNaN(v) ? null : v;
+    });
+    var defined = vals.filter(function(v) { return v !== null; });
+    if (defined.length < 2) {
+      svg.innerHTML = '<text x="50" y="18" text-anchor="middle" font-size="8" fill="var(--ink3)">Zatím málo dat</text>';
+      return;
+    }
+    var mn = Math.min.apply(null, defined), mx = Math.max.apply(null, defined);
+    var range = mx - mn || 1;
+    var points = [];
+    vals.forEach(function(v, i) {
+      if (v === null) return;
+      var x = (i / (keys.length - 1)) * 96 + 2;
+      var y = 26 - ((v - mn) / range) * 22;
+      points.push(x.toFixed(1) + ',' + y.toFixed(1));
+    });
+    var color = defined[defined.length - 1] <= defined[0] ? 'var(--green)' : 'var(--accent)';
+    svg.innerHTML = '<polyline points="' + points.join(' ') + '" fill="none" stroke="' + color + '" stroke-width="1.8" stroke-linejoin="round"/>';
+  }
+  window.drawMiryChart = drawMiryChart;
+  ['pas','boky','stehno','paze'].forEach(function(p) { drawMiryChart(p, 'miry-chart-' + p); });
+  document.querySelectorAll('[data-id]').forEach(function(inp) {
+    var id = inp.dataset.id || '';
+    var m = id.match(/^(pas|boky|stehno|paze)_/);
+    if (m) {
+      inp.addEventListener('input', function() { drawMiryChart(m[1], 'miry-chart-' + m[1]); });
+    }
+  });
+
+  // ── SDÍLENÍ POKROKU ───────────────────────────────────────
+  var shareBtn = document.getElementById('shareProgressBtn');
+  if (shareBtn) {
+    shareBtn.addEventListener('click', function() {
+      var week = localStorage.getItem('ms_week') || '1';
+      var prLines = ['hip_thrust','goblet','rdl','row'].map(function(k) {
+        var raw = localStorage.getItem('ms_pr_' + k);
+        if (!raw) return null;
+        try { var obj = JSON.parse(raw); return k.replace('_', ' ') + ': ' + obj.val; } catch(e) { return null; }
+      }).filter(Boolean);
+      var text = '\uD83D\uDCAA Můj tréninkový pokrok (Týden ' + week + '/24)\n';
+      if (prLines.length) text += '\nOsobní rekordy:\n' + prLines.join('\n');
+      text += '\n\n#ModelkaFitness #FitnessGoals';
+      if (navigator.share) {
+        navigator.share({ title: 'Modelka Fitness — můj pokrok', text: text }).catch(function(){});
+      } else if (navigator.clipboard) {
+        var origHTML = shareBtn.innerHTML;
+        navigator.clipboard.writeText(text).then(function() {
+          shareBtn.textContent = '\u2713 Zkopírováno!';
+          setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2000);
+        });
+      }
+    });
+  }
+
   // ── YT LINK — open youtube:// app on mobile, fallback to browser ──
   document.querySelectorAll('.yt-link').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -1733,5 +1988,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
+<canvas id="confettiCanvas"></canvas>
 </body>
 </html>
