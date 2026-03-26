@@ -169,6 +169,37 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .ql-btn { padding: 9px 18px; background: var(--surface2); border: 1px solid var(--border2); border-radius: 20px; font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink2); cursor: pointer; transition: all .2s; }
 .ql-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 
+/* ── WEEK STRIP ─────────────────────────────────────────── */
+.week-strip { display: flex; gap: 5px; margin: 12px 0 20px; }
+.ws-day { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.ws-lbl { font-size: 8px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
+.ws-pill { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; letter-spacing: .5px; border: 1.5px solid transparent; transition: transform .2s, box-shadow .2s; }
+.ws-a   { background: rgba(45,96,74,.35);   color: #a8d8c0; border-color: rgba(45,96,74,.5);   }
+.ws-b   { background: rgba(96,80,160,.35);  color: #c8bcec; border-color: rgba(96,80,160,.5);  }
+.ws-p   { background: rgba(201,107,136,.3); color: #f4c4d4; border-color: rgba(201,107,136,.45); font-size: 15px; }
+.ws-today .ws-lbl  { color: #fff; font-weight: 800; }
+.ws-today .ws-pill { transform: scale(1.15); box-shadow: 0 0 0 2.5px #fff, 0 4px 12px rgba(0,0,0,.25); }
+
+/* ── IMPROVED WORKOUT CARD HEADER ───────────────────────── */
+.wcard-a { border-left: 4px solid var(--green); }
+.wcard-b { border-left: 4px solid var(--purple); }
+.wcard-p { border-left: 4px solid var(--brown); }
+
+/* ── PHASE LABEL IMPROVEMENT ────────────────────────────── */
+.phase-lbl { padding: 12px 16px 6px; border-top: none; margin-top: 0; position: relative; }
+.phase-lbl::after { content: ''; position: absolute; top: 0; left: 16px; right: 16px; height: 1px; background: var(--border); }
+.phase-lbl[data-phase="warmup"] { background: rgba(255,160,70,.04); }
+.phase-lbl[data-phase="main"]   { background: rgba(45,96,74,.04); }
+.phase-lbl[data-phase="core"]   { background: rgba(96,80,160,.04); }
+.phase-lbl[data-phase="cool"]   { background: rgba(100,160,220,.04); }
+
+/* ── TODAY CARD IMPROVED ────────────────────────────────── */
+.today-card { border-radius: var(--r-lg); padding: 14px 4px; gap: 5px; }
+.tc-icon { font-size: 22px; line-height: 1; }
+.tc-name { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,.9); }
+.tc-sub  { font-size: 9px; letter-spacing: .5px; color: rgba(255,255,255,.55); }
+.today-card.active .tc-sub { color: rgba(255,255,255,.8); }
+
 .phase-lbl { font-family: var(--font-body); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; padding: 12px 16px 6px; display: flex; align-items: center; gap: 12px; color: var(--ink3); border-top: 1px solid var(--border); margin-top: 4px; }
 .phase-lbl::before { content: ''; width: 20px; height: 1px; flex-shrink: 0; }
 .phase-lbl[data-phase="warmup"] { color: var(--orange); }
@@ -484,6 +515,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <div class="today-card" data-type="p"><span class="tc-icon">🩷</span><span class="tc-name">Pilates</span><span class="tc-sub">Core · Pas</span></div>
     <div class="today-card" data-type="rest"><span class="tc-icon">😴</span><span class="tc-name">Volno</span><span class="tc-sub">Odpočívej</span></div>
   </div>
+  <div class="week-strip" id="weekStrip">
+    <div class="ws-day" data-dow="1"><div class="ws-lbl">Po</div><div class="ws-pill ws-a">A</div></div>
+    <div class="ws-day" data-dow="2"><div class="ws-lbl">Út</div><div class="ws-pill ws-a">A</div></div>
+    <div class="ws-day" data-dow="3"><div class="ws-lbl">St</div><div class="ws-pill ws-b">B</div></div>
+    <div class="ws-day" data-dow="4"><div class="ws-lbl">Čt</div><div class="ws-pill ws-b">B</div></div>
+    <div class="ws-day" data-dow="5"><div class="ws-lbl">Pá</div><div class="ws-pill ws-b">B</div></div>
+    <div class="ws-day" data-dow="6"><div class="ws-lbl">So</div><div class="ws-pill ws-p">🧘</div></div>
+    <div class="ws-day" data-dow="0"><div class="ws-lbl">Ne</div><div class="ws-pill ws-p">🧘</div></div>
+  </div>
   <div class="today-info" id="todaySummary">Klepni na trénink výše ↑</div>
   <div class="deload-banner" id="deloadBanner" style="display:none">
     <div class="deload-ico">🧘</div>
@@ -496,10 +536,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <span id="quickStartLabel">Začít trénink</span>
     <span>→</span>
   </button>
-  <div class="quick-links">
-    <button class="ql-btn" onclick="document.querySelector('[data-tab=kardio]').click()">🏃‍♀️ Kardio tipy</button>
-    <button class="ql-btn" onclick="document.querySelector('[data-tab=chyby]').click()">💡 Časté chyby</button>
-  </div>
 </div>
 
 <div class="page-hd-label" style="margin-top:32px">24týdenní periodizace — půl roku</div>
@@ -1439,13 +1475,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var rec = document.getElementById('todayRec');
     if (rec) {
       var suggestions = {
-        1: '✨ Pondělí = ideální start — Síla A',
-        2: '🧘 Úterý — lehčí den, Pilates nebo volno',
-        3: '💪 Středa — Síla B',
-        4: '🚶 Čtvrtek — kardio nebo volno',
-        5: '🔥 Pátek — Síla A nebo B',
-        6: '🌿 Sobota — Pilates nebo volné',
-        0: '😴 Neděle — regenerace, plný odpočinek',
+        1: '✨ Pondělí — Síla A · nohy & záda',
+        2: '💪 Úterý — Síla A · nohy & záda',
+        3: '🔥 Středa — Síla B · zadek & paže',
+        4: '💜 Čtvrtek — Síla B · zadek & paže',
+        5: '🌸 Pátek — Síla B · zadek & paže',
+        6: '🧘 Sobota — Pilates · core & pas',
+        0: '🌿 Neděle — Pilates nebo odpočinek',
       };
       rec.textContent = suggestions[now.getDay()] || '';
     }
@@ -1867,6 +1903,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }, { passive: true });
   })();
 
+  // ── WEEK STRIP — highlight today ──────────────────────────
+  (function() {
+    var dow = new Date().getDay();
+    var wsDay = document.querySelector('.ws-day[data-dow="' + dow + '"]');
+    if (wsDay) wsDay.classList.add('ws-today');
+  })();
+
   // ── RYCHLÝ START TLAČÍTKO ─────────────────────────────────
   (function() {
     var btn = document.getElementById('quickStartBtn');
@@ -1874,12 +1917,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!btn) return;
     var daySchedule = {
       1: { type: 'a', text: 'Síla A — Pondělí' },
-      2: { type: 'p', text: 'Pilates — Úterý' },
+      2: { type: 'a', text: 'Síla A — Úterý' },
       3: { type: 'b', text: 'Síla B — Středa' },
-      4: { type: 'p', text: 'Pilates — Čtvrtek' },
-      5: { type: 'a', text: 'Síla A — Pátek' },
+      4: { type: 'b', text: 'Síla B — Čtvrtek' },
+      5: { type: 'b', text: 'Síla B — Pátek' },
       6: { type: 'p', text: 'Pilates — Sobota' },
-      0: { type: null, text: 'Odpočinek — Neděle' }
+      0: { type: 'p', text: 'Pilates — Neděle' }
     };
     var today = daySchedule[new Date().getDay()];
     if (lbl) lbl.textContent = today.text;
@@ -1887,6 +1930,10 @@ document.addEventListener('DOMContentLoaded', function() {
       if (today.type) goToWorkout(today.type);
       else switchTab('rutina');
     });
+
+    // Auto-select today's workout card type in the today-grid
+    var todayCard = document.querySelector('.today-card[data-type="' + today.type + '"]');
+    if (todayCard) todayCard.click();
   })();
 
   // ── PR SPARKLINES ─────────────────────────────────────────
