@@ -234,6 +234,55 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .skate-gear-item { display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: var(--ink2); line-height: 1.5; }
 .skate-gear-item > span { font-size: 18px; flex-shrink: 0; }
 
+/* ── WORKOUT MODE OVERLAY ───────────────────────────────── */
+.workout-mode { position: fixed; inset: 0; z-index: 400; display: flex; flex-direction: column; pointer-events: none; opacity: 0; transition: opacity .22s; }
+.workout-mode.active { pointer-events: all; opacity: 1; }
+.wm-bg { position: absolute; inset: 0; background: rgba(20,10,24,.6); backdrop-filter: blur(3px); }
+.wm-sheet { position: relative; z-index: 1; background: var(--white); border-radius: 22px 22px 0 0; margin-top: auto; max-height: 93dvh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform .34s cubic-bezier(.34,1.15,.64,1); }
+.workout-mode.active .wm-sheet { transform: translateY(0); }
+
+.wm-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 18px 10px; flex-shrink: 0; }
+.wm-close { width: 30px; height: 30px; border: none; background: var(--surface2); border-radius: 50%; font-size: 13px; cursor: pointer; color: var(--ink3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .15s; }
+.wm-close:hover { background: var(--accent); color: #fff; }
+.wm-title { font-family: var(--font-display); font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); flex: 1; }
+.wm-ctr { font-size: 11px; font-weight: 600; color: var(--ink3); letter-spacing: 1px; white-space: nowrap; }
+.wm-bar { height: 3px; background: var(--border); flex-shrink: 0; }
+.wm-fill { height: 100%; background: var(--accent); transition: width .35s ease; }
+.wm-phase { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--ink3); padding: 8px 18px 4px; flex-shrink: 0; }
+.wm-body { flex: 1; overflow-y: auto; padding: 6px 14px 14px; -webkit-overflow-scrolling: touch; }
+.wm-nav { display: flex; gap: 7px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--border); flex-shrink: 0; background: var(--surface); }
+.wm-btn { flex: 1; padding: 13px 6px; border: 1.5px solid var(--border2); border-radius: var(--r-md); font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--ink); background: var(--surface2); cursor: pointer; transition: all .15s; letter-spacing: .4px; }
+.wm-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wm-btn:disabled { opacity: .3; cursor: default; }
+.wm-done-btn { background: var(--accent); border-color: var(--accent); color: #fff; flex: 1.5; font-size: 13px; }
+.wm-done-btn:hover:not(:disabled) { background: var(--accent2); border-color: var(--accent2); }
+.wm-done-btn.green { background: var(--green); border-color: var(--green); }
+
+/* wm exercise card */
+.wm-card { background: var(--surface2); border-radius: var(--r-lg); padding: 16px; margin-bottom: 10px; border: 1.5px solid var(--border); transition: border-color .2s; }
+.wm-card.done { border-color: var(--green); background: rgba(45,96,74,.04); }
+.wm-name { font-family: var(--font-display); font-size: clamp(18px,5vw,26px); color: var(--black); margin-bottom: 5px; line-height: 1.15; }
+.wm-sub { font-size: 13px; color: var(--ink3); margin-bottom: 8px; }
+.wm-rpe { display: inline-block; padding: 3px 10px; background: var(--black); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; border-radius: 20px; margin-bottom: 12px; }
+.wm-sets { margin-bottom: 10px; }
+.wm-sets .set-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+.wm-sets .set-pill { padding: 8px 14px; font-size: 13px; border-radius: var(--r-md); }
+.wm-sets .ex-sets-inline { font-size: 15px; font-weight: 700; color: var(--ink); }
+.wm-detail-toggle { display: flex; align-items: center; justify-content: space-between; padding: 10px 12px; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); cursor: pointer; font-size: 12px; font-weight: 600; color: var(--ink2); user-select: none; transition: background .12s; }
+.wm-detail-toggle:hover { background: var(--surface2); }
+.wm-detail-arrow { transition: transform .2s; font-size: 12px; }
+.wm-detail-toggle.open .wm-detail-arrow { transform: rotate(180deg); }
+.wm-detail-box { display: none; margin-top: 8px; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px; font-size: 13px; color: var(--ink2); line-height: 1.65; }
+.wm-detail-box h5 { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); margin: 10px 0 6px; }
+.wm-detail-box h5:first-child { margin-top: 0; }
+
+/* finish screen */
+.wm-finish { text-align: center; padding: 28px 16px 16px; }
+.wm-finish-emoji { font-size: 52px; margin-bottom: 12px; }
+.wm-finish-h { font-family: var(--font-display); font-size: 32px; color: var(--accent); margin-bottom: 8px; letter-spacing: 2px; }
+.wm-finish-stat { font-size: 14px; color: var(--ink2); margin-bottom: 6px; font-weight: 600; }
+.wm-finish-note { font-size: 13px; color: var(--ink3); line-height: 1.6; margin-top: 10px; }
+
 .phase-lbl { font-family: var(--font-body); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; padding: 12px 16px 6px; display: flex; align-items: center; gap: 12px; color: var(--ink3); border-top: 1px solid var(--border); margin-top: 4px; }
 .phase-lbl::before { content: ''; width: 20px; height: 1px; flex-shrink: 0; }
 .phase-lbl[data-phase="warmup"] { color: var(--orange); }
@@ -1404,6 +1453,26 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   </div>
 </div>
 
+<!-- WORKOUT MODE OVERLAY -->
+<div class="workout-mode" id="workoutMode">
+  <div class="wm-bg" id="wmBg"></div>
+  <div class="wm-sheet">
+    <div class="wm-hdr">
+      <button class="wm-close" id="wmClose">✕</button>
+      <span class="wm-title" id="wmTitle"></span>
+      <span class="wm-ctr" id="wmCtr"></span>
+    </div>
+    <div class="wm-bar"><div class="wm-fill" id="wmFill"></div></div>
+    <div class="wm-phase" id="wmPhase"></div>
+    <div class="wm-body" id="wmBody"></div>
+    <div class="wm-nav">
+      <button class="wm-btn wm-prev-btn" id="wmPrev">← Zpět</button>
+      <button class="wm-btn wm-done-btn" id="wmDone">✓ Hotovo</button>
+      <button class="wm-btn wm-next-btn" id="wmNext">Další →</button>
+    </div>
+  </div>
+</div>
+
 <!-- TIMER WIDGET -->
 
 <div class="timer-widget" id="timerWidget">
@@ -2373,6 +2442,156 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // ── WORKOUT MODE ──────────────────────────────────────────
+  var wm = (function() {
+    var exercises = [], idx = 0, type = null;
+    var TITLES = { a: 'Síla A', b: 'Síla B', p: 'Pilates' };
+
+    // Walk wcard-body recursively, collect phase-lbls + ex-rows in order
+    function collect(t) {
+      var wcard = document.querySelector('.wcard-' + t);
+      if (!wcard) return [];
+      var list = [], phase = '';
+      function walk(node) {
+        for (var i = 0; i < node.children.length; i++) {
+          var el = node.children[i];
+          if (el.classList.contains('phase-lbl')) {
+            phase = el.textContent.trim();
+          } else if (el.classList.contains('ex-row')) {
+            var next = el.nextElementSibling;
+            var dHTML = '';
+            if (next && next.classList.contains('ex-detail')) {
+              var inn = next.querySelector('.ex-detail-inner');
+              if (inn) dHTML = inn.innerHTML;
+            }
+            var setsBlock = el.querySelector('.ex-sets-block');
+            list.push({
+              phase: phase,
+              name: (el.querySelector('.ex-name') || {}).textContent || '',
+              sub:  (el.querySelector('.ex-sub')  || {}).textContent || '',
+              rpe:  (el.querySelector('.rpe-pill') || {}).textContent || '',
+              setsHTML: setsBlock ? setsBlock.outerHTML : '',
+              detailHTML: dHTML,
+              row: el
+            });
+          } else if (!el.classList.contains('ex-detail') &&
+                     !el.classList.contains('ex-sets-block') &&
+                     el.style.display !== 'none') {
+            walk(el);
+          }
+        }
+      }
+      walk(wcard.querySelector('.wcard-body') || wcard);
+      return list;
+    }
+
+    function render() {
+      var ex = exercises[idx];
+      var total = exercises.length;
+      document.getElementById('wmTitle').textContent = TITLES[type] || '';
+      document.getElementById('wmCtr').textContent = (idx + 1) + ' / ' + total;
+      document.getElementById('wmFill').style.width = Math.round(idx / total * 100) + '%';
+      document.getElementById('wmPhase').textContent = ex.phase;
+
+      var isDone = ex.row && ex.row.classList.contains('done');
+      var rpeH = ex.rpe ? '<div class="wm-rpe">' + ex.rpe + '</div>' : '';
+      var subH = ex.sub ? '<div class="wm-sub">' + ex.sub.trim() + '</div>' : '';
+      var detH = ex.detailHTML
+        ? '<button class="wm-detail-toggle" id="wmDTog">📋 Jak na to <span class="wm-detail-arrow" id="wmDArrow">▾</span></button>' +
+          '<div class="wm-detail-box" id="wmDBox">' + ex.detailHTML + '</div>'
+        : '';
+      var setsH = ex.setsHTML
+        ? '<div class="wm-sets">' + ex.setsHTML + '</div>'
+        : '';
+
+      document.getElementById('wmBody').innerHTML =
+        '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
+        '<div class="wm-name">' + ex.name + '</div>' +
+        subH + rpeH + setsH + detH + '</div>';
+
+      // Detail toggle
+      var dtog = document.getElementById('wmDTog');
+      if (dtog) dtog.addEventListener('click', function() {
+        var box = document.getElementById('wmDBox');
+        var arrow = document.getElementById('wmDArrow');
+        var open = box.style.display === 'block';
+        box.style.display = open ? '' : 'block';
+        dtog.classList.toggle('open', !open);
+        arrow.textContent = open ? '▾' : '▴';
+      });
+
+      document.getElementById('wmPrev').disabled = idx === 0;
+      document.getElementById('wmNext').disabled = idx === total - 1;
+      document.getElementById('wmDone').disabled = false;
+      document.getElementById('wmBody').scrollTop = 0;
+    }
+
+    function showFinish() {
+      var doneCount = exercises.filter(function(e) {
+        return e.row && e.row.classList.contains('done');
+      }).length;
+      document.getElementById('wmFill').style.width = '100%';
+      document.getElementById('wmPhase').textContent = '🎉 Hotovo!';
+      document.getElementById('wmBody').innerHTML =
+        '<div class="wm-finish">' +
+        '<div class="wm-finish-emoji">🏆</div>' +
+        '<div class="wm-finish-h">Trénink splněn!</div>' +
+        '<div class="wm-finish-stat">' + doneCount + ' z ' + exercises.length + ' cviků hotovo</div>' +
+        '<p class="wm-finish-note">Skvělá práce! Nezapomeň na cool-down a hydrataci 💧</p>' +
+        '</div>';
+      document.getElementById('wmDone').disabled = true;
+      document.getElementById('wmNext').disabled = true;
+    }
+
+    function open(t) {
+      type = t;
+      exercises = collect(t);
+      if (!exercises.length) return;
+      idx = 0;
+      render();
+      document.getElementById('workoutMode').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      document.getElementById('workoutMode').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Wire up buttons
+    document.getElementById('wmClose').addEventListener('click', close);
+    document.getElementById('wmBg').addEventListener('click', close);
+
+    document.getElementById('wmPrev').addEventListener('click', function() {
+      if (idx > 0) { idx--; render(); }
+    });
+    document.getElementById('wmNext').addEventListener('click', function() {
+      if (idx < exercises.length - 1) { idx++; render(); }
+    });
+    document.getElementById('wmDone').addEventListener('click', function() {
+      var ex = exercises[idx];
+      // Mark done in source wcard
+      if (ex.row && !ex.row.classList.contains('done')) {
+        var doneBtn = ex.row.querySelector('.ex-done-btn');
+        if (doneBtn) toggleDone(doneBtn);
+      }
+      // Flash green
+      var btn = this;
+      btn.classList.add('green');
+      setTimeout(function() { btn.classList.remove('green'); }, 350);
+      // Advance or finish
+      setTimeout(function() {
+        if (idx < exercises.length - 1) { idx++; render(); }
+        else showFinish();
+      }, 380);
+    });
+
+    // Override goToWorkout to open workout mode
+    goToWorkout = function(t) { open(t); };
+
+    return { open: open, close: close };
+  })();
 
 });
 </script>
