@@ -1841,15 +1841,23 @@ document.addEventListener('DOMContentLoaded', function() {
   // ── SWIPE GESTA MEZI ZÁLOŽKAMI ────────────────────────────
   (function() {
     var tabOrder = ['plan','treninky','rutina','kardio','chyby','tracker','jidlo'];
-    var txStart = 0, tyStart = 0;
+    var txStart = 0, tyStart = 0, scrollLocked = false;
     document.addEventListener('touchstart', function(e) {
       txStart = e.changedTouches[0].screenX;
       tyStart = e.changedTouches[0].screenY;
+      scrollLocked = false;
+    }, { passive: true });
+    document.addEventListener('touchmove', function(e) {
+      if (scrollLocked) return;
+      var dx = Math.abs(e.changedTouches[0].screenX - txStart);
+      var dy = Math.abs(e.changedTouches[0].screenY - tyStart);
+      // Jakmile pohyb je více vertikální než horizontální → jde o scroll
+      if (dy > dx || dy > 8) scrollLocked = true;
     }, { passive: true });
     document.addEventListener('touchend', function(e) {
+      if (scrollLocked) return;
       var dx = e.changedTouches[0].screenX - txStart;
-      var dy = e.changedTouches[0].screenY - tyStart;
-      if (Math.abs(dx) < 80 || Math.abs(dy) > 35) return;
+      if (Math.abs(dx) < 80) return;
       var activeSection = document.querySelector('.section.active');
       if (!activeSection) return;
       var idx = tabOrder.indexOf(activeSection.id);
