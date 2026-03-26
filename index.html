@@ -1023,16 +1023,16 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <button class="backup-btn backup-save" onclick="exportData()">⬇️ Stáhnout zálohu</button>
     <label class="backup-btn backup-load">
       📂 Načíst zálohu
-      <input type="file" accept=".json" onchange="importData(event)" style="display:none">
+      <input type="file" accept=".json" id="importFileInput" onchange="importData(event)" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none">
     </label>
   </div>
   <div class="backup-status" id="backupStatus"></div>
 </div>
 
-<!-- SDÍLENÍ POKROKU -->
+<!-- STAŽENÍ POKROKU JAKO OBRÁZEK -->
 <button class="share-progress-btn" id="shareProgressBtn">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-  Sdílet pokrok
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+  Stáhnout pokrok jako fotku
 </button>
 
 <!-- OSOBNÍ REKORDY -->
@@ -1849,7 +1849,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('touchend', function(e) {
       var dx = e.changedTouches[0].screenX - txStart;
       var dy = e.changedTouches[0].screenY - tyStart;
-      if (Math.abs(dx) < 72 || Math.abs(dy) > Math.abs(dx) * 0.38) return;
+      if (Math.abs(dx) < 80 || Math.abs(dy) > 35) return;
       var activeSection = document.querySelector('.section.active');
       if (!activeSection) return;
       var idx = tabOrder.indexOf(activeSection.id);
@@ -1939,32 +1939,209 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // ── SDÍLENÍ POKROKU ───────────────────────────────────────
+  // ── GENEROVÁNÍ PNG KARTY POKROKU ─────────────────────────
+  function fillRound(ctx, x, y, w, h, r, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.arcTo(x + w, y, x + w, y + r, r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+    ctx.lineTo(x + r, y + h);
+    ctx.arcTo(x, y + h, x, y + h - r, r);
+    ctx.lineTo(x, y + r);
+    ctx.arcTo(x, y, x + r, y, r);
+    ctx.closePath();
+    ctx.fill();
+  }
+
+  function generateProgressCard(onDone) {
+    var W = 750, H = 480;
+    var canvas = document.createElement('canvas');
+    canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d');
+
+    // Background gradient
+    var bg = ctx.createLinearGradient(0, 0, W, H);
+    bg.addColorStop(0, '#fff0f5');
+    bg.addColorStop(1, '#ffe4f0');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    // Decorative circles
+    ctx.globalAlpha = 0.12;
+    ctx.fillStyle = '#c96b88';
+    ctx.beginPath(); ctx.arc(680, 60, 90, 0, Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.arc(80, 420, 60, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
+
+    // Header bar
+    fillRound(ctx, 24, 20, W - 48, 72, 14, '#2d1a2e');
+
+    // App title
+    ctx.fillStyle = '#fce8f0';
+    ctx.font = 'bold 22px system-ui, -apple-system, sans-serif';
+    ctx.fillText('MODELKA', 48, 57);
+    ctx.fillStyle = '#c96b88';
+    ctx.fillText('FITNESS', 178, 57);
+
+    // Week badge
+    var week = localStorage.getItem('ms_week') || '1';
+    var weekTxt = 'Týden ' + week + ' / 24';
+    ctx.font = 'bold 13px system-ui, sans-serif';
+    var tw = ctx.measureText(weekTxt).width;
+    fillRound(ctx, W - 48 - tw - 28, 38, tw + 28, 28, 14, '#c96b88');
+    ctx.fillStyle = '#fff';
+    ctx.fillText(weekTxt, W - 48 - tw - 14, 57);
+
+    // Progress bar under header
+    var prog = parseInt(week) / 24;
+    fillRound(ctx, 24, 100, W - 48, 10, 5, '#eedde6');
+    fillRound(ctx, 24, 100, Math.max(20, (W - 48) * prog), 10, 5, '#c96b88');
+
+    // ── PR RECORDS ───────────────────────────────────────────
+    ctx.fillStyle = '#1e1420';
+    ctx.font = 'bold 14px system-ui, sans-serif';
+    ctx.fillText('Osobní rekordy', 24, 138);
+
+    var prKeys = ['hip_thrust','goblet','rdl','row'];
+    var prNames = ['Hip Thrust','Goblet Squat','RDL','Seated Row'];
+    var prEmojis = ['🏋️','🥤','🔽','🚣'];
+    var cardW = (W - 48 - 12) / 2, cardH = 68;
+    var cardX = [24, 24 + cardW + 12];
+    var cardY = [148, 224];
+
+    prKeys.forEach(function(k, i) {
+      var col = i % 2, row = Math.floor(i / 2);
+      var cx = cardX[col], cy = cardY[row];
+      fillRound(ctx, cx, cy, cardW, cardH, 10, '#ffffff');
+      // subtle border
+      ctx.strokeStyle = '#eedde6'; ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.roundRect ? ctx.roundRect(cx, cy, cardW, cardH, 10) : null;
+      ctx.stroke();
+
+      var raw = localStorage.getItem('ms_pr_' + k);
+      var val = '—', hist = '';
+      if (raw) {
+        try {
+          var obj = JSON.parse(raw);
+          val = (obj.val || '—') + ' kg';
+          if (obj.reps) val += ' × ' + obj.reps;
+        } catch(e) {}
+      }
+      // Check history for improvement
+      var histRaw = localStorage.getItem('ms_pr_hist_' + k);
+      if (histRaw) {
+        try {
+          var arr = JSON.parse(histRaw);
+          if (arr.length > 1) hist = '+' + (arr[arr.length-1].val - arr[0].val).toFixed(1) + ' kg';
+        } catch(e) {}
+      }
+
+      ctx.fillStyle = '#1e1420';
+      ctx.font = 'bold 13px system-ui, sans-serif';
+      ctx.fillText(prEmojis[i] + ' ' + prNames[i], cx + 12, cy + 22);
+      ctx.font = 'bold 20px system-ui, sans-serif';
+      ctx.fillStyle = '#c96b88';
+      ctx.fillText(val, cx + 12, cy + 48);
+      if (hist) {
+        ctx.font = '12px system-ui, sans-serif';
+        ctx.fillStyle = '#2d604a';
+        ctx.fillText(hist, cx + cardW - ctx.measureText(hist).width - 12, cy + 48);
+      }
+    });
+
+    // ── MEASUREMENTS ─────────────────────────────────────────
+    ctx.fillStyle = '#1e1420';
+    ctx.font = 'bold 14px system-ui, sans-serif';
+    ctx.fillText('Míry těla', 24, 316);
+
+    var mKeys = ['pas','boky','stehno','paze'];
+    var mNames = ['Pas','Boky','Stehno','Paže'];
+    var mEmojis = ['〰️','🍑','🦵','💪'];
+    var mW = (W - 48 - 36) / 4, mH = 80;
+    var mY = 326;
+
+    mKeys.forEach(function(p, i) {
+      var mx = 24 + i * (mW + 12);
+      fillRound(ctx, mx, mY, mW, mH, 10, '#ffffff');
+
+      var startVal = localStorage.getItem('ms_ti_' + p + '_start') || '—';
+      var curVal = localStorage.getItem('ms_ti_' + p) || '—';
+      var diff = '';
+      if (startVal !== '—' && curVal !== '—') {
+        var d = parseFloat(curVal) - parseFloat(startVal);
+        if (!isNaN(d) && d !== 0) diff = (d > 0 ? '+' : '') + d.toFixed(1);
+      }
+
+      ctx.fillStyle = '#806270';
+      ctx.font = '11px system-ui, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(mEmojis[i] + ' ' + mNames[i], mx + mW/2, mY + 18);
+
+      ctx.fillStyle = '#1e1420';
+      ctx.font = 'bold 18px system-ui, sans-serif';
+      ctx.fillText(curVal !== '—' ? curVal + ' cm' : '—', mx + mW/2, mY + 42);
+
+      if (startVal !== '—') {
+        ctx.font = '11px system-ui, sans-serif';
+        ctx.fillStyle = '#b09aaa';
+        ctx.fillText('start: ' + startVal, mx + mW/2, mY + 58);
+      }
+      if (diff) {
+        ctx.font = 'bold 12px system-ui, sans-serif';
+        var isGood = (p === 'stehno' || p === 'boky') ? parseFloat(diff) > 0 : parseFloat(diff) < 0;
+        ctx.fillStyle = isGood ? '#2d604a' : '#c96b88';
+        ctx.fillText(diff + ' cm', mx + mW/2, mY + 72);
+      }
+      ctx.textAlign = 'left';
+    });
+
+    // ── FOOTER ───────────────────────────────────────────────
+    var dateStr = new Date().toLocaleDateString('cs-CZ', { day: 'numeric', month: 'long', year: 'numeric' });
+    ctx.fillStyle = '#b09aaa';
+    ctx.font = '12px system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('modelka-fitness.cz  •  ' + dateStr + '  •  #ModelkaFitness', W/2, H - 16);
+    ctx.textAlign = 'left';
+
+    onDone(canvas);
+  }
+
+  // ── SDÍLENÍ POKROKU (PNG DOWNLOAD) ────────────────────────
   var shareBtn = document.getElementById('shareProgressBtn');
   if (shareBtn) {
     shareBtn.addEventListener('click', function() {
-      var week = localStorage.getItem('ms_week') || '1';
-      var prLines = ['hip_thrust','goblet','rdl','row'].map(function(k) {
-        var raw = localStorage.getItem('ms_pr_' + k);
-        if (!raw) return null;
-        try { var obj = JSON.parse(raw); return k.replace('_', ' ') + ': ' + obj.val; } catch(e) { return null; }
-      }).filter(Boolean);
-      var text = '\uD83D\uDCAA Můj tréninkový pokrok (Týden ' + week + '/24)\n';
-      if (prLines.length) text += '\nOsobní rekordy:\n' + prLines.join('\n');
-      text += '\n\n#ModelkaFitness #FitnessGoals';
       var origHTML = shareBtn.innerHTML;
-      function showCopied() {
-        shareBtn.textContent = '\u2713 Zkopírováno!';
-        setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2200);
-      }
-      if (navigator.share) {
-        navigator.share({ title: 'Modelka Fitness — můj pokrok', text: text }).catch(function(){});
-      } else if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(showCopied).catch(function() {
-          window.prompt('Zkopíruj svůj pokrok (Ctrl+C):', text);
-        });
-      } else {
-        window.prompt('Zkopíruj svůj pokrok (Ctrl+C):', text);
+      shareBtn.textContent = '\u23F3 Generuji...';
+      shareBtn.disabled = true;
+      generateProgressCard(function(canvas) {
+        canvas.toBlob(function(blob) {
+          shareBtn.disabled = false;
+          var file = new File([blob], 'pokrok.png', { type: 'image/png' });
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({ title: 'Modelka Fitness \u2014 m\u016Fj pokrok', files: [file] })
+              .then(function() { shareBtn.innerHTML = origHTML; })
+              .catch(function() { downloadPNG(blob); });
+          } else {
+            downloadPNG(blob);
+          }
+        }, 'image/png');
+      });
+      function downloadPNG(blob) {
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'modelka-pokrok-' + new Date().toISOString().slice(0, 10) + '.png';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        shareBtn.textContent = '\u2713 Staženo!';
+        setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2500);
       }
     });
   }
