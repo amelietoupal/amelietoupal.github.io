@@ -115,12 +115,12 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .week-bar-max { font-size: 11px; color: var(--ink3); flex-shrink: 0; letter-spacing: 1px; }
 
 .nav { position: fixed; bottom: 0; left: 0; right: 0; height: var(--nav-h); background: var(--black); display: flex; z-index: 100; }
-.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: none; background: transparent; cursor: pointer; padding: 6px 4px; color: rgba(255,255,255,.4); font-family: var(--font-body); font-size: 9px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; transition: color .2s; position: relative; -webkit-tap-highlight-color: transparent; }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; border: none; background: transparent; cursor: pointer; padding: 6px 2px; color: rgba(255,255,255,.4); font-family: var(--font-body); font-size: 9px; font-weight: 500; letter-spacing: .5px; text-transform: uppercase; transition: color .2s; position: relative; -webkit-tap-highlight-color: transparent; }
 .nav-btn::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) scaleX(0); width: 20px; height: 2px; background: var(--accent); transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
 .nav-btn.active { color: #fff; }
 .nav-btn.active::after { transform: translateX(-50%) scaleX(1); }
-.nav-ico { font-size: 16px; line-height: 1; }
-.nav-lbl { font-size: 8px; letter-spacing: 1.5px; }
+.nav-ico { font-size: 14px; line-height: 1; }
+.nav-lbl { font-size: 7px; letter-spacing: .5px; }
 .nav-badge { position: absolute; top: 6px; right: calc(50% - 22px); background: var(--accent); color: #fff; font-size: 7px; padding: 2px 5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
 
 .section-title { font-family: var(--font-display); font-size: clamp(52px, 13vw, 100px); letter-spacing: .02em; line-height: .9; text-transform: uppercase; margin-bottom: 16px; color: var(--black); }
@@ -453,16 +453,13 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <nav class="nav">
   <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
-  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">START</span></button>
+  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
   <button class="nav-btn" data-tab="rutina"><span class="nav-ico">🧘</span><span class="nav-lbl">Rutina</span></button>
+  <button class="nav-btn" data-tab="kardio"><span class="nav-ico">🏃‍♀️</span><span class="nav-lbl">Kardio</span></button>
+  <button class="nav-btn" data-tab="chyby"><span class="nav-ico">💡</span><span class="nav-lbl">Chyby</span></button>
   <button class="nav-btn" data-tab="tracker"><span class="nav-ico">📈</span><span class="nav-lbl">Tracker</span></button>
   <button class="nav-btn" data-tab="jidlo"><span class="nav-ico">🥗</span><span class="nav-lbl">Jídlo</span></button>
 </nav>
-
-<div id="secondary-nav" style="display:none">
-  <button class="nav-btn" data-tab="kardio"></button>
-  <button class="nav-btn" data-tab="chyby"></button>
-</div>
 
 <!-- ===== TAB: PLÁN ===== -->
 
@@ -476,7 +473,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <div style="position:absolute;right:-4px;top:0;font-family:var(--font-display);font-size:180px;color:rgba(0,0,0,.04);line-height:1;letter-spacing:-4px;pointer-events:none;user-select:none;">PLAN</div>
     </div>
 
-```
 <!-- TODAY'S WORKOUT -->
 <div class="today">
   <div class="today-date" id="todayDate"></div>
@@ -576,7 +572,47 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     </div>
   </div>
 </div>
-```
+
+<!-- HODNOCENÍ CÍLŮ — přesunuto sem z Tréninků -->
+<div class="label" style="margin-top:40px">Tvoje cíle — funguje to?</div>
+<div style="border:1px solid var(--border2);border-radius:var(--r-lg);overflow:hidden;margin-bottom:28px;">
+  <div style="background:var(--black);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <h3 style="font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:#fff;text-transform:uppercase;margin:0;">Hodnocení pro tvé cíle</h3>
+    <span style="background:var(--accent);color:#fff;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;border-radius:20px;">Model Training</span>
+  </div>
+  <div style="padding:18px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px;">
+      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;border-radius:0 var(--r-sm) var(--r-sm) 0;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Pevný zadek</div>
+        <p style="font-size:13px;margin:0;color:var(--ink2);">Hip thrust + clamshell + bridge pulses = ideální kombinace. Dosáhneš pevného, tvarovaného zadku bez objemu. <strong style="color:var(--green);">✓ Ano, dosáhneš.</strong></p>
+      </div>
+      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;border-radius:0 var(--r-sm) var(--r-sm) 0;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé břícho a pás</div>
+        <p style="font-size:13px;margin:0;color:var(--ink2);">Pilates (dead bug, criss-cross, pelvic curl) přímo posiluje příčný břišní sval = přirozený korzet. Viditelné změny za 6–8 týdnů. <strong style="color:var(--green);">✓ Ano, dosáhneš.</strong></p>
+      </div>
+      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;border-radius:0 var(--r-sm) var(--r-sm) 0;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé nohy</div>
+        <p style="font-size:13px;margin:0;color:var(--ink2);">Goblet squat, split squat, RDL nebudují bulk, pokud necvičíš na RPE 9–10 s maximální zátěží. Klíč je umírněná váha + denní chůze 8–10 tis. kroků. <strong style="color:var(--green);">✓ Dosáhneš.</strong></p>
+      </div>
+      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;border-radius:0 var(--r-sm) var(--r-sm) 0;">
+        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé tónované ruce</div>
+        <p style="font-size:13px;margin:0;color:var(--ink2);">Bicep curl + triceps pushdown s lehčí váhou (15–20 opakování) = definice bez objemu. Face pull tvaruje ramena. <strong style="color:var(--green);">✓ Dosáhneš.</strong></p>
+      </div>
+    </div>
+    <div style="background:var(--accent-pale);border:1px solid var(--border2);border-radius:var(--r-md);padding:14px;margin-bottom:12px;">
+      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Jak nepřibírat objemné svaly — 4 pravidla</div>
+      <ol style="margin:0;padding-left:18px;color:var(--ink2);font-size:13px;line-height:1.8;">
+        <li><strong>RPE max 7–8</strong> — ne do selhání. Selhání buduje objem, ne definici.</li>
+        <li><strong>Nohy: preferuj 12–15 opakování</strong> místo 6–8. Goblet squat 8–12 kg stačí.</li>
+        <li><strong>Paže: 15–20 opakování</strong> s lehčí váhou = tonus, ne objem.</li>
+        <li><strong>Chůze 8–10 tis. kroků denně</strong> = nejlepší "lean legs" metoda. Nezatěžuje svaly, spaluje tuk.</li>
+      </ol>
+    </div>
+    <div style="background:var(--surface2);padding:12px;font-size:12px;color:var(--ink3);border-left:2px solid var(--border2);border-radius:0 var(--r-sm) var(--r-sm) 0;">
+      <strong style="color:var(--ink);">Klíčový insight:</strong> Ženy nevybudují velké svaly snadno — nemají dost testosteronu. Strach z "bulku" je přehnaný. Tréninky jsou nastaveny správně. Největší riziko je příliš velká váha + příliš málo kardio/kroků.
+    </div>
+  </div>
+</div>
 
   </div>
 </div>
@@ -591,46 +627,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
         Tréninky<br><em style="color:var(--accent);font-style:normal;">A &amp; B</em>
       </h2>
     </div>
-
-<!-- HODNOCENÍ PRO MODELKA CÍLE -->
-<div class="reveal" style="margin-bottom:28px;border:2px solid var(--black);padding:0;overflow:hidden;">
-  <div style="background:var(--black);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-    <h3 style="font-family:var(--font-display);font-size:16px;letter-spacing:2px;color:#fff;text-transform:uppercase;margin:0;">Hodnocení pro tvé cíle</h3>
-    <span style="background:var(--accent);color:#fff;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;">Model Training</span>
-  </div>
-  <div style="padding:18px;">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:16px;">
-      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Pevný zadek</div>
-        <p style="font-size:13px;margin:0;color:var(--ink2);">Hip thrust + clamshell + bridge pulses = ideální kombinace. Dosáhneš pevného, tvarovaného zadku bez objemu. <strong style="color:var(--green);">✓ Ano, dosáhneš.</strong></p>
-      </div>
-      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé břícho a pás</div>
-        <p style="font-size:13px;margin:0;color:var(--ink2);">Pilates (dead bug, criss-cross, pelvic curl) přímo posiluje příčný břišní sval = přirozený korzet. Viditelné změny za 6–8 týdnů. <strong style="color:var(--green);">✓ Ano, dosáhneš.</strong></p>
-      </div>
-      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé nohy</div>
-        <p style="font-size:13px;margin:0;color:var(--ink2);">Goblet squat, split squat, RDL nebudují bulk, pokud necvičíš na RPE 9–10 s maximální zátěží. Klíč je umírněná váha + denní chůze 8–10 tis. kroků. <strong style="color:var(--green);">✓ Dosáhneš.</strong></p>
-      </div>
-      <div style="background:var(--green-bg);border-left:3px solid var(--green);padding:12px;">
-        <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:6px;">Štíhlé tónované ruce</div>
-        <p style="font-size:13px;margin:0;color:var(--ink2);">Bicep curl + triceps pushdown s lehčí váhou (15–20 opakování) = definice bez objemu. Face pull tvaruje ramena. <strong style="color:var(--green);">✓ Dosáhneš.</strong></p>
-      </div>
-    </div>
-    <div style="background:var(--accent-pale);border:1px solid rgba(193,57,43,.2);padding:14px;margin-bottom:12px;">
-      <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Jak nepřibírat objemné svaly — 4 pravidla</div>
-      <ol style="margin:0;padding-left:18px;color:var(--ink2);font-size:13px;line-height:1.8;">
-        <li><strong>RPE max 7–8</strong> — ne do selhání. Selhání buduje objem, ne definici.</li>
-        <li><strong>Nohy: preferuj 12–15 opakování</strong> místo 6–8. Goblet squat 8–12 kg stačí.</li>
-        <li><strong>Paže: 15–20 opakování</strong> s lehčí váhou = tonus, ne objem.</li>
-        <li><strong>Chůze 8–10 tis. kroků denně</strong> = nejlepší "lean legs" metoda. Nezatěžuje svaly, spaluje tuk.</li>
-      </ol>
-    </div>
-    <div style="background:var(--surface2);padding:12px;font-size:12px;color:var(--ink3);border-left:2px solid var(--border2);">
-      <strong style="color:var(--ink);">Klíčový insight:</strong> Ženy nevybudují velké svaly snadno — nemají dost testosteronu. Strach z "bulku" je přehnaný. Tréninky jsou nastaveny správně. Největší riziko je příliš velká váha + příliš málo kardio/kroků.
-    </div>
-  </div>
-</div>
 
 <!-- SÍLA A -->
 <div class="wcard wcard-a reveal">
@@ -859,7 +855,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     </div>
   </div>
 </div>
-```
 
   </div>
 </div>
@@ -874,7 +869,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       </h2>
     </div>
 
-```
 <!-- FIX #1: opravena class (chybějící uvozovky) -->
 <div class="reveal reveal-delay-1 info-box">
   <h4>Proč je to nejdůležitější?</h4>
@@ -933,7 +927,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Kroky — dostat se ven</div><div class="check-text-sub">Krátká procházka alespoň 15–20 min = bonus pro regeneraci i posturu</div></div></div>
   <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Večerní protažení / mobilita</div><div class="check-text-sub">Nemusí být náročné — hip flexor + hrudník, 5 min stačí</div></div></div>
 </div>
-```
 
   </div>
 </div>
@@ -954,7 +947,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <p>Při souběžném tréninku (síla + kardio) může běh ve vyšším objemu brzdit silové adaptace. Kolo a eliptical jsou šetrnější. Rozumné dávky stále platí.</p>
     </div>
 
-```
 <div class="page-hd-label" style="margin-top:40px">Jak poznat správnou intenzitu</div>
 <div class="training-card" style="margin-bottom:24px">
   <div class="wcard-head"><h3>Talk Test — nejjednodušší metoda</h3><span class="tag">Doporučeno</span></div>
@@ -976,7 +968,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <h4>Kardio a síla — kdy dělat co?</h4>
   <p>Ideálně kardio v jiný den než sílu. Pokud musíš ve stejný den: nejdřív síla, pak kardio. Nikdy naopak.</p>
 </div>
-```
 
   </div>
 </div>
@@ -997,7 +988,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <div class="mistake-card"><div class="mistake-icon">📱</div><div class="mistake-body"><h4>Ignoruješ držení těla v běžném dni</h4><p>V tréninku cvičíš, ale přes den se hrbíš — vizuální efekt mizí.</p><div class="mistake-fix">→ Fix: Denní 10min rutina + vědomé držení + více kroků.</div></div></div>
     <div class="mistake-card"><div class="mistake-icon">😬</div><div class="mistake-body"><h4>Strečink jako "válka" — moc tvrdě</h4><p>Velký statický strečink těsně před silovým tréninkem.</p><div class="mistake-fix">→ Fix: Strečink = hranice tahu, ne bolesti. Statiku dávej PO tréninku.</div></div></div>
 
-```
 <div class="page-hd-label" style="margin-top:48px">Varovné signály — stop a řešit</div>
 <div class="training-card">
   <div class="wcard-head"><h3>Kdy jít k fyzioterapeutovi nebo lékaři</h3><span class="tag">Bezpečnost</span></div>
@@ -1010,7 +1000,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <tr><td><div class="ex-name">Náhlý pokles výkonu + dlouhodobá únava</div></td><td>Zkontroluj regeneraci, lékař</td></tr>
   </tbody></table>
 </div>
-```
 
   </div>
 </div>
@@ -1026,7 +1015,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     </div>
     <p class="section-intro">Zapiš výkon po každém tréninku — stačí 30 sekund. Sleduj jak každý týden rostou tvoje čísla. <strong>RPE</strong> = jak těžce to bylo (1–10).</p>
 
-```
 <!-- ZÁLOHA -->
 <div class="backup-box">
   <div class="backup-title">💾 Záloha dat</div>
@@ -1118,7 +1106,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     </div>
   </div>
 </div>
-```
 
   </div>
 </div>
@@ -1135,7 +1122,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       </h2>
     </div>
 
-```
 <!-- FIX #1: opravena class -->
 <div class="reveal reveal-delay-2 info-box warn">
   <h4>Nejdůležitější pravidlo pro tvůj věk</h4>
@@ -1221,7 +1207,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <h4>⚠️ Pokud ti někdo doporučuje drastické diety...</h4>
   <p>Nízkokalorické diety pod 1 500 kcal, low-carb přístupy nebo přeskakování jídel jsou pro 17letou sportovkyni nevhodné. Pokud si nejsi jistá, poraď se s nutričním terapeutem.</p>
 </div>
-```
 
   </div>
 </div>
@@ -1668,11 +1653,14 @@ document.addEventListener('DOMContentLoaded', function() {
     var url  = URL.createObjectURL(blob);
     var a    = document.createElement('a');
     var now  = new Date();
-    a.href     = url;
+    a.href = url;
+    a.style.display = 'none';
     a.download = 'modelka-zaloha-' + now.getFullYear() + '-' +
                  String(now.getMonth()+1).padStart(2,'0') + '-' +
                  String(now.getDate()).padStart(2,'0') + '.json';
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
     URL.revokeObjectURL(url);
     // FIX #3: uložení timestamps bez cyklické reference
     localStorage.setItem('ms_last_backup', Date.now().toString());
@@ -1722,6 +1710,14 @@ document.addEventListener('DOMContentLoaded', function() {
           var saved2 = localStorage.getItem('ms_mood_' + star.dataset.id);
           star.classList.toggle('active', saved2 && parseInt(star.dataset.rating) <= parseInt(saved2));
         });
+        // Obnov grafy měr a sparklines
+        ['pas','boky','stehno','paze'].forEach(function(p) {
+          if (typeof drawMiryChart === 'function') drawMiryChart(p, 'miry-chart-' + p);
+        });
+        ['hip_thrust','goblet','rdl','row'].forEach(function(k) {
+          if (typeof drawSparkline === 'function') drawSparkline(k);
+        });
+        ['a','b','p'].forEach(updateProgress);
         if (st) {
           st.className = 'backup-status';
           var datum = data.datum ? new Date(data.datum).toLocaleDateString('cs-CZ') : '?';
@@ -1844,7 +1840,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── SWIPE GESTA MEZI ZÁLOŽKAMI ────────────────────────────
   (function() {
-    var tabOrder = ['plan','treninky','rutina','tracker','jidlo'];
+    var tabOrder = ['plan','treninky','rutina','kardio','chyby','tracker','jidlo'];
     var txStart = 0, tyStart = 0;
     document.addEventListener('touchstart', function(e) {
       txStart = e.changedTouches[0].screenX;
@@ -1956,14 +1952,19 @@ document.addEventListener('DOMContentLoaded', function() {
       var text = '\uD83D\uDCAA Můj tréninkový pokrok (Týden ' + week + '/24)\n';
       if (prLines.length) text += '\nOsobní rekordy:\n' + prLines.join('\n');
       text += '\n\n#ModelkaFitness #FitnessGoals';
+      var origHTML = shareBtn.innerHTML;
+      function showCopied() {
+        shareBtn.textContent = '\u2713 Zkopírováno!';
+        setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2200);
+      }
       if (navigator.share) {
         navigator.share({ title: 'Modelka Fitness — můj pokrok', text: text }).catch(function(){});
-      } else if (navigator.clipboard) {
-        var origHTML = shareBtn.innerHTML;
-        navigator.clipboard.writeText(text).then(function() {
-          shareBtn.textContent = '\u2713 Zkopírováno!';
-          setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2000);
+      } else if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(showCopied).catch(function() {
+          window.prompt('Zkopíruj svůj pokrok (Ctrl+C):', text);
         });
+      } else {
+        window.prompt('Zkopíruj svůj pokrok (Ctrl+C):', text);
       }
     });
   }
