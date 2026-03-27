@@ -17,6 +17,8 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
 :root {
+  --today-bg-1: #1e1420;
+  --today-bg-2: #2a1834;
   --white:   #fef8fa;
   --black:   #1e1420;
   --ink:     #28182a;
@@ -60,6 +62,8 @@
 }
 
 [data-theme="dark"] {
+  --today-bg-1: #0d0818;
+  --today-bg-2: #150d28;
   --white:   #1a1020;
   --black:   #f5eef0;
   --ink:     #f0e6ec;
@@ -155,7 +159,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .label::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
 .page-hd-label { font-family: var(--font-body); font-size: 9px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
 
-.today { background: linear-gradient(135deg, #1e1420, #2a1834); padding: 32px 24px 28px; margin-bottom: 0; position: relative; overflow: hidden; }
+.today { background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2)); padding: 32px 24px 28px; margin-bottom: 0; position: relative; overflow: hidden; }
 .today::before { content: 'DNES'; position: absolute; top: -10px; right: -8px; font-family: var(--font-display); font-size: 120px; color: rgba(255,255,255,.04); letter-spacing: -2px; line-height: 1; pointer-events: none; user-select: none; }
 .today-date { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
 .today-rec { font-size: 11px; font-weight: 500; color: var(--accent); margin-bottom: 14px; min-height: 16px; letter-spacing: .5px; }
@@ -450,7 +454,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .ex-timer-go:hover { background: var(--accent2); }
 .ex-rest-trigger { display: flex; align-items: center; gap: 8px; }
 
-.timer-widget { position: fixed; bottom: calc(var(--nav-h) + 14px); left: 50%; transform: translateX(-50%) translateY(130%); background: linear-gradient(135deg, #1e1420, #2a1834); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-xl); padding: 20px 26px; min-width: 270px; z-index: 200; transition: transform .35s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(201,107,136,.15); }
+.timer-widget { position: fixed; bottom: calc(var(--nav-h) + 14px); left: 50%; transform: translateX(-50%) translateY(130%); background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2)); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-xl); padding: 20px 26px; min-width: 270px; z-index: 450; transition: transform .35s cubic-bezier(.34,1.56,.64,1); box-shadow: 0 20px 60px rgba(0,0,0,.4), 0 0 0 1px rgba(201,107,136,.15); }
 .timer-widget.visible { transform: translateX(-50%) translateY(0); }
 .timer-top { font-family: var(--font-body); font-size: 9px; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,.4); text-align: center; margin-bottom: 10px; }
 .timer-track { height: 1px; background: rgba(255,255,255,.15); overflow: hidden; margin-bottom: 12px; }
@@ -783,6 +787,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   </div>
 </div>
 
+<button class="speech-toggle" id="speechToggle" aria-label="Hlasové odpočítávání">🔇</button>
 <button class="dark-toggle" id="darkToggle" aria-label="Přepnout tmavý režim">🌙</button>
 
 <nav class="nav">
@@ -849,6 +854,23 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <!-- NOTIFIKACE -->
 <button class="notif-btn" id="notifBtn">🔔 Připomínky tréninku</button>
+
+<!-- SCHEDULE EDITOR -->
+<div class="schedule-editor" id="scheduleEditor">
+  <div class="schedule-editor-hd" id="scheduleEditorHd">
+    <span class="schedule-editor-title">⚙️ Upravit rozvrh</span>
+    <span id="schedEditorArrow">▾</span>
+  </div>
+  <div class="schedule-editor-body" id="scheduleEditorBody">
+    <div class="sched-row"><span class="sched-day-lbl">Po</span><select class="sched-select" data-dow="1"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Út</span><select class="sched-select" data-dow="2"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">St</span><select class="sched-select" data-dow="3"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Čt</span><select class="sched-select" data-dow="4"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Pá</span><select class="sched-select" data-dow="5"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">So</span><select class="sched-select" data-dow="6"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Ne</span><select class="sched-select" data-dow="0"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+  </div>
+</div>
 
 <div class="page-hd-label" style="margin-top:32px">24týdenní periodizace — půl roku</div>
 <h2 class="section-title">Jak to <em>celé funguje</em></h2>
@@ -1530,6 +1552,24 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   </div>
 </div>
 
+<!-- POROVNÁNÍ TÝDNŮ -->
+<div class="label" style="margin-bottom:6px">📈 Vs. minulý týden</div>
+<div class="week-compare" id="weekCompare">
+  <div class="wc-card"><div class="wc-val" id="wcSessions">—</div><div class="wc-delta" id="wcSessionsDelta"></div><div class="wc-lbl">Tréninků</div></div>
+  <div class="wc-card"><div class="wc-val" id="wcExercises">—</div><div class="wc-delta" id="wcExercisesDelta"></div><div class="wc-lbl">Cviků</div></div>
+  <div class="wc-card"><div class="wc-val" id="wcPct">—</div><div class="wc-delta" id="wcPctDelta"></div><div class="wc-lbl">Splnění</div></div>
+</div>
+
+<!-- MĚSÍČNÍ KALENDÁŘ -->
+<div class="month-cal">
+  <div class="month-cal-head">
+    <button class="month-cal-nav" id="calPrev">‹</button>
+    <div class="month-cal-title" id="calTitle"></div>
+    <button class="month-cal-nav" id="calNext">›</button>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+</div>
+
 <!-- VÁHOVÝ PROGRES -->
 <div class="label" style="margin-bottom:4px">⚖️ Váha</div>
 <div class="weight-box">
@@ -1643,6 +1683,16 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <div class="star" data-id="motivation" data-rating="5"></div>
     </div>
   </div>
+</div>
+
+<!-- CÍLE -->
+<div class="label" style="margin-top:24px">🎯 Cíle</div>
+<div class="goals-box">
+  <div class="goal-add-row">
+    <input class="goal-add-input" id="goalInput" type="text" placeholder="Přidej cíl…">
+    <button class="goal-add-btn" id="goalAddBtn">+</button>
+  </div>
+  <div id="goalsList"></div>
 </div>
 
   </div>
