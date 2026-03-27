@@ -603,6 +603,90 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   .macro-grid,.macro-row { grid-template-columns: repeat(2,1fr); }
   .content { padding: var(--sp-lg) 14px; }
 }
+
+/* ── STREAK ──────────────────────────────────────────────── */
+.streak-banner { display: flex; align-items: center; gap: 16px; background: linear-gradient(135deg, rgba(201,107,136,.12), rgba(201,107,136,.04)); border: 1px solid var(--border2); border-radius: var(--r-lg); padding: 16px 20px; margin-bottom: 20px; }
+.streak-fire { font-size: 34px; flex-shrink: 0; }
+.streak-num { font-family: var(--font-display); font-size: 40px; color: var(--accent); line-height: 1; letter-spacing: 2px; }
+.streak-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-top: 2px; }
+.streak-best { font-size: 11px; color: var(--ink3); margin-top: 4px; }
+
+/* ── VÁHOVÝ PROGRES ──────────────────────────────────────── */
+.weight-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 20px; }
+.weight-row { display: flex; gap: 8px; align-items: flex-end; margin-top: 10px; }
+.weight-row input { flex: 1; }
+.weight-add-btn { padding: 11px 16px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-sm); font-size: 13px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
+.weight-display { display: flex; align-items: baseline; gap: 6px; margin-top: 10px; }
+.weight-latest { font-family: var(--font-display); font-size: 36px; color: var(--accent); letter-spacing: 2px; line-height: 1; }
+.weight-latest-unit { font-size: 13px; color: var(--ink3); }
+.weight-chart-svg { width: 100%; height: 48px; display: block; margin-top: 10px; }
+
+/* ── TÝDENNÍ SOUHRN ──────────────────────────────────────── */
+.weekly-summary { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 20px; }
+.ws-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 10px; }
+.ws-stat { text-align: center; background: var(--white); border-radius: var(--r-md); border: 1px solid var(--border); padding: 10px 6px; }
+.ws-stat-num { font-family: var(--font-display); font-size: 28px; color: var(--accent); letter-spacing: 1px; line-height: 1; }
+.ws-stat-lbl { font-size: 9px; color: var(--ink3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 3px; }
+
+/* ── NOTIFIKACE ──────────────────────────────────────────── */
+.notif-btn { width: 100%; padding: 13px; background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--r-md); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink2); cursor: pointer; transition: all .18s; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.notif-btn.enabled { background: var(--green-bg); border-color: var(--green); color: var(--green); }
+.notif-btn.denied { opacity: .6; cursor: default; }
+
+/* ── VLASTNÍ CVIK ────────────────────────────────────────── */
+.custom-ex-form { padding: 10px 16px 14px; border-top: 1px solid var(--border); background: var(--surface2); }
+.custom-ex-form-lbl { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; display: block; }
+.custom-ex-row { display: flex; gap: 8px; }
+.custom-ex-input { flex: 1; font-size: 13px; }
+.custom-ex-add-btn { padding: 10px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-sm); font-size: 18px; cursor: pointer; font-weight: 700; flex-shrink: 0; }
+.custom-ex-list { margin-top: 8px; }
+.custom-ex-item { display: flex; align-items: center; gap: 8px; padding: 7px 2px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--ink2); }
+.custom-ex-item:last-child { border-bottom: none; }
+.custom-ex-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; line-height: 1; padding: 0; margin-left: auto; flex-shrink: 0; }
+
+/* ── ONBOARDING ──────────────────────────────────────────── */
+.onboard-overlay { position: fixed; inset: 0; z-index: 600; background: rgba(14,8,18,.8); backdrop-filter: blur(8px); display: flex; align-items: flex-end; opacity: 0; pointer-events: none; transition: opacity .25s; }
+.onboard-overlay.active { opacity: 1; pointer-events: all; }
+.onboard-sheet { background: var(--white); border-radius: 22px 22px 0 0; width: 100%; padding: 30px 24px calc(30px + env(safe-area-inset-bottom)); transform: translateY(100%); transition: transform .38s cubic-bezier(.34,1.1,.64,1); }
+.onboard-overlay.active .onboard-sheet { transform: translateY(0); }
+.onboard-title { font-family: var(--font-display); font-size: 30px; color: var(--accent); letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
+.onboard-sub { font-size: 14px; color: var(--ink2); margin-bottom: 22px; line-height: 1.6; }
+.onboard-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; display: block; margin-top: 16px; }
+.onboard-week-val { font-family: var(--font-display); font-size: 22px; color: var(--accent); letter-spacing: 2px; margin-left: 8px; }
+.onboard-start { width: 100%; padding: 16px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-top: 24px; }
+
+/* ── FULL CHART MODAL ────────────────────────────────────── */
+.chart-modal { position: fixed; inset: 0; z-index: 500; display: flex; align-items: flex-end; pointer-events: none; opacity: 0; transition: opacity .2s; }
+.chart-modal.active { opacity: 1; pointer-events: all; }
+.chart-modal-bg { position: absolute; inset: 0; background: rgba(20,10,24,.6); backdrop-filter: blur(4px); }
+.chart-modal-sheet { position: relative; z-index: 1; background: var(--white); border-radius: 20px 20px 0 0; width: 100%; padding: 24px 20px calc(28px + env(safe-area-inset-bottom)); transform: translateY(100%); transition: transform .3s cubic-bezier(.34,1.1,.64,1); }
+.chart-modal.active .chart-modal-sheet { transform: translateY(0); }
+.chart-modal-title { font-family: var(--font-display); font-size: 22px; color: var(--accent); letter-spacing: 2px; }
+.chart-modal-sub { font-size: 12px; color: var(--ink3); margin-top: 2px; margin-bottom: 20px; }
+.chart-modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 20px; cursor: pointer; color: var(--ink3); }
+.chart-full { width: 100%; height: 140px; display: block; }
+.chart-val-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+.chart-val-pill { font-size: 11px; padding: 3px 9px; background: var(--surface2); border: 1px solid var(--border); border-radius: 20px; color: var(--ink2); }
+.chart-val-pill strong { color: var(--accent); }
+
+/* ── STORIES EXPORT ──────────────────────────────────────── */
+.stories-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #c96b88, #a85572); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+
+/* ── PŘÍŠTÍ TÝDEN ────────────────────────────────────────── */
+.next-week-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 28px; }
+.next-week-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
+.nw-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.nw-row:last-child { border-bottom: none; }
+.nw-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.nw-day { font-weight: 700; color: var(--ink); min-width: 24px; font-size: 12px; }
+.nw-date { font-size: 11px; color: var(--ink3); min-width: 52px; }
+.nw-name { color: var(--ink2); flex: 1; font-size: 13px; }
+.nw-today-row { background: var(--accent-pale); border-radius: var(--r-sm); margin: 0 -4px; padding: 0 4px; }
+
+/* ── PILATES HOLD TIMER ──────────────────────────────────── */
+.wm-hold-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 14px; background: var(--accent-pale); border: 1px solid var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); cursor: pointer; transition: background .15s; }
+.wm-hold-btn:hover { background: var(--accent-bg); }
+.wm-hold-active { background: var(--accent); color: #fff; border-color: var(--accent); }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -613,6 +697,33 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <input id="weekInput" type="range" min="1" max="24" value="1" step="1">
   <span id="weekNum" class="week-num">1</span>
   <span class="week-bar-max">/ 24</span>
+</div>
+
+<!-- ONBOARDING -->
+<div class="onboard-overlay" id="onboardOverlay">
+  <div class="onboard-sheet">
+    <div class="onboard-title">Vítej! 🌸</div>
+    <div class="onboard-sub">Rychlé nastavení — zabere 20 sekund. Přizpůsobíme plán tvému aktuálnímu stavu.</div>
+    <label class="onboard-label">Který týden jsi?
+      <span class="onboard-week-val" id="onboardWeekVal">1</span> / 24
+    </label>
+    <input id="weekInput2" type="range" min="1" max="24" value="1" step="1" style="width:100%;margin-bottom:4px;">
+    <label class="onboard-label">Aktuální váha (kg)</label>
+    <input id="onboardWeight" type="number" step="0.1" min="30" max="200" placeholder="např. 60.5" style="width:100%;">
+    <button class="onboard-start" id="onboardStart">Začít 💪</button>
+  </div>
+</div>
+
+<!-- CHART MODAL -->
+<div class="chart-modal" id="chartModal">
+  <div class="chart-modal-bg" id="chartModalBg"></div>
+  <div class="chart-modal-sheet">
+    <button class="chart-modal-close" id="chartModalClose">✕</button>
+    <div class="chart-modal-title" id="chartModalTitle"></div>
+    <div class="chart-modal-sub" id="chartModalSub"></div>
+    <svg class="chart-full" id="chartFullSvg" viewBox="0 0 300 140" preserveAspectRatio="none"></svg>
+    <div class="chart-val-row" id="chartValRow"></div>
+  </div>
 </div>
 
 <button class="dark-toggle" id="darkToggle" aria-label="Přepnout tmavý režim">🌙</button>
@@ -672,6 +783,15 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <span>→</span>
   </button>
 </div>
+
+<!-- PŘÍŠTÍ TÝDEN -->
+<div class="next-week-box">
+  <div class="next-week-title">📅 Příští 7 dní</div>
+  <div id="nextWeekPlan"></div>
+</div>
+
+<!-- NOTIFIKACE -->
+<button class="notif-btn" id="notifBtn">🔔 Připomínky tréninku</button>
 
 <div class="page-hd-label" style="margin-top:32px">24týdenní periodizace — půl roku</div>
 <h2 class="section-title">Jak to <em>celé funguje</em></h2>
@@ -868,6 +988,14 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
     <div class="ex-row" data-uid="ex-55928"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Child's pose</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">45s</span></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Klek, posaď se na paty, natáhni paže dopředu na zem co nejdál</li><li>Uvolni celá záda, ramena a boky</li><li>Dýchej pomalu a hluboce</li></ol><div class="tip-box">💡 Nejlepší zakončení tréninku — uvolní celou páteř a zklidní nervový systém</div><a href="https://www.youtube.com/results?search_query=childs+pose+stretch" target="_blank" rel="noopener" class="yt-link">YouTube tutoriál</a><div class="ex-timer-trigger" data-seconds="45" data-label="45s"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">45s</span><button class="ex-timer-go" data-seconds="45" data-label="45s">▶ Spustit</button></div></div></div>
+    <div class="custom-ex-list" id="custom-ex-list-a"></div>
+  </div>
+  <div class="custom-ex-form">
+    <span class="custom-ex-form-lbl">+ Přidat vlastní cvik</span>
+    <div class="custom-ex-row">
+      <input class="custom-ex-input" id="custom-ex-input-a" type="text" placeholder="Název cviku, série, poznámka…">
+      <button class="custom-ex-add-btn" data-card="a">+</button>
+    </div>
   </div>
 </div>
 
@@ -934,6 +1062,14 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
     <div class="ex-row" data-uid="ex-52560"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Lat stretch + Triceps stretch + Child's pose</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">40s každý</span></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><h5>Lat stretch</h5><ol><li>Chyť se jednou rukou ve výšce ramen u stojanu</li><li>Mírně se posaď dozadu a do strany — tah podél boku od podpaží</li></ol><h5>Triceps stretch</h5><ol><li>Zvedni ruku nahoru, ohni v lokti za hlavu</li><li>Druhou rukou jemně tlač loket dolů a dozadu</li></ol><h5>Child's pose</h5><ol><li>Klek, posaď se na paty, natáhni paže dopředu, čelo na zemi</li><li>Dýchej pomalu a hluboce — 60s</li></ol><a href="https://www.youtube.com/results?search_query=lat+stretch+cable+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Lat stretch</a><a href="https://www.youtube.com/results?search_query=triceps+stretch+overhead+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Triceps stretch</a><a href="https://www.youtube.com/results?search_query=childs+pose+stretch" target="_blank" rel="noopener" class="yt-link">YouTube — Child's pose</a><div class="ex-timer-trigger" data-seconds="60" data-label="60s child's pose"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">60s</span><button class="ex-timer-go" data-seconds="60" data-label="60s">▶ Spustit</button></div></div></div>
+    <div class="custom-ex-list" id="custom-ex-list-b"></div>
+  </div>
+  <div class="custom-ex-form">
+    <span class="custom-ex-form-lbl">+ Přidat vlastní cvik</span>
+    <div class="custom-ex-row">
+      <input class="custom-ex-input" id="custom-ex-input-b" type="text" placeholder="Název cviku, série, poznámka…">
+      <button class="custom-ex-add-btn" data-card="b">+</button>
+    </div>
   </div>
 </div>
 
@@ -1023,6 +1159,14 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <div class="phase-lbl" data-phase="cool">Blok E — Uvolnění (5 min)</div>
       <div class="ex-row" data-uid="ex-pf-09"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Thread the needle + Child's pose boční + Supine twist</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">5×/str + 45s+30s/str + 60s/str</span></div></div>
       <div class="ex-detail"><div class="ex-detail-inner"><h5>Supine twist</h5><ol><li>Leh na záda, pokrč kolena a přitáhni k hrudi. Spusť obě kolena na jednu stranu, paže do T.</li><li>60 s bez pohybu, pak druhá strana</li></ol><div class="tip-box">💡 Spinal twist uvolňuje napětí v IT bandu a vnějších kyčlích</div><a href="https://www.youtube.com/results?search_query=thread+the+needle+stretch+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Thread the needle</a><a href="https://www.youtube.com/results?search_query=supine+spinal+twist+yoga+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Supine twist</a><div class="ex-timer-trigger" data-seconds="60" data-label="60s/strana"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">60s/strana</span><button class="ex-timer-go" data-seconds="60" data-label="60s/strana">▶ Spustit</button></div></div></div>
+      <div class="custom-ex-list" id="custom-ex-list-p"></div>
+    </div>
+  </div>
+  <div class="custom-ex-form">
+    <span class="custom-ex-form-lbl">+ Přidat vlastní cvik</span>
+    <div class="custom-ex-row">
+      <input class="custom-ex-input" id="custom-ex-input-p" type="text" placeholder="Název cviku, série, poznámka…">
+      <button class="custom-ex-add-btn" data-card="p">+</button>
     </div>
   </div>
 </div>
@@ -1309,6 +1453,45 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     </div>
     <p class="section-intro">Zapiš výkon po každém tréninku — stačí 30 sekund. Sleduj jak každý týden rostou tvoje čísla. <strong>RPE</strong> = jak těžce to bylo (1–10).</p>
 
+<!-- STREAK -->
+<div class="streak-banner" id="streakBanner">
+  <div class="streak-fire">🔥</div>
+  <div>
+    <div class="streak-num" id="streakNum">0</div>
+    <div class="streak-lbl">dní v řadě</div>
+    <div class="streak-best" id="streakBest"></div>
+  </div>
+</div>
+
+<!-- TÝDENNÍ SOUHRN -->
+<div class="label" style="margin-bottom:10px">📊 Tento týden</div>
+<div class="weekly-summary" id="weeklySummary">
+  <div class="ws-stat-row">
+    <div class="ws-stat"><div class="ws-stat-num" id="wsSessions">0</div><div class="ws-stat-lbl">Tréninků</div></div>
+    <div class="ws-stat"><div class="ws-stat-num" id="wsExercises">0</div><div class="ws-stat-lbl">Cviků</div></div>
+    <div class="ws-stat"><div class="ws-stat-num" id="wsStreak">0</div><div class="ws-stat-lbl">Streak</div></div>
+  </div>
+</div>
+
+<!-- VÁHOVÝ PROGRES -->
+<div class="label" style="margin-bottom:4px">⚖️ Váha</div>
+<div class="weight-box">
+  <div id="weightDisplay" style="display:none">
+    <div class="weight-display">
+      <span class="weight-latest" id="weightLatest"></span>
+      <span class="weight-latest-unit">kg</span>
+    </div>
+    <svg class="weight-chart-svg" id="weightChartSvg" viewBox="0 0 300 48" preserveAspectRatio="none"></svg>
+  </div>
+  <div class="weight-row">
+    <input id="weightInput" type="number" step="0.1" min="30" max="200" placeholder="Zapiš dnešní váhu (kg)">
+    <button class="weight-add-btn" id="weightAddBtn">Zapsat</button>
+  </div>
+</div>
+
+<!-- STORIES EXPORT -->
+<button class="stories-btn" id="storiesBtn">📱 Sdílet jako Instagram story</button>
+
 <!-- HISTORY LOG -->
 <div class="label" style="margin-bottom:10px">📅 Historie tréninků</div>
 <div class="tlog-box" id="trainingLogList"></div>
@@ -1337,10 +1520,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 <div class="label" style="margin-top:24px">🏆 Osobní rekordy</div>
 <p style="font-size:13px;color:var(--ink3);margin-bottom:12px">Formát: <strong>40 kg × 10 reps</strong></p>
 <div class="pr-grid">
-  <div class="pr-card"><div class="pr-name">Hip thrust</div><input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-hip_thrust"></div><svg class="pr-sparkline" id="spark-hip_thrust" height="32" viewBox="0 0 100 32"></svg></div>
-  <div class="pr-card"><div class="pr-name">Goblet squat</div><input class="pr-input" data-pr="goblet" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-goblet"></div><svg class="pr-sparkline" id="spark-goblet" height="32" viewBox="0 0 100 32"></svg></div>
-  <div class="pr-card"><div class="pr-name">RDL</div><input class="pr-input" data-pr="rdl" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-rdl"></div><svg class="pr-sparkline" id="spark-rdl" height="32" viewBox="0 0 100 32"></svg></div>
-  <div class="pr-card"><div class="pr-name">Seated Row</div><input class="pr-input" data-pr="row" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-row"></div><svg class="pr-sparkline" id="spark-row" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Hip thrust</div><input class="pr-input" data-pr="hip_thrust" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-hip_thrust"></div><svg class="pr-sparkline" id="spark-hip_thrust" data-prkey="hip_thrust" data-prname="Hip thrust" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Goblet squat</div><input class="pr-input" data-pr="goblet" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-goblet"></div><svg class="pr-sparkline" id="spark-goblet" data-prkey="goblet" data-prname="Goblet squat" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">RDL</div><input class="pr-input" data-pr="rdl" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-rdl"></div><svg class="pr-sparkline" id="spark-rdl" data-prkey="rdl" data-prname="RDL" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Seated Row</div><input class="pr-input" data-pr="row" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-row"></div><svg class="pr-sparkline" id="spark-row" data-prkey="row" data-prname="Seated Row" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
 </div>
 
 <!-- VÝKON PO TRÉNINKU -->
@@ -2068,6 +2251,304 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   window.importData = importData;
 
+  // ── STREAK + WEEKLY SUMMARY ───────────────────────────────
+  function renderStreak() {
+    var log = JSON.parse(localStorage.getItem('ms_log') || '[]');
+    // Current streak: count consecutive days ending today or yesterday
+    var today = new Date(); today.setHours(0,0,0,0);
+    var streak = 0, best = parseInt(localStorage.getItem('ms_streak_best') || '0');
+    var checked = new Date(today);
+    for (var i = 0; i < 365; i++) {
+      var dateStr = checked.toISOString().slice(0,10);
+      var found = log.some(function(e) { return e.date && e.date.slice(0,10) === dateStr; });
+      if (found) { streak++; checked.setDate(checked.getDate() - 1); }
+      else if (i === 0) { checked.setDate(checked.getDate() - 1); continue; } // allow today missing
+      else break;
+    }
+    if (streak > best) { best = streak; localStorage.setItem('ms_streak_best', best); }
+    var numEl = document.getElementById('streakNum');
+    var bestEl = document.getElementById('streakBest');
+    var banner = document.getElementById('streakBanner');
+    if (numEl) numEl.textContent = streak;
+    if (bestEl) bestEl.textContent = 'Rekord: ' + best + ' dní';
+    if (banner) banner.querySelector('.streak-fire').textContent = streak >= 7 ? '🔥' : streak >= 3 ? '⚡' : '💪';
+    // Weekly summary
+    var weekStart = new Date(today); weekStart.setDate(today.getDate() - today.getDay() + (today.getDay() === 0 ? -6 : 1));
+    var weekSessions = log.filter(function(e) { var d = new Date(e.date); d.setHours(0,0,0,0); return d >= weekStart && d <= today; });
+    var totalExercises = weekSessions.reduce(function(s,e) { return s + (e.done || 0); }, 0);
+    var wsSess = document.getElementById('wsSessions');
+    var wsEx = document.getElementById('wsExercises');
+    var wsStr = document.getElementById('wsStreak');
+    if (wsSess) wsSess.textContent = weekSessions.length;
+    if (wsEx) wsEx.textContent = totalExercises;
+    if (wsStr) wsStr.textContent = streak;
+  }
+  renderStreak();
+
+  // ── VÁHOVÝ PROGRES ────────────────────────────────────────
+  function getWeightLog() { return JSON.parse(localStorage.getItem('ms_weight_log') || '[]'); }
+  function saveWeightLog(log) { localStorage.setItem('ms_weight_log', JSON.stringify(log)); }
+  function renderWeightChart() {
+    var log = getWeightLog();
+    var disp = document.getElementById('weightDisplay');
+    var latEl = document.getElementById('weightLatest');
+    var svgEl = document.getElementById('weightChartSvg');
+    if (!disp) return;
+    if (!log.length) { disp.style.display = 'none'; return; }
+    disp.style.display = 'block';
+    if (latEl) latEl.textContent = log[log.length-1].v;
+    if (!svgEl || log.length < 2) return;
+    var vals = log.map(function(e) { return e.v; });
+    var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
+    var range = mx - mn || 1;
+    var W = 300, H = 48, pad = 4;
+    var pts = vals.map(function(v, i) {
+      var x = pad + (i / (vals.length - 1)) * (W - 2*pad);
+      var y = H - pad - ((v - mn) / range) * (H - 2*pad);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    }).join(' ');
+    svgEl.innerHTML = '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    // Dots
+    vals.forEach(function(v, i) {
+      var x = pad + (i / (vals.length - 1)) * (W - 2*pad);
+      var y = H - pad - ((v - mn) / range) * (H - 2*pad);
+      svgEl.innerHTML += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="var(--accent)"/>';
+    });
+  }
+  renderWeightChart();
+  var weightAddBtn = document.getElementById('weightAddBtn');
+  if (weightAddBtn) weightAddBtn.addEventListener('click', function() {
+    var inp = document.getElementById('weightInput');
+    var val = parseFloat(inp && inp.value);
+    if (!val || val < 20 || val > 300) return;
+    var log = getWeightLog();
+    log.push({ date: new Date().toISOString(), v: val });
+    if (log.length > 100) log = log.slice(-100);
+    saveWeightLog(log);
+    if (inp) inp.value = '';
+    renderWeightChart();
+  });
+
+  // ── VLASTNÍ CVIKY ─────────────────────────────────────────
+  function getCustomEx(card) { return JSON.parse(localStorage.getItem('ms_custom_ex_' + card) || '[]'); }
+  function saveCustomEx(card, list) { localStorage.setItem('ms_custom_ex_' + card, JSON.stringify(list)); }
+  function renderCustomEx(card) {
+    var listEl = document.getElementById('custom-ex-list-' + card);
+    if (!listEl) return;
+    var items = getCustomEx(card);
+    if (!items.length) { listEl.innerHTML = ''; return; }
+    listEl.innerHTML = items.map(function(item, i) {
+      return '<div class="custom-ex-item"><span>📝 ' + item + '</span><button class="custom-ex-del" data-card="' + card + '" data-idx="' + i + '">✕</button></div>';
+    }).join('');
+  }
+  ['a','b','p'].forEach(function(card) { renderCustomEx(card); });
+  document.addEventListener('click', function(e) {
+    var addBtn = e.target.closest('.custom-ex-add-btn');
+    if (addBtn) {
+      var card = addBtn.dataset.card;
+      var inp = document.getElementById('custom-ex-input-' + card);
+      var val = inp && inp.value.trim();
+      if (!val) return;
+      var list = getCustomEx(card);
+      list.push(val);
+      saveCustomEx(card, list);
+      if (inp) inp.value = '';
+      renderCustomEx(card);
+      return;
+    }
+    var delBtn = e.target.closest('.custom-ex-del');
+    if (delBtn) {
+      var card2 = delBtn.dataset.card;
+      var idx = parseInt(delBtn.dataset.idx);
+      var list2 = getCustomEx(card2);
+      list2.splice(idx, 1);
+      saveCustomEx(card2, list2);
+      renderCustomEx(card2);
+    }
+  });
+
+  // ── ONBOARDING ────────────────────────────────────────────
+  (function() {
+    if (localStorage.getItem('ms_onboarded')) return;
+    var overlay = document.getElementById('onboardOverlay');
+    var slider = document.getElementById('weekInput2');
+    var valEl = document.getElementById('onboardWeekVal');
+    var startBtn = document.getElementById('onboardStart');
+    if (!overlay) return;
+    if (slider) slider.addEventListener('input', function() { if (valEl) valEl.textContent = this.value; });
+    overlay.classList.add('active');
+    if (startBtn) startBtn.addEventListener('click', function() {
+      var week = parseInt((slider && slider.value) || 1);
+      var wt = parseFloat((document.getElementById('onboardWeight') && document.getElementById('onboardWeight').value) || 0);
+      updateWeekBar(week);
+      if (wt > 0) {
+        var log = getWeightLog();
+        log.push({ date: new Date().toISOString(), v: wt });
+        saveWeightLog(log);
+        renderWeightChart();
+      }
+      localStorage.setItem('ms_onboarded', '1');
+      overlay.classList.remove('active');
+    });
+  })();
+
+  // ── NOTIFIKACE ────────────────────────────────────────────
+  (function() {
+    var btn = document.getElementById('notifBtn');
+    if (!btn) return;
+    function updateNotifBtn() {
+      if (!('Notification' in window)) { btn.textContent = '🔔 Notifikace nejsou podporovány'; btn.classList.add('denied'); return; }
+      if (Notification.permission === 'granted') { btn.textContent = '✓ Připomínky jsou zapnuty'; btn.classList.add('enabled'); }
+      else if (Notification.permission === 'denied') { btn.textContent = '✗ Notifikace jsou zakázány (nastavení prohlížeče)'; btn.classList.add('denied'); }
+      else { btn.textContent = '🔔 Zapnout připomínky tréninku'; }
+    }
+    updateNotifBtn();
+    btn.addEventListener('click', function() {
+      if (!('Notification' in window) || Notification.permission === 'denied') return;
+      if (Notification.permission === 'granted') { new Notification('Modelka Fitness', { body: 'Připomínky jsou zapnuty! 💪' }); return; }
+      Notification.requestPermission().then(function(perm) {
+        updateNotifBtn();
+        if (perm === 'granted') new Notification('Modelka Fitness 💪', { body: 'Připomínky tréninku jsou zapnuty!' });
+      });
+    });
+  })();
+
+  // ── PŘÍŠTÍ TÝDEN PLÁN ─────────────────────────────────────
+  (function() {
+    var el = document.getElementById('nextWeekPlan');
+    if (!el) return;
+    var daySchedule = { 1:{type:'a',name:'Síla A'}, 2:{type:'a',name:'Síla A'}, 3:{type:'b',name:'Síla B'}, 4:{type:'b',name:'Síla B'}, 5:{type:'b',name:'Síla B'}, 6:{type:'p',name:'Pilates'}, 0:{type:'p',name:'Pilates'} };
+    var TYPE_COLOR = { a:'#a8d8c0', b:'#c8bcec', p:'#f4c4d4', rest:'#ddd' };
+    var DAY_NAMES = ['Ne','Po','Út','St','Čt','Pá','So'];
+    var MONTHS = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
+    var today = new Date(); today.setHours(0,0,0,0);
+    var html = '';
+    for (var i = 0; i < 7; i++) {
+      var d = new Date(today); d.setDate(today.getDate() + i);
+      var dow = d.getDay();
+      var sched = daySchedule[dow];
+      var dayLabel = DAY_NAMES[dow];
+      var dateLabel = d.getDate() + '. ' + MONTHS[d.getMonth()];
+      var color = TYPE_COLOR[sched ? sched.type : 'rest'];
+      var name = sched ? sched.name : 'Volno 😴';
+      var todayCls = i === 0 ? ' nw-today-row' : '';
+      html += '<div class="nw-row' + todayCls + '"><span class="nw-dot" style="background:' + color + '"></span><span class="nw-day">' + dayLabel + '</span><span class="nw-date">' + dateLabel + '</span><span class="nw-name">' + name + '</span></div>';
+    }
+    el.innerHTML = html;
+  })();
+
+  // ── FULL CHART MODAL (sparkline klik) ─────────────────────
+  (function() {
+    var modal = document.getElementById('chartModal');
+    var bg = document.getElementById('chartModalBg');
+    var closeBtn = document.getElementById('chartModalClose');
+    var titleEl = document.getElementById('chartModalTitle');
+    var subEl = document.getElementById('chartModalSub');
+    var svgEl = document.getElementById('chartFullSvg');
+    var valRow = document.getElementById('chartValRow');
+    if (!modal) return;
+    function openChart(key, name) {
+      var hist = JSON.parse(localStorage.getItem('ms_pr_hist_' + key) || '[]');
+      if (titleEl) titleEl.textContent = name;
+      if (subEl) subEl.textContent = hist.length ? hist.length + ' záznamů' : 'Zatím žádné záznamy — zapiš první PR';
+      if (!hist.length) { if (svgEl) svgEl.innerHTML = ''; if (valRow) valRow.innerHTML = ''; }
+      else {
+        var vals = hist.map(function(e) { return typeof e === 'object' ? (parseFloat(e.v) || 0) : parseFloat(e) || 0; });
+        var dates = hist.map(function(e) { return typeof e === 'object' ? (e.date || '') : ''; });
+        var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), range = mx - mn || 1;
+        var W = 300, H = 140, pad = 8;
+        var pts = vals.map(function(v, i) {
+          var x = pad + (i / Math.max(vals.length-1,1)) * (W - 2*pad);
+          var y = H - pad - ((v - mn) / range) * (H - 2*pad);
+          return x.toFixed(1) + ',' + y.toFixed(1);
+        }).join(' ');
+        if (svgEl) {
+          svgEl.innerHTML = '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+          vals.forEach(function(v, i) {
+            var x = pad + (i / Math.max(vals.length-1,1)) * (W - 2*pad);
+            var y = H - pad - ((v - mn) / range) * (H - 2*pad);
+            svgEl.innerHTML += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="4" fill="var(--accent)"/>';
+          });
+        }
+        if (valRow) valRow.innerHTML = vals.map(function(v,i) {
+          var d = dates[i] ? new Date(dates[i]).toLocaleDateString('cs-CZ') : '';
+          return '<span class="chart-val-pill"><strong>' + v + '</strong>' + (d ? ' · ' + d : '') + '</span>';
+        }).join('');
+      }
+      modal.classList.add('active');
+    }
+    function closeChart() { modal.classList.remove('active'); }
+    if (closeBtn) closeBtn.addEventListener('click', closeChart);
+    if (bg) bg.addEventListener('click', closeChart);
+    document.addEventListener('click', function(e) {
+      var spark = e.target.closest('.pr-sparkline[data-prkey]');
+      if (spark) openChart(spark.dataset.prkey, spark.dataset.prname);
+    });
+  })();
+
+  // ── INSTAGRAM STORY EXPORT ────────────────────────────────
+  (function() {
+    var btn = document.getElementById('storiesBtn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
+      var canvas = document.createElement('canvas');
+      canvas.width = 1080; canvas.height = 1920;
+      var ctx = canvas.getContext('2d');
+      var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      var bg = isDark ? '#1a1020' : '#fef8fa';
+      var fg = isDark ? '#f0e6ec' : '#1e1420';
+      var acc = '#c96b88';
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, 1080, 1920);
+      // Gradient accent block
+      var grad = ctx.createLinearGradient(0, 0, 1080, 0);
+      grad.addColorStop(0, '#c96b88'); grad.addColorStop(1, '#a85572');
+      ctx.fillStyle = grad; ctx.fillRect(0, 0, 1080, 18);
+      // Title
+      ctx.fillStyle = acc; ctx.font = 'bold 52px Arial Black, sans-serif';
+      ctx.fillText('MODELKA FITNESS', 80, 160);
+      ctx.fillStyle = fg; ctx.font = '36px Arial, sans-serif';
+      var now = new Date();
+      ctx.fillText(now.toLocaleDateString('cs-CZ', {weekday:'long', day:'numeric', month:'long'}), 80, 220);
+      // Week
+      var week = parseInt(localStorage.getItem('ms_week') || '1');
+      ctx.fillStyle = acc; ctx.font = 'bold 120px Arial Black, sans-serif';
+      ctx.fillText('TÝDEN ' + week, 80, 400);
+      // Streak
+      var log = JSON.parse(localStorage.getItem('ms_log') || '[]');
+      var streak = 0;
+      var today2 = new Date(); today2.setHours(0,0,0,0);
+      var checked2 = new Date(today2);
+      for (var i = 0; i < 100; i++) {
+        var ds = checked2.toISOString().slice(0,10);
+        if (log.some(function(e) { return e.date && e.date.slice(0,10) === ds; })) { streak++; checked2.setDate(checked2.getDate()-1); }
+        else if (i === 0) { checked2.setDate(checked2.getDate()-1); continue; }
+        else break;
+      }
+      ctx.fillStyle = fg; ctx.font = 'bold 56px Arial Black, sans-serif';
+      ctx.fillText('🔥 ' + streak + ' DNÍ V ŘADĚ', 80, 560);
+      // PRs
+      var prKeys = ['hip_thrust','goblet','rdl','row'];
+      var prNames = ['Hip thrust','Goblet squat','RDL','Seated Row'];
+      ctx.fillStyle = fg; ctx.font = '32px Arial, sans-serif';
+      ctx.fillText('Osobní rekordy:', 80, 700);
+      prKeys.forEach(function(k, i) {
+        var val = localStorage.getItem('ms_pr_' + k) || '—';
+        ctx.fillStyle = acc; ctx.font = 'bold 40px Arial Black, sans-serif';
+        ctx.fillText(prNames[i], 80, 790 + i*100);
+        ctx.fillStyle = fg; ctx.font = '36px Arial, sans-serif';
+        ctx.fillText(val, 80, 840 + i*100);
+      });
+      // Bottom tag
+      ctx.fillStyle = acc; ctx.font = 'bold 30px Arial, sans-serif';
+      ctx.fillText('amelietoupal.github.io', 80, 1820);
+      // Download
+      var link = document.createElement('a');
+      link.download = 'modelka-story-' + now.toISOString().slice(0,10) + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  })();
+
   // ── TRAINING LOG ──────────────────────────────────────────
   function renderTrainingLog() {
     var el = document.getElementById('trainingLogList');
@@ -2598,10 +3079,33 @@ document.addEventListener('DOMContentLoaded', function() {
         ? '<div class="wm-sets">' + ex.setsHTML + '</div>'
         : '';
 
+      // Pilates hold timer button
+      var holdBtn = '';
+      if (type === 'p') {
+        holdBtn = '<button class="wm-hold-btn" id="wmHoldBtn">⏱ Hold 30s</button>';
+      }
+
       document.getElementById('wmBody').innerHTML =
         '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
         '<div class="wm-name">' + ex.name + '</div>' +
-        subH + rpeH + setsH + detH + '</div>';
+        subH + rpeH + setsH + holdBtn + detH + '</div>';
+
+      var hBtn = document.getElementById('wmHoldBtn');
+      if (hBtn) {
+        var holdSecs = 30, holdInt = null;
+        hBtn.addEventListener('click', function() {
+          if (holdInt) { clearInterval(holdInt); holdInt = null; hBtn.textContent = '⏱ Hold 30s'; hBtn.classList.remove('wm-hold-active'); return; }
+          var rem = holdSecs;
+          hBtn.classList.add('wm-hold-active');
+          function tick2() {
+            hBtn.textContent = '⏸ ' + rem + 's';
+            if (rem <= 0) { clearInterval(holdInt); holdInt = null; hBtn.textContent = '✓ Hotovo!'; hBtn.classList.remove('wm-hold-active'); if (navigator.vibrate) navigator.vibrate([200,100,200]); return; }
+            rem--;
+          }
+          tick2();
+          holdInt = setInterval(tick2, 1000);
+        });
+      }
 
       // Detail toggle
       var dtog = document.getElementById('wmDTog');
@@ -2632,6 +3136,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (log.length > 50) log = log.slice(0, 50);
       localStorage.setItem(logKey, JSON.stringify(log));
       renderTrainingLog();
+      renderStreak();
       document.getElementById('wmFill').style.width = '100%';
       document.getElementById('wmPhase').textContent = '🎉 Hotovo!';
       document.getElementById('wmBody').innerHTML =
