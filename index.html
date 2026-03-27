@@ -687,6 +687,63 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wm-hold-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 14px; background: var(--accent-pale); border: 1px solid var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); cursor: pointer; transition: background .15s; }
 .wm-hold-btn:hover { background: var(--accent-bg); }
 .wm-hold-active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ── FEATURE 1: WORKOUT NOTES ─────────────────────────────── */
+.wm-note-form { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.wm-note-form textarea { width: 100%; min-height: 80px; resize: vertical; font-size: 13px; }
+.wm-note-btn { margin-top: 8px; padding: 8px 16px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-sm); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 1px; cursor: pointer; transition: background .15s; }
+.wm-note-btn:hover { background: var(--accent2); }
+.tlog-note { font-size: 11px; color: var(--ink3); font-style: italic; margin-top: 3px; }
+
+/* ── FEATURE 2: SCHEDULE EDITOR ───────────────────────────── */
+.schedule-editor { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 20px; }
+.schedule-editor-hd { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
+.schedule-editor-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); }
+.schedule-editor-body { display: none; margin-top: 12px; }
+.schedule-editor.open .schedule-editor-body { display: block; }
+.sched-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.sched-row:last-child { border-bottom: none; }
+.sched-day-lbl { font-size: 12px; font-weight: 700; color: var(--ink); min-width: 36px; }
+.sched-select { flex: 1; padding: 6px 10px; background: var(--surface); border: 1px solid var(--border2); border-radius: var(--r-sm); font-size: 13px; color: var(--ink); font-family: var(--font-body); }
+
+/* ── FEATURE 3: GOALS ─────────────────────────────────────── */
+.goals-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 28px; }
+.goal-add-row { display: flex; gap: 8px; margin-bottom: 10px; }
+.goal-add-input { flex: 1; }
+.goal-add-btn { padding: 10px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-sm); font-size: 18px; font-weight: 700; cursor: pointer; }
+.goal-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.goal-item:last-child { border-bottom: none; }
+.goal-cb { width: 18px; height: 18px; cursor: pointer; accent-color: var(--accent); }
+.goal-text { flex: 1; font-size: 13px; color: var(--ink2); }
+.goal-text.done { text-decoration: line-through; color: var(--muted); }
+.goal-del { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; }
+
+/* ── FEATURE 5: SPEECH TOGGLE ────────────────────────────── */
+.speech-toggle { position: fixed; top: 10px; right: 56px; z-index: 200; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border2); background: var(--surface2); font-size: 17px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--sh-sm); transition: background .2s; }
+.speech-toggle.enabled { background: var(--accent); border-color: var(--accent); }
+
+/* ── FEATURE 7: MONTHLY CALENDAR ────────────────────────── */
+.month-cal { margin-bottom: 20px; }
+.month-cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.month-cal-title { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); }
+.month-cal-nav { background: none; border: none; color: var(--ink3); cursor: pointer; font-size: 16px; padding: 4px 8px; }
+.cal-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; }
+.cal-dow { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--ink3); text-align: center; padding: 4px 0; }
+.cal-day { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: var(--r-sm); background: var(--surface2); border: 1px solid transparent; font-size: 12px; font-weight: 500; color: var(--ink3); gap: 2px; }
+.cal-day.has-log { color: var(--ink); font-weight: 700; border-color: var(--border); }
+.cal-day.today { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
+.cal-day.empty { background: transparent; border-color: transparent; }
+.cal-dot { width: 6px; height: 6px; border-radius: 50%; }
+
+/* ── FEATURE 8: WEEK COMPARE ────────────────────────────── */
+.week-compare { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 20px; }
+.wc-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 10px 8px; text-align: center; }
+.wc-val { font-family: var(--font-display); font-size: 24px; color: var(--ink); letter-spacing: 1px; line-height: 1; }
+.wc-delta { font-size: 11px; font-weight: 700; margin-top: 3px; }
+.wc-delta.up { color: var(--green); }
+.wc-delta.down { color: var(--accent); }
+.wc-delta.same { color: var(--ink3); }
+.wc-lbl { font-size: 9px; color: var(--ink3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 3px; }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
