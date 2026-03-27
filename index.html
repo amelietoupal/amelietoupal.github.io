@@ -233,7 +233,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wcard-skate { border-left: 4px solid #5b9bd5; }
 .wcard-skate .wcard-head h3 { color: #5b9bd5; }
 
-.skate-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px 12px; border-top: 1px solid var(--border); background: var(--surface2); }
+.skate-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 16px 12px; background: var(--surface2); border-bottom: 1px solid var(--border); }
 .skate-chip { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
 .skate-chip-blue  { background: rgba(91,155,213,.1);  color: #4a8bc4; border: 1px solid rgba(91,155,213,.3); }
 .skate-chip-green { background: rgba(45,96,74,.08);   color: var(--green); border: 1px solid rgba(45,96,74,.2); }
@@ -1336,13 +1336,13 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <h3>⛸ Bruslení / Inline</h3>
     <div class="wcard-head-right"><span class="tag">Low-impact · Full-body</span><span class="wcard-toggle">▾</span></div>
   </div>
-  <div class="skate-chips">
-    <span class="skate-chip skate-chip-blue">Z2 přátelské</span>
-    <span class="skate-chip skate-chip-green">Hýždě &amp; stehna</span>
-    <span class="skate-chip skate-chip-rose">Core stabilizace</span>
-    <span class="skate-chip skate-chip-amber">Nízký dopad</span>
-  </div>
   <div class="wcard-body">
+    <div class="skate-chips">
+      <span class="skate-chip skate-chip-blue">Z2 přátelské</span>
+      <span class="skate-chip skate-chip-green">Hýždě &amp; stehna</span>
+      <span class="skate-chip skate-chip-rose">Core stabilizace</span>
+      <span class="skate-chip skate-chip-amber">Nízký dopad</span>
+    </div>
     <div class="skate-why">
       <p>Bruslení je kardio i tvarování v jednom — při každém odrazu pracují hýždě, stehna a core (stabilizace boku). Nízký dopad = ideální doplněk k silovým dnům A/B bez přetížení kloubů.</p>
     </div>
@@ -1544,7 +1544,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 </div>
 
 <!-- STORIES EXPORT -->
-<button class="stories-btn" id="storiesBtn">📱 Sdílet jako Instagram story</button>
+<button class="stories-btn" id="storiesBtn">📱 Sdílej progress</button>
 
 <!-- HISTORY LOG -->
 <div class="label" style="margin-bottom:10px">📅 Historie tréninků</div>
@@ -1564,11 +1564,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <div class="backup-status" id="backupStatus"></div>
 </div>
 
-<!-- STAŽENÍ POKROKU JAKO OBRÁZEK -->
-<button class="share-progress-btn" id="shareProgressBtn">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-  Stáhnout pokrok jako fotku
-</button>
 
 <!-- OSOBNÍ REKORDY -->
 <div class="label" style="margin-top:24px">🏆 Osobní rekordy</div>
@@ -2954,42 +2949,6 @@ document.addEventListener('DOMContentLoaded', function() {
     onDone(canvas);
   }
 
-  // ── SDÍLENÍ POKROKU (PNG DOWNLOAD) ────────────────────────
-  var shareBtn = document.getElementById('shareProgressBtn');
-  if (shareBtn) {
-    shareBtn.addEventListener('click', function() {
-      var origHTML = shareBtn.innerHTML;
-      shareBtn.textContent = '\u23F3 Generuji...';
-      shareBtn.disabled = true;
-      generateProgressCard(function(canvas) {
-        canvas.toBlob(function(blob) {
-          shareBtn.disabled = false;
-          var file = new File([blob], 'pokrok.png', { type: 'image/png' });
-          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-            navigator.share({ title: 'Modelka Fitness \u2014 m\u016Fj pokrok', files: [file] })
-              .then(function() { shareBtn.innerHTML = origHTML; })
-              .catch(function() { downloadPNG(blob); });
-          } else {
-            downloadPNG(blob);
-          }
-        }, 'image/png');
-      });
-      function downloadPNG(blob) {
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'modelka-pokrok-' + new Date().toISOString().slice(0, 10) + '.png';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-        shareBtn.textContent = '\u2713 Staženo!';
-        setTimeout(function() { shareBtn.innerHTML = origHTML; }, 2500);
-      }
-    });
-  }
-
   // ── YT LINK — open youtube:// app on mobile, fallback to browser ──
   document.querySelectorAll('.yt-link').forEach(function(link) {
     link.addEventListener('click', function(e) {
@@ -3231,6 +3190,363 @@ document.addEventListener('DOMContentLoaded', function() {
     // Override goToWorkout to show choice dialog
     goToWorkout = function(t) { showChoice(t); };
   })();
+
+  // ── FEATURE 5: SPEECH / AUDIO CUES ───────────────────────
+  var speechEnabled = localStorage.getItem('ms_speech') === '1';
+  (function() {
+    var speechBtn = document.getElementById('speechToggle');
+    function updateSpeechBtn() {
+      if (!speechBtn) return;
+      speechBtn.textContent = speechEnabled ? '🔊' : '🔇';
+      speechBtn.classList.toggle('enabled', speechEnabled);
+    }
+    updateSpeechBtn();
+    if (speechBtn) speechBtn.addEventListener('click', function() {
+      speechEnabled = !speechEnabled;
+      localStorage.setItem('ms_speech', speechEnabled ? '1' : '0');
+      updateSpeechBtn();
+    });
+  })();
+
+  function speak(text) {
+    if (!speechEnabled) return;
+    if (!window.speechSynthesis) return;
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = 'cs-CZ'; u.rate = 1.1; u.volume = 0.8;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  }
+  window.speak = speak;
+
+  // Patch openTimer to add speech countdown at last 3s
+  var _origOpenTimer = openTimer;
+  openTimer = function(seconds, label) {
+    clearInterval(tInt);
+    tRem = seconds; tTotal = seconds;
+    getAudioCtx();
+    playTick();
+    var tw = document.getElementById('timerWidget');
+    var td = document.getElementById('timerDisplay');
+    var tbar = document.getElementById('timerBar');
+    var tl = document.getElementById('timerLabel');
+    if (!tw) return;
+    tw.classList.add('visible');
+    if (tl) tl.textContent = label || 'Pauza';
+    function tickSpeech() {
+      if (td) { var m = Math.floor(tRem/60); var s = tRem%60; td.textContent = m+':'+(s<10?'0':'')+s; }
+      if (tbar) tbar.style.width = (tRem/tTotal*100)+'%';
+      if (tRem <= 0) {
+        clearInterval(tInt);
+        playBeep();
+        speak('Hotovo!');
+        if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+        if (td) td.textContent = 'Hotovo!';
+        if (tw) { tw.classList.add('done-pulse'); setTimeout(function() { tw.classList.remove('done-pulse'); }, 800); }
+      } else {
+        if (tRem === 3) speak('3');
+        else if (tRem === 2) speak('2');
+        else if (tRem === 1) speak('1');
+        tRem--;
+      }
+    }
+    tickSpeech();
+    tInt = setInterval(tickSpeech, 1000);
+  };
+  window.openTimer = openTimer;
+
+  // Speak "Výborně" when wmDone marks exercise done
+  (function() {
+    var doneBtn2 = document.getElementById('wmDone');
+    if (!doneBtn2) return;
+    doneBtn2.addEventListener('click', function() { speak('Výborně'); });
+  })();
+
+  // ── FEATURE 2: CONFIGURABLE SCHEDULE ─────────────────────
+  var DEFAULT_SCHEDULE = { 1:'a', 2:'a', 3:'b', 4:'b', 5:'b', 6:'p', 0:'p' };
+  function getSchedule() {
+    var saved = localStorage.getItem('ms_schedule');
+    if (saved) { try { return JSON.parse(saved); } catch(e) {} }
+    return DEFAULT_SCHEDULE;
+  }
+  window.getSchedule = getSchedule;
+
+  (function() {
+    var schedEditor = document.getElementById('scheduleEditor');
+    var schedHd = document.getElementById('scheduleEditorHd');
+    var schedArrow = document.getElementById('schedEditorArrow');
+    if (!schedEditor || !schedHd) return;
+    var sched = getSchedule();
+    schedEditor.querySelectorAll('.sched-select').forEach(function(sel) {
+      sel.value = sched[parseInt(sel.dataset.dow)] || 'rest';
+    });
+    schedHd.addEventListener('click', function() {
+      schedEditor.classList.toggle('open');
+      if (schedArrow) schedArrow.textContent = schedEditor.classList.contains('open') ? '▴' : '▾';
+    });
+    schedEditor.querySelectorAll('.sched-select').forEach(function(sel) {
+      sel.addEventListener('change', function() {
+        var s = getSchedule();
+        s[parseInt(this.dataset.dow)] = this.value;
+        localStorage.setItem('ms_schedule', JSON.stringify(s));
+        renderNextWeekPlan();
+        updateWeekStripFromSchedule();
+        updateTodayRecFromSchedule();
+      });
+    });
+  })();
+
+  function renderNextWeekPlan() {
+    var el = document.getElementById('nextWeekPlan');
+    if (!el) return;
+    var sched = getSchedule();
+    var TYPE_COLOR = { a:'#a8d8c0', b:'#c8bcec', p:'#f4c4d4', rest:'#ddd' };
+    var TYPE_NAME = { a:'Síla A', b:'Síla B', p:'Pilates', rest:'Volno 😴' };
+    var DAY_NAMES = ['Ne','Po','Út','St','Čt','Pá','So'];
+    var MONTHS = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
+    var todayNWP = new Date(); todayNWP.setHours(0,0,0,0);
+    var html = '';
+    for (var i = 0; i < 7; i++) {
+      var dNWP = new Date(todayNWP); dNWP.setDate(todayNWP.getDate() + i);
+      var dowNWP = dNWP.getDay();
+      var typeValNWP = sched[dowNWP] || 'rest';
+      var todayCls = i === 0 ? ' nw-today-row' : '';
+      html += '<div class="nw-row' + todayCls + '"><span class="nw-dot" style="background:' + (TYPE_COLOR[typeValNWP]||'#ddd') + '"></span><span class="nw-day">' + DAY_NAMES[dowNWP] + '</span><span class="nw-date">' + dNWP.getDate() + '. ' + MONTHS[dNWP.getMonth()] + '</span><span class="nw-name">' + (TYPE_NAME[typeValNWP]||'Volno 😴') + '</span></div>';
+    }
+    el.innerHTML = html;
+  }
+  renderNextWeekPlan();
+
+  function updateWeekStripFromSchedule() {
+    var sched = getSchedule();
+    var TYPE_CLASS = { a: 'ws-a', b: 'ws-b', p: 'ws-p', rest: 'ws-p' };
+    var TYPE_LABEL = { a: 'A', b: 'B', p: '🧘', rest: '–' };
+    document.querySelectorAll('.ws-day').forEach(function(day) {
+      var typeVal = sched[parseInt(day.dataset.dow)] || 'rest';
+      var pill = day.querySelector('.ws-pill');
+      if (pill) {
+        pill.className = 'ws-pill ' + (TYPE_CLASS[typeVal] || 'ws-p');
+        pill.textContent = TYPE_LABEL[typeVal] || '–';
+      }
+    });
+  }
+  updateWeekStripFromSchedule();
+
+  function updateTodayRecFromSchedule() {
+    var rec = document.getElementById('todayRec');
+    if (!rec) return;
+    var sched = getSchedule();
+    var dowTR = new Date().getDay();
+    var typeValTR = sched[dowTR] || 'rest';
+    var DAY_NAMES_FULL = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota'];
+    var TYPE_REC = { a:'💚 {d} — Síla A · nohy & záda', b:'💜 {d} — Síla B · zadek & paže', p:'🧘 {d} — Pilates · core & pas', rest:'😴 {d} — Volno · odpočívej' };
+    rec.textContent = (TYPE_REC[typeValTR]||'').replace('{d}', DAY_NAMES_FULL[dowTR]);
+  }
+  updateTodayRecFromSchedule();
+
+  // Re-wire quickStartBtn label from schedule
+  (function() {
+    var qsBtn = document.getElementById('quickStartBtn');
+    var qsLbl = document.getElementById('quickStartLabel');
+    if (!qsBtn || !qsLbl) return;
+    var dowQS = new Date().getDay();
+    var typeQS = getSchedule()[dowQS] || 'rest';
+    var DAY_FULL = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota'];
+    var TYPE_NAME = { a:'Síla A', b:'Síla B', p:'Pilates', rest:'Volno' };
+    qsLbl.textContent = (TYPE_NAME[typeQS]||'Trénink') + ' — ' + DAY_FULL[dowQS];
+    qsBtn.onclick = function() {
+      var t = getSchedule()[new Date().getDay()] || 'rest';
+      if (t && t !== 'rest') goToWorkout(t);
+      else switchTab('rutina');
+    };
+  })();
+
+  // ── FEATURE 1: WORKOUT NOTES ──────────────────────────────
+  (function() {
+    var wmBodyEl = document.getElementById('wmBody');
+    if (!wmBodyEl) return;
+    var noteObserver = new MutationObserver(function() {
+      var finishEl = wmBodyEl.querySelector('.wm-finish');
+      if (finishEl && !wmBodyEl.querySelector('.wm-note-form')) {
+        var noteForm = document.createElement('div');
+        noteForm.className = 'wm-note-form';
+        noteForm.innerHTML =
+          '<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:6px;">📝 Poznámka k tréninku</div>' +
+          '<textarea id="wmNoteText" rows="4" placeholder="Jak šlo? Bolelo? Co zlepšit?"></textarea>' +
+          '<button class="wm-note-btn" id="wmNoteSave">Uložit poznámku</button>' +
+          '<div id="wmNoteSaved" style="font-size:11px;color:var(--green);margin-top:6px;display:none;">✓ Uloženo!</div>';
+        wmBodyEl.appendChild(noteForm);
+        document.getElementById('wmNoteSave').addEventListener('click', function() {
+          var txt = document.getElementById('wmNoteText').value.trim();
+          if (!txt) return;
+          var logN = JSON.parse(localStorage.getItem('ms_log') || '[]');
+          if (logN.length > 0) { logN[0].note = txt; localStorage.setItem('ms_log', JSON.stringify(logN)); }
+          renderTrainingLog();
+          var savedEl = document.getElementById('wmNoteSaved');
+          if (savedEl) { savedEl.style.display = 'block'; setTimeout(function() { savedEl.style.display = 'none'; }, 2000); }
+        });
+      }
+    });
+    noteObserver.observe(wmBodyEl, { childList: true, subtree: true });
+  })();
+
+  // Override renderTrainingLog to show notes
+  renderTrainingLog = function() {
+    var el = document.getElementById('trainingLogList');
+    if (!el) return;
+    var logTL = JSON.parse(localStorage.getItem('ms_log') || '[]');
+    if (!logTL.length) { el.innerHTML = '<div class="tlog-empty">Zatím žádný trénink — dokonči první trénink v režimu tréninku.</div>'; return; }
+    var days = ['Ne','Po','Út','St','Čt','Pá','So'];
+    var TYPE_COLOR = { a: '#a8d8c0', b: '#c8bcec', p: '#f4c4d4' };
+    el.innerHTML = logTL.slice(0, 15).map(function(e) {
+      var d = new Date(e.date);
+      var dateStr = days[d.getDay()] + ' ' + d.getDate() + '.' + (d.getMonth()+1) + '. ' + d.getFullYear();
+      var timeStr = ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
+      var pct = e.total ? Math.round(e.done/e.total*100) : 0;
+      var col = TYPE_COLOR[e.type] || '#ccc';
+      var noteHtml = e.note ? '<div class="tlog-note">' + e.note.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>' : '';
+      return '<div class="tlog-row"><span class="tlog-dot" style="background:'+col+'"></span><div class="tlog-info"><div class="tlog-title">'+e.title+'</div><div class="tlog-date">'+dateStr+' '+timeStr+'</div>'+noteHtml+'</div><div class="tlog-stat">'+e.done+'/'+e.total+' <span class="tlog-pct">'+pct+'%</span></div></div>';
+    }).join('');
+  };
+  renderTrainingLog();
+
+  // ── FEATURE 3: GOALS ──────────────────────────────────────
+  function getGoals() { return JSON.parse(localStorage.getItem('ms_goals') || '[]'); }
+  function saveGoals(goals) { localStorage.setItem('ms_goals', JSON.stringify(goals)); }
+
+  function renderGoals() {
+    var el = document.getElementById('goalsList');
+    if (!el) return;
+    var goals = getGoals();
+    if (!goals.length) { el.innerHTML = '<div style="font-size:13px;color:var(--ink3);text-align:center;padding:8px 0">Zatím žádné cíle — přidej první!</div>'; return; }
+    el.innerHTML = goals.map(function(g, i) {
+      return '<div class="goal-item">' +
+        '<input type="checkbox" class="goal-cb" data-idx="' + i + '"' + (g.done ? ' checked' : '') + '>' +
+        '<span class="goal-text' + (g.done ? ' done' : '') + '">' + g.text.replace(/</g,'&lt;') + '</span>' +
+        '<button class="goal-del" data-idx="' + i + '">✕</button></div>';
+    }).join('');
+  }
+  renderGoals();
+
+  document.addEventListener('click', function(e) {
+    var goalAddBtn = e.target.closest('#goalAddBtn');
+    if (goalAddBtn) {
+      var inp = document.getElementById('goalInput');
+      var val = inp && inp.value.trim();
+      if (!val) return;
+      var goals = getGoals();
+      if (goals.length >= 20) return;
+      goals.push({ text: val, done: false });
+      saveGoals(goals);
+      if (inp) inp.value = '';
+      renderGoals();
+      return;
+    }
+    var goalDel = e.target.closest('#goalsList .goal-del');
+    if (goalDel) {
+      var idx = parseInt(goalDel.dataset.idx);
+      var goals2 = getGoals(); goals2.splice(idx, 1);
+      saveGoals(goals2); renderGoals();
+      return;
+    }
+    var goalCb = e.target.closest('#goalsList .goal-cb');
+    if (goalCb) {
+      var idx2 = parseInt(goalCb.dataset.idx);
+      var goals3 = getGoals();
+      if (goals3[idx2]) goals3[idx2].done = goalCb.checked;
+      saveGoals(goals3); renderGoals();
+    }
+  });
+
+  var goalInputEl = document.getElementById('goalInput');
+  if (goalInputEl) goalInputEl.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') { var ab = document.getElementById('goalAddBtn'); if (ab) ab.click(); }
+  });
+
+  // ── FEATURE 7: MONTHLY CALENDAR ──────────────────────────
+  var calYear = new Date().getFullYear();
+  var calMonth = new Date().getMonth();
+
+  function renderCalendar(year, month) {
+    var titleEl = document.getElementById('calTitle');
+    var gridEl = document.getElementById('calGrid');
+    if (!titleEl || !gridEl) return;
+    var MONTH_NAMES = ['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];
+    titleEl.textContent = MONTH_NAMES[month] + ' ' + year;
+    var logCal = JSON.parse(localStorage.getItem('ms_log') || '[]');
+    var logDates = {};
+    logCal.forEach(function(e) {
+      if (!e.date) return;
+      var dC = new Date(e.date);
+      var key = dC.getFullYear() + '-' + dC.getMonth() + '-' + dC.getDate();
+      if (!logDates[key]) logDates[key] = e.type;
+    });
+    var TYPE_DOT = { a: '#a8d8c0', b: '#c8bcec', p: '#f4c4d4' };
+    var todayCal = new Date(); todayCal.setHours(0,0,0,0);
+    var DOW_LABELS = ['Po','Út','St','Čt','Pá','So','Ne'];
+    var html = DOW_LABELS.map(function(dl) { return '<div class="cal-dow">'+dl+'</div>'; }).join('');
+    var firstDay = new Date(year, month, 1);
+    var startDow = (firstDay.getDay() + 6) % 7;
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    for (var i = 0; i < startDow; i++) html += '<div class="cal-day empty"></div>';
+    for (var day = 1; day <= daysInMonth; day++) {
+      var cellDate = new Date(year, month, day); cellDate.setHours(0,0,0,0);
+      var key2 = year + '-' + month + '-' + day;
+      var hasLog = !!logDates[key2];
+      var isToday = cellDate.getTime() === todayCal.getTime();
+      var cls = 'cal-day' + (hasLog ? ' has-log' : '') + (isToday ? ' today' : '');
+      var dot = hasLog ? '<div class="cal-dot" style="background:'+(TYPE_DOT[logDates[key2]]||'#ccc')+'"></div>' : '';
+      html += '<div class="'+cls+'">'+day+dot+'</div>';
+    }
+    gridEl.innerHTML = html;
+  }
+  renderCalendar(calYear, calMonth);
+
+  var calPrevBtn = document.getElementById('calPrev');
+  var calNextBtn = document.getElementById('calNext');
+  if (calPrevBtn) calPrevBtn.addEventListener('click', function() {
+    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar(calYear, calMonth);
+  });
+  if (calNextBtn) calNextBtn.addEventListener('click', function() {
+    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCalendar(calYear, calMonth);
+  });
+
+  // ── FEATURE 8: WEEK COMPARISON ───────────────────────────
+  function renderWeekCompare() {
+    var logWC = JSON.parse(localStorage.getItem('ms_log') || '[]');
+    var nowWC = new Date(); nowWC.setHours(0,0,0,0);
+    var dowWC = nowWC.getDay();
+    var thisWeekStart = new Date(nowWC); thisWeekStart.setDate(nowWC.getDate() - (dowWC === 0 ? 6 : dowWC - 1));
+    var lastWeekStart = new Date(thisWeekStart); lastWeekStart.setDate(thisWeekStart.getDate() - 7);
+    var lastWeekEnd   = new Date(thisWeekStart); lastWeekEnd.setDate(thisWeekStart.getDate() - 1);
+    function weekData(start, end) {
+      var sessions = logWC.filter(function(e) {
+        if (!e.date) return false;
+        var d = new Date(e.date); d.setHours(0,0,0,0);
+        return d >= start && d <= end;
+      });
+      var exs = sessions.reduce(function(s,e) { return s + (e.done||0); }, 0);
+      var pct = sessions.length ? Math.round(sessions.reduce(function(s,e) { return s + (e.total ? e.done/e.total*100 : 0); },0) / sessions.length) : 0;
+      return { sessions: sessions.length, exercises: exs, pct: pct };
+    }
+    var tw = weekData(thisWeekStart, nowWC);
+    var lw = weekData(lastWeekStart, lastWeekEnd);
+    function setCard(valId, deltaId, thisVal, lastVal, suffix) {
+      var valEl = document.getElementById(valId);
+      var deltaEl = document.getElementById(deltaId);
+      if (!valEl || !deltaEl) return;
+      valEl.textContent = thisVal + (suffix||'');
+      var diff = thisVal - lastVal;
+      if (diff > 0) { deltaEl.textContent = '+'+diff+' vs minulý'; deltaEl.className = 'wc-delta up'; }
+      else if (diff < 0) { deltaEl.textContent = diff+' vs minulý'; deltaEl.className = 'wc-delta down'; }
+      else { deltaEl.textContent = '= stejně'; deltaEl.className = 'wc-delta same'; }
+    }
+    setCard('wcSessions','wcSessionsDelta', tw.sessions, lw.sessions, '');
+    setCard('wcExercises','wcExercisesDelta', tw.exercises, lw.exercises, '');
+    setCard('wcPct','wcPctDelta', tw.pct, lw.pct, '%');
+  }
+  renderWeekCompare();
 
 });
 </script>
