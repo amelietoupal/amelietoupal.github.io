@@ -615,15 +615,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .streak-lbl { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-top: 2px; }
 .streak-best { font-size: 11px; color: var(--ink3); margin-top: 4px; }
 
-/* ── VÁHOVÝ PROGRES ──────────────────────────────────────── */
-.weight-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 20px; }
-.weight-row { display: flex; gap: 8px; align-items: flex-end; margin-top: 10px; }
-.weight-row input { flex: 1; }
-.weight-add-btn { padding: 11px 16px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-sm); font-size: 13px; font-weight: 700; cursor: pointer; flex-shrink: 0; }
-.weight-display { display: flex; align-items: baseline; gap: 6px; margin-top: 10px; }
-.weight-latest { font-family: var(--font-display); font-size: 36px; color: var(--accent); letter-spacing: 2px; line-height: 1; }
-.weight-latest-unit { font-size: 13px; color: var(--ink3); }
-.weight-chart-svg { width: 100%; height: 48px; display: block; margin-top: 10px; }
 
 /* ── TÝDENNÍ SOUHRN ──────────────────────────────────────── */
 .weekly-summary { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 20px; }
@@ -676,16 +667,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 /* ── STORIES EXPORT ──────────────────────────────────────── */
 .stories-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #c96b88, #a85572); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
-/* ── PŘÍŠTÍ TÝDEN ────────────────────────────────────────── */
-.next-week-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 16px; margin-bottom: 28px; }
-.next-week-title { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 10px; }
-.nw-row { display: flex; align-items: center; gap: 12px; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-.nw-row:last-child { border-bottom: none; }
-.nw-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-.nw-day { font-weight: 700; color: var(--ink); min-width: 24px; font-size: 12px; }
-.nw-date { font-size: 11px; color: var(--ink3); min-width: 52px; }
-.nw-name { color: var(--ink2); flex: 1; font-size: 13px; }
-.nw-today-row { background: var(--accent-pale); border-radius: var(--r-sm); margin: 0 -4px; padding: 0 4px; }
 
 /* ── PILATES HOLD TIMER ──────────────────────────────────── */
 .wm-hold-btn { display: inline-flex; align-items: center; gap: 6px; margin-top: 10px; padding: 8px 14px; background: var(--accent-pale); border: 1px solid var(--accent); border-radius: 20px; font-size: 12px; font-weight: 600; color: var(--accent); cursor: pointer; transition: background .15s; }
@@ -769,8 +750,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <span class="onboard-week-val" id="onboardWeekVal">1</span> / 24
     </label>
     <input id="weekInput2" type="range" min="1" max="24" value="1" step="1" style="width:100%;margin-bottom:4px;">
-    <label class="onboard-label">Aktuální váha (kg)</label>
-    <input id="onboardWeight" type="number" step="0.1" min="30" max="200" placeholder="např. 60.5" style="width:100%;">
     <button class="onboard-start" id="onboardStart">Začít 💪</button>
   </div>
 </div>
@@ -844,12 +823,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <span id="quickStartLabel">Začít trénink</span>
     <span>→</span>
   </button>
-</div>
-
-<!-- PŘÍŠTÍ TÝDEN -->
-<div class="next-week-box">
-  <div class="next-week-title">📅 Příští 7 dní</div>
-  <div id="nextWeekPlan"></div>
 </div>
 
 <!-- NOTIFIKACE -->
@@ -1568,22 +1541,6 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <button class="month-cal-nav" id="calNext">›</button>
   </div>
   <div class="cal-grid" id="calGrid"></div>
-</div>
-
-<!-- VÁHOVÝ PROGRES -->
-<div class="label" style="margin-bottom:4px">⚖️ Váha</div>
-<div class="weight-box">
-  <div id="weightDisplay" style="display:none">
-    <div class="weight-display">
-      <span class="weight-latest" id="weightLatest"></span>
-      <span class="weight-latest-unit">kg</span>
-    </div>
-    <svg class="weight-chart-svg" id="weightChartSvg" viewBox="0 0 300 48" preserveAspectRatio="none"></svg>
-  </div>
-  <div class="weight-row">
-    <input id="weightInput" type="number" step="0.1" min="30" max="200" placeholder="Zapiš dnešní váhu (kg)">
-    <button class="weight-add-btn" id="weightAddBtn">Zapsat</button>
-  </div>
 </div>
 
 <!-- STORIES EXPORT -->
@@ -2392,50 +2349,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   renderStreak();
 
-  // ── VÁHOVÝ PROGRES ────────────────────────────────────────
-  function getWeightLog() { return JSON.parse(localStorage.getItem('ms_weight_log') || '[]'); }
-  function saveWeightLog(log) { localStorage.setItem('ms_weight_log', JSON.stringify(log)); }
-  function renderWeightChart() {
-    var log = getWeightLog();
-    var disp = document.getElementById('weightDisplay');
-    var latEl = document.getElementById('weightLatest');
-    var svgEl = document.getElementById('weightChartSvg');
-    if (!disp) return;
-    if (!log.length) { disp.style.display = 'none'; return; }
-    disp.style.display = 'block';
-    if (latEl) latEl.textContent = log[log.length-1].v;
-    if (!svgEl || log.length < 2) return;
-    var vals = log.map(function(e) { return e.v; });
-    var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals);
-    var range = mx - mn || 1;
-    var W = 300, H = 48, pad = 4;
-    var pts = vals.map(function(v, i) {
-      var x = pad + (i / (vals.length - 1)) * (W - 2*pad);
-      var y = H - pad - ((v - mn) / range) * (H - 2*pad);
-      return x.toFixed(1) + ',' + y.toFixed(1);
-    }).join(' ');
-    svgEl.innerHTML = '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
-    // Dots
-    vals.forEach(function(v, i) {
-      var x = pad + (i / (vals.length - 1)) * (W - 2*pad);
-      var y = H - pad - ((v - mn) / range) * (H - 2*pad);
-      svgEl.innerHTML += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3" fill="var(--accent)"/>';
-    });
-  }
-  renderWeightChart();
-  var weightAddBtn = document.getElementById('weightAddBtn');
-  if (weightAddBtn) weightAddBtn.addEventListener('click', function() {
-    var inp = document.getElementById('weightInput');
-    var val = parseFloat(inp && inp.value);
-    if (!val || val < 20 || val > 300) return;
-    var log = getWeightLog();
-    log.push({ date: new Date().toISOString(), v: val });
-    if (log.length > 100) log = log.slice(-100);
-    saveWeightLog(log);
-    if (inp) inp.value = '';
-    renderWeightChart();
-  });
-
   // ── VLASTNÍ CVIKY ─────────────────────────────────────────
   function getCustomEx(card) { return JSON.parse(localStorage.getItem('ms_custom_ex_' + card) || '[]'); }
   function saveCustomEx(card, list) { localStorage.setItem('ms_custom_ex_' + card, JSON.stringify(list)); }
@@ -2486,14 +2399,7 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.classList.add('active');
     if (startBtn) startBtn.addEventListener('click', function() {
       var week = parseInt((slider && slider.value) || 1);
-      var wt = parseFloat((document.getElementById('onboardWeight') && document.getElementById('onboardWeight').value) || 0);
       updateWeekBar(week);
-      if (wt > 0) {
-        var log = getWeightLog();
-        log.push({ date: new Date().toISOString(), v: wt });
-        saveWeightLog(log);
-        renderWeightChart();
-      }
       localStorage.setItem('ms_onboarded', '1');
       overlay.classList.remove('active');
     });
@@ -2518,30 +2424,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (perm === 'granted') new Notification('Modelka Fitness 💪', { body: 'Připomínky tréninku jsou zapnuty!' });
       });
     });
-  })();
-
-  // ── PŘÍŠTÍ TÝDEN PLÁN ─────────────────────────────────────
-  (function() {
-    var el = document.getElementById('nextWeekPlan');
-    if (!el) return;
-    var daySchedule = { 1:{type:'a',name:'Síla A'}, 2:{type:'a',name:'Síla A'}, 3:{type:'b',name:'Síla B'}, 4:{type:'b',name:'Síla B'}, 5:{type:'b',name:'Síla B'}, 6:{type:'p',name:'Pilates'}, 0:{type:'p',name:'Pilates'} };
-    var TYPE_COLOR = { a:'#a8d8c0', b:'#c8bcec', p:'#f4c4d4', rest:'#ddd' };
-    var DAY_NAMES = ['Ne','Po','Út','St','Čt','Pá','So'];
-    var MONTHS = ['led','úno','bře','dub','kvě','čvn','čvc','srp','zář','říj','lis','pro'];
-    var today = new Date(); today.setHours(0,0,0,0);
-    var html = '';
-    for (var i = 0; i < 7; i++) {
-      var d = new Date(today); d.setDate(today.getDate() + i);
-      var dow = d.getDay();
-      var sched = daySchedule[dow];
-      var dayLabel = DAY_NAMES[dow];
-      var dateLabel = d.getDate() + '. ' + MONTHS[d.getMonth()];
-      var color = TYPE_COLOR[sched ? sched.type : 'rest'];
-      var name = sched ? sched.name : 'Volno 😴';
-      var todayCls = i === 0 ? ' nw-today-row' : '';
-      html += '<div class="nw-row' + todayCls + '"><span class="nw-dot" style="background:' + color + '"></span><span class="nw-day">' + dayLabel + '</span><span class="nw-date">' + dateLabel + '</span><span class="nw-name">' + name + '</span></div>';
-    }
-    el.innerHTML = html;
   })();
 
   // ── FULL CHART MODAL (sparkline klik) ─────────────────────
