@@ -2480,93 +2480,103 @@ document.addEventListener('DOMContentLoaded', function() {
       var ctx = canvas.getContext('2d');
       var now = new Date();
 
-      // ── BACKGROUND: deep purple gradient ─────────────────
-      var bgGrad = ctx.createLinearGradient(0, 0, 600, 1920);
-      bgGrad.addColorStop(0,   '#160920');
-      bgGrad.addColorStop(0.45,'#2b1040');
-      bgGrad.addColorStop(1,   '#1a0828');
-      ctx.fillStyle = bgGrad;
+      // ── BACKGROUND: near-black flat ───────────────────────
+      ctx.fillStyle = '#0c0810';
       ctx.fillRect(0, 0, 1080, 1920);
 
-      // ── DECORATIVE BLOBS ─────────────────────────────────
-      function blob(x, y, r, c1, c2) {
-        var g = ctx.createRadialGradient(x, y, 0, x, y, r);
-        g.addColorStop(0, c1); g.addColorStop(1, c2);
-        ctx.fillStyle = g;
-        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI*2); ctx.fill();
-      }
-      blob(150, 380,  340, 'rgba(201,107,136,0.38)', 'rgba(201,107,136,0)');
-      blob(980, 960,  300, 'rgba(138,70,200,0.30)',  'rgba(138,70,200,0)');
-      blob( 80, 1640, 220, 'rgba(190,80,130,0.28)',  'rgba(190,80,130,0)');
-      blob(970, 260,  190, 'rgba(100,50,180,0.22)',  'rgba(100,50,180,0)');
-      blob(540, 1200, 260, 'rgba(160,60,160,0.18)',  'rgba(160,60,160,0)');
-
-      // ── HELPER: rounded rect path ─────────────────────────
-      function rr(x, y, w, h, r) {
+      // ── GRAIN TEXTURE (drawn under everything) ────────────
+      for (var gi = 0; gi < 3500; gi++) {
         ctx.beginPath();
-        ctx.moveTo(x+r, y);
-        ctx.lineTo(x+w-r, y);   ctx.arcTo(x+w, y,   x+w, y+r,   r);
-        ctx.lineTo(x+w, y+h-r); ctx.arcTo(x+w, y+h, x+w-r, y+h, r);
-        ctx.lineTo(x+r, y+h);   ctx.arcTo(x, y+h,   x, y+h-r,   r);
-        ctx.lineTo(x, y+r);     ctx.arcTo(x, y,     x+r, y,     r);
-        ctx.closePath();
+        ctx.arc(Math.random()*1080, Math.random()*1920, Math.random()*1.0+0.3, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(255,255,255,'+(Math.random()*0.03+0.02)+')';
+        ctx.fill();
+      }
+
+      // ── DECORATIVE ARCS: top-right corner (editorial art) ─
+      ctx.beginPath();
+      ctx.arc(1180, -100, 460, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.13)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(1180, -100, 320, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.09)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(1180, -100, 200, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.06)'; ctx.lineWidth = 1; ctx.stroke();
+      // second cluster: bottom-left
+      ctx.beginPath();
+      ctx.arc(-80, 1980, 380, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.07)'; ctx.lineWidth = 1; ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(-80, 1980, 240, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.05)'; ctx.lineWidth = 1; ctx.stroke();
+
+      // ── HELPER: gradient horizontal rule ─────────────────
+      function rule(y) {
+        var g = ctx.createLinearGradient(80, 0, 1000, 0);
+        g.addColorStop(0,   'rgba(201,107,136,0.55)');
+        g.addColorStop(0.55,'rgba(201,107,136,0.18)');
+        g.addColorStop(1,   'rgba(201,107,136,0)');
+        ctx.fillStyle = g; ctx.fillRect(80, y, 920, 1.5);
       }
 
       // ── TOP + BOTTOM ACCENT LINES ─────────────────────────
-      var lineGrad = ctx.createLinearGradient(0, 0, 1080, 0);
-      lineGrad.addColorStop(0, '#ff85a1');
-      lineGrad.addColorStop(0.5, '#c96b88');
-      lineGrad.addColorStop(1, '#8b4078');
-      ctx.fillStyle = lineGrad; ctx.fillRect(0, 0, 1080, 10);
-      ctx.fillStyle = lineGrad; ctx.fillRect(0, 1910, 1080, 10);
+      var lineG = ctx.createLinearGradient(0, 0, 1080, 0);
+      lineG.addColorStop(0, '#ff85a1'); lineG.addColorStop(0.5, '#c96b88'); lineG.addColorStop(1, '#8b4078');
+      ctx.fillStyle = lineG; ctx.fillRect(0, 0, 1080, 7);
+      ctx.fillStyle = lineG; ctx.fillRect(0, 1913, 1080, 7);
 
-      // ── MONOGRAM CIRCLE ───────────────────────────────────
-      var monoG = ctx.createLinearGradient(80, 120, 220, 230);
-      monoG.addColorStop(0, '#ff9ab5'); monoG.addColorStop(1, '#c96b88');
-      ctx.fillStyle = monoG;
-      ctx.beginPath(); ctx.arc(150, 178, 62, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = '#fff';
-      ctx.font = 'bold 52px Arial Black, sans-serif';
-      ctx.textAlign = 'center'; ctx.fillText('M', 150, 196); ctx.textAlign = 'left';
+      // ── LOGO ─────────────────────────────────────────────
+      ctx.beginPath(); ctx.arc(100, 95, 32, 0, Math.PI*2);
+      ctx.strokeStyle = '#c96b88'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 28px Arial Black, sans-serif';
+      ctx.textAlign = 'center'; ctx.fillText('M', 100, 103); ctx.textAlign = 'left';
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 44px Arial Black, sans-serif';
+      ctx.fillText('MODELKA', 150, 106);
+      ctx.fillStyle = 'rgba(201,107,136,0.85)'; ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('FITNESS PROGRESS', 152, 129);
 
-      // ── APP NAME ──────────────────────────────────────────
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 68px Arial Black, sans-serif';
-      ctx.fillText('MODELKA', 240, 172);
-      ctx.fillStyle = '#ff85a1';
-      ctx.font = '30px Arial, sans-serif';
-      ctx.fillText('FITNESS PROGRESS', 242, 210);
+      // ── DATE (right-aligned) ──────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '23px Arial, sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(now.toLocaleDateString('cs-CZ', {day:'numeric', month:'long', year:'numeric'}), 1000, 106);
+      ctx.textAlign = 'left';
 
-      // ── DATE ─────────────────────────────────────────────
-      ctx.fillStyle = 'rgba(255,255,255,0.45)';
-      ctx.font = '30px Arial, sans-serif';
-      ctx.fillText(now.toLocaleDateString('cs-CZ', {weekday:'long', day:'numeric', month:'long', year:'numeric'}), 80, 290);
+      rule(158);
 
-      // ── DIVIDER ───────────────────────────────────────────
-      var divG = ctx.createLinearGradient(80, 0, 1000, 0);
-      divG.addColorStop(0, 'rgba(255,133,161,0.6)');
-      divG.addColorStop(1, 'rgba(255,133,161,0)');
-      ctx.fillStyle = divG; ctx.fillRect(80, 322, 920, 2);
-
-      // ── WEEK CARD ─────────────────────────────────────────
+      // ── WEEK HERO ─────────────────────────────────────────
       var week = parseInt(localStorage.getItem('ms_week') || '1');
-      ctx.fillStyle = 'rgba(255,255,255,0.06)';
-      rr(80, 348, 920, 230, 36); ctx.fill();
-      ctx.strokeStyle = 'rgba(255,133,161,0.28)'; ctx.lineWidth = 2;
-      rr(80, 348, 920, 230, 36); ctx.stroke();
-      ctx.fillStyle = 'rgba(255,133,161,0.8)';
-      ctx.font = '26px Arial, sans-serif';
-      ctx.fillText('AKTUÁLNÍ TÝDEN', 130, 402);
-      var wkG = ctx.createLinearGradient(130, 420, 130, 550);
-      wkG.addColorStop(0, '#ff9ab5'); wkG.addColorStop(1, '#c96b88');
-      ctx.fillStyle = wkG;
-      ctx.font = 'bold 148px Arial Black, sans-serif';
-      ctx.fillText(String(week), 130, 558);
-      ctx.fillStyle = 'rgba(255,255,255,0.35)';
-      ctx.font = '34px Arial, sans-serif';
-      ctx.textAlign = 'right'; ctx.fillText('z 12 týdnů', 960, 558); ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '22px Arial, sans-serif';
+      ctx.fillText('AKTUÁLNÍ TÝDEN', 80, 210);
+      // Massive number — editorial: intentionally large
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 260px Arial Black, sans-serif';
+      ctx.fillText(String(week), 60, 490);
+      // "/ 12 týdnů" right side
+      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 44px Arial Black, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('/ 12', 1000, 370); ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.28)'; ctx.font = '24px Arial, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('týdnů', 1000, 406); ctx.textAlign = 'left';
 
-      // ── STREAK CARD ───────────────────────────────────────
+      // ── WEEK DOTS STRIP ───────────────────────────────────
+      var dotR = 8, dotStride = 73, dotsStart = 80;
+      for (var di = 0; di < 12; di++) {
+        var dx = dotsStart + di * dotStride;
+        var wkIdx = di + 1;
+        ctx.beginPath(); ctx.arc(dx, 533, dotR, 0, Math.PI*2);
+        if (wkIdx < week) {
+          ctx.fillStyle = '#c96b88'; ctx.fill();
+        } else if (wkIdx === week) {
+          ctx.fillStyle = '#ff85a1'; ctx.fill();
+          ctx.beginPath(); ctx.arc(dx, 533, dotR+5, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(255,133,161,0.38)'; ctx.lineWidth = 1.5; ctx.stroke();
+        } else {
+          ctx.beginPath(); ctx.arc(dx, 533, dotR, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1.5; ctx.stroke();
+        }
+      }
+
+      rule(568);
+
+      // ── STREAK ROW ────────────────────────────────────────
       var log = JSON.parse(localStorage.getItem('ms_log') || '[]');
       var streak = 0;
       var today2 = new Date(); today2.setHours(0,0,0,0);
@@ -2578,65 +2588,82 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (si === 0) { checked2.setDate(checked2.getDate()-1); continue; }
         else break;
       }
-      var strG = ctx.createLinearGradient(80, 615, 1000, 775);
-      strG.addColorStop(0, 'rgba(255,130,50,0.28)');
-      strG.addColorStop(1, 'rgba(255,60,110,0.18)');
-      ctx.fillStyle = strG;
-      rr(80, 615, 920, 145, 32); ctx.fill();
-      ctx.strokeStyle = 'rgba(255,150,60,0.4)'; ctx.lineWidth = 2;
-      rr(80, 615, 920, 145, 32); ctx.stroke();
-      ctx.font = '60px serif'; ctx.fillText('🔥', 118, 714);
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 78px Arial Black, sans-serif';
-      ctx.fillText(String(streak), 210, 718);
-      ctx.fillStyle = 'rgba(255,255,255,0.72)'; ctx.font = '34px Arial, sans-serif';
-      ctx.fillText('dní v řadě', 318, 718);
       var best = parseInt(localStorage.getItem('ms_streak_best') || '0');
-      ctx.fillStyle = 'rgba(255,255,255,0.38)'; ctx.font = '26px Arial, sans-serif';
-      ctx.textAlign = 'right'; ctx.fillText('rekord: ' + best + ' dní', 960, 718); ctx.textAlign = 'left';
+      ctx.font = '50px serif'; ctx.fillText('🔥', 80, 660);
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 82px Arial Black, sans-serif';
+      ctx.fillText(String(streak), 158, 664);
+      ctx.fillStyle = 'rgba(255,255,255,0.48)'; ctx.font = '32px Arial, sans-serif';
+      var streakNumW = ctx.measureText(String(streak)).width;
+      ctx.fillText('dní v řadě', 166 + streakNumW, 664);
+      ctx.fillStyle = 'rgba(201,107,136,0.65)'; ctx.font = '23px Arial, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('rekord ' + best + ' dní', 1000, 664); ctx.textAlign = 'left';
 
-      // ── PR SECTION HEADER ─────────────────────────────────
-      ctx.fillStyle = 'rgba(255,255,255,0.88)';
-      ctx.font = 'bold 36px Arial Black, sans-serif';
-      ctx.fillText('OSOBNÍ REKORDY', 80, 840);
-      ctx.fillStyle = lineGrad; ctx.fillRect(80, 852, 240, 4);
+      rule(690);
 
-      // ── PR GRID 2×2 ───────────────────────────────────────
-      var prKeys  = ['hip_thrust','goblet','rdl','row'];
-      var prNames = ['Hip Thrust','Goblet Squat','RDL','Seated Row'];
-      var prEmoji = ['🍑','🏋️','🦵','💪'];
-      var cW = 428, cH = 168, gX = 64, gY = 22, sX = 80, sY = 872;
-      prKeys.forEach(function(k, idx) {
-        var col = idx % 2, row = Math.floor(idx / 2);
-        var cx = sX + col * (cW + gX);
-        var cy = sY + row * (cH + gY);
+      // ── PR LIST ───────────────────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('OSOBNÍ REKORDY', 80, 730);
+      var prKeys2  = ['hip_thrust','goblet','rdl','row'];
+      var prNames2 = ['Hip Thrust','Goblet Squat','RDL','Seated Row'];
+      prKeys2.forEach(function(k, i) {
+        var ry = 760 + i * 92;
         var val = localStorage.getItem('ms_pr_' + k) || '—';
-        ctx.fillStyle = 'rgba(255,255,255,0.055)';
-        rr(cx, cy, cW, cH, 26); ctx.fill();
-        ctx.strokeStyle = 'rgba(255,133,161,0.2)'; ctx.lineWidth = 1.5;
-        rr(cx, cy, cW, cH, 26); ctx.stroke();
-        ctx.font = '42px serif'; ctx.fillText(prEmoji[idx], cx+22, cy+62);
-        ctx.fillStyle = 'rgba(255,255,255,0.55)'; ctx.font = '26px Arial, sans-serif';
-        ctx.fillText(prNames[idx], cx+22, cy+102);
-        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 52px Arial Black, sans-serif';
-        ctx.fillText(val, cx+22, cy+155);
+        ctx.fillStyle = 'rgba(255,255,255,0.52)'; ctx.font = '28px Arial, sans-serif';
+        ctx.fillText(prNames2[i], 80, ry + 40);
+        ctx.fillStyle = '#ffffff'; ctx.font = 'bold 54px Arial Black, sans-serif';
+        ctx.textAlign = 'right'; ctx.fillText(val, 1000, ry + 46); ctx.textAlign = 'left';
+        if (i < 3) { ctx.fillStyle = 'rgba(255,255,255,0.06)'; ctx.fillRect(80, ry+64, 920, 1); }
       });
 
-      // ── TOTAL WORKOUTS CARD ───────────────────────────────
-      var totalW = log.length;
-      var wcG = ctx.createLinearGradient(80, 1290, 1000, 1430);
-      wcG.addColorStop(0, 'rgba(140,70,200,0.28)');
-      wcG.addColorStop(1, 'rgba(201,107,136,0.22)');
-      ctx.fillStyle = wcG;
-      rr(80, 1295, 920, 128, 28); ctx.fill();
-      ctx.strokeStyle = 'rgba(180,100,220,0.36)'; ctx.lineWidth = 2;
-      rr(80, 1295, 920, 128, 28); ctx.stroke();
-      ctx.font = '52px serif'; ctx.fillText('💪', 118, 1382);
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 70px Arial Black, sans-serif';
-      ctx.fillText(String(totalW), 208, 1382);
-      ctx.fillStyle = 'rgba(255,255,255,0.68)'; ctx.font = '32px Arial, sans-serif';
-      ctx.fillText('odtrénovaných lekcí', 316, 1382);
+      rule(1138);
 
-      // ── MOTIVATIONAL QUOTE ────────────────────────────────
+      // ── TOTAL WORKOUTS ────────────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('CELKEM TRÉNINKŮ', 80, 1172);
+      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 106px Arial Black, sans-serif';
+      ctx.fillText(String(log.length), 80, 1268);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)'; ctx.font = '28px Arial, sans-serif';
+      var totalNumW = ctx.measureText(String(log.length)).width;
+      ctx.fillText('odtrénovaných lekcí', 100 + totalNumW, 1252);
+
+      rule(1292);
+
+      // ── 7-DAY ACTIVITY CHART ──────────────────────────────
+      ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '20px Arial, sans-serif';
+      ctx.fillText('AKTIVITA POSLEDNÍCH 7 DNÍ', 80, 1328);
+      var dayNames7 = ['Ne','Po','Út','St','Čt','Pá','So'];
+      var dayCounts = []; var dayLabels = [];
+      for (var d7i = 6; d7i >= 0; d7i--) {
+        var dd7 = new Date(now); dd7.setHours(0,0,0,0); dd7.setDate(dd7.getDate()-d7i);
+        var ds7 = dd7.toISOString().slice(0,10);
+        dayCounts.push(log.filter(function(e){ return e.date && e.date.slice(0,10) === ds7; }).length);
+        dayLabels.push(dayNames7[dd7.getDay()]);
+      }
+      var maxC = Math.max.apply(null, dayCounts.concat([1]));
+      var bW = 82, bBase = 1590, bMaxH = 185, bStride = 131, bStartX = 80;
+      dayCounts.forEach(function(cnt, bi) {
+        var bx = bStartX + bi * bStride;
+        var isToday = (bi === 6);
+        // trough
+        ctx.fillStyle = 'rgba(255,255,255,0.04)'; ctx.fillRect(bx, bBase-bMaxH, bW, bMaxH);
+        // bar
+        if (cnt > 0) {
+          var bh = Math.max(14, Math.round((cnt / maxC) * bMaxH));
+          ctx.fillStyle = isToday ? '#c96b88' : 'rgba(201,107,136,0.5)';
+          ctx.fillRect(bx, bBase-bh, bW, bh);
+          ctx.fillStyle = isToday ? '#ffffff' : 'rgba(255,255,255,0.4)';
+          ctx.font = (isToday ? 'bold ' : '') + '21px Arial, sans-serif';
+          ctx.textAlign = 'center'; ctx.fillText(String(cnt), bx+bW/2, bBase-bh-10);
+        }
+        ctx.fillStyle = isToday ? '#c96b88' : 'rgba(255,255,255,0.28)';
+        ctx.font = isToday ? 'bold 22px Arial, sans-serif' : '21px Arial, sans-serif';
+        ctx.textAlign = 'center'; ctx.fillText(dayLabels[bi], bx+bW/2, bBase+30);
+      });
+      ctx.textAlign = 'left';
+
+      rule(1628);
+
+      // ── QUOTE ─────────────────────────────────────────────
       var quotes = [
         'Každý trénink tě posouvá dál.',
         'Síla roste z opakování.',
@@ -2645,22 +2672,13 @@ document.addEventListener('DOMContentLoaded', function() {
         'Progres, ne perfekce.'
       ];
       var q = quotes[now.getDay() % quotes.length];
-      ctx.save();
-      ctx.fillStyle = 'rgba(255,255,255,0.08)';
-      rr(80, 1460, 920, 110, 24); ctx.fill();
-      ctx.restore();
-      ctx.fillStyle = 'rgba(255,160,190,0.75)';
-      ctx.font = 'italic 30px Georgia, serif';
-      ctx.textAlign = 'center'; ctx.fillText('\u201e' + q + '\u201c', 540, 1524); ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(201,107,136,0.65)'; ctx.fillRect(80, 1650, 2, 58);
+      ctx.fillStyle = 'rgba(255,255,255,0.42)'; ctx.font = 'italic 28px Georgia, serif';
+      ctx.fillText('\u201e' + q + '\u201c', 96, 1686);
 
       // ── BOTTOM BRAND ──────────────────────────────────────
-      var botG = ctx.createLinearGradient(0, 1800, 0, 1920);
-      botG.addColorStop(0, 'rgba(201,107,136,0)');
-      botG.addColorStop(1, 'rgba(201,107,136,0.28)');
-      ctx.fillStyle = botG; ctx.fillRect(0, 1800, 1080, 110);
-      ctx.fillStyle = 'rgba(255,255,255,0.42)';
-      ctx.font = '26px Arial, sans-serif';
-      ctx.textAlign = 'center'; ctx.fillText('amelietoupal.github.io', 540, 1876); ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.28)'; ctx.font = '24px Arial, sans-serif';
+      ctx.textAlign = 'center'; ctx.fillText('amelietoupal.github.io', 540, 1880); ctx.textAlign = 'left';
 
       // ── DOWNLOAD ─────────────────────────────────────────
       var link = document.createElement('a');
