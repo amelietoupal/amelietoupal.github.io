@@ -235,13 +235,12 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .skate-gear-item > span { font-size: 18px; flex-shrink: 0; }
 
 /* ── WORKOUT MODE OVERLAY ───────────────────────────────── */
-.workout-mode { position: fixed; inset: 0; z-index: 400; display: flex; flex-direction: column; pointer-events: none; opacity: 0; transition: opacity .22s; }
-.workout-mode.active { pointer-events: all; opacity: 1; }
-.wm-bg { position: absolute; inset: 0; background: rgba(20,10,24,.6); backdrop-filter: blur(3px); }
-.wm-sheet { position: relative; z-index: 1; background: var(--white); border-radius: 22px 22px 0 0; margin-top: auto; max-height: 93dvh; display: flex; flex-direction: column; transform: translateY(100%); transition: transform .34s cubic-bezier(.34,1.15,.64,1); }
-.workout-mode.active .wm-sheet { transform: translateY(0); }
+.workout-mode { position: fixed; inset: 0; z-index: 400; pointer-events: none; transform: translateY(100%); transition: transform .32s cubic-bezier(.22,1,.36,1); }
+.workout-mode.active { pointer-events: all; transform: translateY(0); }
+.wm-bg { display: none; }
+.wm-sheet { background: var(--white); height: 100%; display: flex; flex-direction: column; }
 
-.wm-hdr { display: flex; align-items: center; gap: 10px; padding: 14px 18px 10px; flex-shrink: 0; }
+.wm-hdr { display: flex; align-items: center; gap: 10px; padding: calc(14px + env(safe-area-inset-top)) 18px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--white); }
 .wm-close { width: 30px; height: 30px; border: none; background: var(--surface2); border-radius: 50%; font-size: 13px; cursor: pointer; color: var(--ink3); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .15s; }
 .wm-close:hover { background: var(--accent); color: #fff; }
 .wm-title { font-family: var(--font-display); font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); flex: 1; }
@@ -282,6 +281,21 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wm-finish-h { font-family: var(--font-display); font-size: 32px; color: var(--accent); margin-bottom: 8px; letter-spacing: 2px; }
 .wm-finish-stat { font-size: 14px; color: var(--ink2); margin-bottom: 6px; font-weight: 600; }
 .wm-finish-note { font-size: 13px; color: var(--ink3); line-height: 1.6; margin-top: 10px; }
+
+/* ── WORKOUT CHOICE DIALOG ──────────────────────────────── */
+.wc-overlay { position: fixed; inset: 0; z-index: 500; display: flex; align-items: flex-end; pointer-events: none; opacity: 0; transition: opacity .2s; }
+.wc-overlay.active { pointer-events: all; opacity: 1; }
+.wc-bg { position: absolute; inset: 0; background: rgba(20,10,24,.55); backdrop-filter: blur(3px); }
+.wc-sheet { position: relative; z-index: 1; background: var(--white); border-radius: 20px 20px 0 0; width: 100%; padding: 24px 20px calc(20px + env(safe-area-inset-bottom)); transform: translateY(100%); transition: transform .3s cubic-bezier(.34,1.1,.64,1); display: flex; flex-direction: column; gap: 10px; }
+.wc-overlay.active .wc-sheet { transform: translateY(0); }
+.wc-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); text-align: center; margin-bottom: 2px; }
+.wc-title { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; text-transform: uppercase; color: var(--black); text-align: center; margin-bottom: 6px; }
+.wc-btn { width: 100%; padding: 15px 20px; border-radius: var(--r-lg); font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; letter-spacing: .3px; }
+.wc-primary { background: var(--accent); color: #fff; }
+.wc-primary:hover { background: var(--accent2); }
+.wc-secondary { background: var(--surface2); color: var(--ink); border: 1.5px solid var(--border2); }
+.wc-secondary:hover { background: var(--black); color: #fff; border-color: var(--black); }
+.wc-cancel { background: none; border: none; color: var(--ink3); font-family: var(--font-body); font-size: 13px; cursor: pointer; padding: 6px; text-align: center; }
 
 .phase-lbl { font-family: var(--font-body); font-size: 9px; font-weight: 600; text-transform: uppercase; letter-spacing: 2.5px; padding: 12px 16px 6px; display: flex; align-items: center; gap: 12px; color: var(--ink3); border-top: 1px solid var(--border); margin-top: 4px; }
 .phase-lbl::before { content: ''; width: 20px; height: 1px; flex-shrink: 0; }
@@ -566,8 +580,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 </div>
 
 <nav class="nav">
-  <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
-  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
+  <button class="nav-btn" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
+  <button class="nav-btn active" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
   <button class="nav-btn" data-tab="rutina"><span class="nav-ico">🧘</span><span class="nav-lbl">Rutina</span></button>
   <button class="nav-btn" data-tab="kardio"><span class="nav-ico">🏃‍♀️</span><span class="nav-lbl">Kardio</span></button>
   <button class="nav-btn" data-tab="chyby"><span class="nav-ico">💡</span><span class="nav-lbl">Chyby</span></button>
@@ -577,7 +591,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <!-- ===== TAB: PLÁN ===== -->
 
-<div id="plan" class="section active">
+<div id="plan" class="section">
   <div class="content">
     <div style="padding:0 0 32px;border-bottom:1px solid var(--black);margin-bottom:32px;position:relative;overflow:hidden;">
       <span class="section-num">01 — Plán</span>
@@ -738,7 +752,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <!-- ===== TAB: TRÉNINKY ===== -->
 
-<div id="treninky" class="section">
+<div id="treninky" class="section active">
   <div class="content">
     <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
       <span class="section-num">02 — Tréninky</span>
@@ -1450,6 +1464,18 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   <p>Nízkokalorické diety pod 1 500 kcal, low-carb přístupy nebo přeskakování jídel jsou pro 17letou sportovkyni nevhodné. Pokud si nejsi jistá, poraď se s nutričním terapeutem.</p>
 </div>
 
+  </div>
+</div>
+
+<!-- WORKOUT CHOICE DIALOG -->
+<div class="wc-overlay" id="wcOverlay">
+  <div class="wc-bg" id="wcBg"></div>
+  <div class="wc-sheet">
+    <div class="wc-label">Jak chceš otevřít trénink?</div>
+    <div class="wc-title" id="wcTitle"></div>
+    <button class="wc-btn wc-primary" id="wcFocused">🎯 Jen tento trénink</button>
+    <button class="wc-btn wc-secondary" id="wcAll">📋 Zobrazit všechny tréninky</button>
+    <button class="wc-cancel" id="wcCancel">Zrušit</button>
   </div>
 </div>
 
@@ -2561,7 +2587,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Wire up buttons
     document.getElementById('wmClose').addEventListener('click', close);
-    document.getElementById('wmBg').addEventListener('click', close);
 
     document.getElementById('wmPrev').addEventListener('click', function() {
       if (idx > 0) { idx--; render(); }
@@ -2587,10 +2612,55 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 380);
     });
 
-    // Override goToWorkout to open workout mode
-    goToWorkout = function(t) { open(t); };
-
     return { open: open, close: close };
+  })();
+
+  // ── WORKOUT CHOICE DIALOG ─────────────────────────────────
+  (function() {
+    var TITLES = { a: 'Síla A', b: 'Síla B', p: 'Pilates' };
+    var pendingType = null;
+
+    var overlay = document.getElementById('wcOverlay');
+    var bg      = document.getElementById('wcBg');
+    var titleEl = document.getElementById('wcTitle');
+
+    function showChoice(type) {
+      pendingType = type;
+      titleEl.textContent = TITLES[type] || type;
+      overlay.classList.add('active');
+    }
+    function hideChoice() {
+      overlay.classList.remove('active');
+      pendingType = null;
+    }
+
+    bg.addEventListener('click', hideChoice);
+    document.getElementById('wcCancel').addEventListener('click', hideChoice);
+
+    document.getElementById('wcFocused').addEventListener('click', function() {
+      var t = pendingType;
+      hideChoice();
+      if (t) wm.open(t);
+    });
+
+    document.getElementById('wcAll').addEventListener('click', function() {
+      var t = pendingType;
+      hideChoice();
+      if (!t) return;
+      switchTab('treninky');
+      setTimeout(function() {
+        var card = document.querySelector('.wcard-' + t);
+        if (card) {
+          card.classList.add('open');
+          var tog = card.querySelector('.wcard-toggle');
+          if (tog) tog.textContent = '▴';
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    });
+
+    // Override goToWorkout to show choice dialog
+    goToWorkout = function(t) { showChoice(t); };
   })();
 
 });
