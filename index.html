@@ -729,6 +729,170 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wc-delta.down { color: var(--accent); }
 .wc-delta.same { color: var(--ink3); }
 .wc-lbl { font-size: 9px; color: var(--ink3); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; margin-top: 3px; }
+
+/* ══════════════════════════════════════════════════════════
+   AESTHETIC POLISH — EDITORIAL REDESIGN
+   ══════════════════════════════════════════════════════════ */
+
+/* ── GLOBAL TOKENS ───────────────────────────────────────── */
+:root { --r-xl: 20px; --r-lg: 16px; --r-md: 11px; }
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ── SECTION TRANSITION — slower = more elegant ──────────── */
+.section.active { animation: fadeUp .65s cubic-bezier(.16,1,.3,1) forwards; }
+
+/* ── NAVIGATION ──────────────────────────────────────────── */
+.nav {
+  background: rgba(14,8,20,0.95);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.nav-btn { padding: 4px 2px 9px; gap: 3px; }
+.nav-btn.active { color: var(--accent); }
+.nav-btn::after { bottom: 7px; width: 16px; }
+.nav-lbl { font-size: 8px; letter-spacing: 0.07em; font-weight: 300; }
+
+/* ── TODAY HERO CARD ─────────────────────────────────────── */
+.today { padding: 36px 24px 30px; }
+.today::before {
+  font-size: 170px;
+  opacity: 0.055;
+  top: -24px;
+  right: -10px;
+}
+.today-date {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 10px;
+}
+.today-title { font-size: 30px; letter-spacing: 4px; margin-bottom: 22px; }
+.today-card { padding: 16px 6px; gap: 6px; }
+.tc-icon { font-size: 24px; }
+.tc-name { font-size: 9px; letter-spacing: 1.8px; }
+.tc-sub { font-size: 8px; letter-spacing: 0.6px; }
+
+/* ── STICKY WEEK SELECTOR ────────────────────────────────── */
+.sticky-week {
+  border-bottom: 1px solid var(--border);
+  padding: 8px 20px;
+  gap: 12px;
+}
+.sticky-week-label {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--ink3);
+}
+.week-num {
+  font-size: 40px;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 38px;
+}
+.week-bar-max {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink3);
+  letter-spacing: 0;
+}
+#weekInput { height: 2px; }
+#weekInput::-webkit-slider-thumb { width: 11px; height: 11px; border-radius: 50%; }
+#weekInput::-moz-range-thumb   { width: 11px; height: 11px; border-radius: 50%; }
+
+/* ── WORKOUT CARDS ───────────────────────────────────────── */
+.wcard-head { padding: 20px 22px; }
+.wcard-head h3 { font-size: 20px; letter-spacing: 2.5px; }
+.wcard-a { border-left-width: 5px; box-shadow: -4px 0 22px rgba(45,96,74,0.10), 0 2px 10px rgba(0,0,0,.04); }
+.wcard-b { border-left-width: 5px; box-shadow: -4px 0 22px rgba(96,80,160,0.11), 0 2px 10px rgba(0,0,0,.04); }
+.wcard-p { border-left-width: 5px; box-shadow: -4px 0 22px rgba(176,112,128,0.11), 0 2px 10px rgba(0,0,0,.04); }
+.wcard-skate { border-left-width: 5px; box-shadow: -4px 0 22px rgba(91,155,213,0.13), 0 2px 10px rgba(0,0,0,.04); }
+.wcard:hover { transform: translateY(-3px); box-shadow: 0 14px 44px rgba(201,107,136,.15); }
+.wcard { margin-bottom: 18px; }
+
+/* ── SECTION HEADERS ─────────────────────────────────────── */
+.section-num {
+  font-family: var(--font-display);
+  font-size: 11px;
+  letter-spacing: 5px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+.section-title { line-height: 0.88; margin-bottom: 14px; }
+.section-intro {
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--ink3);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+/* ── LABEL — more breathing room ─────────────────────────── */
+.label { letter-spacing: 3.5px; margin-bottom: 10px; }
+
+/* ── PHASE CELLS ─────────────────────────────────────────── */
+.phase-cell { padding: 16px 14px; }
+.phase-num { font-size: 26px; }
+
+/* ── STREAK — dramatic hero number ──────────────────────── */
+.streak-banner {
+  padding: 22px 24px;
+  border-radius: var(--r-xl);
+  gap: 20px;
+  align-items: center;
+}
+.streak-fire { font-size: 44px; }
+.streak-num { font-size: 76px; line-height: .88; letter-spacing: -1px; }
+.streak-lbl {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink3);
+  margin-top: 2px;
+}
+.streak-best { font-size: 12px; color: var(--muted); }
+
+/* ── WEEKLY SUMMARY STATS ────────────────────────────────── */
+.ws-stat-num { font-size: 38px; line-height: 1; }
+.ws-stat { padding: 12px 6px; border-radius: var(--r-lg); }
+.ws-stat-lbl { font-size: 8px; letter-spacing: 1.5px; margin-top: 4px; }
+.weekly-summary { border-radius: var(--r-xl); padding: 18px; }
+
+/* ── WEEK COMPARE CARDS ──────────────────────────────────── */
+.wc-val { font-size: 30px; }
+.wc-card { padding: 13px 8px; border-radius: var(--r-lg); }
+.week-compare { gap: 10px; }
+
+/* ── QUICK START BUTTON ──────────────────────────────────── */
+.quick-start-btn {
+  border-radius: var(--r-lg);
+  font-size: 20px;
+  box-shadow: 0 6px 28px rgba(201,107,136,.25);
+  margin-top: 24px;
+}
+
+/* ── EXERCISE ROWS ───────────────────────────────────────── */
+.ex-row-inner { padding: 15px 18px 13px; }
+.ex-name { font-size: 13.5px; }
+
+/* ── DARK MODE REFINEMENTS ───────────────────────────────── */
+[data-theme="dark"] .sticky-week { background: var(--white); border-bottom-color: var(--border); }
+[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
