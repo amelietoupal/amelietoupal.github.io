@@ -2543,38 +2543,71 @@ document.addEventListener('DOMContentLoaded', function() {
 
       rule(158);
 
-      // ── WEEK HERO ─────────────────────────────────────────
+      // ── WEEK HERO: circular progress arc ─────────────────
       var week = parseInt(localStorage.getItem('ms_week') || '1');
+      // Section label left + week fraction right
       ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '22px Arial, sans-serif';
-      ctx.fillText('AKTUÁLNÍ TÝDEN', 80, 210);
-      // Massive number — editorial: intentionally large
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 260px Arial Black, sans-serif';
-      ctx.fillText(String(week), 60, 490);
-      // "/ 12 týdnů" right side
-      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 44px Arial Black, sans-serif';
-      ctx.textAlign = 'right'; ctx.fillText('/ 12', 1000, 370); ctx.textAlign = 'left';
-      ctx.fillStyle = 'rgba(255,255,255,0.28)'; ctx.font = '24px Arial, sans-serif';
-      ctx.textAlign = 'right'; ctx.fillText('týdnů', 1000, 406); ctx.textAlign = 'left';
+      ctx.fillText('AKTUÁLNÍ TÝDEN', 80, 208);
+      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 36px Arial Black, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('/ 12', 1000, 208); ctx.textAlign = 'left';
+
+      // Arc center & radius
+      var arcCX = 540, arcCY = 378, arcR = 148;
+      var startA = -Math.PI / 2;
+      var sweepA = (week / 12) * Math.PI * 2;
+
+      // Outer glow ring (very soft, barely visible)
+      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR + 18, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(201,107,136,0.08)'; ctx.lineWidth = 30; ctx.stroke();
+
+      // Track ring: full circle, dim
+      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(255,255,255,0.09)'; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.stroke();
+
+      // Progress arc
+      var arcG = ctx.createLinearGradient(
+        arcCX + arcR * Math.cos(startA), arcCY + arcR * Math.sin(startA),
+        arcCX + arcR * Math.cos(startA + sweepA), arcCY + arcR * Math.sin(startA + sweepA)
+      );
+      arcG.addColorStop(0, '#ff85a1'); arcG.addColorStop(1, '#8b4078');
+      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR, startA, startA + sweepA);
+      ctx.strokeStyle = arcG; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.stroke();
+
+      // Glowing dot at arc tip
+      var tipA = startA + sweepA;
+      var tipX = arcCX + Math.cos(tipA) * arcR;
+      var tipY = arcCY + Math.sin(tipA) * arcR;
+      ctx.beginPath(); ctx.arc(tipX, tipY, 10, 0, Math.PI*2);
+      ctx.fillStyle = '#ff85a1'; ctx.fill();
+      ctx.beginPath(); ctx.arc(tipX, tipY, 18, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(255,133,161,0.25)'; ctx.fill();
+
+      // Center text: big week number
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 130px Arial Black, sans-serif';
+      ctx.textAlign = 'center'; ctx.fillText(String(week), arcCX, arcCY + 46);
+      ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.font = '26px Arial, sans-serif';
+      ctx.fillText('týden', arcCX, arcCY + 88);
+      ctx.textAlign = 'left';
 
       // ── WEEK DOTS STRIP ───────────────────────────────────
-      var dotR = 8, dotStride = 73, dotsStart = 80;
+      var dotR = 7, dotStride = 73, dotsStart = 80;
       for (var di = 0; di < 12; di++) {
         var dx = dotsStart + di * dotStride;
         var wkIdx = di + 1;
-        ctx.beginPath(); ctx.arc(dx, 533, dotR, 0, Math.PI*2);
+        ctx.beginPath(); ctx.arc(dx, 558, dotR, 0, Math.PI*2);
         if (wkIdx < week) {
           ctx.fillStyle = '#c96b88'; ctx.fill();
         } else if (wkIdx === week) {
           ctx.fillStyle = '#ff85a1'; ctx.fill();
-          ctx.beginPath(); ctx.arc(dx, 533, dotR+5, 0, Math.PI*2);
-          ctx.strokeStyle = 'rgba(255,133,161,0.38)'; ctx.lineWidth = 1.5; ctx.stroke();
+          ctx.beginPath(); ctx.arc(dx, 558, dotR+5, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(255,133,161,0.35)'; ctx.lineWidth = 1.5; ctx.stroke();
         } else {
-          ctx.beginPath(); ctx.arc(dx, 533, dotR, 0, Math.PI*2);
-          ctx.strokeStyle = 'rgba(255,255,255,0.18)'; ctx.lineWidth = 1.5; ctx.stroke();
+          ctx.beginPath(); ctx.arc(dx, 558, dotR, 0, Math.PI*2);
+          ctx.strokeStyle = 'rgba(255,255,255,0.16)'; ctx.lineWidth = 1.5; ctx.stroke();
         }
       }
 
-      rule(568);
+      rule(583);
 
       // ── STREAK ROW ────────────────────────────────────────
       var log = JSON.parse(localStorage.getItem('ms_log') || '[]');
@@ -3409,12 +3442,6 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   window.openTimer = openTimer;
 
-  // Speak "Výborně" when wmDone marks exercise done
-  (function() {
-    var doneBtn2 = document.getElementById('wmDone');
-    if (!doneBtn2) return;
-    doneBtn2.addEventListener('click', function() { speak('Výborně'); });
-  })();
 
   // ── FEATURE 2: CONFIGURABLE SCHEDULE ─────────────────────
   var DEFAULT_SCHEDULE = { 1:'a', 2:'a', 3:'b', 4:'b', 5:'b', 6:'p', 0:'p' };
