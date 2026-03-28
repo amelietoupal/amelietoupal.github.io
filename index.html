@@ -934,8 +934,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 <button class="dark-toggle" id="darkToggle" aria-label="Přepnout tmavý režim">🌙</button>
 
 <nav class="nav">
-  <button class="nav-btn" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
-  <button class="nav-btn active" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
+  <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
+  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
   <button class="nav-btn" data-tab="rutina"><span class="nav-ico">🧘</span><span class="nav-lbl">Rutina</span></button>
   <button class="nav-btn" data-tab="kardio"><span class="nav-ico">🏃‍♀️</span><span class="nav-lbl">Kardio</span></button>
   <button class="nav-btn" data-tab="chyby"><span class="nav-ico">💡</span><span class="nav-lbl">Chyby</span></button>
@@ -945,7 +945,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <!-- ===== TAB: PLÁN ===== -->
 
-<div id="plan" class="section">
+<div id="plan" class="section active">
   <div class="content">
     <div style="padding:0 0 32px;border-bottom:1px solid var(--black);margin-bottom:32px;position:relative;overflow:hidden;">
       <span class="section-num">01 — Plán</span>
@@ -1126,7 +1126,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
 <!-- ===== TAB: TRÉNINKY ===== -->
 
-<div id="treninky" class="section active">
+<div id="treninky" class="section">
   <div class="content">
     <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
       <span class="section-num">02 — Tréninky</span>
@@ -1494,10 +1494,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 <div class="cardio-card"><div class="cardio-emo">🚲</div><div class="cardio-body"><h4>Bike / Eliptical Z2</h4><p>30 min, rovnoměrné tempo, RPE 3–4/10. Šetrné ke kolenům, nebrzdí regeneraci.</p></div><span class="cardio-chip">Základ</span></div>
 <div class="cardio-card"><div class="cardio-emo">⚡</div><div class="cardio-body"><h4>Low-impact intervaly — max 1× týdně</h4><p>5 min warm-up + 8× (1 min RPE 7 + 1 min RPE 2–3) + 5 min cool-down. Celkem ~26 min.</p></div><span class="cardio-chip">Od týdne 3–4</span></div>
 
-<div class="page-hd-label" style="margin-top:28px">Bruslení — plnohodnotné kardio</div>
+<div class="page-hd-label" style="margin-top:28px">In-line bruslení — plnohodnotné kardio</div>
 <div class="wcard wcard-skate reveal" id="wcardSkate">
   <div class="wcard-head">
-    <h3>⛸ Bruslení / Inline</h3>
+    <h3>🛼 In-line bruslení</h3>
     <div class="wcard-head-right"><span class="tag">Low-impact · Full-body</span><span class="wcard-toggle">▾</span></div>
   </div>
   <div class="wcard-body">
@@ -1508,7 +1508,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
       <span class="skate-chip skate-chip-amber">Nízký dopad</span>
     </div>
     <div class="skate-why">
-      <p>Bruslení je kardio i tvarování v jednom — při každém odrazu pracují hýždě, stehna a core (stabilizace boku). Nízký dopad = ideální doplněk k silovým dnům A/B bez přetížení kloubů.</p>
+      <p>In-line bruslení je kardio i tvarování v jednom — při každém odrazu pracují hýždě, stehna a core (stabilizace boku). Nízký dopad = ideální doplněk k silovým dnům A/B bez přetížení kloubů.</p>
     </div>
 
     <div class="phase-lbl" data-phase="main">Tréninky — vyber si</div>
@@ -1585,7 +1585,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
         <div class="skate-phase">
           <span class="skate-phase-ico">⚡</span>
           <div class="skate-phase-body"><strong>8× interval</strong> — 45 s silné (RPE 7) + 90 s velmi lehké (RPE 2–3). Celkem ~19 min.
-            <div class="skate-timer-row"><button class="ex-timer-go skate-timer-btn" data-seconds="45" data-label="45s sprint ⛸">▶ 45s sprint</button><button class="ex-timer-go skate-timer-btn" data-seconds="90" data-label="90s odpočinek ❄️">▶ 90s pauza</button></div>
+            <div class="skate-timer-row"><button class="ex-timer-go skate-timer-btn" data-seconds="45" data-label="45s sprint 🛼">▶ 45s sprint</button><button class="ex-timer-go skate-timer-btn" data-seconds="90" data-label="90s odpočinek ❄️">▶ 90s pauza</button></div>
           </div>
         </div>
         <div class="skate-phase">
@@ -1600,8 +1600,8 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
     <div class="phase-lbl" data-phase="core">Technika — klíčové body</div>
     <div class="skate-tips">
       <div class="skate-tip"><div class="skate-tip-ico">📐</div><div><strong>Postoj</strong> — kolena mírně pokrčená, trup předkloněný 15–20°, ruce volně po bocích. Těžiště dopředu.</div></div>
-      <div class="skate-tip"><div class="skate-tip-ico">🦵</div><div><strong>Odraz</strong> — z celé plochy brusle do strany a dozadu, ne jen ze špičky. Odrazová noha se plně propíná.</div></div>
-      <div class="skate-tip"><div class="skate-tip-ico">🍑</div><div><strong>Hýždě</strong> — zatnout hýždi v momentě odrazu. Při bruslení tak aktivuješ přesně stejné svaly jako při hip thrustu.</div></div>
+      <div class="skate-tip"><div class="skate-tip-ico">🦵</div><div><strong>Odraz</strong> — z celé plochy kolečka do strany a dozadu, ne jen ze špičky. Odrazová noha se plně propíná.</div></div>
+      <div class="skate-tip"><div class="skate-tip-ico">🍑</div><div><strong>Hýždě</strong> — zatnout hýždi v momentě odrazu. Při in-line bruslení tak aktivuješ přesně stejné svaly jako při hip thrustu.</div></div>
       <div class="skate-tip"><div class="skate-tip-ico">🫀</div><div><strong>Core zapnuto</strong> — přirozený korzet po celou dobu = lepší stabilita + tvarování pasu při každém pohybu.</div></div>
       <div class="skate-tip"><div class="skate-tip-ico">👁️</div><div><strong>Pohled</strong> — 10–15 m před sebe. Nikdy přímo pod nohama — ztratíš rovnováhu.</div></div>
     </div>
@@ -1610,9 +1610,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 
     <div class="phase-lbl" data-phase="cool">Vybavení — minimum</div>
     <div class="skate-gear">
-      <div class="skate-gear-item"><span>⛸</span><div><strong>Brusle</strong> — správně padnoucí (pata se nehýbe), pevná holenní část pro podporu kotníku</div></div>
-      <div class="skate-gear-item"><span>🛡️</span><div><strong>Helma</strong> — povinná pro inline na silnici, doporučená pro lední</div></div>
-      <div class="skate-gear-item"><span>🧤</span><div><strong>Chráničky</strong> — inline: kolena + zápěstí (nejčastěji zraňovaná místa). Led: rukavice.</div></div>
+      <div class="skate-gear-item"><span>🛼</span><div><strong>In-line brusle</strong> — správně padnoucí (pata se nehýbe), pevná holenní část pro podporu kotníku</div></div>
+      <div class="skate-gear-item"><span>🛡️</span><div><strong>Helma</strong> — povinná při jízdě na silnici a stezkách</div></div>
+      <div class="skate-gear-item"><span>🧤</span><div><strong>Chráničky</strong> — kolena + zápěstí + lokty (nejčastěji zraňovaná místa při pádu)</div></div>
     </div>
   </div>
 </div>
