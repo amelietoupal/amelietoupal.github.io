@@ -895,184 +895,185 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 [data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
 
 /* ══════════════════════════════════════════════════════════
-   BUTTER & ROSE — PINTEREST AESTHETIC
+   MATCHA PILATES — PINTEREST WELLNESS AESTHETIC
+   sage green · clay terracotta · warm linen
    ══════════════════════════════════════════════════════════ */
 
-/* ── WARM COLOUR PALETTE ─────────────────────────────────── */
+/* ── PALETTE ─────────────────────────────────────────────── */
 :root {
-  /* Backgrounds — warm butter cream */
-  --white:    #FFFBEE;
-  --surface:  #FFFFFF;
-  --surface2: #FFF8E1;
-  --bg:       #FFFBEE;
-  --card-bg:  #FFF8E1;
+  /* Linen backgrounds */
+  --white:    #F0EBE3;
+  --surface:  #FAFAF6;
+  --surface2: #EAF1E7;
+  --bg:       #F0EBE3;
+  --card-bg:  #EAF1E7;
 
-  /* Text — warm brown instead of cool purple */
-  --black:  #2C1A08;
-  --ink:    #2C1A08;
-  --ink2:   #6B4226;
-  --ink3:   #9C7048;
-  --muted:  #C4A87A;
+  /* Forest ink */
+  --black:  #1E2B20;
+  --ink:    #2C3E2D;
+  --ink2:   #4A6B50;
+  --ink3:   #7A9E7E;
+  --muted:  #A8C4AA;
 
-  /* Borders — golden warm */
-  --border:  #F0D9A8;
-  --border2: #D9BF88;
-  --soft:    #F0D9A8;
+  /* Sage borders */
+  --border:  #D4E8D0;
+  --border2: #B4D0B0;
+  --soft:    #D4E8D0;
 
-  /* Pink accent — slightly warmer */
-  --accent:      #D4617A;
-  --accent2:     #B84D65;
-  --accent-pale: rgba(212,97,122,.08);
-  --accent-bg:   rgba(212,97,122,.13);
+  /* Clay / terracotta accent */
+  --accent:      #C8674A;
+  --accent2:     #A8523A;
+  --accent-pale: rgba(200,103,74,.09);
+  --accent-bg:   rgba(200,103,74,.14);
 
-  /* NEW: Butter yellow accent */
-  --butter:       #F5C842;
-  --butter-dark:  #D4A820;
-  --butter-pale:  rgba(245,200,66,.12);
-  --butter-bg:    rgba(245,200,66,.22);
+  /* Sage secondaries */
+  --sage:       #7A9E7E;
+  --sage-dark:  #4A6B50;
+  --sage-pale:  rgba(122,158,126,.12);
+  --sage-bg:    rgba(122,158,126,.20);
 
-  /* Today card: dark warm instead of cool purple */
-  --today-bg-1: #1E0E06;
-  --today-bg-2: #2E1810;
+  /* Today dark: deep forest */
+  --today-bg-1: #182A1A;
+  --today-bg-2: #243828;
 
-  /* Shadows — warm tinted */
-  --sh-sm: 0 2px 12px rgba(180,120,60,.10);
-  --sh:    0 4px 24px rgba(180,120,60,.13);
-  --sh-lg: 0 8px 40px rgba(180,120,60,.17);
+  /* Shadows: green-tinted */
+  --sh-sm: 0 2px 14px rgba(50,90,55,.09);
+  --sh:    0 4px 26px rgba(50,90,55,.12);
+  --sh-lg: 0 8px 44px rgba(50,90,55,.16);
 
-  /* Rounder everything */
   --r-xl: 24px;
-  --r-lg: 18px;
-  --r-md: 12px;
+  --r-lg: 20px;
+  --r-md: 14px;
   --r-sm: 8px;
 }
 
-/* ── POLKA DOTS BACKGROUND ───────────────────────────────── */
+/* ── LINEN BACKGROUND — clean, no pattern ────────────────── */
 body {
   background-color: var(--white);
-  background-image: radial-gradient(circle, rgba(245,200,66,0.18) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(122,158,126,.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(200,103,74,.06) 0%, transparent 55%);
 }
 
-/* ── NAV — warm brown glass ──────────────────────────────── */
-.nav { background: rgba(44,26,8,0.96); }
+/* ── NAV — deep forest glass ─────────────────────────────── */
+.nav {
+  background: rgba(20,36,22,0.97);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.nav-btn.active { color: #C8674A; }
 
-/* ── STICKY WEEK — warm border ───────────────────────────── */
+/* ── STICKY WEEK ─────────────────────────────────────────── */
 .sticky-week { background: var(--white); border-bottom-color: var(--border); }
 
-/* ── TODAY HERO — polka dots on dark bg ─────────────────── */
+/* ── TODAY HERO — forest dark with organic texture ───────── */
 .today {
-  background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.12) 1.2px, transparent 1.2px),
-    linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
-  background-size: 18px 18px, auto;
+  background:
+    radial-gradient(ellipse 100% 60% at 70% 0%, rgba(122,158,126,.18) 0%, transparent 55%),
+    linear-gradient(150deg, var(--today-bg-1) 0%, var(--today-bg-2) 100%);
 }
-/* Today title: butter yellow highlight */
-.today-title { color: var(--butter); }
-/* Today date: soft warm */
-.today-date { color: rgba(255,245,200,0.45); }
-/* Today rec: butter */
-.today-rec { color: var(--butter); }
-/* Today card hover/active: butter accent */
-.today-card:hover { border-color: var(--butter); }
-.today-card.active { background: var(--butter); border-color: var(--butter); }
-.today-card.active .tc-name { color: var(--today-bg-1); }
-.today-card.active .tc-sub { color: rgba(44,26,8,0.7); }
+.today-title  { color: #C8674A; }
+.today-date   { color: rgba(210,230,215,.45); }
+.today-rec    { color: #C8674A; }
+.today-card:hover { border-color: var(--sage); }
+.today-card.active { background: var(--sage); border-color: var(--sage); }
+.today-card.active .tc-name { color: #1E2B20; }
+.today-card.active .tc-sub  { color: rgba(30,43,32,.65); }
 
-/* ── WORKOUT CARDS — warm border, cream surface ──────────── */
+/* ── WORKOUT CARDS ───────────────────────────────────────── */
 .wcard { background: var(--surface); border-color: var(--border); }
 .wcard-head:hover { background: var(--surface2); }
 .wcard.open .wcard-head { border-bottom-color: var(--border); }
-/* Left glow: warm-tinted */
-.wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.12), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.12), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.13), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.13), 0 2px 12px rgba(180,120,60,.07); }
-.wcard:hover { box-shadow: 0 14px 48px rgba(180,120,60,.16); }
+.wcard-a     { box-shadow: -5px 0 24px rgba(74,107,80,.16), 0 2px 12px rgba(50,90,55,.06); }
+.wcard-b     { box-shadow: -5px 0 24px rgba(122,158,126,.14), 0 2px 12px rgba(50,90,55,.06); }
+.wcard-p     { box-shadow: -5px 0 24px rgba(200,103,74,.13), 0 2px 12px rgba(50,90,55,.06); }
+.wcard-skate { box-shadow: -5px 0 24px rgba(91,155,213,.11), 0 2px 12px rgba(50,90,55,.06); }
+.wcard:hover { box-shadow: 0 16px 48px rgba(50,90,55,.14); }
 
-/* ── SECTION TITLE ───────────────────────────────────────── */
-.section-num { color: var(--butter-dark); }
+/* ── SECTION HEADERS ─────────────────────────────────────── */
+.section-num { color: var(--sage-dark); }
 
-/* ── STREAK — butter yellow fire ────────────────────────── */
+/* ── STREAK — terracotta fire ────────────────────────────── */
 .streak-banner {
-  background: linear-gradient(135deg, rgba(245,200,66,.15), rgba(212,97,122,.08));
+  background: linear-gradient(135deg, rgba(122,158,126,.13), rgba(200,103,74,.07));
   border-color: var(--border);
 }
-.streak-num { color: var(--butter-dark); }
+.streak-num { color: #C8674A; }
 
-/* ── WEEK SELECTOR — butter number ──────────────────────── */
-.week-num { color: var(--butter-dark); }
+/* ── WEEK SELECTOR — sage number ─────────────────────────── */
+.week-num { color: var(--sage-dark); }
 
 /* ── LABELS + ACCENTS ────────────────────────────────────── */
-.label::before { background: var(--butter-dark); }
-.label { color: var(--butter-dark); }
-em { color: var(--butter-dark); }
+.label::before { background: var(--sage-dark); }
+.label  { color: var(--sage-dark); }
+em      { color: #C8674A; }
 
 /* ── QUICK LINKS + CHIPS ─────────────────────────────────── */
 .ql-btn { border-color: var(--border); background: var(--surface2); color: var(--ink2); }
-.ql-btn:hover { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
-.chip { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
+.ql-btn:hover { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
+.chip   { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
 
 /* ── PHASE GRID ──────────────────────────────────────────── */
 .phase-cell { background: var(--surface2); border-color: var(--border); }
 .phase-cell:hover { background: var(--white); }
-.phase-num { color: var(--butter-dark); }
+.phase-num  { color: var(--sage-dark); }
 
-/* ── INPUT FOCUS: butter ─────────────────────────────────── */
-input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 0 3px var(--butter-pale); }
+/* ── INPUT FOCUS — sage ring ─────────────────────────────── */
+input:focus, textarea:focus {
+  border-color: var(--sage-dark);
+  box-shadow: 0 0 0 3px var(--sage-pale);
+}
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
-.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(212,97,122,.28); }
-.stories-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-.notif-btn { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
+.quick-start-btn { background: #C8674A; box-shadow: 0 6px 28px rgba(200,103,74,.30); }
+.stories-btn { background: linear-gradient(135deg, #C8674A, #A8523A); }
+.notif-btn   { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
 
 /* ── EXERCISE ROWS ───────────────────────────────────────── */
 .ex-row { border-bottom-color: var(--border); }
 .ex-row:hover { background: var(--surface2); }
 .ex-done-btn { background: var(--white); border-color: var(--border2); }
-.ex-done-btn:hover { border-color: var(--butter-dark); }
+.ex-done-btn:hover { border-color: var(--sage-dark); }
 
-/* ── TOGGLE BUTTON ───────────────────────────────────────── */
+/* ── TOGGLE + SET PILLS ──────────────────────────────────── */
 .wcard-toggle { background: var(--surface2); border-color: var(--border2); }
-.wcard.open .wcard-toggle { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
-
-/* ── SET PILLS ───────────────────────────────────────────── */
+.wcard.open .wcard-toggle { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
 .set-pill { background: var(--white); border-color: var(--border2); }
-.set-pill:hover { border-color: var(--butter-dark); color: var(--butter-dark); }
-.set-pill.done { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+.set-pill:hover { border-color: var(--sage-dark); color: var(--sage-dark); }
+.set-pill.done { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
 .section-intro { border-bottom-color: var(--border); color: var(--ink3); }
 
 /* ── WEEKLY SUMMARY ──────────────────────────────────────── */
 .weekly-summary { background: var(--surface2); border-color: var(--border); }
-.ws-stat { background: var(--white); border-color: var(--border); }
-.ws-stat-num { color: var(--butter-dark); }
+.ws-stat        { background: var(--white); border-color: var(--border); }
+.ws-stat-num    { color: #C8674A; }
 
 /* ── WEEK COMPARE ────────────────────────────────────────── */
 .wc-card { background: var(--surface2); border-color: var(--border); }
-.wc-val { color: var(--ink); }
+.wc-val  { color: var(--ink); }
 
 /* ── CALENDAR ────────────────────────────────────────────── */
 .cal-day { background: var(--surface2); }
-.cal-day.today { border-color: var(--butter-dark); color: var(--butter-dark); background: var(--butter-pale); }
+.cal-day.today {
+  border-color: var(--sage-dark);
+  color: var(--sage-dark);
+  background: var(--sage-pale);
+}
 
 /* ── GOALS & SCHEDULE ────────────────────────────────────── */
 .goals-box, .schedule-editor { background: var(--surface2); border-color: var(--border); }
 
-/* ── DARK MODE: keep purple-dark feel, warm accents ─────── */
-[data-theme="dark"] body {
-  background-image: radial-gradient(circle, rgba(245,200,66,0.07) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
-}
-[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .streak-num { color: var(--butter); }
-[data-theme="dark"] .week-num { color: var(--butter); }
-[data-theme="dark"] .today-title { color: var(--butter); }
+/* ── DARK MODE ───────────────────────────────────────────── */
+[data-theme="dark"] body { background-image: none; }
+[data-theme="dark"] .wcard-a     { box-shadow: -5px 0 24px rgba(74,107,80,.25), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-b     { box-shadow: -5px 0 24px rgba(122,158,126,.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-p     { box-shadow: -5px 0 24px rgba(200,103,74,.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-skate { box-shadow: -5px 0 24px rgba(91,155,213,.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .streak-num  { color: #C8674A; }
+[data-theme="dark"] .week-num    { color: var(--sage); }
+[data-theme="dark"] .today-title { color: #C8674A; }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
