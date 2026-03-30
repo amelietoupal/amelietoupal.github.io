@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Pacifico&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <title>Modelka Fitness Guide</title>
 
 <style>
@@ -49,9 +49,8 @@
   --card-bg:  var(--surface2);
   --soft:     var(--border);
   --light:    var(--ink3);
-  --font-display: 'Fredoka', 'Arial Rounded MT Bold', sans-serif;
-  --font-script:  'Pacifico', cursive;
-  --font-serif:   Georgia, serif;
+  --font-display: 'Syne', 'Arial Black', sans-serif;
+  --font-serif:   'Playfair Display', Georgia, serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
   --r-xl: 18px; --r-lg: 14px; --r-md: 10px; --r-sm: 7px; --r-xs: 5px;
   --sh-sm: 0 2px 8px rgba(201,107,136,.1);
@@ -100,7 +99,7 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3 { font-family: var(--font-display); font-weight: 600; letter-spacing: -.01em; line-height: .95; color: var(--black); text-transform: uppercase; }
+h1,h2,h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; line-height: .9; color: var(--black); text-transform: uppercase; }
 h4,h5 { font-family: var(--font-body); font-weight: 500; color: var(--ink); }
 p { color: var(--ink2); line-height: 1.7; margin-bottom: 12px; }
 p:last-child { margin-bottom: 0; }
@@ -1245,143 +1244,195 @@ input:focus, textarea:focus {
 .ql-btn { border-radius: 50px; }
 
 /* ══════════════════════════════════════════════════════════
-   WHIMSICAL PINTEREST REDESIGN
-   Fredoka · Pacifico · stripes · organic blobs
+   DRAMATIC PINTEREST REDESIGN
+   Syne bold display · Playfair italic accent
+   Visible stripes · editorial contrast
    ══════════════════════════════════════════════════════════ */
 
-/* ── TYPOGRAPHY: Fredoka rounded display ─────────────────── */
-h1, h2, h3 { text-transform: none; }
-
+/* ── SECTION TITLE: Syne ultra-bold ─────────────────────── */
 .section-title {
-  font-size: clamp(48px, 13vw, 96px);
-  letter-spacing: -.02em;
-  line-height: .92;
-  font-weight: 600;
-  text-transform: none;
+  font-size: clamp(52px, 14vw, 108px);
+  letter-spacing: -.03em;
+  line-height: .88;
+  font-weight: 800;
 }
-.section-title em { font-style: normal; }
-
-/* Section intro: mix in Pacifico for the em accent */
-.section-title em,
-.today-title { font-family: var(--font-script); font-weight: 400; }
-
-/* Today title: Pacifico handwritten */
-.today-title {
-  font-size: 20px;
-  letter-spacing: 0;
+/* Italic accent word: Playfair Display italic */
+.section-title em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 700;
   text-transform: none;
-  margin-bottom: 16px;
-  color: rgba(255,255,255,.85);
+  letter-spacing: -.01em;
 }
 
-/* Hero plan heading: soften uppercase */
-#plan .section-title { text-transform: none; }
-
-/* TÝDEN label */
-.sticky-week-label {
-  font-family: var(--font-script);
-  font-size: 16px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--sage-dark);
-}
-.week-num { font-family: var(--font-display); }
-
-/* Workout card heading h3: Fredoka rounded */
-.wcard-head h3 {
-  font-size: 19px;
-  letter-spacing: 0;
-  text-transform: none;
-  font-weight: 600;
-}
-
-/* Section numbers: keep Fredoka small */
-.section-num { font-family: var(--font-display); font-size: 8.5px; }
-
-/* Nav labels: Fredoka */
-.nav-lbl { font-family: var(--font-display); font-size: 9px; letter-spacing: .2px; font-weight: 500; text-transform: none; }
-
-/* ── TODAY CARD: diagonal stripe + organic feel ──────────── */
+/* ── TODAY CARD: visible bold stripes ────────────────────── */
 .today {
   background:
     repeating-linear-gradient(
-      -55deg,
-      rgba(255,255,255,0)    0px,
-      rgba(255,255,255,0)    18px,
-      rgba(255,255,255,0.04) 18px,
-      rgba(255,255,255,0.04) 36px
+      -45deg,
+      transparent         0px,
+      transparent         22px,
+      rgba(255,255,255,.055) 22px,
+      rgba(255,255,255,.055) 44px
     ),
-    radial-gradient(ellipse 90% 50% at 75% 0%, rgba(122,158,126,.22) 0%, transparent 60%),
     linear-gradient(150deg, #182A1A 0%, #243828 100%);
   position: relative;
+  overflow: hidden;
 }
-/* Decorative blob shape inside today card */
-.today::after {
+/* Circular decorative element top-right */
+.today::before {
   content: '';
   position: absolute;
-  width: 160px;
-  height: 160px;
-  background: rgba(200,103,74,.10);
-  border-radius: 61% 39% 55% 45% / 57% 44% 56% 43%;
-  bottom: -30px;
-  right: -30px;
+  width: 200px;
+  height: 200px;
+  border: 32px solid rgba(200,103,74,.14);
+  border-radius: 50%;
+  top: -70px;
+  right: -70px;
   pointer-events: none;
 }
+/* Today title: Playfair italic */
+.today-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 16px;
+  color: rgba(255,255,255,.82);
+}
 
-/* ── PLAN HERO: organic blob accent ──────────────────────── */
+/* ── PLAN HERO: stripe band behind heading ───────────────── */
 #plan .content > div:first-child {
   position: relative;
-  overflow: visible;
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
 }
-#plan .content > div:first-child::before {
+#plan .content > div:first-child::after {
   content: '';
   position: absolute;
-  width: 220px;
-  height: 200px;
-  background: rgba(122,158,126,.13);
-  border-radius: 44% 56% 37% 63% / 55% 42% 58% 45%;
-  top: -30px;
-  right: -20px;
+  right: -24px;
+  top: 10px;
+  bottom: 10px;
+  width: 130px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--sage-pale) 0px,
+    var(--sage-pale) 7px,
+    transparent 7px,
+    transparent 14px
+  );
+  border-radius: 8px;
   pointer-events: none;
-  z-index: 0;
 }
 
-/* ── BACKGROUND: very subtle horizontal stripe ───────────── */
+/* ── PAGE BACKGROUND: very faint linen lines ────────────── */
 body {
+  background-color: var(--white);
   background-image:
     repeating-linear-gradient(
-      180deg,
-      transparent 0px,
-      transparent 72px,
-      rgba(122,158,126,.028) 72px,
-      rgba(122,158,126,.028) 73px
-    ),
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(122,158,126,.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(200,103,74,.06) 0%, transparent 55%);
+      90deg,
+      transparent       0px,
+      transparent       80px,
+      rgba(122,158,126,.022) 80px,
+      rgba(122,158,126,.022) 81px
+    );
 }
 
-/* ── PHASE NUMBERS: Pacifico accent ─────────────────────── */
-.phase-num { font-family: var(--font-script); font-size: 24px; letter-spacing: 0; }
-.phase-name { text-transform: none; letter-spacing: .5px; font-size: 12px; }
+/* ── WORKOUT CARDS: Syne heading ─────────────────────────── */
+.wcard-head h3 {
+  font-size: 18px;
+  letter-spacing: -.01em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
 
-/* ── LABELS: script accent ───────────────────────────────── */
+/* ── SECTION NUMBER: Playfair italic label ───────────────── */
+.section-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  color: var(--sage-dark);
+  opacity: .8;
+  margin-bottom: 10px;
+}
+.section-num::before { display: none; }
+
+/* ── PAGE-HD-LABEL: Playfair italic ─────────────────────── */
 .page-hd-label {
-  font-family: var(--font-script);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--sage-dark);
+  font-weight: 400;
+}
+
+/* ── STREAK LABEL: Playfair italic ──────────────────────── */
+.streak-lbl {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink3);
+  margin-top: 2px;
+}
+.streak-num { font-family: var(--font-display); font-weight: 800; }
+
+/* ── STICKY WEEK LABEL ───────────────────────────────────── */
+.sticky-week-label {
+  font-family: var(--font-serif);
+  font-style: italic;
   font-size: 14px;
   letter-spacing: 0;
   text-transform: none;
   color: var(--sage-dark);
 }
+.week-num { font-family: var(--font-display); font-weight: 800; }
 
-/* ── STREAK: Pacifico for "dni v řadě" ───────────────────── */
-.streak-lbl { font-family: var(--font-script); font-size: 17px; font-style: normal; text-transform: none; letter-spacing: 0; }
-.streak-num { font-family: var(--font-display); }
+/* ── PHASE NUMBERS: Playfair serif ──────────────────────── */
+.phase-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 26px;
+  letter-spacing: 0;
+  font-weight: 700;
+}
+.phase-name { text-transform: none; }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
-.section-intro { font-size: 15px; line-height: 1.75; border-bottom-color: var(--border); }
+.section-intro {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 16px;
+  line-height: 1.78;
+  border-bottom-color: var(--border);
+  color: var(--ink2);
+}
 
-/* ── DELOAD TITLE ────────────────────────────────────────── */
-.deload-title { font-family: var(--font-script); text-transform: none; letter-spacing: 0; font-size: 15px; }
+/* ── DELOAD TITLE: Playfair italic ──────────────────────── */
+.deload-title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ── NAV LABELS: Syne ────────────────────────────────────── */
+.nav-lbl { font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .3px; }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
