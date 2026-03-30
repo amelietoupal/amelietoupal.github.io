@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Caveat:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <title>Modelka Fitness Guide</title>
 
 <style>
@@ -50,7 +50,7 @@
   --soft:     var(--border);
   --light:    var(--ink3);
   --font-display: 'Syne', 'Arial Black', sans-serif;
-  --font-serif:   'Playfair Display', Georgia, serif;
+  --font-script:  'Caveat', cursive;
   --font-body:    'DM Sans', system-ui, sans-serif;
   --r-xl: 18px; --r-lg: 14px; --r-md: 10px; --r-sm: 7px; --r-xs: 5px;
   --sh-sm: 0 2px 8px rgba(201,107,136,.1);
@@ -895,152 +895,202 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 [data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
 
 /* ══════════════════════════════════════════════════════════
-   MATCHA PILATES — PINTEREST WELLNESS AESTHETIC
-   sage green · clay terracotta · warm linen
+   TINGLE & TOTS — STRIPES + CREAM + RED AESTHETIC
+   kraft brown · baby blue · butter cream · red
    ══════════════════════════════════════════════════════════ */
 
 /* ── PALETTE ─────────────────────────────────────────────── */
 :root {
-  /* Linen backgrounds */
-  --white:    #F0EBE3;
-  --surface:  #FAFAF6;
-  --surface2: #EAF1E7;
-  --bg:       #F0EBE3;
-  --card-bg:  #EAF1E7;
+  --cream:    #F5EFCC;
+  --white:    #F5EFCC;
+  --surface:  #FAF6E0;
+  --surface2: #EDE7C0;
+  --bg:       #F5EFCC;
 
-  /* Forest ink */
-  --black:  #1E2B20;
-  --ink:    #2C3E2D;
-  --ink2:   #4A6B50;
-  --ink3:   #7A9E7E;
-  --muted:  #A8C4AA;
+  --black:  #2C1F0E;
+  --ink:    #2C1F0E;
+  --ink2:   #5A4422;
+  --ink3:   #8B6E42;
+  --muted:  #BBA878;
 
-  /* Sage borders */
-  --border:  #D4E8D0;
-  --border2: #B4D0B0;
-  --soft:    #D4E8D0;
+  --border:  #DDD4A0;
+  --border2: #CCC090;
+  --soft:    #DDD4A0;
 
-  /* Clay / terracotta accent */
-  --accent:      #C8674A;
-  --accent2:     #A8523A;
-  --accent-pale: rgba(200,103,74,.09);
-  --accent-bg:   rgba(200,103,74,.14);
+  /* Red accent — T&T signature */
+  --accent:      #C83028;
+  --accent2:     #A82020;
+  --accent-pale: rgba(200,48,40,.09);
+  --accent-bg:   rgba(200,48,40,.14);
 
-  /* Sage secondaries */
-  --sage:       #7A9E7E;
-  --sage-dark:  #4A6B50;
-  --sage-pale:  rgba(122,158,126,.12);
-  --sage-bg:    rgba(122,158,126,.20);
+  /* Stripe colors */
+  --kraft:      #A89E7A;
+  --babyblue:   #A8C8D8;
+  --sage:       #A8C8D8;       /* map old sage → baby blue */
+  --sage-dark:  #6A9AB0;
+  --sage-pale:  rgba(168,200,216,.15);
+  --sage-bg:    rgba(168,200,216,.25);
 
-  /* Today dark: deep forest */
-  --today-bg-1: #182A1A;
-  --today-bg-2: #243828;
+  --today-bg-1: #A89E7A;
+  --today-bg-2: #9A9070;
 
-  /* Shadows: green-tinted */
-  --sh-sm: 0 2px 14px rgba(50,90,55,.09);
-  --sh:    0 4px 26px rgba(50,90,55,.12);
-  --sh-lg: 0 8px 44px rgba(50,90,55,.16);
+  --sh-sm: 0 2px 14px rgba(44,31,14,.10);
+  --sh:    0 4px 26px rgba(44,31,14,.13);
+  --sh-lg: 0 8px 44px rgba(44,31,14,.18);
 
-  --r-xl: 24px;
-  --r-lg: 20px;
-  --r-md: 14px;
+  --r-xl: 20px;
+  --r-lg: 16px;
+  --r-md: 12px;
   --r-sm: 8px;
 }
 
-/* ── LINEN BACKGROUND — clean, no pattern ────────────────── */
+/* ── BODY: vertical stripe wallpaper ─────────────────────── */
 body {
-  background-color: var(--white);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 20% 10%, rgba(122,158,126,.08) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 85% 80%, rgba(200,103,74,.06) 0%, transparent 55%);
+  background-color: var(--kraft);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent       0px,
+    transparent       28px,
+    var(--babyblue)   28px,
+    var(--babyblue)   56px
+  );
 }
 
-/* ── NAV — deep forest glass ─────────────────────────────── */
-.nav {
-  background: rgba(20,36,22,0.97);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+/* ── SECTION: cream floating card on stripes ─────────────── */
+.section { background: transparent; }
+.content {
+  background: var(--cream);
+  border-radius: 0;
+  position: relative;
 }
-.nav-btn.active { color: #C8674A; }
+/* Red dashed decorative line at top of content */
+.content::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 14px,
+    transparent   14px,
+    transparent   22px
+  );
+  margin-bottom: 0;
+}
+
+/* ── NAV: cream butter bar ───────────────────────────────── */
+.nav {
+  background: var(--cream);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-top: 3px solid var(--border);
+}
+.nav-btn        { color: rgba(44,31,14,.40); }
+.nav-btn.active { background: rgba(200,48,40,.12); color: var(--accent); }
 
 /* ── STICKY WEEK ─────────────────────────────────────────── */
-.sticky-week { background: var(--white); border-bottom-color: var(--border); }
+.sticky-week { background: var(--cream); border-bottom-color: var(--border); }
 
-/* ── TODAY HERO — forest dark with organic texture ───────── */
+/* ── TODAY HERO: bold stripe card ────────────────────────── */
 .today {
-  background:
-    radial-gradient(ellipse 100% 60% at 70% 0%, rgba(122,158,126,.18) 0%, transparent 55%),
-    linear-gradient(150deg, var(--today-bg-1) 0%, var(--today-bg-2) 100%);
+  background-color: var(--kraft);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent     0px,
+    transparent     22px,
+    var(--babyblue) 22px,
+    var(--babyblue) 44px
+  );
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
 }
-.today-title  { color: #C8674A; }
-.today-date   { color: rgba(210,230,215,.45); }
-.today-rec    { color: #C8674A; }
-.today-card:hover { border-color: var(--sage); }
-.today-card.active { background: var(--sage); border-color: var(--sage); }
-.today-card.active .tc-name { color: #1E2B20; }
-.today-card.active .tc-sub  { color: rgba(30,43,32,.65); }
+/* Cream content area float inside today */
+.today::before {
+  content: none;
+}
+.today-date   { color: rgba(255,255,255,.65); text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.today-rec    { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.3); font-weight: 600; }
+.today-title  { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+/* Today category cards: cream pills on stripe */
+.today-card {
+  background: rgba(245,239,204,.88);
+  border-color: rgba(245,239,204,.7);
+}
+.today-card:hover { background: rgba(245,239,204,1); border-color: var(--accent); }
+.today-card.active { background: var(--accent); border-color: var(--accent); }
+.today-card .tc-name { color: var(--black); }
+.today-card .tc-sub  { color: var(--ink3); }
+.today-card.active .tc-name { color: #fff; }
+.today-card.active .tc-sub  { color: rgba(255,255,255,.75); }
+/* Week strip */
+.ws-lbl { color: rgba(255,255,255,.7); }
+.ws-a   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
+.ws-b   { background: rgba(200,48,40,.3);   color: #ffd0cc; border-color: rgba(200,48,40,.5); }
+.ws-p   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
+.today-info { color: rgba(255,255,255,.5); }
+
+/* Quick start: red */
+.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(200,48,40,.30); }
 
 /* ── WORKOUT CARDS ───────────────────────────────────────── */
 .wcard { background: var(--surface); border-color: var(--border); }
 .wcard-head:hover { background: var(--surface2); }
 .wcard.open .wcard-head { border-bottom-color: var(--border); }
-.wcard-a     { box-shadow: -5px 0 24px rgba(74,107,80,.16), 0 2px 12px rgba(50,90,55,.06); }
-.wcard-b     { box-shadow: -5px 0 24px rgba(122,158,126,.14), 0 2px 12px rgba(50,90,55,.06); }
-.wcard-p     { box-shadow: -5px 0 24px rgba(200,103,74,.13), 0 2px 12px rgba(50,90,55,.06); }
-.wcard-skate { box-shadow: -5px 0 24px rgba(91,155,213,.11), 0 2px 12px rgba(50,90,55,.06); }
-.wcard:hover { box-shadow: 0 16px 48px rgba(50,90,55,.14); }
+.wcard-a     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-b     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-p     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-skate { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard:hover { box-shadow: 0 14px 40px rgba(44,31,14,.14); }
+.wcard-a { border-top-color: #6A9AB0; }
+.wcard-b { border-top-color: #A8C8D8; }
+.wcard-p { border-top-color: var(--accent); }
 
 /* ── SECTION HEADERS ─────────────────────────────────────── */
-.section-num { color: var(--sage-dark); }
+.section-num { color: var(--accent); }
 
-/* ── STREAK — terracotta fire ────────────────────────────── */
-.streak-banner {
-  background: linear-gradient(135deg, rgba(122,158,126,.13), rgba(200,103,74,.07));
-  border-color: var(--border);
-}
-.streak-num { color: #C8674A; }
+/* ── STREAK ──────────────────────────────────────────────── */
+.streak-banner { background: var(--surface2); border-color: var(--border); }
+.streak-num    { color: var(--accent); }
 
-/* ── WEEK SELECTOR — sage number ─────────────────────────── */
-.week-num { color: var(--sage-dark); }
-
-/* ── LABELS + ACCENTS ────────────────────────────────────── */
-.label::before { background: var(--sage-dark); }
-.label  { color: var(--sage-dark); }
-em      { color: #C8674A; }
+/* ── WEEK / LABELS ───────────────────────────────────────── */
+.week-num       { color: var(--accent); }
+.label::before  { background: var(--accent); }
+.label          { color: var(--accent); }
+em              { color: var(--accent); }
 
 /* ── QUICK LINKS + CHIPS ─────────────────────────────────── */
 .ql-btn { border-color: var(--border); background: var(--surface2); color: var(--ink2); }
-.ql-btn:hover { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
-.chip   { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
+.ql-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
 
 /* ── PHASE GRID ──────────────────────────────────────────── */
 .phase-cell { background: var(--surface2); border-color: var(--border); }
 .phase-cell:hover { background: var(--white); }
-.phase-num  { color: var(--sage-dark); }
+.phase-num  { color: var(--accent); }
 
-/* ── INPUT FOCUS — sage ring ─────────────────────────────── */
+/* ── INPUTS ──────────────────────────────────────────────── */
 input:focus, textarea:focus {
-  border-color: var(--sage-dark);
-  box-shadow: 0 0 0 3px var(--sage-pale);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,48,40,.10);
 }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
-.quick-start-btn { background: #C8674A; box-shadow: 0 6px 28px rgba(200,103,74,.30); }
-.stories-btn { background: linear-gradient(135deg, #C8674A, #A8523A); }
+.stories-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
 .notif-btn   { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
 
 /* ── EXERCISE ROWS ───────────────────────────────────────── */
 .ex-row { border-bottom-color: var(--border); }
 .ex-row:hover { background: var(--surface2); }
 .ex-done-btn { background: var(--white); border-color: var(--border2); }
-.ex-done-btn:hover { border-color: var(--sage-dark); }
+.ex-done-btn:hover { border-color: var(--accent); }
 
 /* ── TOGGLE + SET PILLS ──────────────────────────────────── */
 .wcard-toggle { background: var(--surface2); border-color: var(--border2); }
-.wcard.open .wcard-toggle { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
+.wcard.open .wcard-toggle { background: var(--accent); border-color: var(--accent); color: #fff; }
 .set-pill { background: var(--white); border-color: var(--border2); }
-.set-pill:hover { border-color: var(--sage-dark); color: var(--sage-dark); }
-.set-pill.done { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
+.set-pill:hover { border-color: var(--accent); color: var(--accent); }
+.set-pill.done { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
 .section-intro { border-bottom-color: var(--border); color: var(--ink3); }
@@ -1048,7 +1098,7 @@ input:focus, textarea:focus {
 /* ── WEEKLY SUMMARY ──────────────────────────────────────── */
 .weekly-summary { background: var(--surface2); border-color: var(--border); }
 .ws-stat        { background: var(--white); border-color: var(--border); }
-.ws-stat-num    { color: #C8674A; }
+.ws-stat-num    { color: var(--accent); }
 
 /* ── WEEK COMPARE ────────────────────────────────────────── */
 .wc-card { background: var(--surface2); border-color: var(--border); }
@@ -1056,24 +1106,15 @@ input:focus, textarea:focus {
 
 /* ── CALENDAR ────────────────────────────────────────────── */
 .cal-day { background: var(--surface2); }
-.cal-day.today {
-  border-color: var(--sage-dark);
-  color: var(--sage-dark);
-  background: var(--sage-pale);
-}
+.cal-day.today { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
 
 /* ── GOALS & SCHEDULE ────────────────────────────────────── */
 .goals-box, .schedule-editor { background: var(--surface2); border-color: var(--border); }
 
-/* ── DARK MODE ───────────────────────────────────────────── */
-[data-theme="dark"] body { background-image: none; }
-[data-theme="dark"] .wcard-a     { box-shadow: -5px 0 24px rgba(74,107,80,.25), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-b     { box-shadow: -5px 0 24px rgba(122,158,126,.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-p     { box-shadow: -5px 0 24px rgba(200,103,74,.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-skate { box-shadow: -5px 0 24px rgba(91,155,213,.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .streak-num  { color: #C8674A; }
-[data-theme="dark"] .week-num    { color: var(--sage); }
-[data-theme="dark"] .today-title { color: #C8674A; }
+/* ── DARK MODE: keep light, just dimmer ─────────────────── */
+[data-theme="dark"] .streak-num  { color: var(--accent); }
+[data-theme="dark"] .week-num    { color: var(--accent); }
+[data-theme="dark"] .today-title { color: #fff; }
 
 /* ══════════════════════════════════════════════════════════
    FULL RENOVATION — PINTEREST WELLNESS LAYOUT
@@ -1088,8 +1129,8 @@ input:focus, textarea:focus {
   transition: background .2s, color .2s;
 }
 .nav-btn.active {
-  background: rgba(200,103,74,.16);
-  color: #C8674A;
+  background: rgba(200,48,40,.13);
+  color: var(--accent);
 }
 .nav-btn::after { display: none; }   /* remove underline dot */
 .nav-lbl { font-size: 7.5px; letter-spacing: .4px; font-weight: 500; }
@@ -1256,51 +1297,27 @@ input:focus, textarea:focus {
   line-height: .88;
   font-weight: 800;
 }
-/* Italic accent word: Playfair Display italic */
+/* Accent word: Caveat handwritten */
 .section-title em {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-script);
+  font-style: normal;
   font-weight: 700;
   text-transform: none;
   letter-spacing: -.01em;
+  font-size: 1.05em;
 }
 
-/* ── TODAY CARD: visible bold stripes ────────────────────── */
-.today {
-  background:
-    repeating-linear-gradient(
-      -45deg,
-      transparent         0px,
-      transparent         22px,
-      rgba(255,255,255,.055) 22px,
-      rgba(255,255,255,.055) 44px
-    ),
-    linear-gradient(150deg, #182A1A 0%, #243828 100%);
-  position: relative;
-  overflow: hidden;
-}
-/* Circular decorative element top-right */
-.today::before {
-  content: '';
-  position: absolute;
-  width: 200px;
-  height: 200px;
-  border: 32px solid rgba(200,103,74,.14);
-  border-radius: 50%;
-  top: -70px;
-  right: -70px;
-  pointer-events: none;
-}
-/* Today title: Playfair italic */
+/* ── TODAY CARD: Caveat title ────────────────────────────── */
+/* Today title: Caveat handwritten */
 .today-title {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 22px;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
   letter-spacing: 0;
   text-transform: none;
   margin-bottom: 16px;
-  color: rgba(255,255,255,.82);
+  color: #fff;
 }
 
 /* ── PLAN HERO: stripe band behind heading ───────────────── */
@@ -1349,40 +1366,38 @@ body {
   text-transform: uppercase;
 }
 
-/* ── SECTION NUMBER: Playfair italic label ───────────────── */
+/* ── SECTION NUMBER: Caveat script label ─────────────────── */
 .section-num {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 400;
-  font-size: 12px;
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
   letter-spacing: 0;
   text-transform: none;
   background: none;
   border-radius: 0;
   padding: 0;
-  color: var(--sage-dark);
-  opacity: .8;
+  color: var(--accent);
+  opacity: .9;
   margin-bottom: 10px;
 }
 .section-num::before { display: none; }
 
-/* ── PAGE-HD-LABEL: Playfair italic ─────────────────────── */
+/* ── PAGE-HD-LABEL: Caveat ───────────────────────────────── */
 .page-hd-label {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14px;
+  font-family: var(--font-script);
+  font-size: 17px;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--sage-dark);
-  font-weight: 400;
+  color: var(--accent);
+  font-weight: 600;
 }
 
-/* ── STREAK LABEL: Playfair italic ──────────────────────── */
+/* ── STREAK LABEL: Caveat ────────────────────────────────── */
 .streak-lbl {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 16px;
-  font-weight: 400;
+  font-family: var(--font-script);
+  font-size: 18px;
+  font-weight: 600;
   text-transform: none;
   letter-spacing: 0;
   color: var(--ink3);
@@ -1392,42 +1407,38 @@ body {
 
 /* ── STICKY WEEK LABEL ───────────────────────────────────── */
 .sticky-week-label {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14px;
+  font-family: var(--font-script);
+  font-size: 18px;
   letter-spacing: 0;
   text-transform: none;
-  color: var(--sage-dark);
+  color: var(--accent);
 }
 .week-num { font-family: var(--font-display); font-weight: 800; }
 
-/* ── PHASE NUMBERS: Playfair serif ──────────────────────── */
+/* ── PHASE NUMBERS: Caveat ───────────────────────────────── */
 .phase-num {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-script);
   font-size: 26px;
   letter-spacing: 0;
   font-weight: 700;
+  color: var(--accent);
 }
 .phase-name { text-transform: none; }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
 .section-intro {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 16px;
-  line-height: 1.78;
+  font-size: 15px;
+  line-height: 1.75;
   border-bottom-color: var(--border);
   color: var(--ink2);
 }
 
-/* ── DELOAD TITLE: Playfair italic ──────────────────────── */
+/* ── DELOAD TITLE: Caveat ────────────────────────────────── */
 .deload-title {
-  font-family: var(--font-serif);
-  font-style: italic;
+  font-family: var(--font-script);
   text-transform: none;
   letter-spacing: 0;
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
 }
 
