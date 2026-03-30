@@ -893,6 +893,186 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 [data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
 [data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
 [data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
+
+/* ══════════════════════════════════════════════════════════
+   BUTTER & ROSE — PINTEREST AESTHETIC
+   ══════════════════════════════════════════════════════════ */
+
+/* ── WARM COLOUR PALETTE ─────────────────────────────────── */
+:root {
+  /* Backgrounds — warm butter cream */
+  --white:    #FFFBEE;
+  --surface:  #FFFFFF;
+  --surface2: #FFF8E1;
+  --bg:       #FFFBEE;
+  --card-bg:  #FFF8E1;
+
+  /* Text — warm brown instead of cool purple */
+  --black:  #2C1A08;
+  --ink:    #2C1A08;
+  --ink2:   #6B4226;
+  --ink3:   #9C7048;
+  --muted:  #C4A87A;
+
+  /* Borders — golden warm */
+  --border:  #F0D9A8;
+  --border2: #D9BF88;
+  --soft:    #F0D9A8;
+
+  /* Pink accent — slightly warmer */
+  --accent:      #D4617A;
+  --accent2:     #B84D65;
+  --accent-pale: rgba(212,97,122,.08);
+  --accent-bg:   rgba(212,97,122,.13);
+
+  /* NEW: Butter yellow accent */
+  --butter:       #F5C842;
+  --butter-dark:  #D4A820;
+  --butter-pale:  rgba(245,200,66,.12);
+  --butter-bg:    rgba(245,200,66,.22);
+
+  /* Today card: dark warm instead of cool purple */
+  --today-bg-1: #1E0E06;
+  --today-bg-2: #2E1810;
+
+  /* Shadows — warm tinted */
+  --sh-sm: 0 2px 12px rgba(180,120,60,.10);
+  --sh:    0 4px 24px rgba(180,120,60,.13);
+  --sh-lg: 0 8px 40px rgba(180,120,60,.17);
+
+  /* Rounder everything */
+  --r-xl: 24px;
+  --r-lg: 18px;
+  --r-md: 12px;
+  --r-sm: 8px;
+}
+
+/* ── POLKA DOTS BACKGROUND ───────────────────────────────── */
+body {
+  background-color: var(--white);
+  background-image: radial-gradient(circle, rgba(245,200,66,0.18) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+
+/* ── NAV — warm brown glass ──────────────────────────────── */
+.nav { background: rgba(44,26,8,0.96); }
+
+/* ── STICKY WEEK — warm border ───────────────────────────── */
+.sticky-week { background: var(--white); border-bottom-color: var(--border); }
+
+/* ── TODAY HERO — polka dots on dark bg ─────────────────── */
+.today {
+  background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.12) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
+  background-size: 18px 18px, auto;
+}
+/* Today title: butter yellow highlight */
+.today-title { color: var(--butter); }
+/* Today date: soft warm */
+.today-date { color: rgba(255,245,200,0.45); }
+/* Today rec: butter */
+.today-rec { color: var(--butter); }
+/* Today card hover/active: butter accent */
+.today-card:hover { border-color: var(--butter); }
+.today-card.active { background: var(--butter); border-color: var(--butter); }
+.today-card.active .tc-name { color: var(--today-bg-1); }
+.today-card.active .tc-sub { color: rgba(44,26,8,0.7); }
+
+/* ── WORKOUT CARDS — warm border, cream surface ──────────── */
+.wcard { background: var(--surface); border-color: var(--border); }
+.wcard-head:hover { background: var(--surface2); }
+.wcard.open .wcard-head { border-bottom-color: var(--border); }
+/* Left glow: warm-tinted */
+.wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.12), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.12), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.13), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.13), 0 2px 12px rgba(180,120,60,.07); }
+.wcard:hover { box-shadow: 0 14px 48px rgba(180,120,60,.16); }
+
+/* ── SECTION TITLE ───────────────────────────────────────── */
+.section-num { color: var(--butter-dark); }
+
+/* ── STREAK — butter yellow fire ────────────────────────── */
+.streak-banner {
+  background: linear-gradient(135deg, rgba(245,200,66,.15), rgba(212,97,122,.08));
+  border-color: var(--border);
+}
+.streak-num { color: var(--butter-dark); }
+
+/* ── WEEK SELECTOR — butter number ──────────────────────── */
+.week-num { color: var(--butter-dark); }
+
+/* ── LABELS + ACCENTS ────────────────────────────────────── */
+.label::before { background: var(--butter-dark); }
+.label { color: var(--butter-dark); }
+em { color: var(--butter-dark); }
+
+/* ── QUICK LINKS + CHIPS ─────────────────────────────────── */
+.ql-btn { border-color: var(--border); background: var(--surface2); color: var(--ink2); }
+.ql-btn:hover { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+.chip { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
+
+/* ── PHASE GRID ──────────────────────────────────────────── */
+.phase-cell { background: var(--surface2); border-color: var(--border); }
+.phase-cell:hover { background: var(--white); }
+.phase-num { color: var(--butter-dark); }
+
+/* ── INPUT FOCUS: butter ─────────────────────────────────── */
+input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 0 3px var(--butter-pale); }
+
+/* ── BUTTONS ─────────────────────────────────────────────── */
+.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(212,97,122,.28); }
+.stories-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
+.notif-btn { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
+
+/* ── EXERCISE ROWS ───────────────────────────────────────── */
+.ex-row { border-bottom-color: var(--border); }
+.ex-row:hover { background: var(--surface2); }
+.ex-done-btn { background: var(--white); border-color: var(--border2); }
+.ex-done-btn:hover { border-color: var(--butter-dark); }
+
+/* ── TOGGLE BUTTON ───────────────────────────────────────── */
+.wcard-toggle { background: var(--surface2); border-color: var(--border2); }
+.wcard.open .wcard-toggle { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+
+/* ── SET PILLS ───────────────────────────────────────────── */
+.set-pill { background: var(--white); border-color: var(--border2); }
+.set-pill:hover { border-color: var(--butter-dark); color: var(--butter-dark); }
+.set-pill.done { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+
+/* ── SECTION INTRO ───────────────────────────────────────── */
+.section-intro { border-bottom-color: var(--border); color: var(--ink3); }
+
+/* ── WEEKLY SUMMARY ──────────────────────────────────────── */
+.weekly-summary { background: var(--surface2); border-color: var(--border); }
+.ws-stat { background: var(--white); border-color: var(--border); }
+.ws-stat-num { color: var(--butter-dark); }
+
+/* ── WEEK COMPARE ────────────────────────────────────────── */
+.wc-card { background: var(--surface2); border-color: var(--border); }
+.wc-val { color: var(--ink); }
+
+/* ── CALENDAR ────────────────────────────────────────────── */
+.cal-day { background: var(--surface2); }
+.cal-day.today { border-color: var(--butter-dark); color: var(--butter-dark); background: var(--butter-pale); }
+
+/* ── GOALS & SCHEDULE ────────────────────────────────────── */
+.goals-box, .schedule-editor { background: var(--surface2); border-color: var(--border); }
+
+/* ── DARK MODE: keep purple-dark feel, warm accents ─────── */
+[data-theme="dark"] body {
+  background-image: radial-gradient(circle, rgba(245,200,66,0.07) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .streak-num { color: var(--butter); }
+[data-theme="dark"] .week-num { color: var(--butter); }
+[data-theme="dark"] .today-title { color: var(--butter); }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
