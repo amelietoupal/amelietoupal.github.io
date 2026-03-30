@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Caveat:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <title>Modelka Fitness Guide</title>
 
 <style>
@@ -49,8 +49,8 @@
   --card-bg:  var(--surface2);
   --soft:     var(--border);
   --light:    var(--ink3);
-  --font-display: 'Syne', 'Arial Black', sans-serif;
-  --font-script:  'Caveat', cursive;
+  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
   --r-xl: 18px; --r-lg: 14px; --r-md: 10px; --r-sm: 7px; --r-xs: 5px;
   --sh-sm: 0 2px 8px rgba(201,107,136,.1);
@@ -99,7 +99,7 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; line-height: .9; color: var(--black); text-transform: uppercase; }
+h1,h2,h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: .04em; line-height: .95; color: var(--black); text-transform: uppercase; }
 h4,h5 { font-family: var(--font-body); font-weight: 500; color: var(--ink); }
 p { color: var(--ink2); line-height: 1.7; margin-bottom: 12px; }
 p:last-child { margin-bottom: 0; }
@@ -895,555 +895,184 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 [data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
 
 /* ══════════════════════════════════════════════════════════
-   TINGLE & TOTS — STRIPES + CREAM + RED AESTHETIC
-   kraft brown · baby blue · butter cream · red
+   BUTTER & ROSE — PINTEREST AESTHETIC
    ══════════════════════════════════════════════════════════ */
 
-/* ── PALETTE ─────────────────────────────────────────────── */
+/* ── WARM COLOUR PALETTE ─────────────────────────────────── */
 :root {
-  --cream:    #F5EFCC;
-  --white:    #F5EFCC;
-  --surface:  #FAF6E0;
-  --surface2: #EDE7C0;
-  --bg:       #F5EFCC;
+  /* Backgrounds — warm butter cream */
+  --white:    #FFFBEE;
+  --surface:  #FFFFFF;
+  --surface2: #FFF8E1;
+  --bg:       #FFFBEE;
+  --card-bg:  #FFF8E1;
 
-  --black:  #2C1F0E;
-  --ink:    #2C1F0E;
-  --ink2:   #5A4422;
-  --ink3:   #8B6E42;
-  --muted:  #BBA878;
+  /* Text — warm brown instead of cool purple */
+  --black:  #2C1A08;
+  --ink:    #2C1A08;
+  --ink2:   #6B4226;
+  --ink3:   #9C7048;
+  --muted:  #C4A87A;
 
-  --border:  #DDD4A0;
-  --border2: #CCC090;
-  --soft:    #DDD4A0;
+  /* Borders — golden warm */
+  --border:  #F0D9A8;
+  --border2: #D9BF88;
+  --soft:    #F0D9A8;
 
-  /* Red accent — T&T signature */
-  --accent:      #C83028;
-  --accent2:     #A82020;
-  --accent-pale: rgba(200,48,40,.09);
-  --accent-bg:   rgba(200,48,40,.14);
+  /* Pink accent — slightly warmer */
+  --accent:      #D4617A;
+  --accent2:     #B84D65;
+  --accent-pale: rgba(212,97,122,.08);
+  --accent-bg:   rgba(212,97,122,.13);
 
-  /* Stripe colors */
-  --kraft:      #A89E7A;
-  --babyblue:   #A8C8D8;
-  --sage:       #A8C8D8;       /* map old sage → baby blue */
-  --sage-dark:  #6A9AB0;
-  --sage-pale:  rgba(168,200,216,.15);
-  --sage-bg:    rgba(168,200,216,.25);
+  /* NEW: Butter yellow accent */
+  --butter:       #F5C842;
+  --butter-dark:  #D4A820;
+  --butter-pale:  rgba(245,200,66,.12);
+  --butter-bg:    rgba(245,200,66,.22);
 
-  --today-bg-1: #A89E7A;
-  --today-bg-2: #9A9070;
+  /* Today card: dark warm instead of cool purple */
+  --today-bg-1: #1E0E06;
+  --today-bg-2: #2E1810;
 
-  --sh-sm: 0 2px 14px rgba(44,31,14,.10);
-  --sh:    0 4px 26px rgba(44,31,14,.13);
-  --sh-lg: 0 8px 44px rgba(44,31,14,.18);
+  /* Shadows — warm tinted */
+  --sh-sm: 0 2px 12px rgba(180,120,60,.10);
+  --sh:    0 4px 24px rgba(180,120,60,.13);
+  --sh-lg: 0 8px 40px rgba(180,120,60,.17);
 
-  --r-xl: 20px;
-  --r-lg: 16px;
+  /* Rounder everything */
+  --r-xl: 24px;
+  --r-lg: 18px;
   --r-md: 12px;
   --r-sm: 8px;
 }
 
-/* ── BODY: vertical stripe wallpaper ─────────────────────── */
+/* ── POLKA DOTS BACKGROUND ───────────────────────────────── */
 body {
-  background-color: var(--kraft);
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent       0px,
-    transparent       28px,
-    var(--babyblue)   28px,
-    var(--babyblue)   56px
-  );
+  background-color: var(--white);
+  background-image: radial-gradient(circle, rgba(245,200,66,0.18) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
 }
 
-/* ── SECTION: cream floating card on stripes ─────────────── */
-.section { background: transparent; }
-.content {
-  background: var(--cream);
-  border-radius: 0;
-  position: relative;
-}
-/* Red dashed decorative line at top of content */
-.content::before {
-  content: '';
-  display: block;
-  height: 5px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--accent) 0px,
-    var(--accent) 14px,
-    transparent   14px,
-    transparent   22px
-  );
-  margin-bottom: 0;
-}
+/* ── NAV — warm brown glass ──────────────────────────────── */
+.nav { background: rgba(44,26,8,0.96); }
 
-/* ── NAV: cream butter bar ───────────────────────────────── */
-.nav {
-  background: var(--cream);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border-top: 3px solid var(--border);
-}
-.nav-btn        { color: rgba(44,31,14,.40); }
-.nav-btn.active { background: rgba(200,48,40,.12); color: var(--accent); }
+/* ── STICKY WEEK — warm border ───────────────────────────── */
+.sticky-week { background: var(--white); border-bottom-color: var(--border); }
 
-/* ── STICKY WEEK ─────────────────────────────────────────── */
-.sticky-week { background: var(--cream); border-bottom-color: var(--border); }
-
-/* ── TODAY HERO: bold stripe card ────────────────────────── */
+/* ── TODAY HERO — polka dots on dark bg ─────────────────── */
 .today {
-  background-color: var(--kraft);
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent     0px,
-    transparent     22px,
-    var(--babyblue) 22px,
-    var(--babyblue) 44px
-  );
-  position: relative;
-  overflow: hidden;
-  border-radius: 16px;
+  background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.12) 1.2px, transparent 1.2px),
+    linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
+  background-size: 18px 18px, auto;
 }
-/* Cream content area float inside today */
-.today::before {
-  content: none;
-}
-.today-date   { color: rgba(255,255,255,.65); text-shadow: 0 1px 3px rgba(0,0,0,.3); }
-.today-rec    { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.3); font-weight: 600; }
-.today-title  { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
-/* Today category cards: cream pills on stripe */
-.today-card {
-  background: rgba(245,239,204,.88);
-  border-color: rgba(245,239,204,.7);
-}
-.today-card:hover { background: rgba(245,239,204,1); border-color: var(--accent); }
-.today-card.active { background: var(--accent); border-color: var(--accent); }
-.today-card .tc-name { color: var(--black); }
-.today-card .tc-sub  { color: var(--ink3); }
-.today-card.active .tc-name { color: #fff; }
-.today-card.active .tc-sub  { color: rgba(255,255,255,.75); }
-/* Week strip */
-.ws-lbl { color: rgba(255,255,255,.7); }
-.ws-a   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
-.ws-b   { background: rgba(200,48,40,.3);   color: #ffd0cc; border-color: rgba(200,48,40,.5); }
-.ws-p   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
-.today-info { color: rgba(255,255,255,.5); }
+/* Today title: butter yellow highlight */
+.today-title { color: var(--butter); }
+/* Today date: soft warm */
+.today-date { color: rgba(255,245,200,0.45); }
+/* Today rec: butter */
+.today-rec { color: var(--butter); }
+/* Today card hover/active: butter accent */
+.today-card:hover { border-color: var(--butter); }
+.today-card.active { background: var(--butter); border-color: var(--butter); }
+.today-card.active .tc-name { color: var(--today-bg-1); }
+.today-card.active .tc-sub { color: rgba(44,26,8,0.7); }
 
-/* Quick start: red */
-.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(200,48,40,.30); }
-
-/* ── WORKOUT CARDS ───────────────────────────────────────── */
+/* ── WORKOUT CARDS — warm border, cream surface ──────────── */
 .wcard { background: var(--surface); border-color: var(--border); }
 .wcard-head:hover { background: var(--surface2); }
 .wcard.open .wcard-head { border-bottom-color: var(--border); }
-.wcard-a     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
-.wcard-b     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
-.wcard-p     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
-.wcard-skate { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
-.wcard:hover { box-shadow: 0 14px 40px rgba(44,31,14,.14); }
-.wcard-a { border-top-color: #6A9AB0; }
-.wcard-b { border-top-color: #A8C8D8; }
-.wcard-p { border-top-color: var(--accent); }
+/* Left glow: warm-tinted */
+.wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.12), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.12), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.13), 0 2px 12px rgba(180,120,60,.07); }
+.wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.13), 0 2px 12px rgba(180,120,60,.07); }
+.wcard:hover { box-shadow: 0 14px 48px rgba(180,120,60,.16); }
 
-/* ── SECTION HEADERS ─────────────────────────────────────── */
-.section-num { color: var(--accent); }
+/* ── SECTION TITLE ───────────────────────────────────────── */
+.section-num { color: var(--butter-dark); }
 
-/* ── STREAK ──────────────────────────────────────────────── */
-.streak-banner { background: var(--surface2); border-color: var(--border); }
-.streak-num    { color: var(--accent); }
+/* ── STREAK — butter yellow fire ────────────────────────── */
+.streak-banner {
+  background: linear-gradient(135deg, rgba(245,200,66,.15), rgba(212,97,122,.08));
+  border-color: var(--border);
+}
+.streak-num { color: var(--butter-dark); }
 
-/* ── WEEK / LABELS ───────────────────────────────────────── */
-.week-num       { color: var(--accent); }
-.label::before  { background: var(--accent); }
-.label          { color: var(--accent); }
-em              { color: var(--accent); }
+/* ── WEEK SELECTOR — butter number ──────────────────────── */
+.week-num { color: var(--butter-dark); }
+
+/* ── LABELS + ACCENTS ────────────────────────────────────── */
+.label::before { background: var(--butter-dark); }
+.label { color: var(--butter-dark); }
+em { color: var(--butter-dark); }
 
 /* ── QUICK LINKS + CHIPS ─────────────────────────────────── */
 .ql-btn { border-color: var(--border); background: var(--surface2); color: var(--ink2); }
-.ql-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.ql-btn:hover { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
 .chip { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
 
 /* ── PHASE GRID ──────────────────────────────────────────── */
 .phase-cell { background: var(--surface2); border-color: var(--border); }
 .phase-cell:hover { background: var(--white); }
-.phase-num  { color: var(--accent); }
+.phase-num { color: var(--butter-dark); }
 
-/* ── INPUTS ──────────────────────────────────────────────── */
-input:focus, textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(200,48,40,.10);
-}
+/* ── INPUT FOCUS: butter ─────────────────────────────────── */
+input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 0 3px var(--butter-pale); }
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
+.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(212,97,122,.28); }
 .stories-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-.notif-btn   { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
+.notif-btn { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
 
 /* ── EXERCISE ROWS ───────────────────────────────────────── */
 .ex-row { border-bottom-color: var(--border); }
 .ex-row:hover { background: var(--surface2); }
 .ex-done-btn { background: var(--white); border-color: var(--border2); }
-.ex-done-btn:hover { border-color: var(--accent); }
+.ex-done-btn:hover { border-color: var(--butter-dark); }
 
-/* ── TOGGLE + SET PILLS ──────────────────────────────────── */
+/* ── TOGGLE BUTTON ───────────────────────────────────────── */
 .wcard-toggle { background: var(--surface2); border-color: var(--border2); }
-.wcard.open .wcard-toggle { background: var(--accent); border-color: var(--accent); color: #fff; }
+.wcard.open .wcard-toggle { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+
+/* ── SET PILLS ───────────────────────────────────────────── */
 .set-pill { background: var(--white); border-color: var(--border2); }
-.set-pill:hover { border-color: var(--accent); color: var(--accent); }
-.set-pill.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+.set-pill:hover { border-color: var(--butter-dark); color: var(--butter-dark); }
+.set-pill.done { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
 .section-intro { border-bottom-color: var(--border); color: var(--ink3); }
 
 /* ── WEEKLY SUMMARY ──────────────────────────────────────── */
 .weekly-summary { background: var(--surface2); border-color: var(--border); }
-.ws-stat        { background: var(--white); border-color: var(--border); }
-.ws-stat-num    { color: var(--accent); }
+.ws-stat { background: var(--white); border-color: var(--border); }
+.ws-stat-num { color: var(--butter-dark); }
 
 /* ── WEEK COMPARE ────────────────────────────────────────── */
 .wc-card { background: var(--surface2); border-color: var(--border); }
-.wc-val  { color: var(--ink); }
+.wc-val { color: var(--ink); }
 
 /* ── CALENDAR ────────────────────────────────────────────── */
 .cal-day { background: var(--surface2); }
-.cal-day.today { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
+.cal-day.today { border-color: var(--butter-dark); color: var(--butter-dark); background: var(--butter-pale); }
 
 /* ── GOALS & SCHEDULE ────────────────────────────────────── */
 .goals-box, .schedule-editor { background: var(--surface2); border-color: var(--border); }
 
-/* ── DARK MODE: keep light, just dimmer ─────────────────── */
-[data-theme="dark"] .streak-num  { color: var(--accent); }
-[data-theme="dark"] .week-num    { color: var(--accent); }
-[data-theme="dark"] .today-title { color: #fff; }
-
-/* ══════════════════════════════════════════════════════════
-   FULL RENOVATION — PINTEREST WELLNESS LAYOUT
-   ══════════════════════════════════════════════════════════ */
-
-/* ── NAV: floating pill-style active state ───────────────── */
-.nav { padding: 4px 6px; gap: 2px; }
-.nav-btn {
-  border-radius: 16px;
-  padding: 6px 4px 8px;
-  margin: 3px 0;
-  transition: background .2s, color .2s;
+/* ── DARK MODE: keep purple-dark feel, warm accents ─────── */
+[data-theme="dark"] body {
+  background-image: radial-gradient(circle, rgba(245,200,66,0.07) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
 }
-.nav-btn.active {
-  background: rgba(200,48,40,.13);
-  color: var(--accent);
-}
-.nav-btn::after { display: none; }   /* remove underline dot */
-.nav-lbl { font-size: 7.5px; letter-spacing: .4px; font-weight: 500; }
-
-/* ── SECTION NUM: pill badge ─────────────────────────────── */
-.section-num {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--sage-pale);
-  color: var(--sage-dark);
-  border-radius: 20px;
-  padding: 4px 14px 4px 10px;
-  font-size: 9px;
-  letter-spacing: 2.5px;
-  margin-bottom: 14px;
-}
-.section-num::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--sage-dark);
-  flex-shrink: 0;
-}
-
-/* ── TODAY CARD: organic floating card ───────────────────── */
-.today {
-  border-radius: 28px;
-  padding: 28px 22px 22px;
-  margin-bottom: 24px;
-  box-shadow: 0 8px 40px rgba(20,50,24,.18);
-}
-.today-title {
-  font-size: 13px;
-  letter-spacing: 3px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  opacity: .7;
-  margin-bottom: 14px;
-}
-.today-card {
-  border-radius: 18px;
-  padding: 16px 4px;
-  gap: 6px;
-}
-.tc-icon { font-size: 24px; }
-.tc-name { font-size: 10px; letter-spacing: 1px; }
-.tc-sub  { font-size: 8px; }
-
-/* Week strip pills — sage + terracotta palette */
-.ws-a { background: rgba(74,107,80,.35); color: #b8dcc0; border-color: rgba(74,107,80,.55); }
-.ws-b { background: rgba(122,158,126,.30); color: #c8ecc8; border-color: rgba(122,158,126,.50); }
-.ws-p { background: rgba(200,103,74,.28); color: #f4c8a8; border-color: rgba(200,103,74,.45); }
-
-/* ── WORKOUT CARDS: top strip instead of left border ─────── */
-.wcard {
-  border-left: none !important;
-  border-top: 4px solid transparent;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s;
-}
-.wcard:hover { transform: translateY(-4px); }
-.wcard-a { border-top-color: var(--sage-dark); }
-.wcard-b { border-top-color: var(--sage); }
-.wcard-p { border-top-color: #C8674A; }
-.wcard-skate { border-top-color: #5b9bd5; }
-
-/* Card header: tinted background per type */
-.wcard-a .wcard-head { background: rgba(74,107,80,.06); }
-.wcard-b .wcard-head { background: rgba(122,158,126,.05); }
-.wcard-p .wcard-head { background: rgba(200,103,74,.05); }
-
-/* Type indicator dot before heading */
-.wcard-head h3 { display: flex; align-items: center; gap: 10px; }
-.wcard-head h3::before {
-  content: '';
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.wcard-a .wcard-head h3::before { background: var(--sage-dark); }
-.wcard-b .wcard-head h3::before { background: var(--sage); }
-.wcard-p .wcard-head h3::before { background: #C8674A; }
-.wcard-skate .wcard-head h3::before { background: #5b9bd5; }
-
-/* ── QUICK-START BUTTON: full pill ───────────────────────── */
-.quick-start-btn {
-  border-radius: 50px;
-  font-size: 14px;
-  letter-spacing: 2.5px;
-  padding: 17px 32px;
-  width: 100%;
-  margin-top: 20px;
-}
-
-/* ── PHASE GRID: taller organic cards ───────────────────── */
-.phase-cell {
-  border-radius: 18px;
-  padding: 18px 14px;
-  border: 1.5px solid var(--border);
-}
-.phase-num { font-size: 28px; margin-bottom: 5px; }
-.phase-name { font-size: 11.5px; letter-spacing: .8px; margin-bottom: 6px; }
-.phase-desc { font-size: 11.5px; line-height: 1.6; }
-
-/* ── STREAK BANNER: bigger & bolder ─────────────────────── */
-.streak-banner {
-  border-radius: 22px;
-  padding: 24px 22px;
-  border: 1.5px solid var(--border);
-}
-.streak-fire { font-size: 48px; }
-.streak-num  { font-size: 84px; letter-spacing: -2px; }
-
-/* ── SET PILLS: rounded organic ──────────────────────────── */
-.set-pill { border-radius: 50px; padding: 8px 14px; font-size: 11px; }
-.set-pill.done { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
-
-/* ── WCARD TOGGLE: pill style ────────────────────────────── */
-.wcard-toggle { border-radius: 50px; padding: 6px 16px; font-size: 11px; }
-.wcard.open .wcard-toggle { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
-
-/* ── LABELS: cleaner ─────────────────────────────────────── */
-.label::before { width: 18px; background: var(--sage-dark); }
-.label { color: var(--sage-dark); font-size: 8.5px; letter-spacing: 3px; }
-
-/* ── PAGE HEADING: softer divider ────────────────────────── */
-.page-hd-label { color: var(--sage-dark); letter-spacing: 2.5px; }
-
-/* ── INFO BOX & REVEAL: organic border ──────────────────── */
-.info-box { border-radius: 18px; border: 1.5px solid var(--border); }
-.reveal.info-box { background: var(--surface2); }
-
-/* ── SCHEDULE EDITOR: organic ────────────────────────────── */
-.schedule-editor { border-radius: 20px; overflow: hidden; }
-.goals-box { border-radius: 20px; }
-
-/* ── WEEKLY SUMMARY ──────────────────────────────────────── */
-.weekly-summary { border-radius: 22px; }
-.ws-stat { border-radius: 16px; }
-.ws-stat-num { font-size: 42px; }
-
-/* ── WEEK COMPARE CARDS ──────────────────────────────────── */
-.wc-card { border-radius: 18px; }
-
-/* ── NOTIF BUTTON: pill ──────────────────────────────────── */
-.notif-btn { border-radius: 50px; width: 100%; margin-bottom: 18px; padding: 13px 20px; font-size: 12px; letter-spacing: 1px; }
-
-/* ── QUICK LINKS: pill style ─────────────────────────────── */
-.ql-btn { border-radius: 50px; }
-
-/* ══════════════════════════════════════════════════════════
-   DRAMATIC PINTEREST REDESIGN
-   Syne bold display · Playfair italic accent
-   Visible stripes · editorial contrast
-   ══════════════════════════════════════════════════════════ */
-
-/* ── SECTION TITLE: Syne ultra-bold ─────────────────────── */
-.section-title {
-  font-size: clamp(52px, 14vw, 108px);
-  letter-spacing: -.03em;
-  line-height: .88;
-  font-weight: 800;
-}
-/* Accent word: Caveat handwritten */
-.section-title em {
-  font-family: var(--font-script);
-  font-style: normal;
-  font-weight: 700;
-  text-transform: none;
-  letter-spacing: -.01em;
-  font-size: 1.05em;
-}
-
-/* ── TODAY CARD: Caveat title ────────────────────────────── */
-/* Today title: Caveat handwritten */
-.today-title {
-  font-family: var(--font-script);
-  font-style: normal;
-  font-weight: 700;
-  font-size: 26px;
-  letter-spacing: 0;
-  text-transform: none;
-  margin-bottom: 16px;
-  color: #fff;
-}
-
-/* ── PLAN HERO: stripe band behind heading ───────────────── */
-#plan .content > div:first-child {
-  position: relative;
-  padding: 0 0 32px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 32px;
-}
-#plan .content > div:first-child::after {
-  content: '';
-  position: absolute;
-  right: -24px;
-  top: 10px;
-  bottom: 10px;
-  width: 130px;
-  background: repeating-linear-gradient(
-    0deg,
-    var(--sage-pale) 0px,
-    var(--sage-pale) 7px,
-    transparent 7px,
-    transparent 14px
-  );
-  border-radius: 8px;
-  pointer-events: none;
-}
-
-/* ── PAGE BACKGROUND: very faint linen lines ────────────── */
-body {
-  background-color: var(--white);
-  background-image:
-    repeating-linear-gradient(
-      90deg,
-      transparent       0px,
-      transparent       80px,
-      rgba(122,158,126,.022) 80px,
-      rgba(122,158,126,.022) 81px
-    );
-}
-
-/* ── WORKOUT CARDS: Syne heading ─────────────────────────── */
-.wcard-head h3 {
-  font-size: 18px;
-  letter-spacing: -.01em;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
-/* ── SECTION NUMBER: Caveat script label ─────────────────── */
-.section-num {
-  font-family: var(--font-script);
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0;
-  text-transform: none;
-  background: none;
-  border-radius: 0;
-  padding: 0;
-  color: var(--accent);
-  opacity: .9;
-  margin-bottom: 10px;
-}
-.section-num::before { display: none; }
-
-/* ── PAGE-HD-LABEL: Caveat ───────────────────────────────── */
-.page-hd-label {
-  font-family: var(--font-script);
-  font-size: 17px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* ── STREAK LABEL: Caveat ────────────────────────────────── */
-.streak-lbl {
-  font-family: var(--font-script);
-  font-size: 18px;
-  font-weight: 600;
-  text-transform: none;
-  letter-spacing: 0;
-  color: var(--ink3);
-  margin-top: 2px;
-}
-.streak-num { font-family: var(--font-display); font-weight: 800; }
-
-/* ── STICKY WEEK LABEL ───────────────────────────────────── */
-.sticky-week-label {
-  font-family: var(--font-script);
-  font-size: 18px;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--accent);
-}
-.week-num { font-family: var(--font-display); font-weight: 800; }
-
-/* ── PHASE NUMBERS: Caveat ───────────────────────────────── */
-.phase-num {
-  font-family: var(--font-script);
-  font-size: 26px;
-  letter-spacing: 0;
-  font-weight: 700;
-  color: var(--accent);
-}
-.phase-name { text-transform: none; }
-
-/* ── SECTION INTRO ───────────────────────────────────────── */
-.section-intro {
-  font-size: 15px;
-  line-height: 1.75;
-  border-bottom-color: var(--border);
-  color: var(--ink2);
-}
-
-/* ── DELOAD TITLE: Caveat ────────────────────────────────── */
-.deload-title {
-  font-family: var(--font-script);
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-/* ── NAV LABELS: Syne ────────────────────────────────────── */
-.nav-lbl { font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .3px; }
+[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
+[data-theme="dark"] .streak-num { color: var(--butter); }
+[data-theme="dark"] .week-num { color: var(--butter); }
+[data-theme="dark"] .today-title { color: var(--butter); }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -4444,9 +4073,6 @@ document.addEventListener('DOMContentLoaded', function() {
     setCard('wcPct','wcPctDelta', tw.pct, lw.pct, '%');
   }
   renderWeekCompare();
-
-  // Always land on plan tab on fresh page load
-  switchTab('plan');
 
 });
 </script>
