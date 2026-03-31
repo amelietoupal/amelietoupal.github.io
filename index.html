@@ -1445,49 +1445,44 @@ body {
 /* ── NAV LABELS: Syne ────────────────────────────────────── */
 .nav-lbl { font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .3px; }
 
-/* ── GEAR BUTTON on exercise rows ───────────────────────── */
-.ex-gear-btn {
-  margin-left: auto; flex-shrink: 0;
-  width: 28px; height: 28px;
+/* ── CARD EDIT MODE ──────────────────────────────────────── */
+.wcard-edit-btn {
+  width: 28px; height: 28px; flex-shrink: 0;
   border: 1px solid var(--border2); border-radius: 50%;
   background: var(--white); color: var(--ink3);
   font-size: 13px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  transition: all .18s; opacity: 0;
+  transition: all .18s;
 }
-.ex-row-inner:hover .ex-gear-btn,
-.ex-row.detail-open .ex-gear-btn { opacity: 1; }
-.ex-gear-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: rotate(40deg); }
-
-/* ── EXERCISE EDIT MODAL ─────────────────────────────────── */
-.ex-modal-backdrop {
-  position: fixed; inset: 0; z-index: 500;
-  background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
-  animation: fadeIn .2s ease;
+.wcard-edit-btn:hover, .wcard.wcard-editing .wcard-edit-btn {
+  background: var(--accent); border-color: var(--accent); color: #fff;
 }
-.ex-modal-sheet {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 501;
-  background: var(--surface); border-radius: 24px 24px 0 0;
-  padding: 28px 24px calc(32px + env(safe-area-inset-bottom));
-  max-height: 88vh; overflow-y: auto;
-  animation: slideUp .3s cubic-bezier(.34,1.1,.64,1);
+.wcard-edit-toolbar {
+  display: none; padding: 10px 16px 8px;
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+  gap: 8px; align-items: center; flex-wrap: wrap;
 }
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
-.ex-modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 0 auto 20px; }
-.ex-modal-name { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; letter-spacing: -.01em; }
-.ex-modal-sub  { font-size: 10px; color: var(--ink3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
-.ex-modal-field { margin-bottom: 16px; }
-.ex-modal-field label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; }
-.ex-modal-field input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border2); border-radius: 12px; font-size: 15px; background: var(--white); color: var(--ink); box-sizing: border-box; }
-.ex-modal-field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-pale); }
-.ex-modal-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.ex-modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
-.ex-modal-save   { width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; border-radius: 50px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
-.ex-modal-delete { width: 100%; padding: 13px; background: transparent; color: var(--ink3); border: 1.5px solid var(--border2); border-radius: 50px; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .15s; }
-.ex-modal-delete:hover { border-color: #c0392b; color: #c0392b; }
-.ex-modal-cancel { background: none; border: none; font-size: 11px; color: var(--muted); text-align: center; cursor: pointer; padding: 8px; letter-spacing: 1px; text-transform: uppercase; width: 100%; }
-.ex-pill-kg { font-size: 9px; color: var(--accent); font-weight: 700; letter-spacing: .5px; margin-left: 4px; vertical-align: middle; }
+.wcard.wcard-editing .wcard-edit-toolbar { display: flex; }
+.wcard.wcard-editing .wcard-body { display: block !important; }
+.wcard-edit-duration { flex: 1; font-size: 11px; color: var(--ink3); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+.wcard-edit-done { padding: 7px 18px; background: var(--accent); color: #fff; border: none; border-radius: 50px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; }
+.wcard-edit-cancel { padding: 7px 12px; background: transparent; color: var(--ink3); border: 1.5px solid var(--border2); border-radius: 50px; font-family: var(--font-body); font-size: 11px; cursor: pointer; }
+/* Exercise edit rows */
+.ex-edit-row { display: none; padding: 8px 14px 8px 12px; background: var(--surface); border-bottom: 1px solid var(--border); gap: 6px; align-items: center; flex-wrap: wrap; }
+.wcard.wcard-editing .ex-edit-row { display: flex; }
+.wcard.wcard-editing .ex-row { display: none !important; }
+.wcard.wcard-editing .ex-detail { display: none !important; }
+.wcard.wcard-editing .phase-lbl { opacity: 0.5; font-size: 10px; padding: 4px 14px; }
+.ex-edit-order { display: flex; flex-direction: column; gap: 2px; flex-shrink: 0; }
+.ex-edit-order button { width: 22px; height: 20px; padding: 0; border: 1px solid var(--border2); border-radius: 4px; background: var(--white); color: var(--ink3); font-size: 10px; cursor: pointer; line-height: 1; }
+.ex-edit-order button:hover { background: var(--surface2); }
+.ex-edit-name { flex: 1; font-size: 13px; font-weight: 600; color: var(--ink); min-width: 80px; }
+.ex-edit-inp { padding: 5px 7px; border: 1.5px solid var(--border2); border-radius: 8px; font-size: 13px; background: var(--white); color: var(--ink); width: 48px; text-align: center; box-sizing: border-box; }
+.ex-edit-inp:focus { border-color: var(--accent); outline: none; }
+.ex-edit-inp.wide { width: 68px; }
+.ex-edit-inp-lbl { font-size: 10px; color: var(--muted); }
+.ex-edit-del { width: 26px; height: 26px; padding: 0; background: transparent; border: 1px solid var(--border2); border-radius: 50%; color: var(--muted); font-size: 12px; cursor: pointer; margin-left: auto; flex-shrink: 0; transition: all .15s; }
+.ex-edit-del:hover { background: #fff0f0; border-color: #c0392b; color: #c0392b; }
 
 /* ── CALENDAR FIX ────────────────────────────────────────── */
 .cal-grid { gap: 3px; }
@@ -4497,153 +4492,231 @@ document.addEventListener('DOMContentLoaded', function() {
   // Always land on plan tab on fresh page load
   switchTab('plan');
 
-  // ── EXERCISE GEAR: DELETE + EDIT REPS/SETS/KG ────────────
+  // ── CARD-LEVEL EDIT MODE ─────────────────────────────────
 
   // 1. Hide permanently deleted exercises
   var deletedEx = JSON.parse(localStorage.getItem('ms_deleted_ex') || '[]');
   deletedEx.forEach(function(uid) {
     var row = document.querySelector('.ex-row[data-uid="' + uid + '"]');
     var detail = row && row.nextElementSibling;
-    if (row) row.style.display = 'none';
+    if (row) { row.style.display = 'none'; row.dataset.deleted = '1'; }
     if (detail && detail.classList.contains('ex-detail')) detail.style.display = 'none';
   });
 
-  // 2. Apply saved custom configs (reps/sets/kg) to exercises
-  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+  // 2. Helper: detect if reps text is time-based
+  function isTimeBased(text) {
+    return /\d+\s*(s\b|min|sec)/i.test(text || '');
+  }
+
+  // 3. Build pill display text from config
+  function buildPillText(cfg, existingPill) {
+    var base = cfg.reps || (existingPill ? existingPill.textContent.split(' · ')[0] : '');
+    if ((cfg.mins || cfg.secs) && isTimeBased(base)) {
+      base = (cfg.mins ? cfg.mins + 'min' : '') + (cfg.mins && cfg.secs ? ' ' : '') + (cfg.secs ? cfg.secs + 's' : '');
+    }
+    return base + (cfg.kg ? ' · ' + cfg.kg + 'kg' : '');
+  }
+
+  // 4. Apply saved config to row display
+  function applyCfgToRow(row) {
     var uid = row.dataset.uid;
     var cfg = JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null');
     if (!cfg) return;
-    // Update set pills text
     var pills = row.querySelectorAll('.set-pill');
-    pills.forEach(function(p) {
-      var txt = cfg.reps || p.textContent;
-      if (cfg.kg) txt += ' · ' + cfg.kg + 'kg';
-      if (cfg.secs) txt += ' · ' + cfg.secs + 's';
-      p.textContent = txt;
-    });
-    // Update inline sets text
     var inline = row.querySelector('.ex-sets-inline');
-    if (inline && cfg.reps) {
-      inline.textContent = cfg.reps + (cfg.kg ? ' · ' + cfg.kg + 'kg' : '') + (cfg.secs ? ' · ' + cfg.secs + 's' : '');
-    }
-    // Update set count (add/remove pills)
+    var pt = buildPillText(cfg, pills[0]);
     if (cfg.sets && pills.length && cfg.sets !== pills.length) {
       var block = row.querySelector('.set-pills');
       if (block) {
-        var newPillText = pills[0].textContent;
         block.innerHTML = '';
         for (var s = 0; s < cfg.sets; s++) {
           var np = document.createElement('button');
-          np.className = 'set-pill';
-          np.dataset.ex = uid; np.dataset.set = s;
-          np.textContent = newPillText;
-          block.appendChild(np);
+          np.className = 'set-pill'; np.dataset.ex = uid; np.dataset.set = s;
+          np.textContent = pt; block.appendChild(np);
         }
-        // Re-bind set pill click (re-use existing handler via delegation)
       }
-    }
-  });
+    } else { pills.forEach(function(p) { p.textContent = pt; }); }
+    if (inline) inline.textContent = pt;
+  }
+  document.querySelectorAll('.ex-row[data-uid]').forEach(applyCfgToRow);
 
-  // 3. Add gear button to every exercise row
-  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
-    var inner = row.querySelector('.ex-row-inner');
-    if (!inner || inner.querySelector('.ex-gear-btn')) return;
+  // 5. Add edit button to each workout card
+  document.querySelectorAll('.wcard').forEach(function(card) {
+    var headRight = card.querySelector('.wcard-head-right');
+    if (!headRight || headRight.querySelector('.wcard-edit-btn')) return;
     var btn = document.createElement('button');
-    btn.className = 'ex-gear-btn';
-    btn.innerHTML = '⚙';
-    btn.title = 'Upravit cvik';
+    btn.className = 'wcard-edit-btn';
+    btn.innerHTML = '✏';
+    btn.title = 'Upravit trénink';
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      openExModal(row.dataset.uid, row);
+      if (card.classList.contains('wcard-editing')) { exitEditMode(card, false); }
+      else { enterEditMode(card); }
     });
-    inner.appendChild(btn);
+    var toggle = headRight.querySelector('.wcard-toggle');
+    if (toggle) headRight.insertBefore(btn, toggle);
+    else headRight.appendChild(btn);
   });
 
-  // 4. Exercise edit modal
-  function openExModal(uid, row) {
-    var name = (row.querySelector('.ex-name') || {}).textContent || uid;
-    var cfg = JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') || {};
-    var pills = row.querySelectorAll('.set-pill');
-    var defaultSets = cfg.sets || pills.length || 3;
-    var defaultReps = cfg.reps || (pills[0] ? pills[0].textContent.split(' · ')[0] : '10 opak.');
-
-    var backdrop = document.createElement('div');
-    backdrop.className = 'ex-modal-backdrop';
-
-    var sheet = document.createElement('div');
-    sheet.className = 'ex-modal-sheet';
-    sheet.innerHTML = [
-      '<div class="ex-modal-handle"></div>',
-      '<div class="ex-modal-name">' + name + '</div>',
-      '<div class="ex-modal-sub">Úprava cviku</div>',
-      '<div class="ex-modal-field"><label>Počet sérií</label>',
-      '<input type="number" id="emSets" min="1" max="10" value="' + defaultSets + '"></div>',
-      '<div class="ex-modal-grid2">',
-      '<div class="ex-modal-field"><label>Opakování / čas</label>',
-      '<input type="text" id="emReps" placeholder="10 opak." value="' + defaultReps + '"></div>',
-      '<div class="ex-modal-field"><label>Váha (kg)</label>',
-      '<input type="number" id="emKg" min="0" step="0.5" placeholder="–" value="' + (cfg.kg || '') + '"></div>',
-      '</div>',
-      '<div class="ex-modal-field"><label>Čas (sekundy) – volitelné</label>',
-      '<input type="number" id="emSecs" min="0" placeholder="–" value="' + (cfg.secs || '') + '"></div>',
-      '<div class="ex-modal-actions">',
-      '<button class="ex-modal-save" id="emSave">Uložit</button>',
-      '<button class="ex-modal-delete" id="emDelete">🗑 Odstranit cvik natrvalo</button>',
-      '<button class="ex-modal-cancel" id="emCancel">Zrušit</button>',
-      '</div>'
-    ].join('');
-
-    document.body.appendChild(backdrop);
-    document.body.appendChild(sheet);
-
-    function closeModal() {
-      backdrop.remove(); sheet.remove();
+  // 6. Enter edit mode for a card
+  function enterEditMode(card) {
+    // Make sure card is open
+    if (!card.classList.contains('open')) {
+      card.classList.add('open');
+      var body = card.querySelector('.wcard-body');
+      if (body) body.style.display = 'block';
     }
-    backdrop.addEventListener('click', closeModal);
-    sheet.querySelector('#emCancel').addEventListener('click', closeModal);
+    card.classList.add('wcard-editing');
 
-    sheet.querySelector('#emSave').addEventListener('click', function() {
-      var sets = parseInt(sheet.querySelector('#emSets').value) || defaultSets;
-      var reps = sheet.querySelector('#emReps').value.trim() || defaultReps;
-      var kg   = parseFloat(sheet.querySelector('#emKg').value) || 0;
-      var secs = parseInt(sheet.querySelector('#emSecs').value) || 0;
-      var newCfg = { sets: sets, reps: reps };
-      if (kg)   newCfg.kg   = kg;
-      if (secs) newCfg.secs = secs;
-      localStorage.setItem('ms_ex_cfg_' + uid, JSON.stringify(newCfg));
-      // Update DOM immediately
-      var pillText = reps + (kg ? ' · ' + kg + 'kg' : '') + (secs ? ' · ' + secs + 's' : '');
-      var pillBlock = row.querySelector('.set-pills');
-      var inlineEl  = row.querySelector('.ex-sets-inline');
-      if (pillBlock) {
-        pillBlock.innerHTML = '';
-        for (var s = 0; s < sets; s++) {
-          var np = document.createElement('button');
-          np.className = 'set-pill';
-          np.dataset.ex = uid; np.dataset.set = s;
-          np.textContent = pillText;
-          pillBlock.appendChild(np);
-        }
-      } else if (inlineEl) {
-        inlineEl.textContent = pillText;
+    // Build edit row for each visible exercise
+    var rows = card.querySelectorAll('.ex-row[data-uid]');
+    rows.forEach(function(row) {
+      if (row.dataset.deleted === '1') return;
+      var uid = row.dataset.uid;
+      var name = (row.querySelector('.ex-name') || {}).textContent || uid;
+      var cfg = JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') || {};
+      var pills = row.querySelectorAll('.set-pill');
+      var inline = row.querySelector('.ex-sets-inline');
+      var sets = cfg.sets || pills.length || 3;
+      var firstText = pills[0] ? pills[0].textContent : (inline ? inline.textContent : '');
+      var repsText = cfg.reps || firstText.split(' · ')[0] || '10 opak.';
+      var kg = cfg.kg || '';
+      var timeBased = isTimeBased(repsText);
+      var mins = cfg.mins || 0;
+      var secs = cfg.secs || 0;
+      if (timeBased && !mins && !secs) {
+        var minM = repsText.match(/(\d+)\s*min/i);
+        var secM = repsText.match(/(\d+)\s*s\b/i);
+        if (minM) mins = parseInt(minM[1]);
+        if (secM) secs = parseInt(secM[1]);
       }
-      closeModal();
+
+      var timeHtml = timeBased
+        ? '<input class="ex-edit-inp" type="number" data-field="mins" min="0" max="99" value="' + (mins||0) + '" placeholder="0"><span class="ex-edit-inp-lbl">min</span><input class="ex-edit-inp" type="number" data-field="secs" min="0" max="59" value="' + (secs||0) + '" placeholder="0"><span class="ex-edit-inp-lbl">s</span>'
+        : '<input class="ex-edit-inp wide" type="text" data-field="reps" value="' + repsText + '" placeholder="10 opak."><input class="ex-edit-inp" type="number" data-field="kg" min="0" step="0.5" value="' + kg + '" placeholder="kg"><span class="ex-edit-inp-lbl">kg</span>';
+
+      var er = document.createElement('div');
+      er.className = 'ex-edit-row';
+      er.dataset.uid = uid;
+      er.dataset.timeBased = timeBased ? '1' : '0';
+      er.innerHTML = [
+        '<div class="ex-edit-order"><button class="ex-edit-up">↑</button><button class="ex-edit-dn">↓</button></div>',
+        '<div class="ex-edit-name">' + name + '</div>',
+        '<input class="ex-edit-inp" type="number" data-field="sets" min="1" max="10" value="' + sets + '">',
+        '<span class="ex-edit-inp-lbl">sér.</span>',
+        timeHtml,
+        '<button class="ex-edit-del">🗑</button>'
+      ].join('');
+
+      row.parentNode.insertBefore(er, row);
+
+      // Reorder up
+      er.querySelector('.ex-edit-up').addEventListener('click', function(e) {
+        e.stopPropagation();
+        var prev = er.previousElementSibling;
+        while (prev && !prev.classList.contains('ex-edit-row')) prev = prev.previousElementSibling;
+        if (prev) er.parentNode.insertBefore(er, prev);
+        updateDuration(card);
+      });
+      // Reorder down
+      er.querySelector('.ex-edit-dn').addEventListener('click', function(e) {
+        e.stopPropagation();
+        var next = er.nextElementSibling;
+        while (next && !next.classList.contains('ex-edit-row')) next = next.nextElementSibling;
+        if (next && next.classList.contains('ex-edit-row')) er.parentNode.insertBefore(next, er);
+        updateDuration(card);
+      });
+      // Delete exercise permanently
+      er.querySelector('.ex-edit-del').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!confirm('Odstranit "' + name + '" natrvalo?')) return;
+        var del = JSON.parse(localStorage.getItem('ms_deleted_ex') || '[]');
+        if (!del.includes(uid)) del.push(uid);
+        localStorage.setItem('ms_deleted_ex', JSON.stringify(del));
+        row.dataset.deleted = '1'; row.style.display = 'none';
+        var detail = row.nextElementSibling;
+        if (detail && detail.classList.contains('ex-detail')) detail.style.display = 'none';
+        er.remove();
+        updateDuration(card);
+      });
+      // Update duration on input change
+      er.querySelectorAll('.ex-edit-inp').forEach(function(inp) {
+        inp.addEventListener('input', function() { updateDuration(card); });
+      });
     });
 
-    sheet.querySelector('#emDelete').addEventListener('click', function() {
-      if (!confirm('Odstranit "' + name + '" natrvalo?')) return;
-      var del = JSON.parse(localStorage.getItem('ms_deleted_ex') || '[]');
-      if (!del.includes(uid)) del.push(uid);
-      localStorage.setItem('ms_deleted_ex', JSON.stringify(del));
-      var detail = row.nextElementSibling;
-      row.style.transition = 'opacity .3s, max-height .3s';
-      row.style.opacity = '0';
-      setTimeout(function() {
-        row.style.display = 'none';
-        if (detail && detail.classList.contains('ex-detail')) detail.style.display = 'none';
-      }, 320);
-      closeModal();
+    // Add toolbar
+    var toolbar = document.createElement('div');
+    toolbar.className = 'wcard-edit-toolbar';
+    toolbar.innerHTML = '<span class="wcard-edit-duration">~? min</span><button class="wcard-edit-cancel">Zrušit</button><button class="wcard-edit-done">Hotovo ✓</button>';
+    var body = card.querySelector('.wcard-body');
+    body.insertBefore(toolbar, body.firstChild);
+
+    updateDuration(card);
+    toolbar.querySelector('.wcard-edit-cancel').addEventListener('click', function(e) {
+      e.stopPropagation(); exitEditMode(card, false);
     });
+    toolbar.querySelector('.wcard-edit-done').addEventListener('click', function(e) {
+      e.stopPropagation(); saveEditMode(card);
+    });
+  }
+
+  // 7. Calculate and show estimated duration
+  function updateDuration(card) {
+    var editRows = card.querySelectorAll('.ex-edit-row');
+    var totalSecs = 0;
+    editRows.forEach(function(er) {
+      var sets = parseInt(er.querySelector('[data-field="sets"]').value) || 3;
+      if (er.dataset.timeBased === '1') {
+        var m = parseInt((er.querySelector('[data-field="mins"]') || {}).value) || 0;
+        var s = parseInt((er.querySelector('[data-field="secs"]') || {}).value) || 0;
+        totalSecs += sets * (m * 60 + s) + sets * 30;
+      } else {
+        var reps = parseInt((er.querySelector('[data-field="reps"]') || {}).value) || 10;
+        totalSecs += sets * reps * 3 + sets * 60;
+      }
+    });
+    var durEl = card.querySelector('.wcard-edit-duration');
+    if (durEl) durEl.textContent = '~' + Math.max(1, Math.round(totalSecs / 60)) + ' min';
+  }
+
+  // 8. Save and exit edit mode
+  function saveEditMode(card) {
+    card.querySelectorAll('.ex-edit-row').forEach(function(er) {
+      var uid = er.dataset.uid;
+      var row = card.querySelector('.ex-row[data-uid="' + uid + '"]');
+      if (!row || row.dataset.deleted === '1') return;
+      var sets = parseInt(er.querySelector('[data-field="sets"]').value) || 3;
+      var cfg = { sets: sets };
+      if (er.dataset.timeBased === '1') {
+        var m = parseInt((er.querySelector('[data-field="mins"]') || {}).value) || 0;
+        var s = parseInt((er.querySelector('[data-field="secs"]') || {}).value) || 0;
+        cfg.mins = m; cfg.secs = s;
+        cfg.reps = (m ? m + 'min' : '') + (m && s ? ' ' : '') + (s ? s + 's' : '') || '0s';
+      } else {
+        cfg.reps = (er.querySelector('[data-field="reps"]') || {}).value || '10 opak.';
+        var kg = parseFloat((er.querySelector('[data-field="kg"]') || {}).value);
+        if (kg) cfg.kg = kg;
+      }
+      localStorage.setItem('ms_ex_cfg_' + uid, JSON.stringify(cfg));
+      // Move ex-row (+ detail) to match edit-row order
+      var parent = row.parentNode;
+      var detail = row.nextElementSibling;
+      var hasDetail = detail && detail.classList.contains('ex-detail');
+      var anchor = er.nextElementSibling;
+      parent.insertBefore(row, anchor);
+      if (hasDetail) parent.insertBefore(detail, anchor);
+      applyCfgToRow(row);
+    });
+    exitEditMode(card, true);
+  }
+
+  // 9. Exit edit mode
+  function exitEditMode(card) {
+    card.classList.remove('wcard-editing');
+    card.querySelectorAll('.ex-edit-row').forEach(function(er) { er.remove(); });
+    var tb = card.querySelector('.wcard-edit-toolbar');
+    if (tb) tb.remove();
   }
 
 });
