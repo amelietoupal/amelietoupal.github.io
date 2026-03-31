@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Caveat:wght@600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <title>Modelka Fitness Guide</title>
 
 <style>
@@ -49,8 +49,8 @@
   --card-bg:  var(--surface2);
   --soft:     var(--border);
   --light:    var(--ink3);
-  --font-display: 'Bebas Neue', 'Arial Black', sans-serif;
-  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Syne', 'Arial Black', sans-serif;
+  --font-script:  'Caveat', cursive;
   --font-body:    'DM Sans', system-ui, sans-serif;
   --r-xl: 18px; --r-lg: 14px; --r-md: 10px; --r-sm: 7px; --r-xs: 5px;
   --sh-sm: 0 2px 8px rgba(201,107,136,.1);
@@ -99,7 +99,7 @@ body {
   overflow-x: hidden;
 }
 
-h1,h2,h3 { font-family: var(--font-display); font-weight: 400; letter-spacing: .04em; line-height: .95; color: var(--black); text-transform: uppercase; }
+h1,h2,h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.02em; line-height: .9; color: var(--black); text-transform: uppercase; }
 h4,h5 { font-family: var(--font-body); font-weight: 500; color: var(--ink); }
 p { color: var(--ink2); line-height: 1.7; margin-bottom: 12px; }
 p:last-child { margin-bottom: 0; }
@@ -895,184 +895,604 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 [data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
 
 /* ══════════════════════════════════════════════════════════
-   BUTTER & ROSE — PINTEREST AESTHETIC
+   TINGLE & TOTS — STRIPES + CREAM + RED AESTHETIC
+   kraft brown · baby blue · butter cream · red
    ══════════════════════════════════════════════════════════ */
 
-/* ── WARM COLOUR PALETTE ─────────────────────────────────── */
+/* ── PALETTE ─────────────────────────────────────────────── */
 :root {
-  /* Backgrounds — warm butter cream */
-  --white:    #FFFBEE;
-  --surface:  #FFFFFF;
-  --surface2: #FFF8E1;
-  --bg:       #FFFBEE;
-  --card-bg:  #FFF8E1;
+  --cream:    #F5EFCC;
+  --white:    #F5EFCC;
+  --surface:  #FAF6E0;
+  --surface2: #EDE7C0;
+  --bg:       #F5EFCC;
 
-  /* Text — warm brown instead of cool purple */
-  --black:  #2C1A08;
-  --ink:    #2C1A08;
-  --ink2:   #6B4226;
-  --ink3:   #9C7048;
-  --muted:  #C4A87A;
+  --black:  #2C1F0E;
+  --ink:    #2C1F0E;
+  --ink2:   #5A4422;
+  --ink3:   #8B6E42;
+  --muted:  #BBA878;
 
-  /* Borders — golden warm */
-  --border:  #F0D9A8;
-  --border2: #D9BF88;
-  --soft:    #F0D9A8;
+  --border:  #DDD4A0;
+  --border2: #CCC090;
+  --soft:    #DDD4A0;
 
-  /* Pink accent — slightly warmer */
-  --accent:      #D4617A;
-  --accent2:     #B84D65;
-  --accent-pale: rgba(212,97,122,.08);
-  --accent-bg:   rgba(212,97,122,.13);
+  /* Red accent — T&T signature */
+  --accent:      #C83028;
+  --accent2:     #A82020;
+  --accent-pale: rgba(200,48,40,.09);
+  --accent-bg:   rgba(200,48,40,.14);
 
-  /* NEW: Butter yellow accent */
-  --butter:       #F5C842;
-  --butter-dark:  #D4A820;
-  --butter-pale:  rgba(245,200,66,.12);
-  --butter-bg:    rgba(245,200,66,.22);
+  /* Stripe colors */
+  --kraft:      #A89E7A;
+  --babyblue:   #A8C8D8;
+  --sage:       #A8C8D8;       /* map old sage → baby blue */
+  --sage-dark:  #6A9AB0;
+  --sage-pale:  rgba(168,200,216,.15);
+  --sage-bg:    rgba(168,200,216,.25);
 
-  /* Today card: dark warm instead of cool purple */
-  --today-bg-1: #1E0E06;
-  --today-bg-2: #2E1810;
+  --today-bg-1: #A89E7A;
+  --today-bg-2: #9A9070;
 
-  /* Shadows — warm tinted */
-  --sh-sm: 0 2px 12px rgba(180,120,60,.10);
-  --sh:    0 4px 24px rgba(180,120,60,.13);
-  --sh-lg: 0 8px 40px rgba(180,120,60,.17);
+  --sh-sm: 0 2px 14px rgba(44,31,14,.10);
+  --sh:    0 4px 26px rgba(44,31,14,.13);
+  --sh-lg: 0 8px 44px rgba(44,31,14,.18);
 
-  /* Rounder everything */
-  --r-xl: 24px;
-  --r-lg: 18px;
+  --r-xl: 20px;
+  --r-lg: 16px;
   --r-md: 12px;
   --r-sm: 8px;
 }
 
-/* ── POLKA DOTS BACKGROUND ───────────────────────────────── */
+/* ── BODY: vertical stripe wallpaper ─────────────────────── */
 body {
-  background-color: var(--white);
-  background-image: radial-gradient(circle, rgba(245,200,66,0.18) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
+  background-color: var(--kraft);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent       0px,
+    transparent       28px,
+    var(--babyblue)   28px,
+    var(--babyblue)   56px
+  );
 }
 
-/* ── NAV — warm brown glass ──────────────────────────────── */
-.nav { background: rgba(44,26,8,0.96); }
+/* ── SECTION: cream floating card on stripes ─────────────── */
+.section { background: transparent; }
+.content {
+  background: var(--cream);
+  border-radius: 0;
+  position: relative;
+}
+/* Red dashed decorative line at top of content */
+.content::before {
+  content: '';
+  display: block;
+  height: 5px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--accent) 0px,
+    var(--accent) 14px,
+    transparent   14px,
+    transparent   22px
+  );
+  margin-bottom: 0;
+}
 
-/* ── STICKY WEEK — warm border ───────────────────────────── */
-.sticky-week { background: var(--white); border-bottom-color: var(--border); }
+/* ── NAV: cream butter bar ───────────────────────────────── */
+.nav {
+  background: var(--cream);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-top: 3px solid var(--border);
+}
+.nav-btn        { color: rgba(44,31,14,.40); }
+.nav-btn.active { background: rgba(200,48,40,.12); color: var(--accent); }
 
-/* ── TODAY HERO — polka dots on dark bg ─────────────────── */
+/* ── STICKY WEEK ─────────────────────────────────────────── */
+.sticky-week { background: var(--cream); border-bottom-color: var(--border); }
+
+/* ── TODAY HERO: bold stripe card ────────────────────────── */
 .today {
-  background: linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
-  background-image:
-    radial-gradient(circle, rgba(255,255,255,0.12) 1.2px, transparent 1.2px),
-    linear-gradient(135deg, var(--today-bg-1), var(--today-bg-2));
-  background-size: 18px 18px, auto;
+  background-color: var(--kraft);
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent     0px,
+    transparent     22px,
+    var(--babyblue) 22px,
+    var(--babyblue) 44px
+  );
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
 }
-/* Today title: butter yellow highlight */
-.today-title { color: var(--butter); }
-/* Today date: soft warm */
-.today-date { color: rgba(255,245,200,0.45); }
-/* Today rec: butter */
-.today-rec { color: var(--butter); }
-/* Today card hover/active: butter accent */
-.today-card:hover { border-color: var(--butter); }
-.today-card.active { background: var(--butter); border-color: var(--butter); }
-.today-card.active .tc-name { color: var(--today-bg-1); }
-.today-card.active .tc-sub { color: rgba(44,26,8,0.7); }
+/* Cream content area float inside today */
+.today::before {
+  content: none;
+}
+.today-date   { color: rgba(255,255,255,.65); text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+.today-rec    { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.3); font-weight: 600; }
+.today-title  { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
+/* Today category cards: cream pills on stripe */
+.today-card {
+  background: rgba(245,239,204,.88);
+  border-color: rgba(245,239,204,.7);
+}
+.today-card:hover { background: rgba(245,239,204,1); border-color: var(--accent); }
+.today-card.active { background: var(--accent); border-color: var(--accent); }
+.today-card .tc-name { color: var(--black); }
+.today-card .tc-sub  { color: var(--ink3); }
+.today-card.active .tc-name { color: #fff; }
+.today-card.active .tc-sub  { color: rgba(255,255,255,.75); }
+/* Week strip */
+.ws-lbl { color: rgba(255,255,255,.7); }
+.ws-a   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
+.ws-b   { background: rgba(200,48,40,.3);   color: #ffd0cc; border-color: rgba(200,48,40,.5); }
+.ws-p   { background: rgba(245,239,204,.3); color: #fff; border-color: rgba(255,255,255,.5); }
+.today-info { color: rgba(255,255,255,.5); }
 
-/* ── WORKOUT CARDS — warm border, cream surface ──────────── */
+/* Quick start: red */
+.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(200,48,40,.30); }
+
+/* ── WORKOUT CARDS ───────────────────────────────────────── */
 .wcard { background: var(--surface); border-color: var(--border); }
 .wcard-head:hover { background: var(--surface2); }
 .wcard.open .wcard-head { border-bottom-color: var(--border); }
-/* Left glow: warm-tinted */
-.wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.12), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.12), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.13), 0 2px 12px rgba(180,120,60,.07); }
-.wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.13), 0 2px 12px rgba(180,120,60,.07); }
-.wcard:hover { box-shadow: 0 14px 48px rgba(180,120,60,.16); }
+.wcard-a     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-b     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-p     { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard-skate { box-shadow: 0 2px 16px rgba(44,31,14,.10); }
+.wcard:hover { box-shadow: 0 14px 40px rgba(44,31,14,.14); }
+.wcard-a { border-top-color: #6A9AB0; }
+.wcard-b { border-top-color: #A8C8D8; }
+.wcard-p { border-top-color: var(--accent); }
 
-/* ── SECTION TITLE ───────────────────────────────────────── */
-.section-num { color: var(--butter-dark); }
+/* ── SECTION HEADERS ─────────────────────────────────────── */
+.section-num { color: var(--accent); }
 
-/* ── STREAK — butter yellow fire ────────────────────────── */
-.streak-banner {
-  background: linear-gradient(135deg, rgba(245,200,66,.15), rgba(212,97,122,.08));
-  border-color: var(--border);
-}
-.streak-num { color: var(--butter-dark); }
+/* ── STREAK ──────────────────────────────────────────────── */
+.streak-banner { background: var(--surface2); border-color: var(--border); }
+.streak-num    { color: var(--accent); }
 
-/* ── WEEK SELECTOR — butter number ──────────────────────── */
-.week-num { color: var(--butter-dark); }
-
-/* ── LABELS + ACCENTS ────────────────────────────────────── */
-.label::before { background: var(--butter-dark); }
-.label { color: var(--butter-dark); }
-em { color: var(--butter-dark); }
+/* ── WEEK / LABELS ───────────────────────────────────────── */
+.week-num       { color: var(--accent); }
+.label::before  { background: var(--accent); }
+.label          { color: var(--accent); }
+em              { color: var(--accent); }
 
 /* ── QUICK LINKS + CHIPS ─────────────────────────────────── */
 .ql-btn { border-color: var(--border); background: var(--surface2); color: var(--ink2); }
-.ql-btn:hover { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+.ql-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 .chip { border-color: var(--border2); color: var(--ink2); background: var(--surface2); }
 
 /* ── PHASE GRID ──────────────────────────────────────────── */
 .phase-cell { background: var(--surface2); border-color: var(--border); }
 .phase-cell:hover { background: var(--white); }
-.phase-num { color: var(--butter-dark); }
+.phase-num  { color: var(--accent); }
 
-/* ── INPUT FOCUS: butter ─────────────────────────────────── */
-input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 0 3px var(--butter-pale); }
+/* ── INPUTS ──────────────────────────────────────────────── */
+input:focus, textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(200,48,40,.10);
+}
 
 /* ── BUTTONS ─────────────────────────────────────────────── */
-.quick-start-btn { background: var(--accent); box-shadow: 0 6px 28px rgba(212,97,122,.28); }
 .stories-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); }
-.notif-btn { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
+.notif-btn   { border-color: var(--border2); background: var(--surface2); color: var(--ink2); }
 
 /* ── EXERCISE ROWS ───────────────────────────────────────── */
 .ex-row { border-bottom-color: var(--border); }
 .ex-row:hover { background: var(--surface2); }
 .ex-done-btn { background: var(--white); border-color: var(--border2); }
-.ex-done-btn:hover { border-color: var(--butter-dark); }
+.ex-done-btn:hover { border-color: var(--accent); }
 
-/* ── TOGGLE BUTTON ───────────────────────────────────────── */
+/* ── TOGGLE + SET PILLS ──────────────────────────────────── */
 .wcard-toggle { background: var(--surface2); border-color: var(--border2); }
-.wcard.open .wcard-toggle { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
-
-/* ── SET PILLS ───────────────────────────────────────────── */
+.wcard.open .wcard-toggle { background: var(--accent); border-color: var(--accent); color: #fff; }
 .set-pill { background: var(--white); border-color: var(--border2); }
-.set-pill:hover { border-color: var(--butter-dark); color: var(--butter-dark); }
-.set-pill.done { background: var(--butter); border-color: var(--butter); color: var(--today-bg-1); }
+.set-pill:hover { border-color: var(--accent); color: var(--accent); }
+.set-pill.done { background: var(--accent); border-color: var(--accent); color: #fff; }
 
 /* ── SECTION INTRO ───────────────────────────────────────── */
 .section-intro { border-bottom-color: var(--border); color: var(--ink3); }
 
 /* ── WEEKLY SUMMARY ──────────────────────────────────────── */
 .weekly-summary { background: var(--surface2); border-color: var(--border); }
-.ws-stat { background: var(--white); border-color: var(--border); }
-.ws-stat-num { color: var(--butter-dark); }
+.ws-stat        { background: var(--white); border-color: var(--border); }
+.ws-stat-num    { color: var(--accent); }
 
 /* ── WEEK COMPARE ────────────────────────────────────────── */
 .wc-card { background: var(--surface2); border-color: var(--border); }
-.wc-val { color: var(--ink); }
+.wc-val  { color: var(--ink); }
 
 /* ── CALENDAR ────────────────────────────────────────────── */
 .cal-day { background: var(--surface2); }
-.cal-day.today { border-color: var(--butter-dark); color: var(--butter-dark); background: var(--butter-pale); }
+.cal-day.today { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
 
 /* ── GOALS & SCHEDULE ────────────────────────────────────── */
 .goals-box, .schedule-editor { background: var(--surface2); border-color: var(--border); }
 
-/* ── DARK MODE: keep purple-dark feel, warm accents ─────── */
-[data-theme="dark"] body {
-  background-image: radial-gradient(circle, rgba(245,200,66,0.07) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
+/* ── DARK MODE: keep light, just dimmer ─────────────────── */
+[data-theme="dark"] .streak-num  { color: var(--accent); }
+[data-theme="dark"] .week-num    { color: var(--accent); }
+[data-theme="dark"] .today-title { color: #fff; }
+
+/* ══════════════════════════════════════════════════════════
+   FULL RENOVATION — PINTEREST WELLNESS LAYOUT
+   ══════════════════════════════════════════════════════════ */
+
+/* ── NAV: floating pill-style active state ───────────────── */
+.nav { padding: 4px 6px; gap: 2px; }
+.nav-btn {
+  border-radius: 16px;
+  padding: 6px 4px 8px;
+  margin: 3px 0;
+  transition: background .2s, color .2s;
 }
-[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .streak-num { color: var(--butter); }
-[data-theme="dark"] .week-num { color: var(--butter); }
-[data-theme="dark"] .today-title { color: var(--butter); }
+.nav-btn.active {
+  background: rgba(200,48,40,.13);
+  color: var(--accent);
+}
+.nav-btn::after { display: none; }   /* remove underline dot */
+.nav-lbl { font-size: 7.5px; letter-spacing: .4px; font-weight: 500; }
+
+/* ── SECTION NUM: pill badge ─────────────────────────────── */
+.section-num {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--sage-pale);
+  color: var(--sage-dark);
+  border-radius: 20px;
+  padding: 4px 14px 4px 10px;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  margin-bottom: 14px;
+}
+.section-num::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--sage-dark);
+  flex-shrink: 0;
+}
+
+/* ── TODAY CARD: organic floating card ───────────────────── */
+.today {
+  border-radius: 28px;
+  padding: 28px 22px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 40px rgba(20,50,24,.18);
+}
+.today-title {
+  font-size: 13px;
+  letter-spacing: 3px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  opacity: .7;
+  margin-bottom: 14px;
+}
+.today-card {
+  border-radius: 18px;
+  padding: 16px 4px;
+  gap: 6px;
+}
+.tc-icon { font-size: 24px; }
+.tc-name { font-size: 10px; letter-spacing: 1px; }
+.tc-sub  { font-size: 8px; }
+
+/* Week strip pills — sage + terracotta palette */
+.ws-a { background: rgba(74,107,80,.35); color: #b8dcc0; border-color: rgba(74,107,80,.55); }
+.ws-b { background: rgba(122,158,126,.30); color: #c8ecc8; border-color: rgba(122,158,126,.50); }
+.ws-p { background: rgba(200,103,74,.28); color: #f4c8a8; border-color: rgba(200,103,74,.45); }
+
+/* ── WORKOUT CARDS: top strip instead of left border ─────── */
+.wcard {
+  border-left: none !important;
+  border-top: 4px solid transparent;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s;
+}
+.wcard:hover { transform: translateY(-4px); }
+.wcard-a { border-top-color: var(--sage-dark); }
+.wcard-b { border-top-color: var(--sage); }
+.wcard-p { border-top-color: #C8674A; }
+.wcard-skate { border-top-color: #5b9bd5; }
+
+/* Card header: tinted background per type */
+.wcard-a .wcard-head { background: rgba(74,107,80,.06); }
+.wcard-b .wcard-head { background: rgba(122,158,126,.05); }
+.wcard-p .wcard-head { background: rgba(200,103,74,.05); }
+
+/* Type indicator dot before heading */
+.wcard-head h3 { display: flex; align-items: center; gap: 10px; }
+.wcard-head h3::before {
+  content: '';
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.wcard-a .wcard-head h3::before { background: var(--sage-dark); }
+.wcard-b .wcard-head h3::before { background: var(--sage); }
+.wcard-p .wcard-head h3::before { background: #C8674A; }
+.wcard-skate .wcard-head h3::before { background: #5b9bd5; }
+
+/* ── QUICK-START BUTTON: full pill ───────────────────────── */
+.quick-start-btn {
+  border-radius: 50px;
+  font-size: 14px;
+  letter-spacing: 2.5px;
+  padding: 17px 32px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* ── PHASE GRID: taller organic cards ───────────────────── */
+.phase-cell {
+  border-radius: 18px;
+  padding: 18px 14px;
+  border: 1.5px solid var(--border);
+}
+.phase-num { font-size: 28px; margin-bottom: 5px; }
+.phase-name { font-size: 11.5px; letter-spacing: .8px; margin-bottom: 6px; }
+.phase-desc { font-size: 11.5px; line-height: 1.6; }
+
+/* ── STREAK BANNER: bigger & bolder ─────────────────────── */
+.streak-banner {
+  border-radius: 22px;
+  padding: 24px 22px;
+  border: 1.5px solid var(--border);
+}
+.streak-fire { font-size: 48px; }
+.streak-num  { font-size: 84px; letter-spacing: -2px; }
+
+/* ── SET PILLS: rounded organic ──────────────────────────── */
+.set-pill { border-radius: 50px; padding: 8px 14px; font-size: 11px; }
+.set-pill.done { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
+
+/* ── WCARD TOGGLE: pill style ────────────────────────────── */
+.wcard-toggle { border-radius: 50px; padding: 6px 16px; font-size: 11px; }
+.wcard.open .wcard-toggle { background: var(--sage); border-color: var(--sage); color: #1E2B20; }
+
+/* ── LABELS: cleaner ─────────────────────────────────────── */
+.label::before { width: 18px; background: var(--sage-dark); }
+.label { color: var(--sage-dark); font-size: 8.5px; letter-spacing: 3px; }
+
+/* ── PAGE HEADING: softer divider ────────────────────────── */
+.page-hd-label { color: var(--sage-dark); letter-spacing: 2.5px; }
+
+/* ── INFO BOX & REVEAL: organic border ──────────────────── */
+.info-box { border-radius: 18px; border: 1.5px solid var(--border); }
+.reveal.info-box { background: var(--surface2); }
+
+/* ── SCHEDULE EDITOR: organic ────────────────────────────── */
+.schedule-editor { border-radius: 20px; overflow: hidden; }
+.goals-box { border-radius: 20px; }
+
+/* ── WEEKLY SUMMARY ──────────────────────────────────────── */
+.weekly-summary { border-radius: 22px; }
+.ws-stat { border-radius: 16px; }
+.ws-stat-num { font-size: 42px; }
+
+/* ── WEEK COMPARE CARDS ──────────────────────────────────── */
+.wc-card { border-radius: 18px; }
+
+/* ── NOTIF BUTTON: pill ──────────────────────────────────── */
+.notif-btn { border-radius: 50px; width: 100%; margin-bottom: 18px; padding: 13px 20px; font-size: 12px; letter-spacing: 1px; }
+
+/* ── QUICK LINKS: pill style ─────────────────────────────── */
+.ql-btn { border-radius: 50px; }
+
+/* ══════════════════════════════════════════════════════════
+   DRAMATIC PINTEREST REDESIGN
+   Syne bold display · Playfair italic accent
+   Visible stripes · editorial contrast
+   ══════════════════════════════════════════════════════════ */
+
+/* ── SECTION TITLE: Syne ultra-bold ─────────────────────── */
+.section-title {
+  font-size: clamp(52px, 14vw, 108px);
+  letter-spacing: -.03em;
+  line-height: .88;
+  font-weight: 800;
+}
+/* Accent word: Caveat handwritten */
+.section-title em {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: -.01em;
+  font-size: 1.05em;
+}
+
+/* ── TODAY CARD: Caveat title ────────────────────────────── */
+/* Today title: Caveat handwritten */
+.today-title {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 26px;
+  letter-spacing: 0;
+  text-transform: none;
+  margin-bottom: 16px;
+  color: #fff;
+}
+
+/* ── PLAN HERO: stripe band behind heading ───────────────── */
+#plan .content > div:first-child {
+  position: relative;
+  padding: 0 0 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+#plan .content > div:first-child::after {
+  content: '';
+  position: absolute;
+  right: -24px;
+  top: 10px;
+  bottom: 10px;
+  width: 130px;
+  background: repeating-linear-gradient(
+    0deg,
+    var(--sage-pale) 0px,
+    var(--sage-pale) 7px,
+    transparent 7px,
+    transparent 14px
+  );
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* ── PAGE BACKGROUND: very faint linen lines ────────────── */
+body {
+  background-color: var(--white);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent       0px,
+      transparent       80px,
+      rgba(122,158,126,.022) 80px,
+      rgba(122,158,126,.022) 81px
+    );
+}
+
+/* ── WORKOUT CARDS: Syne heading ─────────────────────────── */
+.wcard-head h3 {
+  font-size: 18px;
+  letter-spacing: -.01em;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* ── SECTION NUMBER: Caveat script label ─────────────────── */
+.section-num {
+  font-family: var(--font-script);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0;
+  text-transform: none;
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  color: var(--accent);
+  opacity: .9;
+  margin-bottom: 10px;
+}
+.section-num::before { display: none; }
+
+/* ── PAGE-HD-LABEL: Caveat ───────────────────────────────── */
+.page-hd-label {
+  font-family: var(--font-script);
+  font-size: 17px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ── STREAK LABEL: Caveat ────────────────────────────────── */
+.streak-lbl {
+  font-family: var(--font-script);
+  font-size: 18px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink3);
+  margin-top: 2px;
+}
+.streak-num { font-family: var(--font-display); font-weight: 800; }
+
+/* ── STICKY WEEK LABEL ───────────────────────────────────── */
+.sticky-week-label {
+  font-family: var(--font-script);
+  font-size: 18px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent);
+}
+.week-num { font-family: var(--font-display); font-weight: 800; }
+
+/* ── PHASE NUMBERS: Caveat ───────────────────────────────── */
+.phase-num {
+  font-family: var(--font-script);
+  font-size: 26px;
+  letter-spacing: 0;
+  font-weight: 700;
+  color: var(--accent);
+}
+.phase-name { text-transform: none; }
+
+/* ── SECTION INTRO ───────────────────────────────────────── */
+.section-intro {
+  font-size: 15px;
+  line-height: 1.75;
+  border-bottom-color: var(--border);
+  color: var(--ink2);
+}
+
+/* ── DELOAD TITLE: Caveat ────────────────────────────────── */
+.deload-title {
+  font-family: var(--font-script);
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* ── NAV LABELS: Syne ────────────────────────────────────── */
+.nav-lbl { font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .3px; }
+
+/* ── GEAR BUTTON on exercise rows ───────────────────────── */
+.ex-gear-btn {
+  margin-left: auto; flex-shrink: 0;
+  width: 28px; height: 28px;
+  border: 1px solid var(--border2); border-radius: 50%;
+  background: var(--white); color: var(--ink3);
+  font-size: 13px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s; opacity: 0;
+}
+.ex-row-inner:hover .ex-gear-btn,
+.ex-row.detail-open .ex-gear-btn { opacity: 1; }
+.ex-gear-btn:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: rotate(40deg); }
+
+/* ── EXERCISE EDIT MODAL ─────────────────────────────────── */
+.ex-modal-backdrop {
+  position: fixed; inset: 0; z-index: 500;
+  background: rgba(0,0,0,.45); backdrop-filter: blur(4px);
+  animation: fadeIn .2s ease;
+}
+.ex-modal-sheet {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 501;
+  background: var(--surface); border-radius: 24px 24px 0 0;
+  padding: 28px 24px calc(32px + env(safe-area-inset-bottom));
+  max-height: 88vh; overflow-y: auto;
+  animation: slideUp .3s cubic-bezier(.34,1.1,.64,1);
+}
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+.ex-modal-handle { width: 36px; height: 4px; background: var(--border2); border-radius: 2px; margin: 0 auto 20px; }
+.ex-modal-name { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--black); margin-bottom: 4px; letter-spacing: -.01em; }
+.ex-modal-sub  { font-size: 10px; color: var(--ink3); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+.ex-modal-field { margin-bottom: 16px; }
+.ex-modal-field label { display: block; font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; }
+.ex-modal-field input { width: 100%; padding: 12px 14px; border: 1.5px solid var(--border2); border-radius: 12px; font-size: 15px; background: var(--white); color: var(--ink); box-sizing: border-box; }
+.ex-modal-field input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-pale); }
+.ex-modal-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ex-modal-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 26px; }
+.ex-modal-save   { width: 100%; padding: 15px; background: var(--accent); color: #fff; border: none; border-radius: 50px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; }
+.ex-modal-delete { width: 100%; padding: 13px; background: transparent; color: var(--ink3); border: 1.5px solid var(--border2); border-radius: 50px; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all .15s; }
+.ex-modal-delete:hover { border-color: #c0392b; color: #c0392b; }
+.ex-modal-cancel { background: none; border: none; font-size: 11px; color: var(--muted); text-align: center; cursor: pointer; padding: 8px; letter-spacing: 1px; text-transform: uppercase; width: 100%; }
+.ex-pill-kg { font-size: 9px; color: var(--accent); font-weight: 700; letter-spacing: .5px; margin-left: 4px; vertical-align: middle; }
+
+/* ── CALENDAR FIX ────────────────────────────────────────── */
+.cal-grid { gap: 3px; }
+.cal-day { min-height: 36px; aspect-ratio: unset; font-size: 11px; padding: 4px 2px; }
+.cal-dot  { margin-top: 2px; }
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -1340,11 +1760,11 @@ input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 
     <div class="ex-row" data-uid="ex-98020a"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug</div><div class="ex-sub">aktivace hlubokého core</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-98020a" data-set="0">5/strana · pomalu</button><button class="set-pill" data-ex="ex-98020a" data-set="1">5/strana · pomalu</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Pomalu spusť pravou ruku nad hlavu + zároveň natáhni levou nohu k zemi</li><li>Záda musí být pořád plochá — to je nejdůležitější</li><li>Výdech při extenzi, nádech zpět</li></ol><div class="tip-box">💡 Pokud se záda zvedají — zmenši rozsah pohybu</div><a href="https://www.youtube.com/results?search_query=dead+bug+core+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube tutoriál — Dead bug</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-66571"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow + Open book</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">6× + 5×/strana</span></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Cat-cow</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru jako kočka, hlava dolů (cat)</li></ol><h5>Open book</h5><ol><li>Leh na bok, kolena pokrčena v 90°, ruce natažené před sebou</li><li>Horní ruku zvedni a otoč se do rotace — jako otevíráš knihu</li><li>Pohled sleduje ruku, výdech v rotaci</li></ol><div class="tip-box">💡 Open book uvolní hrudní páteř — klíč pro držení těla</div><a href="https://www.youtube.com/results?search_query=cat+cow+spine+mobilization" target="_blank" rel="noopener" class="yt-link">YouTube — Cat-cow</a><a href="https://www.youtube.com/results?search_query=open+book+thoracic+rotation+stretch" target="_blank" rel="noopener" class="yt-link">YouTube — Open book</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
+    <div class="ex-row" data-uid="ex-66571"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cat-cow</div></div></div><div class="ex-sets-block"><span class="ex-sets-inline">6×</span></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><h5>Cat-cow</h5><ol><li>Klek na čtyři — ruce pod rameny, kolena pod kyčlemi</li><li>Nádech: prohni záda dolů, hlava nahoru (cow)</li><li>Výdech: vyhrbíš záda nahoru jako kočka, hlava dolů (cat)</li></ol><a href="https://www.youtube.com/results?search_query=cat+cow+spine+mobilization" target="_blank" rel="noopener" class="yt-link">YouTube — Cat-cow</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-49810"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Glute bridge (aktivace) + Wall slides</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-49810" data-set="0">10 opak. (pauza 2s) + 1×8</button><button class="set-pill" data-ex="ex-49810" data-set="1">10 opak. (pauza 2s) + 1×8</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Glute bridge</h5><ol><li>Leh na záda, chodidla na zemi, kolena pokrčena</li><li>Zatlač do pat a zvedni pánev nahoru — zatnout hýždě nahoře</li><li>Drž 2 sekundy nahoře, pak pomalu dolů</li></ol><h5>Wall slides</h5><ol><li>Stoupni si zády ke zdi, záda a lokty přiložené ke zdi</li><li>Pomalu taháš ruce nahoru po zdi — lokty a zápěstí se nesmí odlepit</li></ol><div class="tip-box">💡 Wall slides aktivují lopatky a připraví záda na silový trénink</div><a href="https://www.youtube.com/results?search_query=glute+bridge+activation+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Glute bridge</a><a href="https://www.youtube.com/results?search_query=wall+slides+shoulder+blade+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Wall slides</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
+    <div class="ex-row" data-uid="ex-49810"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Wall slides</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-49810" data-set="0">1×8</button><button class="set-pill" data-ex="ex-49810" data-set="1">1×8</button></div></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><h5>Wall slides</h5><ol><li>Stoupni si zády ke zdi, záda a lokty přiložené ke zdi</li><li>Pomalu taháš ruce nahoru po zdi — lokty a zápěstí se nesmí odlepit</li></ol><div class="tip-box">💡 Wall slides aktivují lopatky a připraví záda na silový trénink</div><a href="https://www.youtube.com/results?search_query=wall+slides+shoulder+blade+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Wall slides</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
 
     <div class="phase-lbl" data-phase="main">Hlavní část — 45–50 min</div>
 
@@ -1448,8 +1868,8 @@ input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 
     <div class="ex-row" data-uid="ex-11906"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hip abduction (kabel vestoje / lying s gumou)</div><div class="ex-sub">Glute medius — tvar boků</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-11906" data-set="0">15 opak. · pomalé</button><button class="set-pill" data-ex="ex-11906" data-set="1">15 opak. · pomalé</button><button class="set-pill" data-ex="ex-11906" data-set="2">15 opak. · pomalé</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–10 kg na kabelu / lehká guma</span></div><h5>Jak na to</h5><ol><li>Připoj kabel na kotník, stůj bokem ke stroji</li><li>Mírně se naloň dopředu 10–15° — klíč pro aktivaci glute medius místo TFL</li><li>Zvedni nohu do strany — pohyb jde z kyčle, ne ze záklonu trupu</li></ol><div class="tip-box">💡 Mírný předklon při stojící variantě je klíčový — buduje "booty shelf" a hourglass proporce</div><a href="https://www.youtube.com/results?search_query=cable+hip+abduction+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Kabel (vestoje)</a><a href="https://www.youtube.com/results?search_query=lying+hip+abduction+resistance+band+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Lying s gumou</a><div class="ex-rest-trigger" data-seconds="60" data-label="Pauza 60s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60s</span><button class="ex-timer-go" data-seconds="60" data-label="Pauza 60s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-88610"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold + Glute bridge march</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-88610" data-set="0">3×15–25s + 2×8/strana</button><button class="set-pill" data-ex="ex-88610" data-set="1">3×15–25s + 2×8/strana</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Hollow hold</h5><ol><li>Leh na záda, zvedni ramena a nohy pár centimetrů od země</li><li>Záda zůstávají plochá — bederní páteř přitisknuta k zemi</li></ol><h5>Glute bridge march</h5><ol><li>Udělej glute bridge — pánev nahoře, hýždě zatnuty</li><li>V této pozici pomalu zvedni jedno koleno k hrudníku</li><li>Pánev se nesmí spadnout ani otočit</li></ol><a href="https://www.youtube.com/results?search_query=hollow+hold+core+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Hollow hold</a><a href="https://www.youtube.com/results?search_query=glute+bridge+march+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Glute bridge march</a><div class="ex-timer-trigger" data-seconds="20" data-label="20s"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">20s</span><button class="ex-timer-go" data-seconds="20" data-label="20s">▶ Spustit</button></div></div></div>
+    <div class="ex-row" data-uid="ex-88610"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Hollow hold</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-88610" data-set="0">3×15–25s</button><button class="set-pill" data-ex="ex-88610" data-set="1">3×15–25s</button></div></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><h5>Hollow hold</h5><ol><li>Leh na záda, zvedni ramena a nohy pár centimetrů od země</li><li>Záda zůstávají plochá — bederní páteř přitisknuta k zemi</li></ol><a href="https://www.youtube.com/results?search_query=hollow+hold+core+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Hollow hold</a><div class="ex-timer-trigger" data-seconds="20" data-label="20s"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">20s</span><button class="ex-timer-go" data-seconds="20" data-label="20s">▶ Spustit</button></div></div></div>
 
     <div class="phase-lbl" data-phase="cool">Cooldown + strečink — 10 min</div>
 
@@ -1611,8 +2031,8 @@ input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 
   <div class="routine-step">
     <div class="step-time" data-step="3">6–8 min</div>
     <div class="step-content">
-      <h4>Hrudní páteř — "Open book"</h4>
-      <p>1×6/strana, pomalu, výdech v rotaci. Otevírá hrudní páteř, zlepšuje pozici ramen — klíčové pro "modelka" siluetu zepředu i zezadu.</p>
+      <h4>Hrudní páteř — Cat-cow</h4>
+      <p>6×, pomalé tempo, synchronizuj s dechem. Uvolňuje páteř a připravuje tělo na pohyb.</p>
     </div>
   </div>
   <div class="routine-step">
@@ -1632,7 +2052,7 @@ input:focus, textarea:focus { border-color: var(--butter-dark); box-shadow: 0 0 
 
 <div class="page-hd-label" style="margin-top:48px">Denní checklist</div>
 <div id="daily-checklist">
-  <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Ranní 10min rutina držení těla</div><div class="check-text-sub">Dýchání → chin tuck → wall slides → open book → hip flexor</div></div></div>
+  <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Ranní 10min rutina držení těla</div><div class="check-text-sub">Dýchání → chin tuck → wall slides → cat-cow → hip flexor</div></div></div>
   <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Vědomé držení těla při sezení</div><div class="check-text-sub">Hrudník nahoře, lopatky dolů, nekrčit se nad telefonem</div></div></div>
   <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Trénink / kardio (tréninkový den)</div><div class="check-text-sub">Síla A nebo B + core finisher, nebo kardio Z2</div></div></div>
   <div class="check-item"><div class="check-box"></div><div class="check-text"><div class="check-text-title">Kroky — dostat se ven</div><div class="check-text-sub">Krátká procházka alespoň 15–20 min = bonus pro regeneraci i posturu</div></div></div>
@@ -4073,6 +4493,158 @@ document.addEventListener('DOMContentLoaded', function() {
     setCard('wcPct','wcPctDelta', tw.pct, lw.pct, '%');
   }
   renderWeekCompare();
+
+  // Always land on plan tab on fresh page load
+  switchTab('plan');
+
+  // ── EXERCISE GEAR: DELETE + EDIT REPS/SETS/KG ────────────
+
+  // 1. Hide permanently deleted exercises
+  var deletedEx = JSON.parse(localStorage.getItem('ms_deleted_ex') || '[]');
+  deletedEx.forEach(function(uid) {
+    var row = document.querySelector('.ex-row[data-uid="' + uid + '"]');
+    var detail = row && row.nextElementSibling;
+    if (row) row.style.display = 'none';
+    if (detail && detail.classList.contains('ex-detail')) detail.style.display = 'none';
+  });
+
+  // 2. Apply saved custom configs (reps/sets/kg) to exercises
+  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+    var uid = row.dataset.uid;
+    var cfg = JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null');
+    if (!cfg) return;
+    // Update set pills text
+    var pills = row.querySelectorAll('.set-pill');
+    pills.forEach(function(p) {
+      var txt = cfg.reps || p.textContent;
+      if (cfg.kg) txt += ' · ' + cfg.kg + 'kg';
+      if (cfg.secs) txt += ' · ' + cfg.secs + 's';
+      p.textContent = txt;
+    });
+    // Update inline sets text
+    var inline = row.querySelector('.ex-sets-inline');
+    if (inline && cfg.reps) {
+      inline.textContent = cfg.reps + (cfg.kg ? ' · ' + cfg.kg + 'kg' : '') + (cfg.secs ? ' · ' + cfg.secs + 's' : '');
+    }
+    // Update set count (add/remove pills)
+    if (cfg.sets && pills.length && cfg.sets !== pills.length) {
+      var block = row.querySelector('.set-pills');
+      if (block) {
+        var newPillText = pills[0].textContent;
+        block.innerHTML = '';
+        for (var s = 0; s < cfg.sets; s++) {
+          var np = document.createElement('button');
+          np.className = 'set-pill';
+          np.dataset.ex = uid; np.dataset.set = s;
+          np.textContent = newPillText;
+          block.appendChild(np);
+        }
+        // Re-bind set pill click (re-use existing handler via delegation)
+      }
+    }
+  });
+
+  // 3. Add gear button to every exercise row
+  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+    var inner = row.querySelector('.ex-row-inner');
+    if (!inner || inner.querySelector('.ex-gear-btn')) return;
+    var btn = document.createElement('button');
+    btn.className = 'ex-gear-btn';
+    btn.innerHTML = '⚙';
+    btn.title = 'Upravit cvik';
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      openExModal(row.dataset.uid, row);
+    });
+    inner.appendChild(btn);
+  });
+
+  // 4. Exercise edit modal
+  function openExModal(uid, row) {
+    var name = (row.querySelector('.ex-name') || {}).textContent || uid;
+    var cfg = JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') || {};
+    var pills = row.querySelectorAll('.set-pill');
+    var defaultSets = cfg.sets || pills.length || 3;
+    var defaultReps = cfg.reps || (pills[0] ? pills[0].textContent.split(' · ')[0] : '10 opak.');
+
+    var backdrop = document.createElement('div');
+    backdrop.className = 'ex-modal-backdrop';
+
+    var sheet = document.createElement('div');
+    sheet.className = 'ex-modal-sheet';
+    sheet.innerHTML = [
+      '<div class="ex-modal-handle"></div>',
+      '<div class="ex-modal-name">' + name + '</div>',
+      '<div class="ex-modal-sub">Úprava cviku</div>',
+      '<div class="ex-modal-field"><label>Počet sérií</label>',
+      '<input type="number" id="emSets" min="1" max="10" value="' + defaultSets + '"></div>',
+      '<div class="ex-modal-grid2">',
+      '<div class="ex-modal-field"><label>Opakování / čas</label>',
+      '<input type="text" id="emReps" placeholder="10 opak." value="' + defaultReps + '"></div>',
+      '<div class="ex-modal-field"><label>Váha (kg)</label>',
+      '<input type="number" id="emKg" min="0" step="0.5" placeholder="–" value="' + (cfg.kg || '') + '"></div>',
+      '</div>',
+      '<div class="ex-modal-field"><label>Čas (sekundy) – volitelné</label>',
+      '<input type="number" id="emSecs" min="0" placeholder="–" value="' + (cfg.secs || '') + '"></div>',
+      '<div class="ex-modal-actions">',
+      '<button class="ex-modal-save" id="emSave">Uložit</button>',
+      '<button class="ex-modal-delete" id="emDelete">🗑 Odstranit cvik natrvalo</button>',
+      '<button class="ex-modal-cancel" id="emCancel">Zrušit</button>',
+      '</div>'
+    ].join('');
+
+    document.body.appendChild(backdrop);
+    document.body.appendChild(sheet);
+
+    function closeModal() {
+      backdrop.remove(); sheet.remove();
+    }
+    backdrop.addEventListener('click', closeModal);
+    sheet.querySelector('#emCancel').addEventListener('click', closeModal);
+
+    sheet.querySelector('#emSave').addEventListener('click', function() {
+      var sets = parseInt(sheet.querySelector('#emSets').value) || defaultSets;
+      var reps = sheet.querySelector('#emReps').value.trim() || defaultReps;
+      var kg   = parseFloat(sheet.querySelector('#emKg').value) || 0;
+      var secs = parseInt(sheet.querySelector('#emSecs').value) || 0;
+      var newCfg = { sets: sets, reps: reps };
+      if (kg)   newCfg.kg   = kg;
+      if (secs) newCfg.secs = secs;
+      localStorage.setItem('ms_ex_cfg_' + uid, JSON.stringify(newCfg));
+      // Update DOM immediately
+      var pillText = reps + (kg ? ' · ' + kg + 'kg' : '') + (secs ? ' · ' + secs + 's' : '');
+      var pillBlock = row.querySelector('.set-pills');
+      var inlineEl  = row.querySelector('.ex-sets-inline');
+      if (pillBlock) {
+        pillBlock.innerHTML = '';
+        for (var s = 0; s < sets; s++) {
+          var np = document.createElement('button');
+          np.className = 'set-pill';
+          np.dataset.ex = uid; np.dataset.set = s;
+          np.textContent = pillText;
+          pillBlock.appendChild(np);
+        }
+      } else if (inlineEl) {
+        inlineEl.textContent = pillText;
+      }
+      closeModal();
+    });
+
+    sheet.querySelector('#emDelete').addEventListener('click', function() {
+      if (!confirm('Odstranit "' + name + '" natrvalo?')) return;
+      var del = JSON.parse(localStorage.getItem('ms_deleted_ex') || '[]');
+      if (!del.includes(uid)) del.push(uid);
+      localStorage.setItem('ms_deleted_ex', JSON.stringify(del));
+      var detail = row.nextElementSibling;
+      row.style.transition = 'opacity .3s, max-height .3s';
+      row.style.opacity = '0';
+      setTimeout(function() {
+        row.style.display = 'none';
+        if (detail && detail.classList.contains('ex-detail')) detail.style.display = 'none';
+      }, 320);
+      closeModal();
+    });
+  }
 
 });
 </script>
