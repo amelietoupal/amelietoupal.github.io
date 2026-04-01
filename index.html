@@ -4722,6 +4722,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (hasDetail) row.after(detail); // detail goes right after row
       applyCfgToRow(row);
     });
+    // Save exercise order permanently
+    var cardKey = cardKeyOf(card);
+    if (cardKey) {
+      var order = Array.from(card.querySelectorAll('.ex-edit-row')).map(function(er) { return er.dataset.uid; });
+      localStorage.setItem('ms_ex_order_' + cardKey, JSON.stringify(order));
+    }
     exitEditMode(card, true);
   }
 
@@ -4732,6 +4738,35 @@ document.addEventListener('DOMContentLoaded', function() {
     var tb = card.querySelector('.wcard-edit-toolbar');
     if (tb) tb.remove();
   }
+
+  // 10. Card key helper
+  function cardKeyOf(card) {
+    return Array.from(card.classList).find(function(c) { return /^wcard-[a-z]/.test(c) && c !== 'wcard'; }) || null;
+  }
+
+  // 11. Restore saved exercise order on page load
+  document.querySelectorAll('.wcard').forEach(function(card) {
+    var cardKey = cardKeyOf(card);
+    if (!cardKey) return;
+    var order = JSON.parse(localStorage.getItem('ms_ex_order_' + cardKey) || 'null');
+    if (!order || !order.length) return;
+    var body = card.querySelector('.wcard-body');
+    if (!body) return;
+    // Find the anchor: element just before the first ex-row in this card
+    var firstRow = body.querySelector('.ex-row[data-uid]');
+    if (!firstRow) return;
+    var anchor = firstRow.previousElementSibling; // e.g. phase-lbl
+    var cursor = anchor;
+    order.forEach(function(uid) {
+      var row = body.querySelector('.ex-row[data-uid="' + uid + '"]');
+      if (!row) return;
+      var detail = row.nextElementSibling; // capture before moving
+      var hasDetail = detail && detail.classList.contains('ex-detail');
+      if (cursor) { cursor.after(row); } else { body.insertBefore(row, body.firstChild); }
+      if (hasDetail) row.after(detail);
+      cursor = hasDetail ? detail : row;
+    });
+  });
 
 });
 </script>
