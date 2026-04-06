@@ -562,6 +562,20 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .backup-status { font-size: 11px; color: var(--green); margin-top: 10px; min-height: 16px; font-weight: 500; letter-spacing: .5px; }
 .backup-status.error { color: var(--accent); }
 
+/* ── TOAST ───────────────────────────────────────────────── */
+.toast { position: fixed; bottom: calc(var(--nav-h) + 84px); left: 50%; transform: translateX(-50%) translateY(16px); background: var(--black); color: #fff; padding: 10px 20px; border-radius: 24px; font-family: var(--font-body); font-size: 13px; font-weight: 600; z-index: 650; opacity: 0; transition: opacity .22s, transform .22s; pointer-events: none; white-space: nowrap; max-width: 90vw; text-align: center; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── VÁHOVÝ DENÍK ────────────────────────────────────────── */
+.wj-box { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 16px; }
+.wj-input-row { display: flex; gap: 8px; align-items: center; }
+.wj-input { flex: 1; }
+.wj-btn { padding: 9px 18px; background: var(--accent); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; white-space: nowrap; transition: background .15s; }
+.wj-btn:hover { background: var(--accent2); }
+.wj-chart { width: 100%; height: 56px; margin-top: 10px; display: block; overflow: visible; }
+.wj-empty { font-size: 12px; color: var(--ink3); text-align: center; padding: 10px 0; }
+.wj-last { font-size: 11px; color: var(--ink3); margin-top: 5px; text-align: right; }
+
 .macro-grid,.macro-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; background: transparent; margin-bottom: 20px; }
 .macro-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 16px; text-align: center; }
 .macro-icon { font-size: 20px; margin-bottom: 6px; }
@@ -2328,6 +2342,18 @@ body {
 </div>
 
 
+<!-- VÁHOVÝ DENÍK -->
+<div class="label" style="margin-top:24px">⚖️ Váhový deník</div>
+<div class="wj-box">
+  <div class="wj-input-row">
+    <input class="wj-input track-input" id="wjKg" type="number" step="0.1" min="20" max="300" placeholder="Váha (kg)">
+    <button class="wj-btn" id="wjSave">Zapsat</button>
+  </div>
+  <svg class="wj-chart" id="wjChart" viewBox="0 0 320 56" preserveAspectRatio="none"></svg>
+  <div class="wj-empty" id="wjEmpty">Zatím žádné záznamy</div>
+  <div class="wj-last" id="wjLast"></div>
+</div>
+
 <!-- OSOBNÍ REKORDY -->
 <div class="label" style="margin-top:24px">🏆 Osobní rekordy</div>
 <p style="font-size:13px;color:var(--ink3);margin-bottom:12px">Formát: <strong>40 kg × 10 reps</strong></p>
@@ -2562,6 +2588,7 @@ body {
 </div>
 
 <button id="scrollTopBtn" style="display:none">↑</button>
+<div id="toastMsg" class="toast"></div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -2673,6 +2700,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // ── SET PILLS + DONE ──────────────────────────────────────
+  function savePillState(pill) {
+    var ex = pill.dataset.ex; var s = pill.dataset.set;
+    if (ex == null || s == null) return;
+    if (pill.classList.contains('done')) sessionStorage.setItem('ms_pill_' + ex + '_' + s, '1');
+    else sessionStorage.removeItem('ms_pill_' + ex + '_' + s);
+  }
+
   document.addEventListener('click', function(e) {
     var btn = e.target.closest('.ex-done-btn');
     if (btn) {
@@ -2681,12 +2715,13 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!row) return;
       var nowDone = !row.classList.contains('done');
       row.classList.toggle('done', nowDone);
-      var block = row.nextElementSibling;
-      if (block && block.classList.contains('ex-sets-block')) {
+      var block = row.querySelector('.ex-sets-block');
+      if (block) {
         block.querySelectorAll('.set-pill').forEach(function(p) {
           if (!p.dataset.label) p.dataset.label = p.textContent;
           p.classList.toggle('done', nowDone);
           p.textContent = nowDone ? '✓' : p.dataset.label;
+          savePillState(p);
         });
       }
       setTimeout(function() { ['a','b','p'].forEach(updateProgress); }, 50);
@@ -2698,10 +2733,22 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!pill.dataset.label) pill.dataset.label = pill.textContent;
       pill.classList.toggle('done');
       pill.textContent = pill.classList.contains('done') ? '✓' : pill.dataset.label;
+      savePillState(pill);
+      // Auto-start rest timer when set is marked done
+      if (pill.classList.contains('done')) {
+        var pillRow = pill.closest('.ex-row');
+        if (pillRow) {
+          var pillDetail = pillRow.nextElementSibling;
+          if (pillDetail && pillDetail.classList.contains('ex-detail')) {
+            var restTrig = pillDetail.querySelector('.ex-rest-trigger');
+            if (restTrig) setTimeout(function() { openTimer(parseInt(restTrig.dataset.seconds)||60, restTrig.dataset.label||'Pauza'); }, 200);
+          }
+        }
+      }
       var block2 = pill.closest('.ex-sets-block');
       if (block2) {
-        var row2 = block2.previousElementSibling;
-        if (row2 && row2.classList.contains('ex-row')) {
+        var row2 = block2.closest('.ex-row');
+        if (row2) {
           var allDone = Array.from(block2.querySelectorAll('.set-pill')).every(function(p) { return p.classList.contains('done'); });
           row2.classList.toggle('done', allDone);
         }
@@ -2963,6 +3010,108 @@ document.addEventListener('DOMContentLoaded', function() {
       this.classList.add('pr-new-record');
       var self = this;
       setTimeout(function() { self.classList.remove('pr-new-record'); }, 1500);
+    });
+  });
+
+  // ── TOAST ─────────────────────────────────────────────────
+  function showToast(msg, dur) {
+    var t = document.getElementById('toastMsg');
+    if (!t) return;
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(function() { t.classList.remove('show'); }, dur || 2800);
+  }
+  window.showToast = showToast;
+
+  // ── VÁHOVÝ DENÍK ──────────────────────────────────────────
+  function renderWeightChart() {
+    var entries = JSON.parse(localStorage.getItem('ms_weight_log') || '[]');
+    var emptyEl = document.getElementById('wjEmpty');
+    var chartEl = document.getElementById('wjChart');
+    var lastEl = document.getElementById('wjLast');
+    if (!chartEl) return;
+    if (!entries.length) {
+      if (emptyEl) emptyEl.style.display = 'block';
+      chartEl.innerHTML = '';
+      if (lastEl) lastEl.textContent = '';
+      return;
+    }
+    if (emptyEl) emptyEl.style.display = 'none';
+    var last30 = entries.slice(-30);
+    var kgs = last30.map(function(e) { return e.kg; });
+    var minKg = Math.min.apply(null, kgs);
+    var maxKg = Math.max.apply(null, kgs);
+    var range = maxKg - minKg || 1;
+    var W = 320, H = 56, pad = 6;
+    var pts = kgs.map(function(kg, i) {
+      var x = pad + (i / Math.max(kgs.length - 1, 1)) * (W - pad * 2);
+      var y = H - pad - ((kg - minKg) / range) * (H - pad * 2);
+      return x.toFixed(1) + ',' + y.toFixed(1);
+    });
+    var lastPt = pts[pts.length - 1].split(',');
+    var lastEntry = last30[last30.length - 1];
+    if (lastEl) lastEl.textContent = 'Poslední: ' + lastEntry.kg + ' kg  (' + lastEntry.date + ')';
+    chartEl.innerHTML =
+      '<polyline points="' + pts.join(' ') + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>' +
+      '<circle cx="' + lastPt[0] + '" cy="' + lastPt[1] + '" r="3.5" fill="var(--accent)"/>';
+  }
+
+  var wjSaveBtn = document.getElementById('wjSave');
+  if (wjSaveBtn) {
+    wjSaveBtn.addEventListener('click', function() {
+      var inp = document.getElementById('wjKg');
+      if (!inp) return;
+      var kg = parseFloat(inp.value.replace(',', '.'));
+      if (isNaN(kg) || kg < 20 || kg > 300) { showToast('Zadej platnou váhu v kg'); return; }
+      var entries = JSON.parse(localStorage.getItem('ms_weight_log') || '[]');
+      var today = new Date().toISOString().slice(0, 10);
+      var todayIdx = -1;
+      for (var ti = 0; ti < entries.length; ti++) { if (entries[ti].date === today) { todayIdx = ti; break; } }
+      if (todayIdx >= 0) { entries[todayIdx].kg = kg; } else { entries.push({ date: today, kg: kg }); }
+      if (entries.length > 365) entries = entries.slice(-365);
+      localStorage.setItem('ms_weight_log', JSON.stringify(entries));
+      inp.value = '';
+      renderWeightChart();
+      showToast('Váha ' + kg + ' kg uložena ✓');
+    });
+  }
+  renderWeightChart();
+
+  // ── PR AUTODETECT Z TRACKERU ──────────────────────────────
+  var PR_AUTOMAP = {
+    'ht_kg':  { prKey: 'hip_thrust', name: 'Hip Thrust',   repsId: 'ht_reps' },
+    'gs_kg':  { prKey: 'goblet',     name: 'Goblet Squat', repsId: 'gs_reps' },
+    'rdl_kg': { prKey: 'rdl',        name: 'RDL',          repsId: 'rdl_reps' },
+    'row_kg': { prKey: 'row',        name: 'Seated Row',   repsId: 'row_reps' }
+  };
+  document.querySelectorAll('.tracker-input[data-id]').forEach(function(inp) {
+    var info = PR_AUTOMAP[inp.dataset.id];
+    if (!info) return;
+    inp.addEventListener('change', function() {
+      var newKg = parseFloat(this.value.replace(',', '.'));
+      if (isNaN(newKg) || newKg <= 0) return;
+      var prKey = 'ms_pr_' + info.prKey;
+      var saved = localStorage.getItem(prKey);
+      var curPrKg = 0;
+      if (saved) {
+        try { var obj = JSON.parse(saved); curPrKg = parseFloat((obj.val || '').replace(',', '.')) || 0; }
+        catch(e) { curPrKg = parseFloat(saved) || 0; }
+      }
+      if (newKg > curPrKg) {
+        var repsInp = document.querySelector('.tracker-input[data-id="' + info.repsId + '"]');
+        var reps = repsInp ? repsInp.value.trim() : '';
+        var d = new Date();
+        var dateStr = d.getDate() + '. ' + (d.getMonth()+1) + '. ' + d.getFullYear();
+        var prVal = newKg + ' kg' + (reps ? ' × ' + reps + ' reps' : '');
+        localStorage.setItem(prKey, JSON.stringify({ val: prVal, date: dateStr }));
+        var prInp = document.querySelector('.pr-input[data-pr="' + info.prKey + '"]');
+        if (prInp) prInp.value = prVal;
+        var prDateEl = document.getElementById('pr-date-' + info.prKey);
+        if (prDateEl) prDateEl.textContent = 'Nastaveno: ' + dateStr;
+        if (typeof drawSparkline === 'function') drawSparkline(info.prKey);
+        showToast('🏆 Nový rekord! ' + info.name + ' ' + newKg + ' kg 💪');
+      }
     });
   });
 
@@ -3321,51 +3470,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
       rule(158);
 
-      // ── WEEK HERO: circular progress arc ─────────────────
+      // ── WEEK HERO: massive typographic number ────────────────
       var week = parseInt(localStorage.getItem('ms_week') || '1');
-      // Section label left + week fraction right
       ctx.fillStyle = 'rgba(255,255,255,0.32)'; ctx.font = '22px Arial, sans-serif';
-      ctx.fillText('AKTUÁLNÍ TÝDEN', 80, 208);
-      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 36px Arial Black, sans-serif';
-      ctx.textAlign = 'right'; ctx.fillText('/ 12', 1000, 208); ctx.textAlign = 'left';
-
-      // Arc center & radius
-      var arcCX = 540, arcCY = 378, arcR = 148;
-      var startA = -Math.PI / 2;
-      var sweepA = (week / 12) * Math.PI * 2;
-
-      // Outer glow ring (very soft, barely visible)
-      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR + 18, 0, Math.PI*2);
-      ctx.strokeStyle = 'rgba(201,107,136,0.08)'; ctx.lineWidth = 30; ctx.stroke();
-
-      // Track ring: full circle, dim
-      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR, 0, Math.PI*2);
-      ctx.strokeStyle = 'rgba(255,255,255,0.09)'; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.stroke();
-
-      // Progress arc
-      var arcG = ctx.createLinearGradient(
-        arcCX + arcR * Math.cos(startA), arcCY + arcR * Math.sin(startA),
-        arcCX + arcR * Math.cos(startA + sweepA), arcCY + arcR * Math.sin(startA + sweepA)
-      );
-      arcG.addColorStop(0, '#ff85a1'); arcG.addColorStop(1, '#8b4078');
-      ctx.beginPath(); ctx.arc(arcCX, arcCY, arcR, startA, startA + sweepA);
-      ctx.strokeStyle = arcG; ctx.lineWidth = 6; ctx.lineCap = 'round'; ctx.stroke();
-
-      // Glowing dot at arc tip
-      var tipA = startA + sweepA;
-      var tipX = arcCX + Math.cos(tipA) * arcR;
-      var tipY = arcCY + Math.sin(tipA) * arcR;
-      ctx.beginPath(); ctx.arc(tipX, tipY, 10, 0, Math.PI*2);
-      ctx.fillStyle = '#ff85a1'; ctx.fill();
-      ctx.beginPath(); ctx.arc(tipX, tipY, 18, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(255,133,161,0.25)'; ctx.fill();
-
-      // Center text: big week number
-      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 130px Arial Black, sans-serif';
-      ctx.textAlign = 'center'; ctx.fillText(String(week), arcCX, arcCY + 46);
-      ctx.fillStyle = 'rgba(255,255,255,0.35)'; ctx.font = '26px Arial, sans-serif';
-      ctx.fillText('týden', arcCX, arcCY + 88);
-      ctx.textAlign = 'left';
+      ctx.fillText('AKTUÁLNÍ TÝDEN', 80, 210);
+      // "/ 12" right-aligned, pink
+      ctx.fillStyle = '#c96b88'; ctx.font = 'bold 40px Arial Black, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('/ 12', 1000, 390); ctx.textAlign = 'left';
+      ctx.fillStyle = 'rgba(255,255,255,0.28)'; ctx.font = '24px Arial, sans-serif';
+      ctx.textAlign = 'right'; ctx.fillText('týdnů', 1000, 428); ctx.textAlign = 'left';
+      // Massive number — left aligned, editorial style
+      ctx.fillStyle = '#ffffff'; ctx.font = 'bold 240px Arial Black, sans-serif';
+      ctx.fillText(String(week), 60, 494);
 
       // ── WEEK DOTS STRIP ───────────────────────────────────
       var dotR = 7, dotStride = 73, dotsStart = 80;
@@ -3418,7 +3534,9 @@ document.addEventListener('DOMContentLoaded', function() {
       var prNames2 = ['Hip Thrust','Goblet Squat','RDL','Seated Row'];
       prKeys2.forEach(function(k, i) {
         var ry = 760 + i * 92;
-        var val = localStorage.getItem('ms_pr_' + k) || '—';
+        var prRaw = localStorage.getItem('ms_pr_' + k);
+        var val = '—';
+        if (prRaw) { try { val = JSON.parse(prRaw).val || prRaw; } catch(e) { val = prRaw; } }
         ctx.fillStyle = 'rgba(255,255,255,0.52)'; ctx.font = '28px Arial, sans-serif';
         ctx.fillText(prNames2[i], 80, ry + 40);
         ctx.fillStyle = '#ffffff'; ctx.font = 'bold 54px Arial Black, sans-serif';
@@ -3537,12 +3655,13 @@ document.addEventListener('DOMContentLoaded', function() {
     var nowDone = !row.classList.contains('done');
     row.classList.toggle('done', nowDone);
     row.classList.remove('detail-open');
-    var block = row.nextElementSibling;
-    if (block && block.classList.contains('ex-sets-block')) {
+    var block = row.querySelector('.ex-sets-block');
+    if (block) {
       block.querySelectorAll('.set-pill').forEach(function(p) {
         if (!p.dataset.label) p.dataset.label = p.textContent;
         p.classList.toggle('done', nowDone);
         p.textContent = nowDone ? '✓' : p.dataset.label;
+        savePillState(p);
       });
     }
     setTimeout(function() { ['a','b','p'].forEach(updateProgress); }, 50);
@@ -4569,6 +4688,24 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   document.querySelectorAll('.ex-row[data-uid]').forEach(applyCfgToRow);
 
+  // Restore set-pill done state from sessionStorage
+  document.querySelectorAll('.set-pill[data-ex][data-set]').forEach(function(p) {
+    if (sessionStorage.getItem('ms_pill_' + p.dataset.ex + '_' + p.dataset.set) === '1') {
+      if (!p.dataset.label) p.dataset.label = p.textContent;
+      p.classList.add('done');
+      p.textContent = '✓';
+    }
+  });
+  // Sync ex-row done state from pills after restore
+  document.querySelectorAll('.ex-sets-block').forEach(function(block) {
+    var pills = block.querySelectorAll('.set-pill');
+    if (!pills.length) return;
+    var row = block.closest('.ex-row');
+    if (!row) return;
+    var allDone = Array.from(pills).every(function(p) { return p.classList.contains('done'); });
+    if (allDone) row.classList.add('done');
+  });
+
   // 5. Add edit button to each workout card
   document.querySelectorAll('.wcard').forEach(function(card) {
     var headRight = card.querySelector('.wcard-head-right');
@@ -4734,6 +4871,13 @@ document.addEventListener('DOMContentLoaded', function() {
       er.after(row);           // row goes right after edit-row
       if (hasDetail) row.after(detail); // detail goes right after row
       applyCfgToRow(row);
+      // Restore pill done state in case applyCfgToRow recreated pills
+      row.querySelectorAll('.set-pill[data-ex][data-set]').forEach(function(p) {
+        if (sessionStorage.getItem('ms_pill_' + p.dataset.ex + '_' + p.dataset.set) === '1') {
+          if (!p.dataset.label) p.dataset.label = p.textContent;
+          p.classList.add('done'); p.textContent = '✓';
+        }
+      });
     });
     // Save exercise order permanently
     var cardKey = cardKeyOf(card);
