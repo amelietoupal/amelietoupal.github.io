@@ -547,6 +547,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .tlog-date { font-size: 11px; color: var(--ink3); margin-top: 1px; }
 .tlog-stat { font-size: 13px; font-weight: 700; color: var(--ink); white-space: nowrap; }
 .tlog-pct { font-size: 11px; color: var(--ink3); font-weight: 400; }
+.tlog-del-btn { background: none; border: none; font-size: 14px; cursor: pointer; opacity: 0; padding: 4px 2px; color: var(--muted); flex-shrink: 0; transition: opacity .15s, color .15s; }
+.tlog-row:hover .tlog-del-btn { opacity: 1; }
+.tlog-del-btn:hover { color: #c0392b; }
 .backup-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 20px; margin-bottom: 28px; }
 .backup-title { font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); margin-bottom: 8px; }
 .backup-desc { font-size: 13px; color: var(--ink3); line-height: 1.6; margin-bottom: 16px; }
@@ -4346,7 +4349,7 @@ document.addEventListener('DOMContentLoaded', function() {
     noteObserver.observe(wmBodyEl, { childList: true, subtree: true });
   })();
 
-  // Override renderTrainingLog to show notes
+  // Override renderTrainingLog to show notes + delete button
   renderTrainingLog = function() {
     var el = document.getElementById('trainingLogList');
     if (!el) return;
@@ -4354,15 +4357,25 @@ document.addEventListener('DOMContentLoaded', function() {
     if (!logTL.length) { el.innerHTML = '<div class="tlog-empty">Zatím žádný trénink — dokonči první trénink v režimu tréninku.</div>'; return; }
     var days = ['Ne','Po','Út','St','Čt','Pá','So'];
     var TYPE_COLOR = { a: '#a8d8c0', b: '#c8bcec', p: '#f4c4d4' };
-    el.innerHTML = logTL.slice(0, 15).map(function(e) {
+    el.innerHTML = logTL.slice(0, 30).map(function(e, i) {
       var d = new Date(e.date);
       var dateStr = days[d.getDay()] + ' ' + d.getDate() + '.' + (d.getMonth()+1) + '. ' + d.getFullYear();
       var timeStr = ('0'+d.getHours()).slice(-2) + ':' + ('0'+d.getMinutes()).slice(-2);
       var pct = e.total ? Math.round(e.done/e.total*100) : 0;
       var col = TYPE_COLOR[e.type] || '#ccc';
       var noteHtml = e.note ? '<div class="tlog-note">' + e.note.replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>' : '';
-      return '<div class="tlog-row"><span class="tlog-dot" style="background:'+col+'"></span><div class="tlog-info"><div class="tlog-title">'+e.title+'</div><div class="tlog-date">'+dateStr+' '+timeStr+'</div>'+noteHtml+'</div><div class="tlog-stat">'+e.done+'/'+e.total+' <span class="tlog-pct">'+pct+'%</span></div></div>';
+      return '<div class="tlog-row"><span class="tlog-dot" style="background:'+col+'"></span><div class="tlog-info"><div class="tlog-title">'+e.title+'</div><div class="tlog-date">'+dateStr+' '+timeStr+'</div>'+noteHtml+'</div><div class="tlog-stat">'+e.done+'/'+e.total+' <span class="tlog-pct">'+pct+'%</span></div><button class="tlog-del-btn" data-idx="'+i+'" title="Smazat záznam">🗑</button></div>';
     }).join('');
+    el.querySelectorAll('.tlog-del-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var idx = parseInt(this.dataset.idx);
+        var lg = JSON.parse(localStorage.getItem('ms_log') || '[]');
+        lg.splice(idx, 1);
+        localStorage.setItem('ms_log', JSON.stringify(lg));
+        renderTrainingLog();
+      });
+    });
   };
   renderTrainingLog();
 
