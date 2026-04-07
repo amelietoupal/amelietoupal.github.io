@@ -203,9 +203,10 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .ws-day { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .ws-lbl { font-size: 8px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.45); transition: color .2s; }
 .ws-pill { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; letter-spacing: .5px; border: 1.5px solid transparent; transition: transform .2s, box-shadow .2s; }
-.ws-a   { background: rgba(45,96,74,.35);   color: #a8d8c0; border-color: rgba(45,96,74,.5);   }
-.ws-b   { background: rgba(96,80,160,.35);  color: #c8bcec; border-color: rgba(96,80,160,.5);  }
-.ws-p   { background: rgba(201,107,136,.3); color: #f4c4d4; border-color: rgba(201,107,136,.45); font-size: 15px; }
+.ws-a    { background: rgba(45,96,74,.35);   color: #a8d8c0; border-color: rgba(45,96,74,.5);   }
+.ws-b    { background: rgba(96,80,160,.35);  color: #c8bcec; border-color: rgba(96,80,160,.5);  }
+.ws-p    { background: rgba(201,107,136,.3); color: #f4c4d4; border-color: rgba(201,107,136,.45); font-size: 15px; }
+.ws-rest { background: rgba(255,255,255,.08); color: rgba(255,255,255,.3); border-color: rgba(255,255,255,.12); font-size: 13px; }
 .ws-today .ws-lbl  { color: #fff; font-weight: 800; }
 .ws-today .ws-pill { transform: scale(1.15); box-shadow: 0 0 0 2.5px #fff, 0 4px 12px rgba(0,0,0,.25); }
 
@@ -1573,18 +1574,18 @@ body {
   <div class="today-rec" id="todayRec"></div>
   <div class="today-title">Co dnes trénuješ?</div>
   <div class="today-grid">
-    <div class="today-card" data-type="a"><span class="tc-icon">💚</span><span class="tc-name">Síla A</span><span class="tc-sub">Nohy · Záda</span></div>
-    <div class="today-card" data-type="b"><span class="tc-icon">💜</span><span class="tc-name">Síla B</span><span class="tc-sub">Zadek · Paže</span></div>
+    <div class="today-card" data-type="a"><span class="tc-icon">💚</span><span class="tc-name">Síla A</span><span class="tc-sub">Glute · Nohy · Postura</span></div>
+    <div class="today-card" data-type="b"><span class="tc-icon">💜</span><span class="tc-name">Síla B</span><span class="tc-sub">Zadek · Záda · Paže</span></div>
     <div class="today-card" data-type="p"><span class="tc-icon">🩷</span><span class="tc-name">Pilates</span><span class="tc-sub">Core · Pas</span></div>
     <div class="today-card" data-type="rest"><span class="tc-icon">😴</span><span class="tc-name">Volno</span><span class="tc-sub">Odpočívej</span></div>
   </div>
   <div class="week-strip" id="weekStrip">
     <div class="ws-day" data-dow="1"><div class="ws-lbl">Po</div><div class="ws-pill ws-a">A</div></div>
-    <div class="ws-day" data-dow="2"><div class="ws-lbl">Út</div><div class="ws-pill ws-a">A</div></div>
+    <div class="ws-day" data-dow="2"><div class="ws-lbl">Út</div><div class="ws-pill ws-rest">—</div></div>
     <div class="ws-day" data-dow="3"><div class="ws-lbl">St</div><div class="ws-pill ws-b">B</div></div>
-    <div class="ws-day" data-dow="4"><div class="ws-lbl">Čt</div><div class="ws-pill ws-b">B</div></div>
-    <div class="ws-day" data-dow="5"><div class="ws-lbl">Pá</div><div class="ws-pill ws-b">B</div></div>
-    <div class="ws-day" data-dow="6"><div class="ws-lbl">So</div><div class="ws-pill ws-p">🧘</div></div>
+    <div class="ws-day" data-dow="4"><div class="ws-lbl">Čt</div><div class="ws-pill ws-rest">—</div></div>
+    <div class="ws-day" data-dow="5"><div class="ws-lbl">Pá</div><div class="ws-pill ws-a">A</div></div>
+    <div class="ws-day" data-dow="6"><div class="ws-lbl">So</div><div class="ws-pill ws-rest">—</div></div>
     <div class="ws-day" data-dow="0"><div class="ws-lbl">Ne</div><div class="ws-pill ws-p">🧘</div></div>
   </div>
   <div class="today-info" id="todaySummary">Klepni na trénink výše ↑</div>
@@ -1651,43 +1652,42 @@ body {
   <div class="rpe-bar"><div class="rpe-fill" style="height:90px;background:#b8926a;"></div><div class="rpe-num">9</div><div class="rpe-label">1 rep v zásobě</div></div>
   <div class="rpe-bar"><div class="rpe-fill" style="height:116px;background:#8a6840;"></div><div class="rpe-num">10</div><div class="rpe-label">Selhání ✗</div></div>
 </div>
-<!-- FIX #1: opraveny class atributy (chybějící uvozovky) -->
 <div class="reveal info-box">
   <h4>Proč ne selhání?</h4>
   <p>Trénink do selhání nepřináší pro začátečníky lepší výsledky pro sílu ani objem — ale zvyšuje únavu a riziko špatné techniky. Většina práce v RPE 6–8 = progres + regenerace v pořádku.</p>
 </div>
 
+<div class="reveal info-box" style="border-color:var(--accent);margin-top:12px">
+  <h4>Double Progression — jak přidávat zátěž</h4>
+  <p>Nejjednodušší způsob jak dlouhodobě progresovat bez stresu:</p>
+  <ol>
+    <li>Zvolíš rozsah opakování — např. <strong>8–12 opak.</strong></li>
+    <li>Cvičíš se stejnou váhou, dokud nedáš <strong>všechny série na horní hranici</strong> (12/12/12) s dobrou technikou</li>
+    <li>Pak přidáš <strong>+1–2 kg</strong> (jednoručky) nebo <strong>+2,5–5 kg</strong> (stroj) a vrátíš se na spodní hranici (8 opak.)</li>
+    <li>Opakuj — cyklus trvá typicky <strong>2–4 týdny</strong> na cvik</li>
+  </ol>
+  <div class="tip-box" style="margin-top:10px;border-color:var(--accent)">💡 Když stejná váha najednou působí lehčeji — to je progres i bez změny váhy. Zapiš si RPE každý trénink.</div>
+</div>
+
 <!-- Weekly schedule -->
 <div class="page-hd-label" style="margin-top:48px">Týdenní rozvrh</div>
 <div class="training-card">
-  <div class="wcard-head"><h3>Varianta 2× týdně — základ</h3><span class="tag">Doporučeno</span></div>
+  <div class="wcard-head"><h3>3× týdně — A-B-A / B-A-B střídání</h3><span class="tag">Doporučeno</span></div>
   <div style="display:block">
     <div style="padding:0">
-      <div class="phase-lbl">Týdenní struktura</div>
+      <div class="phase-lbl">Týden 1 — A·B·A &nbsp;|&nbsp; Týden 2 — B·A·B (a tak dál)</div>
       <table><thead><tr><th>Den</th><th>Obsah</th><th>Délka</th></tr></thead>
       <tbody>
-        <tr><td><div class="ex-name">Den A</div></td><td>Síla — glute / nohy / postura + 10 min core</td><td>55–70 min</td></tr>
-        <tr><td><div class="ex-name">volno</div></td><td>Kardio — chůze do kopce / kolo (Z2)</td><td>20–30 min</td></tr>
-        <tr><td><div class="ex-name">Den B</div></td><td>Síla — záda / paže / glute + 10 min core</td><td>55–70 min</td></tr>
-        <tr><td><div class="ex-name">volno</div></td><td>Kardio nebo odpočinek + 10 min mobilita</td><td>dle energie</td></tr>
+        <tr><td><div class="ex-name">Pondělí</div></td><td>Síla A — glute / nohy / postura</td><td>55–65 min</td></tr>
+        <tr><td><div class="ex-name">Úterý</div></td><td>Procházka / kroky + 10 min mobilita</td><td>20–30 min</td></tr>
+        <tr><td><div class="ex-name">Středa</div></td><td>Síla B — zadek / záda / paže</td><td>60–70 min</td></tr>
+        <tr><td><div class="ex-name">Čtvrtek</div></td><td>Procházka / lehké kolo (volitelně)</td><td>dle energie</td></tr>
+        <tr><td><div class="ex-name">Pátek</div></td><td>Síla A — (příští týden B)</td><td>55–65 min</td></tr>
+        <tr><td><div class="ex-name">Sobota</div></td><td>Volno + kroky</td><td>—</td></tr>
+        <tr><td><div class="ex-name">Neděle</div></td><td>Volno nebo Pilates (pokud se cítíš svěže)</td><td>30–40 min</td></tr>
         <tr><td><div class="ex-name">každý den</div></td><td>10 min denní rutina držení těla</td><td>10 min</td></tr>
       </tbody></table>
-    </div>
-  </div>
-</div>
-
-<div class="training-card">
-  <div class="wcard-head"><h3>Varianta 3× týdně — ideál</h3><span class="tag">Pokročilá</span></div>
-  <div style="display:block">
-    <div style="padding:0">
-      <table><thead><tr><th>Den</th><th>Obsah</th><th>Délka</th></tr></thead>
-      <tbody>
-        <tr><td><div class="ex-name">Den A</div></td><td>Síla full-body A</td><td>55–60 min</td></tr>
-        <tr><td><div class="ex-name">Den P</div></td><td>Pilates/Core + mobilita (+ vol. 20 min chůze)</td><td>30–40 min</td></tr>
-        <tr><td><div class="ex-name">Den B</div></td><td>Síla full-body B</td><td>55–60 min</td></tr>
-        <tr><td><div class="ex-name">1–2× vol.</div></td><td>Kardio (Z2, 20–40 min)</td><td>dle regenerace</td></tr>
-        <tr><td><div class="ex-name">každý den</div></td><td>10 min rutina držení těla</td><td>10 min</td></tr>
-      </tbody></table>
+      <div class="tip-box" style="margin:12px 0 0;border-color:var(--accent)">💡 Střídání A-B-A / B-A-B zajistí, že oba tréninky máš v průměru stejně často — bez nutnosti plán měnit.</div>
     </div>
   </div>
 </div>
@@ -1746,6 +1746,7 @@ body {
         Tréninky<br><em style="color:var(--accent);font-style:normal;">A &amp; B</em>
       </h2>
     </div>
+    <p class="section-intro">Dva silové tréninky pokrývají celé tělo s důrazem na zadek, nohy a vzpřímené držení. Střídej je v rytmu <strong>A–B–A</strong>, příští týden <strong>B–A–B</strong>. Každý cvik má vlastní set-pilulek — klepni na cvičení pro instrukce a zapni timer pauzy.</p>
 
 <!-- SÍLA A -->
 <div class="wcard wcard-a reveal">
@@ -1922,7 +1923,6 @@ body {
       <span class="wcard-progress-label">hotovo</span>
     </div>
   </div>
-  <!-- FIX #4: opraveny CSS tokeny var(--card-bg) a var(--soft) -->
   <div style="padding:14px 16px;background:var(--card-bg);border-bottom:1px solid var(--soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
     <span style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--light);">Verze:</span>
     <button class="today-btn btn-p active" id="pilShortBtn" data-version="short">⚡ Krátká 25 min</button>
@@ -2010,13 +2010,12 @@ body {
   <div class="content">
     <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
       <span class="section-num">03 — Rutina</span>
-      <!-- FIX #1: opraveno </h2>/h2> → správné uzavření -->
       <h2 style="font-family:var(--font-display);font-size:clamp(56px,15vw,110px);line-height:.88;text-transform:uppercase;">
         Denní<br><em style="color:var(--accent);font-style:normal;">rutina.</em>
       </h2>
     </div>
+    <p class="section-intro">10 minut ráno mění víc než hodina v posilovně. Tato rutina opravuje držení těla — bránici, krk, lopatky a kyčle — a vizuální efekt „dlouhých linií" se projeví dříve, než zhubtneš jediný kilogram.</p>
 
-<!-- FIX #1: opravena class (chybějící uvozovky) -->
 <div class="reveal reveal-delay-1 info-box">
   <h4>Proč je to nejdůležitější?</h4>
   <p>Vizuální efekt „dlouhých linií" pochází především z držení těla — hrudník nahoře, lopatky stabilní, krk dlouhý, otevřené kyčle. Tato rutina ti dá největší výsledek i bez změny váhy.</p>
@@ -2060,7 +2059,6 @@ body {
   </div>
 </div>
 
-<!-- FIX #1: opravena class (chybějící uvozovky) -->
 <div class="reveal reveal-delay-2 info-box warn" style="margin-top:32px">
   <h4>Jen 5 minut? Tato 3 jsou klíčová:</h4>
   <p>0–2 min 90/90 dýchání → 2–4 min chin tuck → 8–10 min hip flexor stretch. V tomto pořadí, každý den.</p>
@@ -2088,7 +2086,8 @@ body {
         Kardio<br><em style="color:var(--accent);font-style:normal;">smart.</em>
       </h2>
     </div>
-    <!-- FIX #1: opravena class -->
+    <p class="section-intro">Kardio není o spalování — je o regeneraci a zdravém srdci. Chůze do kopce, kolo nebo brusle v pásmu Z2 doplňují silový trénink, aniž by ho brzdily. Méně, lépe, konzistentně.</p>
+
     <div class="reveal info-box">
       <h4>Proč nízká intenzita a ne běh?</h4>
       <p>Při souběžném tréninku (síla + kardio) může běh ve vyšším objemu brzdit silové adaptace. Kolo a eliptical jsou šetrnější. Rozumné dávky stále platí.</p>
@@ -2233,7 +2232,6 @@ body {
   </div>
 </div>
 
-<!-- FIX #1: opravena class -->
 <div class="reveal reveal-delay-1 info-box warn" style="margin-top:32px">
   <h4>Kardio a síla — kdy dělat co?</h4>
   <p>Ideálně kardio v jiný den než sílu. Pokud musíš ve stejný den: nejdřív síla, pak kardio. Nikdy naopak.</p>
@@ -2252,6 +2250,8 @@ body {
         5 chyb,<br><em style="color:var(--accent);font-style:normal;">stop.</em>
       </h2>
     </div>
+    <p class="section-intro">Tyto chyby dělá většina žen při fitness. Každá stojí měsíce výsledků. Přečti si je jednou — a pak je prostě nedělej.</p>
+
     <div class="mistake-card"><div class="mistake-icon">↘️</div><div class="mistake-body"><h4>Jede pořád moc lehce bez progrese</h4><p>Po 2–3 týdnech žádné zlepšení reps ani techniky.</p><div class="mistake-fix">→ Fix: Double progression — nejdřív přidej reps, pak váhu.</div></div></div>
     <div class="mistake-card"><div class="mistake-icon">🔥</div><div class="mistake-body"><h4>Moc tvrdě — RPE 9–10 pořád</h4><p>Technika se rozpadá, bolesti zad/kolen, zničená 2–3 dny.</p><div class="mistake-fix">→ Fix: Drž většinu práce RPE 6–8. Selhání není nutné.</div></div></div>
     <div class="mistake-card"><div class="mistake-icon">🏃</div><div class="mistake-body"><h4>Příliš mnoho kardio a málo síly</h4><p>Nohy pořád těžké, zhoršuje se výkon v dřepech a hip thrustu.</p><div class="mistake-fix">→ Fix: Priorita = síla. Kardio je doplněk. Preferuj nízký dopad.</div></div></div>
@@ -2278,7 +2278,6 @@ body {
   <div class="content">
     <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
       <span class="section-num">06 — Tracker</span>
-      <!-- FIX #1: opraveno přebytečné >> za </h2> -->
       <h2 style="font-family:var(--font-display);font-size:clamp(56px,15vw,110px);line-height:.88;text-transform:uppercase;">
         Progress<br><em style="color:var(--accent);font-style:normal;">tracker.</em>
       </h2>
@@ -2365,6 +2364,7 @@ body {
   <div class="pr-card"><div class="pr-name">Goblet squat</div><input class="pr-input" data-pr="goblet" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-goblet"></div><svg class="pr-sparkline" id="spark-goblet" data-prkey="goblet" data-prname="Goblet squat" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
   <div class="pr-card"><div class="pr-name">RDL</div><input class="pr-input" data-pr="rdl" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-rdl"></div><svg class="pr-sparkline" id="spark-rdl" data-prkey="rdl" data-prname="RDL" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
   <div class="pr-card"><div class="pr-name">Seated Row</div><input class="pr-input" data-pr="row" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-row"></div><svg class="pr-sparkline" id="spark-row" data-prkey="row" data-prname="Seated Row" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
+  <div class="pr-card"><div class="pr-name">Lat Pulldown</div><input class="pr-input" data-pr="lat_pd" placeholder="Max kg × reps"><div class="pr-date" id="pr-date-lat_pd"></div><svg class="pr-sparkline" id="spark-lat_pd" data-prkey="lat_pd" data-prname="Lat Pulldown" style="cursor:pointer" title="Klepni pro detail" height="32" viewBox="0 0 100 32"></svg></div>
 </div>
 
 <!-- VÝKON PO TRÉNINKU -->
@@ -2374,6 +2374,7 @@ body {
   <div class="tracker-card"><h4>Goblet squat</h4><label class="track-label">Váha (kg)</label><input class="track-input tracker-input" data-id="gs_kg" placeholder="např. 20"><label class="track-label">Reps</label><input class="track-input tracker-input" data-id="gs_reps" placeholder="např. 10"><label class="track-label">RPE (1–10)</label><input class="track-input tracker-input" data-id="gs_rpe" placeholder="např. 7"></div>
   <div class="tracker-card"><h4>RDL</h4><label class="track-label">Váha (kg)</label><input class="track-input tracker-input" data-id="rdl_kg" placeholder="např. 30"><label class="track-label">Reps</label><input class="track-input tracker-input" data-id="rdl_reps" placeholder="např. 10"><label class="track-label">RPE (1–10)</label><input class="track-input tracker-input" data-id="rdl_rpe" placeholder="např. 7"></div>
   <div class="tracker-card"><h4>Seated Row</h4><label class="track-label">Váha (kg)</label><input class="track-input tracker-input" data-id="row_kg" placeholder="např. 25"><label class="track-label">Reps</label><input class="track-input tracker-input" data-id="row_reps" placeholder="např. 10"><label class="track-label">RPE (1–10)</label><input class="track-input tracker-input" data-id="row_rpe" placeholder="např. 7"></div>
+  <div class="tracker-card"><h4>Lat Pulldown</h4><label class="track-label">Váha (kg)</label><input class="track-input tracker-input" data-id="lp_kg" placeholder="např. 30"><label class="track-label">Reps</label><input class="track-input tracker-input" data-id="lp_reps" placeholder="např. 10"><label class="track-label">RPE (1–10)</label><input class="track-input tracker-input" data-id="lp_rpe" placeholder="např. 7"></div>
 </div>
 
 <!-- MÍRY -->
@@ -2399,7 +2400,6 @@ body {
   <div class="mood-row">
     <span class="mood-lbl">Spánek</span>
     <div class="stars">
-      <!-- FIX #5: data-id opraveno z "mood-star" třídy — JS nyní správně čte .star -->
       <div class="star" data-id="sleep" data-rating="1"></div>
       <div class="star" data-id="sleep" data-rating="2"></div>
       <div class="star" data-id="sleep" data-rating="3"></div>
@@ -2448,13 +2448,11 @@ body {
   <div class="content">
     <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
       <span class="section-num">07 — Výživa</span>
-      <!-- FIX #1: opraveno přebytečné >> za </h2> -->
       <h2 style="font-family:var(--font-display);font-size:clamp(56px,15vw,110px);line-height:.88;text-transform:uppercase;">
         Jídelníček<br><em style="color:var(--accent);font-style:normal;">bez diet.</em>
       </h2>
     </div>
 
-<!-- FIX #1: opravena class -->
 <div class="reveal reveal-delay-2 info-box warn">
   <h4>Nejdůležitější pravidlo pro tvůj věk</h4>
   <p>Máš 17 let a tělo stále roste — nechceš být v kalorickém deficitu. Cílem není hubnout, ale zpevnit a dodat tělu co potřebuje ke stavbě svalů, zdravým kostem a hormonální rovnováze.</p>
@@ -3086,7 +3084,8 @@ document.addEventListener('DOMContentLoaded', function() {
     'ht_kg':  { prKey: 'hip_thrust', name: 'Hip Thrust',   repsId: 'ht_reps' },
     'gs_kg':  { prKey: 'goblet',     name: 'Goblet Squat', repsId: 'gs_reps' },
     'rdl_kg': { prKey: 'rdl',        name: 'RDL',          repsId: 'rdl_reps' },
-    'row_kg': { prKey: 'row',        name: 'Seated Row',   repsId: 'row_reps' }
+    'row_kg': { prKey: 'row',        name: 'Seated Row',   repsId: 'row_reps' },
+    'lp_kg':  { prKey: 'lat_pd',     name: 'Lat Pulldown', repsId: 'lp_reps'  }
   };
   document.querySelectorAll('.tracker-input[data-id]').forEach(function(inp) {
     var info = PR_AUTOMAP[inp.dataset.id];
