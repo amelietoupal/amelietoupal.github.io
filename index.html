@@ -61,31 +61,6 @@
   --sp-lg: 24px; --sp-xl: 48px; --sp-2xl: 80px;
 }
 
-[data-theme="dark"] {
-  --today-bg-1: #0d0818;
-  --today-bg-2: #150d28;
-  --white:   #1a1020;
-  --black:   #f5eef0;
-  --ink:     #f0e6ec;
-  --ink2:    #c9afc0;
-  --ink3:    #9c7e90;
-  --muted:   #6a4e60;
-  --border:  #3a2840;
-  --border2: #4e3050;
-  --surface: #221428;
-  --surface2:#2a1a30;
-  --card-bg: #2a1a30;
-  --bg:      #1a1020;
-  --text:    #f0e6ec;
-  --text2:   #c9afc0;
-  --text3:   #9c7e90;
-  --green-bg: rgba(45,96,74,.18);
-  --purple-bg:rgba(96,80,160,.18);
-  --brown-bg: rgba(176,112,128,.18);
-  --accent-pale: rgba(201,107,136,.15);
-  --accent-bg:   rgba(201,107,136,.18);
-}
-
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 body {
   font-family: var(--font-body);
@@ -164,7 +139,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .today-date { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 6px; }
 .today-rec { font-size: 11px; font-weight: 500; color: var(--accent); margin-bottom: 14px; min-height: 16px; letter-spacing: .5px; }
 .today-title { font-family: var(--font-display); font-size: 28px; letter-spacing: 3px; color: #fff; margin-bottom: 20px; text-transform: uppercase; }
-.today-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; margin-bottom: 16px; }
+.today-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 5px; margin-bottom: 16px; }
 .today-card { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 4px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: var(--r-md); cursor: pointer; transition: all .2s; }
 .today-card:hover { background: rgba(255,255,255,.12); border-color: var(--accent); }
 .today-card.active { background: var(--accent); border-color: var(--accent); }
@@ -624,7 +599,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 @media (max-width: 380px) {
   .section-title { font-size: 44px; }
   .phase-grid { grid-template-columns: repeat(2,1fr); }
-  .today-grid { grid-template-columns: repeat(2,1fr); }
+  .today-grid { grid-template-columns: repeat(3,1fr); }
   .tracker-grid,.pr-grid { grid-template-columns: 1fr; background: transparent; gap: 8px; }
   .macro-grid,.macro-row { grid-template-columns: repeat(2,1fr); }
   .content { padding: var(--sp-lg) 14px; }
@@ -966,6 +941,31 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   --r-lg: 16px;
   --r-md: 12px;
   --r-sm: 8px;
+}
+
+[data-theme="dark"] {
+  --today-bg-1: #0d0818;
+  --today-bg-2: #150d28;
+  --white:   #1a1020;
+  --black:   #f5eef0;
+  --ink:     #f0e6ec;
+  --ink2:    #c9afc0;
+  --ink3:    #9c7e90;
+  --muted:   #6a4e60;
+  --border:  #3a2840;
+  --border2: #4e3050;
+  --surface: #221428;
+  --surface2:#2a1a30;
+  --card-bg: #2a1a30;
+  --bg:      #1a1020;
+  --text:    #f0e6ec;
+  --text2:   #c9afc0;
+  --text3:   #9c7e90;
+  --green-bg: rgba(45,96,74,.18);
+  --purple-bg:rgba(96,80,160,.18);
+  --brown-bg: rgba(176,112,128,.18);
+  --accent-pale: rgba(201,107,136,.15);
+  --accent-bg:   rgba(201,107,136,.18);
 }
 
 /* ── BODY: vertical stripe wallpaper ─────────────────────── */
@@ -1587,6 +1587,7 @@ body {
     <div class="today-card" data-type="a"><span class="tc-icon">💚</span><span class="tc-name">Síla A</span><span class="tc-sub">Glute · Nohy · Postura</span></div>
     <div class="today-card" data-type="b"><span class="tc-icon">💜</span><span class="tc-name">Síla B</span><span class="tc-sub">Zadek · Záda · Paže</span></div>
     <div class="today-card" data-type="p"><span class="tc-icon">🩷</span><span class="tc-name">Pilates</span><span class="tc-sub">Core · Pas</span></div>
+    <div class="today-card" data-type="c"><span class="tc-icon">🧡</span><span class="tc-name">Trénink C</span><span class="tc-sub">Zadek · Břicho</span></div>
     <div class="today-card" data-type="rest"><span class="tc-icon">😴</span><span class="tc-name">Volno</span><span class="tc-sub">Odpočívej</span></div>
   </div>
   <div class="week-strip" id="weekStrip">
@@ -1622,13 +1623,13 @@ body {
     <span id="schedEditorArrow">▾</span>
   </div>
   <div class="schedule-editor-body" id="scheduleEditorBody">
-    <div class="sched-row"><span class="sched-day-lbl">Po</span><select class="sched-select" data-dow="1"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">Út</span><select class="sched-select" data-dow="2"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">St</span><select class="sched-select" data-dow="3"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">Čt</span><select class="sched-select" data-dow="4"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">Pá</span><select class="sched-select" data-dow="5"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">So</span><select class="sched-select" data-dow="6"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
-    <div class="sched-row"><span class="sched-day-lbl">Ne</span><select class="sched-select" data-dow="0"><option value="a">Síla A</option><option value="b">Síla B</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Po</span><select class="sched-select" data-dow="1"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Út</span><select class="sched-select" data-dow="2"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">St</span><select class="sched-select" data-dow="3"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Čt</span><select class="sched-select" data-dow="4"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Pá</span><select class="sched-select" data-dow="5"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">So</span><select class="sched-select" data-dow="6"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
+    <div class="sched-row"><span class="sched-day-lbl">Ne</span><select class="sched-select" data-dow="0"><option value="a">Síla A</option><option value="b">Síla B</option><option value="c">Trénink C</option><option value="p">Pilates</option><option value="rest">Volno</option></select></div>
   </div>
 </div>
 
@@ -1808,7 +1809,7 @@ body {
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Jen tyč (bez přidané zátěže)</span></div><h5>Kneeling Landmine Press</h5><ol><li>Klekni na jedno nebo obě kolena, drž konec tyče oběma rukama u hrudníku</li><li>Zatlač tyč šikmo dopředu a nahoru — plný rozsah</li><li>Core zatažený, nezaklánět záda</li></ol><div class="tip-box">💡 Landmine press je šetrnější k ramenům — preferuj ho pokud máš slabší ramena</div><a href="https://www.youtube.com/results?search_query=incline+dumbbell+press+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Tlak na šikmé lavici</a><a href="https://www.youtube.com/results?search_query=kneeling+landmine+press+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Kneeling landmine press</a><div class="ex-rest-trigger" data-seconds="82" data-label="Pauza 75–90s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 75–90s</span><button class="ex-timer-go" data-seconds="82" data-label="Pauza 75–90s">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-45401"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pulls / rear-delt fly</div><div class="ex-sub">Fitko: kabel | Doma: DB</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-45401" data-set="0">12–15 opak.</button><button class="set-pill" data-ex="ex-45401" data-set="1">12–15 opak.</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena a vzpřímený postoj — nepřeskakuj tento cvik</div><a href="https://www.youtube.com/results?search_query=face+pull+cable+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Face pull (kabel)</a><a href="https://www.youtube.com/results?search_query=rear+delt+fly+dumbbell+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Rear-delt fly (činky)</a><div class="ex-rest-trigger" data-seconds="60" data-label="Pauza 60s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60s</span><button class="ex-timer-go" data-seconds="60" data-label="Pauza 60s">▶ Spustit</button></div></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Kabel: 5–10 kg · DB: 3–6 kg</span><span class="weight-note">Priorita: technika a rozsah, ne váha</span></div><h5>Face pull na kabelu</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Táhni lano k obličeji — lokty jdou nahoru a do stran</li><li>Na konci pohybu jsou ruce po stranách hlavy</li></ol><div class="tip-box">💡 Klíčové pro otevřená ramena a vzpřímený postoj — nepřeskakuj tento cvik</div><a href="https://www.youtube.com/results?search_query=face+pull+cable+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Face pull (kabel)</a><a href="https://www.youtube.com/results?search_query=rear+delt+fly+dumbbell+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Rear-delt fly (činky)</a><div class="ex-rest-trigger" data-seconds="60" data-label="Pauza 60s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60s</span><button class="ex-timer-go" data-seconds="60" data-label="Pauza 60s">▶ Spustit</button></div></div></div>
 
     <div class="phase-lbl" data-phase="core">Core finisher — 8 min</div>
 
@@ -1879,7 +1880,7 @@ body {
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">20–30 kg na stroji</span><span class="weight-note">Váha kde zvládneš čistou techniku po celou sérii</span></div><h5>Jak na to</h5><ol><li>Sed na stroji, stehna zajištěná pod polštáři — chodidla celá na zemi</li><li>Úchop trochu širší než ramena, dlaně od sebe (pronated grip)</li><li>Mírně se zaklop dozadu (10–15°) — to je přirozená pozice pro tah</li><li>Výdech — táhni hrazdu k hornímu hrudníku, lopatky jdou dolů a k sobě</li><li>Nádech — pomalu zpět nahoru, plné propnutí paží nahoře</li></ol><div class="tip-box">💡 Mysli na to že "mačkáš" lopatky dolů a k páteři — ne že ohýbáš lokty. Loketní klouby jsou jen háčky.</div><div class="tip-box" style="border-color:var(--accent);color:var(--accent);">🎯 Lat pulldown formuje V-tvar zad a vizuálně zužuje pas. Priorita pro vzpřímené držení těla.</div><a href="https://www.youtube.com/results?search_query=lat+pulldown+proper+form+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Lat pulldown</a><div class="ex-rest-trigger" data-seconds="105" data-label="Pauza 1,5–2 min"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 1,5–2 min</span><button class="ex-timer-go" data-seconds="105" data-label="Pauza 1,5–2 min">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-fp-b01"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Face pull / Rear-delt fly</div><div class="ex-sub">kabel na obličej · nebo DB v předklonu</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-fp-b01" data-set="0">12–15 opak.</button><button class="set-pill" data-ex="ex-fp-b01" data-set="1">12–15 opak.</button><button class="set-pill" data-ex="ex-fp-b01" data-set="2">12–15 opak.</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Face pull (kabel)</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Táhni k obličeji — lokty jdou nahoru a do stran, ruce skončí po stranách hlavy</li><li>Soustřeď se na lopatky — stáhni je k sobě a dolů, ne jen ohni lokty</li><li>Pomalu zpět — nesmí to bouchat</li></ol><h5>Rear-delt fly s jednoručkami (doma)</h5><ol><li>Mírný předklon — záda rovná, ne kulatá</li><li>Paže volně dolů, lehce pokrčené lokty</li><li>Zvedni paže do stran jako křídla — pohyb jde z lopatek</li><li>Pauza nahoře, pomalu dolů 3 sekundy</li></ol><div class="tip-box">💡 Klíčový cvik pro otevřená ramena a vzpřímený postoj. Nepřeskakuj ho — drž techniku, ne váhu. RPE 7 = klidné opakování.</div><a href="https://www.youtube.com/results?search_query=face+pull+cable+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Face pull (kabel)</a><a href="https://www.youtube.com/results?search_query=rear+delt+fly+dumbbell+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Rear-delt fly (DB)</a><div class="ex-rest-trigger" data-seconds="75" data-label="Pauza 60–90s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60–90s</span><button class="ex-timer-go" data-seconds="75" data-label="Pauza 60–90s">▶ Spustit</button></div></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Kabel: 5–10 kg · DB: 3–6 kg</span><span class="weight-note">+2,5 kg kdy zvládneš 3×15 bez švihu</span></div><h5>Face pull (kabel)</h5><ol><li>Nastav kabel na výšku obličeje, uchop lano oběma rukama</li><li>Táhni k obličeji — lokty jdou nahoru a do stran, ruce skončí po stranách hlavy</li><li>Soustřeď se na lopatky — stáhni je k sobě a dolů, ne jen ohni lokty</li><li>Pomalu zpět — nesmí to bouchat</li></ol><h5>Rear-delt fly s jednoručkami (doma)</h5><ol><li>Mírný předklon — záda rovná, ne kulatá</li><li>Paže volně dolů, lehce pokrčené lokty</li><li>Zvedni paže do stran jako křídla — pohyb jde z lopatek</li><li>Pauza nahoře, pomalu dolů 3 sekundy</li></ol><div class="tip-box">💡 Klíčový cvik pro otevřená ramena a vzpřímený postoj. Nepřeskakuj ho — drž techniku, ne váhu. RPE 7 = klidné opakování.</div><a href="https://www.youtube.com/results?search_query=face+pull+cable+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Face pull (kabel)</a><a href="https://www.youtube.com/results?search_query=rear+delt+fly+dumbbell+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Rear-delt fly (DB)</a><div class="ex-rest-trigger" data-seconds="75" data-label="Pauza 60–90s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60–90s</span><button class="ex-timer-go" data-seconds="75" data-label="Pauza 60–90s">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-52540"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Overhead press DB</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-52540" data-set="0">8–10 opak.</button><button class="set-pill" data-ex="ex-52540" data-set="1">8–10 opak.</button><button class="set-pill" data-ex="ex-52540" data-set="2">8–10 opak.</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">2× 5–8 kg</span></div><h5>Jak na to</h5><ol><li>Sed nebo stoj, činky na výšce ramen — lokty 90°, dlaně dopředu</li><li>Výdech — zatlač činky rovně nahoru nad hlavu, propni lokty (ne do zámku)</li><li>Nádech — pomalu zpět dolů 3 sekundy</li><li>Core zatažený celou dobu — záda neprohýbej</li></ol><div class="tip-box">💡 Ramena, triceps a core zároveň — jeden z nejefektivnějších cviků pro horní část těla. Sed = stabilnější verze, stoj = zapojení víc svalů.</div><a href="https://www.youtube.com/results?search_query=overhead+press+dumbbell+seated+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Overhead press DB</a><div class="ex-rest-trigger" data-seconds="90" data-label="Pauza 90s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 90s</span><button class="ex-timer-go" data-seconds="90" data-label="Pauza 90s">▶ Spustit</button></div></div></div>
@@ -1961,8 +1962,6 @@ body {
     <div class="ex-row" data-uid="ex-c-m02"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Cable kickback / Donkey kick</div><div class="ex-sub">kabel s kotníkovým úchytem · nebo guma</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-m02" data-set="0">15 opak./strana</button><button class="set-pill" data-ex="ex-c-m02" data-set="1">15 opak./strana</button><button class="set-pill" data-ex="ex-c-m02" data-set="2">15 opak./strana</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">5–10 kg na kabelu / lehká guma</span></div><h5>Cable kickback (fitko)</h5><ol><li>Připoj kabel na kotník, postoj k pultu nebo stroji</li><li>Mírný předklon, drž se oporou — záda rovná</li><li>Kopni nohu dozadu a nahoru — pohyb zastavíš kdy cítíš plný stah hýždě</li><li>Pauza nahoře 1 sekundu, pomalu zpět</li></ol><h5>Donkey kick s gumou (doma)</h5><ol><li>Čtyřnožka, guma nad koleny nebo na kotníku</li><li>Jedna noha kopne dozadu a nahoru — stehno rovnoběžné se zemí</li><li>Kyčel zůstane rovná — nepřeklápěj trup do strany</li></ol><div class="tip-box">💡 Izolační cvik — váha není priorita, priorita je plný rozsah a vědomé zatínání hýždě nahoře. Lehká váha s pomalým tempem = lepší výsledek než těžká váha s švihem.</div><a href="https://www.youtube.com/results?search_query=cable+kickback+glute+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Cable kickback</a><a href="https://www.youtube.com/results?search_query=donkey+kick+resistance+band+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Donkey kick (guma)</a><div class="ex-rest-trigger" data-seconds="60" data-label="Pauza 60s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 60s</span><button class="ex-timer-go" data-seconds="60" data-label="Pauza 60s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-c-m03"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Sumo squat s jednoručkou</div><div class="ex-sub">vnitřní stehna + hýždě</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-m03" data-set="0">12–15 opak.</button><button class="set-pill" data-ex="ex-c-m03" data-set="1">12–15 opak.</button><button class="set-pill" data-ex="ex-c-m03" data-set="2">12–15 opak.</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">10–16 kg jednoručka</span><span class="weight-note">+2 kg když zvládneš 3×15 při RPE ≤7</span></div><h5>Jak na to</h5><ol><li>Stoj, nohy na šířce 1,5 ramene, špičky vytočeny ven 45°</li><li>Drž jednu velkou jednoručku oběma rukama svisle před sebou</li><li>Pomalu dolů — kolena sledují směr špičky, záda rovná</li><li>Zatlač do pat, zatnout hýždě a vnitřní stehna při návratu nahoru</li></ol><div class="tip-box">💡 Sumo squat cílí jinam než goblet squat — víc na vnitřní stranu stehna a hýždeň ze širokého postoje. Skvělé tvarování boků a zadku zároveň.</div><a href="https://www.youtube.com/results?search_query=sumo+squat+dumbbell+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Sumo squat</a><div class="ex-rest-trigger" data-seconds="75" data-label="Pauza 75s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 75s</span><button class="ex-timer-go" data-seconds="75" data-label="Pauza 75s">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-c-m04"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Single-leg hip thrust</div><div class="ex-sub">vlastní váha nebo lehká zátěž</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-m04" data-set="0">12 opak./strana</button><button class="set-pill" data-ex="ex-c-m04" data-set="1">12 opak./strana</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Vlastní váha — přidej DB 5–10 kg na bok až zvládneš 2×12 čistě</span></div><h5>Jak na to</h5><ol><li>Záda opři o lavici, jedna noha na zemi, druhá natažená nebo zkřížená přes koleno</li><li>Zatlač do paty stojné nohy — zvedni pánev nahoru</li><li>Nahoře pánev rovná — nevychyluj ji na stranu</li><li>Pomalu dolů, opakuj všechna opakování na jednu stranu</li></ol><div class="tip-box">💡 Single-leg varianta odhalí nesymetrie mezi pravou a levou hýždí — normální je rozdíl, ale cíl je ho postupně vyrovnat.</div><a href="https://www.youtube.com/results?search_query=single+leg+hip+thrust+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Single-leg hip thrust</a><div class="ex-rest-trigger" data-seconds="75" data-label="Pauza 75s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 75s</span><button class="ex-timer-go" data-seconds="75" data-label="Pauza 75s">▶ Spustit</button></div></div></div>
@@ -1972,8 +1971,6 @@ body {
     <div class="ex-row" data-uid="ex-c-cf01"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Reverse crunch</div><div class="ex-sub">spodní břicho</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-cf01" data-set="0">12–15 opak.</button><button class="set-pill" data-ex="ex-c-cf01" data-set="1">12–15 opak.</button><button class="set-pill" data-ex="ex-c-cf01" data-set="2">12–15 opak.</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><h5>Jak na to</h5><ol><li>Leh na záda, ruce podél těla nebo lehce pod hýždě pro oporu</li><li>Zvedni kolena do 90° — startovní pozice</li><li>Přitáhni kolena k hrudníku sklopením pánve — ne švihem, ale vědomým stahem břicha</li><li>Pauza nahoře, pak pomalu zpět — bederní páteř zůstane přitisknuta k zemi celou dobu</li></ol><div class="tip-box">💡 Klíč: pohyb musí jít z pánve nahoru, ne z kolen dopředu. Pokud cítíš hlavně stehna nebo kyčle — zpomal a zaměř se na stažení spodního břicha.</div><div class="tip-box" style="border-color:var(--orange);color:var(--orange);">🎯 Progrese: zvládneš-li 3×15 čistě, zkus s nataženými nohami — náročnější varianta.</div><a href="https://www.youtube.com/results?search_query=reverse+crunch+lower+abs+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Reverse crunch</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-c-cf02"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Dead bug — pokročilá verze</div><div class="ex-sub">hluboký core + stabilizace</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-cf02" data-set="0">6 opak./strana</button><button class="set-pill" data-ex="ex-c-cf02" data-set="1">6 opak./strana</button><button class="set-pill" data-ex="ex-c-cf02" data-set="2">6 opak./strana</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><h5>Pokročilá varianta</h5><ol><li>Leh na záda, paže kolmo nahoru, nohy do 90°</li><li>Pomalu spusť protilehlou ruku a nohu — noha jde těsně nad zem, paže za hlavu</li><li>Výdech celou cestu dolů — bederní páteř NESMÍ se zvednout od země</li><li>Zpět do startovní pozice, pak druhá strana</li></ol><div class="tip-box">💡 Pokročilá verze = plné propnutí nohy těsně nad zemí (ne 90°). Pokud se záda zvedají — vrať se na ohnuté koleno. Záda na zemi = základ celého cviku.</div><a href="https://www.youtube.com/results?search_query=dead+bug+advanced+progression+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Dead bug pokročilý</a><div class="ex-rest-trigger" data-seconds="30" data-label="Pauza 30s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 30s</span><button class="ex-timer-go" data-seconds="30" data-label="Pauza 30s">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-c-cf03"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Ab wheel rollout</div><div class="ex-sub">Alternativa: Plank 30–40s</div></div></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-c-cf03" data-set="0">6–8 opak.</button><button class="set-pill" data-ex="ex-c-cf03" data-set="1">6–8 opak.</button><button class="set-pill" data-ex="ex-c-cf03" data-set="2">6–8 opak.</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><h5>Ab wheel rollout</h5><ol><li>Klek, kolo drž oběma rukama pod rameny</li><li>Pomalu roluj dopředu — záda rovná, core zatažený</li><li>Jdi jen tak daleko, aby záda zůstala rovná (nezapadala dolů)</li><li>Stáhni core a vrať se zpět — pohyb jde z břicha, ne z ramen</li></ol><h5>Alternativa — Plank (bez kola)</h5><ol><li>Předloktí na zemi, lokty pod rameny</li><li>Tělo v rovné linii — hýždě nezvedej ani nezklápěj</li><li>Dýchej normálně, core zatažený</li></ol><div class="tip-box">💡 Ab wheel je nejlepší progrese pro celý anterior core. Začni od kolen — pokud záda propadají, vrať se na plank. Bezpečnost = záda rovná vždy.</div><a href="https://www.youtube.com/results?search_query=ab+wheel+rollout+tutorial+beginner" target="_blank" rel="noopener" class="yt-link">YouTube — Ab wheel rollout</a><div class="ex-timer-trigger" data-seconds="30" data-label="30s plank"><span class="ex-timer-ico">⏱</span><span class="ex-timer-lbl">30s plank</span><button class="ex-timer-go" data-seconds="30" data-label="30s plank">▶ Spustit</button></div></div></div>
@@ -3402,21 +3399,39 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // ── ONBOARDING ────────────────────────────────────────────
+  // ── ONBOARDING — automatické sledování týdne ─────────────
   (function() {
-    if (localStorage.getItem('ms_onboarded')) return;
     var overlay = document.getElementById('onboardOverlay');
+    // Auto-set start date on very first visit, never show modal again
+    if (!localStorage.getItem('ms_start_date')) {
+      var savedWeek = parseInt(localStorage.getItem('ms_week') || '1');
+      // Back-calculate start date from saved week
+      var startDate = new Date();
+      startDate.setDate(startDate.getDate() - (savedWeek - 1) * 7);
+      localStorage.setItem('ms_start_date', startDate.toISOString().split('T')[0]);
+    }
+    localStorage.setItem('ms_onboarded', '1');
+    // Auto-calculate current week from start date
+    var start = new Date(localStorage.getItem('ms_start_date'));
+    var now = new Date();
+    var autoWeek = Math.min(24, Math.max(1, Math.ceil((now - start) / (7 * 24 * 60 * 60 * 1000)) + 1));
+    // Only auto-update if user hasn't manually set it recently
+    if (!localStorage.getItem('ms_week_manual')) {
+      updateWeekBar(autoWeek);
+    }
+    // Keep overlay hidden
+    if (overlay) overlay.classList.remove('active');
+    // Manual week slider still works — mark as manually set when changed
     var slider = document.getElementById('weekInput2');
-    var valEl = document.getElementById('onboardWeekVal');
+    if (slider) slider.addEventListener('input', function() {
+      localStorage.setItem('ms_week_manual', '1');
+    });
     var startBtn = document.getElementById('onboardStart');
-    if (!overlay) return;
-    if (slider) slider.addEventListener('input', function() { if (valEl) valEl.textContent = this.value; });
-    overlay.classList.add('active');
     if (startBtn) startBtn.addEventListener('click', function() {
       var week = parseInt((slider && slider.value) || 1);
       updateWeekBar(week);
-      localStorage.setItem('ms_onboarded', '1');
-      overlay.classList.remove('active');
+      localStorage.setItem('ms_week_manual', '1');
+      if (overlay) overlay.classList.remove('active');
     });
   })();
 
@@ -4146,7 +4161,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // ── WORKOUT MODE ──────────────────────────────────────────
   var wm = (function() {
     var exercises = [], idx = 0, type = null;
-    var TITLES = { a: 'Síla A', b: 'Síla B', p: 'Pilates' };
+    var TITLES = { a: 'Síla A', b: 'Síla B', c: 'Trénink C', p: 'Pilates' };
 
     // Walk wcard-body recursively, collect phase-lbls + ex-rows in order
     function collect(t) {
@@ -4257,7 +4272,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Save to training log
       var logKey = 'ms_log';
       var log = JSON.parse(localStorage.getItem(logKey) || '[]');
-      var TITLES = { a: 'Síla A', b: 'Síla B', p: 'Pilates' };
+      var TITLES = { a: 'Síla A', b: 'Síla B', c: 'Trénink C', p: 'Pilates' };
       log.unshift({ date: new Date().toISOString(), type: type, title: TITLES[type] || type, done: doneCount, total: exercises.length });
       if (log.length > 50) log = log.slice(0, 50);
       localStorage.setItem(logKey, JSON.stringify(log));
@@ -4323,7 +4338,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ── WORKOUT CHOICE DIALOG ─────────────────────────────────
   (function() {
-    var TITLES = { a: 'Síla A', b: 'Síla B', p: 'Pilates' };
+    var TITLES = { a: 'Síla A', b: 'Síla B', c: 'Trénink C', p: 'Pilates' };
     var pendingType = null;
 
     var overlay = document.getElementById('wcOverlay');
@@ -4510,7 +4525,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var dowTR = new Date().getDay();
     var typeValTR = sched[dowTR] || 'rest';
     var DAY_NAMES_FULL = ['Neděle','Pondělí','Úterý','Středa','Čtvrtek','Pátek','Sobota'];
-    var TYPE_REC = { a:'💚 {d} — Síla A · nohy & záda', b:'💜 {d} — Síla B · zadek & paže', p:'🧘 {d} — Pilates · core & pas', rest:'😴 {d} — Volno · odpočívej' };
+    var TYPE_REC = { a:'💚 {d} — Síla A · nohy & záda', b:'💜 {d} — Síla B · zadek & paže', c:'🧡 {d} — Trénink C · zadek & břicho', p:'🧘 {d} — Pilates · core & pas', rest:'😴 {d} — Volno · odpočívej' };
     rec.textContent = (TYPE_REC[typeValTR]||'').replace('{d}', DAY_NAMES_FULL[dowTR]);
   }
   updateTodayRecFromSchedule();
@@ -4837,7 +4852,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var pills = row.querySelectorAll('.set-pill');
       var inline = row.querySelector('.ex-sets-inline');
       var sets = cfg.sets || pills.length || 3;
-      var firstText = pills[0] ? pills[0].textContent : (inline ? inline.textContent : '');
+      var firstPill = pills[0];
+      var firstText = firstPill ? (firstPill.dataset.label || firstPill.textContent) : (inline ? inline.textContent : '');
       var repsText = cfg.reps || firstText.split(' · ')[0] || '10 opak.';
       var kg = cfg.kg || '';
       var timeBased = isTimeBased(repsText);
