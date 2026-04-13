@@ -1702,6 +1702,95 @@ body {
 }
 [data-theme="dark"] .sc-val { color: var(--black); }
 
+/* ═══════════════════════════════════════════════════════════
+   PREMIUM UI UPGRADE — BIGGER NAV + VISUAL POLISH
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── NAV: bigger icons, taller bar ─────────────────────────── */
+:root { --nav-h: 72px; }
+.nav { height: var(--nav-h); padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); gap: 0; }
+.nav-btn {
+  flex: 1; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 4px; padding: 6px 4px;
+  border-radius: 16px; margin: 2px;
+  transition: background .18s, color .18s, transform .15s;
+}
+.nav-btn:active { transform: scale(.92); }
+.nav-ico { font-size: 24px; line-height: 1; display: block; }
+.nav-lbl { font-size: 9px; font-weight: 700; letter-spacing: .3px; font-family: var(--font-display); line-height: 1; }
+.nav-btn::after { display: none; }  /* kill underline */
+
+/* light mode active */
+.nav-btn.active { color: var(--accent); background: rgba(201,107,136,.10); }
+
+/* ── NAV: dark mode enhancements ────────────────────────────── */
+[data-theme="dark"] .nav { padding: 4px 4px calc(4px + env(safe-area-inset-bottom)); }
+[data-theme="dark"] .nav-btn { color: rgba(255,255,255,.35); }
+[data-theme="dark"] .nav-btn.active {
+  color: #f4b4c8;
+  background: rgba(201,107,136,.18);
+  border-radius: 16px;
+}
+
+/* ── STAT CHIPS: bigger and bolder ─────────────────────────── */
+.stat-chip { padding: 16px 8px 14px; gap: 4px; }
+.sc-ico { font-size: 22px; }
+.sc-val { font-size: 30px; }
+.sc-lbl { font-size: 9.5px; letter-spacing: 1px; }
+
+[data-theme="dark"] .stat-chip {
+  background: linear-gradient(145deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 100%);
+  border-color: rgba(255,255,255,0.10);
+  box-shadow: 0 4px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.07);
+}
+[data-theme="dark"] .sc-val { color: #f4f0f8; }
+[data-theme="dark"] .sc-lbl { color: rgba(255,255,255,.38); }
+
+/* ── QUICK START BUTTON: more prominent ─────────────────────── */
+.quick-start-btn {
+  font-size: 17px; padding: 17px 28px; letter-spacing: .4px;
+  box-shadow: 0 8px 30px rgba(201,107,136,.38);
+}
+[data-theme="dark"] .quick-start-btn {
+  box-shadow: 0 8px 36px rgba(201,107,136,.45), 0 0 0 1px rgba(201,107,136,.25);
+}
+
+/* ── WCARD: bigger radius, premium dark surface ─────────────── */
+[data-theme="dark"] .wcard {
+  border-radius: 22px;
+  overflow: hidden;
+}
+
+/* ── TODAY HERO: stronger dark treatment ────────────────────── */
+[data-theme="dark"] .today {
+  border-radius: 24px;
+}
+[data-theme="dark"] .today-title {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  color: rgba(255,255,255,.9);
+}
+
+/* ── TODAY CARDS: bigger, cleaner ───────────────────────────── */
+[data-theme="dark"] .today-card {
+  border-radius: 16px;
+  padding: 14px 10px;
+}
+
+/* ── EXERCISE ROWS: cleaner dark lines ──────────────────────── */
+[data-theme="dark"] .ex-name { font-weight: 600; font-size: 15px; }
+[data-theme="dark"] .set-pill {
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* ── SECTION INTRO / HEADERS: dark mode boost ───────────────── */
+[data-theme="dark"] h2, [data-theme="dark"] h1 { color: var(--ink); }
+[data-theme="dark"] .page-hd-label { color: rgba(201,107,136,.75); letter-spacing: 2px; }
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
