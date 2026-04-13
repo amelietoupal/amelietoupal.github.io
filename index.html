@@ -3563,6 +3563,29 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   renderStreak();
 
+  // ── STAT CHIPS ────────────────────────────────────────────
+  function renderStatChips() {
+    var log = JSON.parse(localStorage.getItem('ms_log') || '[]');
+    var today = new Date(); today.setHours(0,0,0,0);
+    var streak = 0;
+    var checked = new Date(today);
+    for (var i = 0; i < 365; i++) {
+      var dateStr = checked.toISOString().slice(0,10);
+      var found = log.some(function(e) { return e.date && e.date.slice(0,10) === dateStr; });
+      if (found) { streak++; checked.setDate(checked.getDate() - 1); }
+      else if (i === 0) { checked.setDate(checked.getDate() - 1); continue; }
+      else break;
+    }
+    var week = parseInt(localStorage.getItem('ms_week') || '1');
+    var scS = document.getElementById('scStreak');
+    var scW = document.getElementById('scWeek');
+    var scT = document.getElementById('scTotal');
+    if (scS) scS.textContent = streak;
+    if (scW) scW.textContent = week;
+    if (scT) scT.textContent = log.length;
+  }
+  renderStatChips();
+
   // ── VLASTNÍ CVIKY ─────────────────────────────────────────
   function getCustomEx(card) { return JSON.parse(localStorage.getItem('ms_custom_ex_' + card) || '[]'); }
   function saveCustomEx(card, list) { localStorage.setItem('ms_custom_ex_' + card, JSON.stringify(list)); }
