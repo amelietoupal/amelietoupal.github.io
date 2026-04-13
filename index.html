@@ -885,13 +885,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .ex-row-inner { padding: 15px 18px 13px; }
 .ex-name { font-size: 13.5px; }
 
-/* ── DARK MODE REFINEMENTS ───────────────────────────────── */
-[data-theme="dark"] .sticky-week { background: var(--white); border-bottom-color: var(--border); }
-[data-theme="dark"] .wcard-a { box-shadow: -4px 0 22px rgba(45,96,74,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-b { box-shadow: -4px 0 22px rgba(96,80,160,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-c { box-shadow: -4px 0 22px rgba(196,120,80,0.22), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-p { box-shadow: -4px 0 22px rgba(176,112,128,0.20), 0 2px 10px rgba(0,0,0,.15); }
-[data-theme="dark"] .wcard-skate { box-shadow: -4px 0 22px rgba(91,155,213,0.22), 0 2px 10px rgba(0,0,0,.15); }
+/* ── DARK MODE REFINEMENTS: moved to Ultimate App Redesign block ─ */
 
 /* ══════════════════════════════════════════════════════════
    TINGLE & TOTS — STRIPES + CREAM + RED AESTHETIC
@@ -944,28 +938,37 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 }
 
 [data-theme="dark"] {
-  --today-bg-1: #0d0818;
-  --today-bg-2: #150d28;
-  --white:   #1a1020;
-  --black:   #f5eef0;
-  --ink:     #f0e6ec;
-  --ink2:    #c9afc0;
-  --ink3:    #9c7e90;
-  --muted:   #6a4e60;
-  --border:  #3a2840;
-  --border2: #4e3050;
-  --surface: #221428;
-  --surface2:#2a1a30;
-  --card-bg: #2a1a30;
-  --bg:      #1a1020;
-  --text:    #f0e6ec;
-  --text2:   #c9afc0;
-  --text3:   #9c7e90;
-  --green-bg: rgba(45,96,74,.18);
-  --purple-bg:rgba(96,80,160,.18);
-  --brown-bg: rgba(176,112,128,.18);
-  --accent-pale: rgba(201,107,136,.15);
-  --accent-bg:   rgba(201,107,136,.18);
+  --today-bg-1: #0a0810;
+  --today-bg-2: #10101a;
+  --white:   #0e0e18;
+  --black:   #f4f0f8;
+  --ink:     #ede6f4;
+  --ink2:    #b0a0cc;
+  --ink3:    #706090;
+  --muted:   #483860;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.14);
+  --surface: #171626;
+  --surface2:#1f1e30;
+  --card-bg: #1f1e30;
+  --soft:    rgba(255,255,255,0.07);
+  --bg:      #0e0e18;
+  --text:    #ede6f4;
+  --text2:   #b0a0cc;
+  --text3:   #706090;
+  --green-bg: rgba(45,96,74,.25);
+  --purple-bg:rgba(96,80,160,.25);
+  --brown-bg: rgba(176,112,128,.25);
+  --accent-pale: rgba(201,107,136,.18);
+  --accent-bg:   rgba(201,107,136,.22);
+  --sh-sm: 0 2px 16px rgba(0,0,0,.52);
+  --sh:    0 6px 32px rgba(0,0,0,.62);
+  --sh-lg: 0 14px 60px rgba(0,0,0,.72);
+  --r-xl: 26px;
+  --r-lg: 22px;
+  --r-md: 16px;
+  --r-sm: 10px;
+  --r-xs: 6px;
 }
 
 /* ── BODY: vertical stripe wallpaper ─────────────────────── */
@@ -1516,6 +1519,189 @@ body {
 .cal-grid { gap: 3px; }
 .cal-day { min-height: 36px; aspect-ratio: unset; font-size: 11px; padding: 4px 2px; }
 .cal-dot  { margin-top: 2px; }
+
+/* ══════════════════════════════════════════════════════════
+   ULTIMATE APP REDESIGN — PREMIUM DARK MODE
+   ══════════════════════════════════════════════════════════ */
+
+/* Dark mode: flat near-black body, no stripe */
+[data-theme="dark"] body {
+  background-color: var(--bg);
+  background-image: none;
+}
+[data-theme="dark"] .content {
+  background: transparent;
+}
+[data-theme="dark"] .content::before { display: none; }
+
+/* Dark mode: premium frosted nav */
+[data-theme="dark"] .nav {
+  background: rgba(14,14,24,0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+[data-theme="dark"] .nav-btn { color: rgba(255,255,255,.32); }
+[data-theme="dark"] .nav-btn.active { background: rgba(201,107,136,.15); color: var(--accent); border-radius: 14px; }
+
+/* Dark mode: sticky week bar */
+[data-theme="dark"] .sticky-week {
+  background: rgba(14,14,24,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom-color: rgba(255,255,255,0.06);
+}
+
+/* Dark mode: today hero card */
+[data-theme="dark"] .today {
+  background: linear-gradient(135deg, #130f20 0%, #1a1530 50%, #110e1e 100%);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 16px 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+[data-theme="dark"] .today-card {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.09);
+}
+[data-theme="dark"] .today-card:hover {
+  background: rgba(255,255,255,0.11);
+  border-color: var(--accent);
+}
+[data-theme="dark"] .today-card.active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+[data-theme="dark"] .today-card .tc-name { color: rgba(255,255,255,.88); }
+[data-theme="dark"] .today-card .tc-sub  { color: rgba(255,255,255,.45); }
+
+/* Dark mode: week strip */
+[data-theme="dark"] .ws-a    { background: rgba(45,96,74,.32);   color: #8ad4a8; border-color: rgba(45,96,74,.55); }
+[data-theme="dark"] .ws-b    { background: rgba(96,80,160,.32);  color: #b8aaee; border-color: rgba(96,80,160,.55); }
+[data-theme="dark"] .ws-p    { background: rgba(201,107,136,.28); color: #f4b4c8; border-color: rgba(201,107,136,.5); }
+[data-theme="dark"] .ws-rest { background: rgba(255,255,255,.06); color: rgba(255,255,255,.28); border-color: rgba(255,255,255,.1); }
+
+/* Dark mode: workout cards — premium dark surface */
+[data-theme="dark"] .wcard {
+  background: var(--surface);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 4px 30px rgba(0,0,0,.45);
+}
+[data-theme="dark"] .wcard:hover {
+  box-shadow: 0 10px 50px rgba(0,0,0,.6);
+  border-color: rgba(255,255,255,0.12);
+}
+[data-theme="dark"] .wcard-head:hover { background: rgba(255,255,255,0.03); }
+[data-theme="dark"] .wcard.open .wcard-head { border-bottom-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .wcard-a { box-shadow: 0 4px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(45,96,74,.18); }
+[data-theme="dark"] .wcard-a:hover { box-shadow: 0 10px 50px rgba(0,0,0,.6), 0 0 0 1px rgba(45,96,74,.3); }
+[data-theme="dark"] .wcard-b { box-shadow: 0 4px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(96,80,160,.18); }
+[data-theme="dark"] .wcard-b:hover { box-shadow: 0 10px 50px rgba(0,0,0,.6), 0 0 0 1px rgba(96,80,160,.3); }
+[data-theme="dark"] .wcard-c { box-shadow: 0 4px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(196,120,80,.18); }
+[data-theme="dark"] .wcard-c:hover { box-shadow: 0 10px 50px rgba(0,0,0,.6), 0 0 0 1px rgba(196,120,80,.3); }
+[data-theme="dark"] .wcard-p { box-shadow: 0 4px 30px rgba(0,0,0,.45), 0 0 0 1px rgba(176,112,128,.18); }
+[data-theme="dark"] .wcard-p:hover { box-shadow: 0 10px 50px rgba(0,0,0,.6), 0 0 0 1px rgba(176,112,128,.3); }
+
+/* Dark mode: wcard header tints */
+[data-theme="dark"] .wcard-a .wcard-head { background: rgba(45,96,74,.08); }
+[data-theme="dark"] .wcard-b .wcard-head { background: rgba(96,80,160,.08); }
+[data-theme="dark"] .wcard-c .wcard-head { background: rgba(196,120,80,.08); }
+[data-theme="dark"] .wcard-p .wcard-head { background: rgba(176,112,128,.08); }
+
+/* Dark mode: wcard top accent thicker + glow tint */
+[data-theme="dark"] .wcard-a { border-top: 3px solid var(--green); }
+[data-theme="dark"] .wcard-b { border-top: 3px solid var(--purple); }
+[data-theme="dark"] .wcard-c { border-top: 3px solid var(--orange); }
+[data-theme="dark"] .wcard-p { border-top: 3px solid var(--brown); }
+[data-theme="dark"] .wcard-skate { border-top: 3px solid #5b9bd5; }
+
+/* Dark mode: wcard progress bar */
+[data-theme="dark"] .wcard-progress {
+  background: rgba(255,255,255,0.03);
+  border-top-color: rgba(255,255,255,0.05);
+}
+
+/* Dark mode: exercise rows */
+[data-theme="dark"] .ex-row { border-bottom-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .ex-row:hover { background: rgba(255,255,255,0.03); }
+[data-theme="dark"] .ex-row.done { background: rgba(45,96,74,.06); }
+[data-theme="dark"] .ex-name { color: var(--ink); }
+[data-theme="dark"] .ex-row.done .ex-name { color: var(--ink3); }
+[data-theme="dark"] .ex-sets-block { background: rgba(255,255,255,0.025); }
+[data-theme="dark"] .ex-detail { background: rgba(255,255,255,0.025); border-bottom-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .ex-done-btn { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+[data-theme="dark"] .ex-done-btn:hover { border-color: var(--accent); }
+
+/* Dark mode: set pills */
+[data-theme="dark"] .set-pill {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
+  color: var(--ink2);
+}
+[data-theme="dark"] .set-pill:hover { border-color: var(--accent); color: var(--accent); }
+[data-theme="dark"] .set-pill.done { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* Dark mode: wcard toggle */
+[data-theme="dark"] .wcard-toggle { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+
+/* Dark mode: section title hero */
+[data-theme="dark"] #plan .content > div:first-child {
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+[data-theme="dark"] #plan .content > div:first-child::after { display: none; }
+
+/* Dark mode: quick-start button glow */
+[data-theme="dark"] .quick-start-btn {
+  box-shadow: 0 8px 32px rgba(201,107,136,.35);
+}
+
+/* Dark mode: tip box */
+[data-theme="dark"] .tip-box { background: rgba(201,107,136,.06); }
+
+/* Dark mode: phase grid */
+[data-theme="dark"] .phase-cell { background: var(--surface); border-color: rgba(255,255,255,0.07); }
+[data-theme="dark"] .phase-cell:hover { background: var(--surface2); }
+
+/* Dark mode: info box */
+[data-theme="dark"] .info-box { background: var(--surface); border-color: rgba(255,255,255,0.08); }
+
+/* Dark mode: streak banner */
+[data-theme="dark"] .streak-banner { background: var(--surface); border-color: rgba(255,255,255,0.07); }
+
+/* Dark mode: section intro */
+[data-theme="dark"] .section-intro { color: var(--ink3); border-bottom-color: rgba(255,255,255,0.08); }
+
+/* Dark mode: checklist */
+[data-theme="dark"] .checklist { background: var(--surface); border-color: rgba(255,255,255,0.07); }
+[data-theme="dark"] .check-item { border-bottom-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .check-item:hover { background: rgba(255,255,255,0.03); }
+
+/* ── STAT CHIPS (home dashboard stats) ──────────────────── */
+.stat-chips {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 20px;
+}
+.stat-chip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 14px 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--r-lg);
+  transition: transform .2s, box-shadow .2s;
+}
+.stat-chip:active { transform: scale(.97); }
+.sc-ico { font-size: 20px; line-height: 1; }
+.sc-val { font-family: var(--font-display); font-size: 26px; font-weight: 800; color: var(--black); letter-spacing: -.02em; line-height: 1; }
+.sc-lbl { font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); }
+[data-theme="dark"] .stat-chip {
+  background: var(--surface);
+  border-color: rgba(255,255,255,0.07);
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+}
+[data-theme="dark"] .sc-val { color: var(--black); }
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -1611,6 +1797,25 @@ body {
     <span id="quickStartLabel">Začít trénink</span>
     <span>→</span>
   </button>
+</div>
+
+<!-- STAT CHIPS -->
+<div class="stat-chips" id="statChips">
+  <div class="stat-chip">
+    <span class="sc-ico">🔥</span>
+    <span class="sc-val" id="scStreak">0</span>
+    <span class="sc-lbl">dní série</span>
+  </div>
+  <div class="stat-chip">
+    <span class="sc-ico">📅</span>
+    <span class="sc-val" id="scWeek">1</span>
+    <span class="sc-lbl">/ 12 týdnů</span>
+  </div>
+  <div class="stat-chip">
+    <span class="sc-ico">💪</span>
+    <span class="sc-val" id="scTotal">0</span>
+    <span class="sc-lbl">tréninků</span>
+  </div>
 </div>
 
 <!-- NOTIFIKACE -->
@@ -2715,8 +2920,8 @@ document.addEventListener('DOMContentLoaded', function() {
       if (e.target.closest('.today-btn') || e.target.closest('.wcard-edit-btn')) return;
       var wcard = this.closest('.wcard');
       if (!wcard) return;
-      // Exit edit mode (without saving) when card header is tapped
-      if (wcard.classList.contains('wcard-editing')) exitEditMode(wcard);
+      // Exit edit mode: SAVE when card header is tapped (don't discard)
+      if (wcard.classList.contains('wcard-editing')) { saveEditMode(wcard); return; }
       var isOpen = wcard.classList.contains('open');
       wcard.classList.toggle('open', !isOpen);
       var tog = this.querySelector('.wcard-toggle');
@@ -4968,7 +5173,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         cfg.reps = (er.querySelector('[data-field="reps"]') || {}).value || '10 opak.';
         var kg = parseFloat((er.querySelector('[data-field="kg"]') || {}).value);
-        if (kg) cfg.kg = kg;
+        if (!isNaN(kg) && kg >= 0) cfg.kg = kg;
       }
       localStorage.setItem('ms_ex_cfg_' + uid, JSON.stringify(cfg));
       // Move ex-row (+ detail) to match edit-row order — er stays as anchor
