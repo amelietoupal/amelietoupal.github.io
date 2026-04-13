@@ -1791,6 +1791,95 @@ body {
 [data-theme="dark"] h2, [data-theme="dark"] h1 { color: var(--ink); }
 [data-theme="dark"] .page-hd-label { color: rgba(201,107,136,.75); letter-spacing: 2px; }
 
+/* ═══════════════════════════════════════════════════════════
+   PHONE-FIRST UX — TOUCH TARGETS + READABILITY
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── EX DONE BUTTON: 44 px minimum tap target ───────────────── */
+.ex-done-btn {
+  width: 40px; height: 40px;
+}
+.ex-done-btn svg { width: 18px; height: 18px; }
+
+/* ── EX ROW INNER: more height, easier to tap ───────────────── */
+.ex-row-inner {
+  padding: 16px 16px 14px;
+  min-height: 64px;
+  gap: 14px;
+}
+
+/* ── EX NAME + META: bigger, more readable ──────────────────── */
+.ex-name { font-size: 14.5px; }
+.ex-meta { font-size: 12px; }
+
+/* ── SETS BLOCK: align with bigger done-btn ─────────────────── */
+.ex-sets-block { padding: 6px 16px 12px 70px; gap: 8px; }
+
+/* ── SET PILLS: large, thumb-friendly ───────────────────────── */
+.set-pill {
+  padding: 10px 18px;
+  min-height: 40px;
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  letter-spacing: .2px;
+}
+
+/* ── WCARD HEAD: bigger tap area ────────────────────────────── */
+.wcard-head { padding: 20px 20px; min-height: 68px; }
+.wcard-head h3 { font-size: 19px; }
+
+/* ── WCARD: no lift-hover on touch devices ──────────────────── */
+@media (hover: none) {
+  .wcard:hover { transform: none; box-shadow: inherit; }
+  .wcard-head:hover { background: transparent; }
+  .ex-row:hover { background: transparent; }
+  [data-theme="dark"] .ex-row:hover { background: transparent; }
+  [data-theme="dark"] .wcard-head:hover { background: transparent; }
+}
+
+/* ── TODAY CARDS: bigger tap area ───────────────────────────── */
+.today-card { padding: 16px 8px; min-height: 84px; gap: 5px; }
+.tc-name { font-size: 14px; font-weight: 700; }
+.tc-sub { font-size: 10.5px; }
+.tc-icon { font-size: 22px; }
+
+/* ── CONTENT: reduce excessive top padding on phone ─────────── */
+@media (max-width: 500px) {
+  .content { padding: 18px 14px calc(var(--nav-h) + 24px); }
+}
+
+/* ── EDIT INPUTS: 16px prevents iOS auto-zoom ───────────────── */
+.ex-edit-inp {
+  font-size: 16px !important;
+  min-height: 44px;
+  padding: 10px 10px;
+  border-radius: 10px;
+}
+.ex-edit-inp.wide { width: 80px; }
+.ex-edit-inp-lbl { font-size: 12px; }
+
+/* ── QUICK START BTN: fullwidth prominent CTA ───────────────── */
+.quick-start-btn {
+  border-radius: 20px;
+  min-height: 62px;
+  font-size: 20px;
+}
+
+/* ── DARK: edit inputs ───────────────────────────────────────── */
+[data-theme="dark"] .ex-edit-inp {
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.15);
+  color: #f4f0f8;
+}
+[data-theme="dark"] .ex-edit-inp:focus {
+  border-color: var(--accent);
+  background: rgba(255,255,255,0.10);
+}
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -2090,8 +2179,8 @@ body {
     <div class="ex-row" data-uid="ex-76162"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Goblet squat</div><div class="ex-sub">Tvoje varianta: Pendulum / hack squat / leg press</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-76162" data-set="0">8–12 opak.</button><button class="set-pill" data-ex="ex-76162" data-set="1">8–12 opak.</button><button class="set-pill" data-ex="ex-76162" data-set="2">8–12 opak.</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">8–12 kg činka</span></div><h5>Jak na to</h5><ol><li>Drž jednoručku nebo kettlebell oběma rukama u hrudníku</li><li>Nohy na šířku ramen, špičky mírně ven</li><li>Pomalu jdi dolů 3 sekundy — kolena jdou ve směru špičky</li><li>Pauza dole 1 sekundu, pak nahoru</li></ol><div class="tip-box">💡 Lepší než air squat — nutí tě držet hrudník nahoře = trénuješ posturu zároveň</div><div class="tip-box" style="border-color:var(--accent);color:var(--accent);">🎯 Model tip: Drž váhu 8–12 kg, priorita je 12–15 opakování s lehčí váhou — tónuje bez objemu.</div><a href="https://www.youtube.com/results?search_query=goblet+squat+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube tutoriál</a><div class="ex-rest-trigger" data-seconds="105" data-label="Pauza 90–120s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 90–120s</span><button class="ex-timer-go" data-seconds="105" data-label="Pauza 90–120s">▶ Spustit</button></div></div></div>
 
-    <div class="ex-row" data-uid="ex-23983"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Rumunský mrtvý tah (RDL)</div><div class="ex-sub">Fitko: RDL s činkami nebo Smith</div></div><span class="rpe-pill">RPE 7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-23983" data-set="0">8–12 opak.</button><button class="set-pill" data-ex="ex-23983" data-set="1">8–12 opak.</button><button class="set-pill" data-ex="ex-23983" data-set="2">8–12 opak.</button></div></div></div>
-    <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">2× 8–10 kg</span><span class="weight-note">Technika nejdůležitější ze všech cviků</span></div><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, činky v rukou před stehny</li><li>Mírně pokrč kolena — to zůstane po celou dobu stejné</li><li>Pomalu předkloň trup — činky jedou blízko těla dolů po stehnech</li><li>Cítíš tah v zadní straně stehen (hamstringy) — to je správně</li><li>Jdi jen tak nízko dokud záda zůstávají rovná</li></ol><div class="tip-box">💡 Pohyb je z kyčlí, ne z kolen. Záda rovná celou dobu.</div><div class="tip-box" style="border-color:var(--accent);color:var(--accent);">🎯 Model tip: RDL formuje zadní stranu stehen (lean, ne bulk). Váha 2× 8–10 kg = tvar bez objemu. Nemusíš zvyšovat váhu pokud nechceš — 12–15 opak. je dokonalé.</div><a href="https://www.youtube.com/results?search_query=romanian+deadlift+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube tutoriál</a><div class="ex-rest-trigger" data-seconds="120" data-label="Pauza 120s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 120s</span><button class="ex-timer-go" data-seconds="120" data-label="Pauza 120s">▶ Spustit</button></div></div></div>
+    <div class="ex-row" data-uid="ex-23983"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Rumunský mrtvý tah (RDL)</div><div class="ex-sub">Fitko: RDL s činkami nebo Smith</div></div><span class="rpe-pill">RPE 6–7</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-23983" data-set="0">10–12 opak.</button><button class="set-pill" data-ex="ex-23983" data-set="1">10–12 opak.</button><button class="set-pill" data-ex="ex-23983" data-set="2">10–12 opak.</button></div></div></div>
+    <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">2× 4–6 kg</span><span class="weight-note">Technika vždy první — váha až potom</span></div><div class="tip-box" style="border-color:#e05585;color:#e05585;margin-bottom:10px;">⚠️ Cítíš záda místo hamstringů? Váha je moc velká nebo jdeš moc hluboko. Sniž váhu a zastav se u holení.</div><h5>Jak na to</h5><ol><li>Stůj vzpřímeně, činky před stehny, ramena dolů a zpět</li><li>Mírně pokrč kolena — zůstanou tak celou dobu (ne dřep, ne natažené)</li><li>Myšlenka: <strong>tlač kyčle DOZADU</strong> (jako bys chtěla zadat sáhnout na stěnu za tebou)</li><li>Činky jedou těsně u nohou dolů — nepohybují se od těla</li><li>Zastav se jakmile ucítíš <strong>tah v hamstrinzích</strong> — pro většinu lidí u holení, ne u kotníků</li><li>Záda rovná celou dobu — jakmile se zakulatí, jsi moc nízko</li></ol><div class="tip-box">💡 Pohyb je z kyčlí, ne z páteře. Pokud cítíš záda = zastav výš, sniž váhu. Hamstringy = mírné pálení v zadní straně stehen.</div><a href="https://www.youtube.com/results?search_query=romanian+deadlift+tutorial+hamstring" target="_blank" rel="noopener" class="yt-link">YouTube — RDL technika</a><div class="ex-rest-trigger" data-seconds="120" data-label="Pauza 120s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 120s</span><button class="ex-timer-go" data-seconds="120" data-label="Pauza 120s">▶ Spustit</button></div></div></div>
 
     <div class="ex-row" data-uid="ex-9933"><div class="ex-row-inner"><button class="ex-done-btn" onclick="event.stopPropagation();toggleDone(this)"><svg class="done-svg" viewBox="0 0 36 36" fill="none"><circle class="done-ring" cx="18" cy="18" r="16" stroke-width="2"/><path class="done-check" d="M10 18.5l5.5 5.5L26 13" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button><span class="ex-chevron">+</span><div class="ex-main"><div class="ex-name">Bulharský split squat / Walking Lunge with Rotation</div><div class="ex-sub">Vyber jedno — obě varianty jsou vhodné</div></div><span class="rpe-pill">RPE 7–8</span></div><div class="ex-sets-block"><div class="set-pills"><button class="set-pill" data-ex="ex-9933" data-set="0">8–10/noha</button><button class="set-pill" data-ex="ex-9933" data-set="1">8–10/noha</button></div></div></div>
     <div class="ex-detail"><div class="ex-detail-inner"><div class="weight-row"><span class="weight-label">Startovní váha</span><span class="weight-val">Bez zátěže → 2× 5–8 kg</span></div><h5>Bulharský split squat</h5><ol><li>Zadní noha položená na lavici za tebou, přední noha krok dopředu</li><li>Pomalu jdi dolů — přední koleno jde dopředu ve směru špičky</li><li>Zadní koleno míří k zemi ale nedotkne se</li></ol><div class="tip-box">💡 Split squat = více na zadek. Lunge with rotation = přidává práci pro hrudní páteř</div><a href="https://www.youtube.com/results?search_query=bulgarian+split+squat+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Bulharský split squat</a><a href="https://www.youtube.com/results?search_query=walking+lunge+with+rotation+tutorial" target="_blank" rel="noopener" class="yt-link">YouTube — Walking lunge s rotací</a><div class="ex-rest-trigger" data-seconds="90" data-label="Pauza 90s"><span class="ex-timer-ico">☕</span><span class="ex-timer-lbl">Pauza 90s</span><button class="ex-timer-go" data-seconds="90" data-label="Pauza 90s">▶ Spustit</button></div></div></div>
