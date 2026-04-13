@@ -1880,6 +1880,164 @@ body {
   background: rgba(255,255,255,0.10);
 }
 
+/* ═══════════════════════════════════════════════════════════
+   APP-STYLE UPGRADE — INSPIRED BY MODERN FITNESS APPS
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── 1. NAV: ICON ONLY — clean, modern ──────────────────────── */
+.nav-lbl { display: none !important; }
+:root { --nav-h: 64px; }
+.nav {
+  align-items: center;
+  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+}
+.nav-btn {
+  padding: 10px 8px;
+  gap: 0;
+  border-radius: 18px;
+  margin: 3px 2px;
+}
+.nav-ico { font-size: 26px; }
+
+/* light mode active */
+.nav-btn.active {
+  background: rgba(201,107,136,.13);
+}
+/* dark mode active — stronger pill */
+[data-theme="dark"] .nav-btn.active {
+  background: rgba(201,107,136,.24);
+  border-radius: 18px;
+  box-shadow: 0 2px 12px rgba(201,107,136,.2);
+}
+[data-theme="dark"] .nav-btn.active .nav-ico { filter: drop-shadow(0 0 6px rgba(255,133,161,.4)); }
+
+/* ── 2. WCARD HEADER: workout-card hero style ───────────────── */
+[data-theme="dark"] .wcard-head {
+  position: relative;
+  min-height: 100px;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: 18px;
+}
+/* Large decorative letter background */
+[data-theme="dark"] .wcard-head::before {
+  position: absolute;
+  right: 14px;
+  top: -12px;
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.12;
+  color: #ffffff;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -4px;
+}
+[data-theme="dark"] .wcard-a .wcard-head::before { content: 'A'; }
+[data-theme="dark"] .wcard-b .wcard-head::before { content: 'B'; }
+[data-theme="dark"] .wcard-c .wcard-head::before { content: 'C'; }
+[data-theme="dark"] .wcard-p .wcard-head::before { content: 'P'; }
+[data-theme="dark"] .wcard-skate .wcard-head::before { content: '🛼'; font-size: 80px; }
+
+/* Colored hero gradient per workout type */
+[data-theme="dark"] .wcard-a .wcard-head {
+  background: linear-gradient(135deg, rgba(45,130,80,.38) 0%, rgba(20,55,35,.18) 100%);
+  border-bottom-color: rgba(45,130,80,.25);
+}
+[data-theme="dark"] .wcard-b .wcard-head {
+  background: linear-gradient(135deg, rgba(110,80,210,.38) 0%, rgba(45,30,90,.18) 100%);
+  border-bottom-color: rgba(110,80,210,.25);
+}
+[data-theme="dark"] .wcard-c .wcard-head {
+  background: linear-gradient(135deg, rgba(210,120,55,.38) 0%, rgba(85,45,18,.18) 100%);
+  border-bottom-color: rgba(210,120,55,.25);
+}
+[data-theme="dark"] .wcard-p .wcard-head {
+  background: linear-gradient(135deg, rgba(201,107,136,.32) 0%, rgba(85,40,58,.18) 100%);
+  border-bottom-color: rgba(201,107,136,.22);
+}
+[data-theme="dark"] .wcard-skate .wcard-head {
+  background: linear-gradient(135deg, rgba(70,130,210,.32) 0%, rgba(25,50,90,.18) 100%);
+}
+
+/* Wcard h3 styling in hero mode */
+[data-theme="dark"] .wcard-head h3 {
+  font-size: 20px;
+  letter-spacing: -.01em;
+  text-shadow: 0 1px 8px rgba(0,0,0,.4);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 3. TODAY TITLE: dashboard-style heading ────────────────── */
+.today-title {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+[data-theme="dark"] .today-title { color: #f4f0f8; }
+
+/* ── 4. STAT CHIPS: bigger numbers, app-style ───────────────── */
+.stat-chips { gap: 10px; margin-bottom: 22px; }
+[data-theme="dark"] .sc-val { color: #ffffff; font-size: 36px; letter-spacing: -.03em; }
+[data-theme="dark"] .sc-ico { font-size: 24px; }
+[data-theme="dark"] .stat-chip {
+  padding: 18px 10px 16px;
+  gap: 2px;
+  border-radius: 20px;
+}
+/* Active/accent chip: streak chip gets pink tint */
+[data-theme="dark"] .stat-chip:first-child {
+  border-color: rgba(201,107,136,.25);
+  background: linear-gradient(145deg, rgba(201,107,136,.12) 0%, rgba(255,255,255,.03) 100%);
+}
+
+/* ── 5. QUICK START BTN: app-style primary CTA ──────────────── */
+[data-theme="dark"] .quick-start-btn {
+  background: linear-gradient(135deg, #e05585 0%, #c96b88 100%);
+  border-radius: 24px;
+  font-size: 18px;
+  letter-spacing: .5px;
+  box-shadow: 0 8px 32px rgba(201,107,136,.45), 0 0 0 1px rgba(255,255,255,.08);
+}
+
+/* ── 6. TODAY CARDS: app-style pill buttons ─────────────────── */
+[data-theme="dark"] .today-card {
+  border-radius: 18px;
+  min-height: 88px;
+  flex-direction: column;
+  gap: 6px;
+}
+[data-theme="dark"] .today-card.active {
+  background: var(--accent);
+  box-shadow: 0 6px 24px rgba(201,107,136,.4);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* ── 7. SECTION PAGE HEADERS: dashboard-feel ───────────────── */
+[data-theme="dark"] .section-num {
+  background: rgba(201,107,136,.12);
+  color: rgba(201,107,136,.9);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* ── 8. PROGRESS RING: more visible in dark mode ─────────────── */
+[data-theme="dark"] .progress-ring-track { stroke: rgba(255,255,255,.08); }
+[data-theme="dark"] .wcard-a .progress-ring-fill { stroke: #4ecf8a; }
+[data-theme="dark"] .wcard-b .progress-ring-fill { stroke: #a084f0; }
+[data-theme="dark"] .wcard-c .progress-ring-fill { stroke: #f09050; }
+[data-theme="dark"] .wcard-p .progress-ring-fill { stroke: #f4b4c8; }
+[data-theme="dark"] .progress-pct { color: #f4f0f8; font-weight: 800; font-size: 13px; }
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
