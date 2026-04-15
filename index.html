@@ -2038,6 +2038,143 @@ body {
 [data-theme="dark"] .wcard-p .progress-ring-fill { stroke: #f4b4c8; }
 [data-theme="dark"] .progress-pct { color: #f4f0f8; font-weight: 800; font-size: 13px; }
 
+/* ═══════════════════════════════════════════════════════════
+   LIGHT MODE UPGRADE — DAY THEME APP STYLE
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── LIGHT NAV: stronger active pill ────────────────────────── */
+.nav-btn.active {
+  background: rgba(201,107,136,.16);
+  border-radius: 18px;
+}
+.nav-btn.active .nav-ico { filter: drop-shadow(0 0 4px rgba(201,107,136,.5)); }
+
+/* ── LIGHT WCARD: softer elevated surface ───────────────────── */
+.wcard {
+  border-radius: 20px;
+  border: none;
+  box-shadow: 0 2px 16px rgba(30,20,40,.08), 0 0 0 1px rgba(200,180,210,.35);
+}
+.wcard:hover {
+  box-shadow: 0 8px 32px rgba(30,20,40,.13), 0 0 0 1px rgba(200,180,210,.5);
+  transform: translateY(-2px);
+}
+/* Remove left border accent — hero gradient replaces it */
+.wcard-a { border-left: none; }
+.wcard-b { border-left: none; }
+.wcard-c { border-left: none; }
+.wcard-p { border-left: none; }
+
+/* ── LIGHT WCARD HEAD: colored hero area + decorative letter ── */
+.wcard-head {
+  position: relative;
+  min-height: 96px;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: 16px;
+  border-radius: 20px 20px 0 0;
+}
+/* Decorative letter */
+.wcard-head::before {
+  position: absolute;
+  right: 14px;
+  top: -10px;
+  font-family: var(--font-display);
+  font-size: 110px;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0.07;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -4px;
+}
+.wcard-a .wcard-head::before { content: 'A'; color: #2d7a50; }
+.wcard-b .wcard-head::before { content: 'B'; color: #6650c8; }
+.wcard-c .wcard-head::before { content: 'C'; color: #d47830; }
+.wcard-p .wcard-head::before { content: 'P'; color: #c96b88; }
+.wcard-skate .wcard-head::before { content: '🛼'; font-size: 70px; opacity: .08; }
+
+/* Pastel gradient hero per workout type */
+.wcard-a .wcard-head {
+  background: linear-gradient(135deg, rgba(45,130,80,.12) 0%, rgba(45,130,80,.04) 100%);
+  border-bottom: 1px solid rgba(45,130,80,.15);
+}
+.wcard-b .wcard-head {
+  background: linear-gradient(135deg, rgba(102,80,200,.12) 0%, rgba(102,80,200,.04) 100%);
+  border-bottom: 1px solid rgba(102,80,200,.15);
+}
+.wcard-c .wcard-head {
+  background: linear-gradient(135deg, rgba(212,120,48,.12) 0%, rgba(212,120,48,.04) 100%);
+  border-bottom: 1px solid rgba(212,120,48,.15);
+}
+.wcard-p .wcard-head {
+  background: linear-gradient(135deg, rgba(201,107,136,.12) 0%, rgba(201,107,136,.04) 100%);
+  border-bottom: 1px solid rgba(201,107,136,.15);
+}
+
+/* Wcard h3 in light hero */
+.wcard-head h3 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  position: relative;
+  z-index: 1;
+}
+
+/* Top accent stripe instead of left border */
+.wcard-a { border-top: 3px solid var(--green); }
+.wcard-b { border-top: 3px solid var(--purple); }
+.wcard-c { border-top: 3px solid var(--orange); }
+.wcard-p { border-top: 3px solid var(--accent); }
+.wcard-skate { border-top: 3px solid #5b9bd5; }
+
+/* ── LIGHT STAT CHIPS: bigger, softer shadow ────────────────── */
+.stat-chip {
+  border-radius: 20px;
+  padding: 18px 10px 16px;
+  box-shadow: 0 2px 16px rgba(30,20,40,.07);
+  border-color: rgba(200,180,210,.45);
+  gap: 3px;
+}
+.sc-val { font-size: 32px; color: var(--black); }
+.sc-ico { font-size: 22px; }
+/* Streak chip: pink tint */
+.stat-chip:first-child {
+  border-color: rgba(201,107,136,.3);
+  background: linear-gradient(145deg, rgba(201,107,136,.07) 0%, #ffffff 100%);
+}
+
+/* ── LIGHT QUICK START BTN: gradient + stronger shadow ──────── */
+.quick-start-btn {
+  background: linear-gradient(135deg, #e05585 0%, #c96b88 100%);
+  border-radius: 24px;
+  min-height: 62px;
+  font-size: 18px;
+  letter-spacing: .5px;
+  box-shadow: 0 8px 28px rgba(201,107,136,.38), 0 2px 8px rgba(201,107,136,.2);
+}
+
+/* ── LIGHT TODAY TITLE: bigger and bolder ───────────────────── */
+.today-title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -.02em;
+}
+
+/* ── LIGHT TODAY CARD: cleaner tap targets ──────────────────── */
+.today-card {
+  border-radius: 16px;
+  padding: 16px 6px;
+  min-height: 84px;
+  gap: 5px;
+}
+.today-card.active {
+  box-shadow: 0 4px 18px rgba(201,107,136,.35);
+}
+.tc-name { font-size: 13.5px; font-weight: 700; }
+.tc-sub { font-size: 10px; opacity: .75; }
+.tc-icon { font-size: 22px; }
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
