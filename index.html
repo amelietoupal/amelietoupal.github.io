@@ -2468,6 +2468,38 @@ body {
   height: 100%; background: var(--accent); transition: width .4s ease;
 }
 
+/* ══ COMPACT EXERCISE ROWS ══════════════════════════════════
+   Circles inline-right, one clean line per exercise
+   ══════════════════════════════════════════════════════════ */
+.ex-row { flex-direction: row !important; align-items: stretch !important; }
+.ex-row-inner {
+  flex: 1; min-width: 0;
+  padding: 11px 6px 11px 16px !important;
+  min-height: unset !important;
+  border-bottom: none !important;
+}
+.ex-sets-block {
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  padding: 0 14px 0 0 !important;
+  background: transparent !important;
+  gap: 5px !important;
+  flex-shrink: 0;
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+}
+/* Compact circles for inline layout */
+.ex-sets-block .set-pill {
+  width: 32px !important; height: 32px !important;
+}
+.ex-sets-block .set-pills { gap: 6px !important; }
+/* Hide noisy lines in compact view */
+.ex-sub { display: none !important; }
+.ex-chevron { display: none !important; }
+.set-reps-label { display: none !important; }
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
