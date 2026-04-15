@@ -2175,6 +2175,298 @@ body {
 .tc-sub { font-size: 10px; opacity: .75; }
 .tc-icon { font-size: 22px; }
 
+/* ═══════════════════════════════════════════════════════════
+   SET CIRCLES — vizuální sety (●●○)
+   ═══════════════════════════════════════════════════════════ */
+.set-pill {
+  width: 38px !important; height: 38px !important;
+  min-height: unset !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+  border: 2.5px solid var(--border2) !important;
+  background: transparent !important;
+  font-size: 0 !important;
+  color: transparent !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: border-color .2s, background .2s, transform .15s cubic-bezier(.34,1.56,.64,1) !important;
+  position: relative;
+  flex-shrink: 0;
+}
+.set-pill::after {
+  content: '';
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2.5px solid var(--ink3);
+  transition: all .2s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+.set-pill.done {
+  border-color: var(--accent) !important;
+  background: var(--accent-pale) !important;
+  transform: scale(1.08);
+}
+.set-pill.done::after {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+.set-pill:active { transform: scale(.9) !important; }
+
+/* Dark mode circles */
+[data-theme="dark"] .set-pill { border-color: rgba(255,255,255,.2) !important; }
+[data-theme="dark"] .set-pill::after { border-color: rgba(255,255,255,.35); }
+[data-theme="dark"] .set-pill.done { border-color: var(--accent) !important; background: rgba(201,107,136,.15) !important; }
+[data-theme="dark"] .set-pill.done::after { background: var(--accent); border-color: var(--accent); }
+
+/* Sets block layout for circles */
+.ex-sets-block {
+  padding: 10px 16px 14px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.set-pills {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.set-reps-label {
+  font-size: 11.5px;
+  color: var(--ink3);
+  font-weight: 500;
+  letter-spacing: .3px;
+  padding-left: 2px;
+}
+[data-theme="dark"] .set-reps-label { color: rgba(255,255,255,.38); }
+
+/* Ex last log line */
+.ex-last-log {
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 1px;
+  opacity: .8;
+}
+[data-theme="dark"] .ex-last-log { color: #f4b4c8; opacity: .85; }
+
+/* ─── SUBNAV CHIPS ──────────────────────────────────────── */
+.subnav-chips {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  padding: 24px 0 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+.subnav-chip {
+  padding: 10px 18px;
+  border: 1.5px solid var(--border2);
+  border-radius: 24px;
+  background: var(--surface);
+  color: var(--ink2);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .18s;
+}
+.subnav-chip:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-pale); }
+[data-theme="dark"] .subnav-chip { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); color: rgba(255,255,255,.7); }
+[data-theme="dark"] .subnav-chip:hover { border-color: var(--accent); color: #f4b4c8; background: rgba(201,107,136,.12); }
+
+/* ═══════════════════════════════════════════════════════════
+   FULLSCREEN WORKOUT PLAYER
+   ═══════════════════════════════════════════════════════════ */
+.wp-overlay {
+  position: fixed; inset: 0; z-index: 900;
+  background: #0c0810;
+  display: flex; flex-direction: column;
+  font-family: var(--font-body);
+  overflow: hidden;
+}
+.wp-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px 10px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  flex-shrink: 0;
+}
+.wp-close {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: none; background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.8); font-size: 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.wp-close:hover { background: rgba(255,255,255,.18); }
+.wp-workout-name {
+  font-family: var(--font-display); font-size: 15px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.5);
+}
+.wp-ex-counter {
+  font-size: 13px; color: rgba(255,255,255,.4); font-weight: 500;
+}
+
+/* Hero area */
+.wp-hero {
+  flex-shrink: 0;
+  height: 220px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+  margin: 8px 16px;
+  border-radius: 20px;
+}
+.wp-hero-bg {
+  position: absolute; inset: 0; border-radius: 20px;
+}
+.wp-hero-ico {
+  font-size: 80px; line-height: 1;
+  position: relative; z-index: 1;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,.4));
+}
+
+/* Body */
+.wp-body {
+  flex: 1; overflow-y: auto;
+  padding: 20px 24px 8px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.wp-ex-name {
+  font-family: var(--font-display); font-size: 28px; font-weight: 800;
+  color: #ffffff; line-height: 1.1; letter-spacing: -.01em;
+}
+.wp-set-info {
+  font-size: 13px; color: rgba(255,255,255,.45); font-weight: 500;
+  letter-spacing: .5px; text-transform: uppercase;
+}
+.wp-circles {
+  display: flex; gap: 12px; align-items: center;
+}
+.wp-circle {
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2.5px solid rgba(255,255,255,.22);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .2s cubic-bezier(.34,1.56,.64,1);
+  background: transparent;
+}
+.wp-circle::after {
+  content: ''; width: 16px; height: 16px; border-radius: 50%;
+  border: 2.5px solid rgba(255,255,255,.3);
+  transition: all .2s;
+}
+.wp-circle.done {
+  border-color: var(--accent);
+  background: rgba(201,107,136,.15);
+}
+.wp-circle.done::after {
+  background: var(--accent); border-color: var(--accent);
+}
+.wp-circle.current {
+  border-color: rgba(255,255,255,.6);
+  transform: scale(1.12);
+}
+.wp-reps-hint {
+  font-size: 13px; color: rgba(255,255,255,.4);
+  margin-left: 4px;
+}
+
+/* Rest timer */
+.wp-rest {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 16px 20px;
+  display: none;
+  flex-direction: column; gap: 8px;
+}
+.wp-rest.active { display: flex; }
+.wp-rest-lbl {
+  font-size: 11px; color: rgba(255,255,255,.4);
+  letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+}
+.wp-rest-time {
+  font-family: var(--font-display); font-size: 48px; font-weight: 800;
+  color: #ffffff; line-height: 1; letter-spacing: -.02em;
+}
+.wp-rest-bar-track {
+  height: 4px; border-radius: 2px;
+  background: rgba(255,255,255,.08);
+  overflow: hidden;
+}
+.wp-rest-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: var(--accent);
+  transition: width .9s linear;
+}
+.wp-rest-skip {
+  background: none; border: none; color: rgba(255,255,255,.35);
+  font-size: 12px; cursor: pointer; align-self: flex-end;
+  font-family: var(--font-body);
+}
+
+/* Weight log quick-entry */
+.wp-log {
+  display: flex; flex-direction: column; gap: 8px;
+}
+.wp-log-last {
+  font-size: 12px; color: rgba(201,107,136,.8);
+  font-weight: 500; min-height: 16px;
+}
+.wp-log-inputs {
+  display: flex; align-items: center; gap: 8px;
+}
+.wp-inp {
+  background: rgba(255,255,255,.07);
+  border: 1.5px solid rgba(255,255,255,.14);
+  border-radius: 12px; color: #fff;
+  font-size: 16px; font-family: var(--font-body);
+  padding: 10px 14px; width: 80px; text-align: center;
+  transition: border-color .15s;
+}
+.wp-inp:focus { outline: none; border-color: var(--accent); }
+.wp-inp::placeholder { color: rgba(255,255,255,.3); }
+.wp-inp-x { color: rgba(255,255,255,.35); font-size: 18px; }
+
+/* Controls */
+.wp-controls {
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 20px calc(20px + env(safe-area-inset-bottom));
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+.wp-btn {
+  flex-shrink: 0;
+  height: 56px; border-radius: 16px; border: none; cursor: pointer;
+  font-family: var(--font-display); font-size: 16px; font-weight: 700;
+  letter-spacing: .5px; text-transform: uppercase;
+  transition: all .15s; display: flex; align-items: center; justify-content: center;
+}
+.wp-btn-prev, .wp-btn-next {
+  width: 56px;
+  background: rgba(255,255,255,.08); color: rgba(255,255,255,.6);
+  font-size: 22px;
+}
+.wp-btn-prev:hover, .wp-btn-next:hover { background: rgba(255,255,255,.14); }
+.wp-btn-done {
+  flex: 1;
+  background: linear-gradient(135deg, #e05585, #c96b88);
+  color: #fff; font-size: 17px;
+  box-shadow: 0 6px 24px rgba(201,107,136,.4);
+}
+.wp-btn-done:hover { box-shadow: 0 8px 32px rgba(201,107,136,.55); }
+.wp-btn-done:active { transform: scale(.97); }
+.wp-btn-done.resting {
+  background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.5);
+  box-shadow: none;
+}
+.wp-progress-bar {
+  height: 3px; background: rgba(255,255,255,.06); flex-shrink: 0;
+}
+.wp-progress-fill {
+  height: 100%; background: var(--accent); transition: width .4s ease;
+}
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -2216,13 +2508,10 @@ body {
 <button class="dark-toggle" id="darkToggle" aria-label="Přepnout tmavý režim">🌙</button>
 
 <nav class="nav">
-  <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🌸</span><span class="nav-lbl">Plán</span></button>
-  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-lbl">Tréninky</span><span class="nav-badge" id="startBadge">!</span></button>
-  <button class="nav-btn" data-tab="rutina"><span class="nav-ico">🧘</span><span class="nav-lbl">Rutina</span></button>
-  <button class="nav-btn" data-tab="kardio"><span class="nav-ico">🏃‍♀️</span><span class="nav-lbl">Kardio</span></button>
-  <button class="nav-btn" data-tab="chyby"><span class="nav-ico">💡</span><span class="nav-lbl">Chyby</span></button>
-  <button class="nav-btn" data-tab="tracker"><span class="nav-ico">📈</span><span class="nav-lbl">Tracker</span></button>
-  <button class="nav-btn" data-tab="jidlo"><span class="nav-ico">🥗</span><span class="nav-lbl">Jídlo</span></button>
+  <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🏠</span></button>
+  <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-badge" id="startBadge">!</span></button>
+  <button class="nav-btn" data-tab="tracker"><span class="nav-ico">📅</span></button>
+  <button class="nav-btn" data-tab="jidlo"><span class="nav-ico">📈</span></button>
 </nav>
 
 <!-- ===== TAB: PLÁN ===== -->
@@ -2767,6 +3056,15 @@ body {
 </div>
 
   </div>
+
+<!-- Sub-nav: skryté sekce dostupné z Tréninků -->
+<div class="subnav-chips">
+  <button class="subnav-chip" onclick="switchTab('rutina')">🧘 Rutina & Mobilita</button>
+  <button class="subnav-chip" onclick="switchTab('kardio')">🏃‍♀️ Kardio</button>
+  <button class="subnav-chip" onclick="switchTab('chyby')">💡 Tipy & Mýty</button>
+</div>
+
+</div>
 </div>
 <!-- ===== TAB: RUTINA ===== -->
 <div id="rutina" class="section">
@@ -5757,5 +6055,358 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(function(){});
 }
 </script>
+
+<!-- ═══════════════ FULLSCREEN WORKOUT PLAYER ═══════════════ -->
+<div id="workoutPlayer" class="wp-overlay" style="display:none;" aria-modal="true" role="dialog">
+  <div class="wp-progress-bar"><div class="wp-progress-fill" id="wpProgressFill"></div></div>
+  <div class="wp-header">
+    <button class="wp-close" id="wpClose" aria-label="Zavřít">✕</button>
+    <span class="wp-workout-name" id="wpWorkoutName">Síla A</span>
+    <span class="wp-ex-counter" id="wpExCounter">1 / 8</span>
+  </div>
+  <div class="wp-hero">
+    <div class="wp-hero-bg" id="wpHeroBg"></div>
+    <span class="wp-hero-ico" id="wpHeroIco">💪</span>
+  </div>
+  <div class="wp-body">
+    <div>
+      <div class="wp-ex-name" id="wpExName">Hip Thrust</div>
+      <div class="wp-set-info" id="wpSetInfo">Série 1 ze 3</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+      <div class="wp-circles" id="wpCircles"></div>
+      <span class="wp-reps-hint" id="wpRepsHint"></span>
+    </div>
+    <div class="wp-rest" id="wpRest">
+      <div class="wp-rest-lbl">Pauza</div>
+      <div class="wp-rest-time" id="wpRestTime">01:30</div>
+      <div class="wp-rest-bar-track"><div class="wp-rest-bar-fill" id="wpRestFill"></div></div>
+      <button class="wp-rest-skip" id="wpRestSkip">přeskočit →</button>
+    </div>
+    <div class="wp-log">
+      <div class="wp-log-last" id="wpLogLast"></div>
+      <div class="wp-log-inputs">
+        <input class="wp-inp" id="wpKg" type="number" step="0.5" min="0" placeholder="kg" inputmode="decimal">
+        <span class="wp-inp-x">×</span>
+        <input class="wp-inp" id="wpReps" type="number" min="1" placeholder="reps" inputmode="numeric">
+      </div>
+    </div>
+  </div>
+  <div class="wp-controls">
+    <button class="wp-btn wp-btn-prev" id="wpPrev" aria-label="Předchozí">‹</button>
+    <button class="wp-btn wp-btn-done" id="wpDone">✓ Dokončit set</button>
+    <button class="wp-btn wp-btn-next" id="wpNext" aria-label="Další">›</button>
+  </div>
+</div>
+
+<script>
+/* ═══════════ WORKOUT PLAYER JS ═══════════ */
+(function() {
+  var ICONS = {
+    'hip thrust': '🍑', 'goblet': '🏋️', 'rdl': '💪', 'mrtvý': '💪',
+    'row|veslování': '🚣', 'pulldown|lat': '⬇️', 'press|tlak': '🤸',
+    'curl|biceps': '💪', 'triceps|pushdown': '💪', 'plank': '🧗‍♀️',
+    'dead bug': '🐛', 'abduction|únoska': '🦵', 'kickback': '🍑',
+    'face pull|rear delt': '🎯', 'step.up': '🪜', 'split squat|lunge': '🦿',
+    'bridge|pelvic': '🌉', 'crunch|criss': '🔥', 'rollout|ab wheel': '⚙️',
+    'chůze|bike|kardio': '🚴', 'stretch|protažení': '🤸', 'hollow': '🫡',
+  };
+  var HERO_COLORS = {
+    'a': ['rgba(45,130,80,.6)','rgba(20,55,35,1)'],
+    'b': ['rgba(102,80,200,.6)','rgba(40,30,90,1)'],
+    'c': ['rgba(210,120,55,.6)','rgba(80,45,20,1)'],
+    'p': ['rgba(201,107,136,.55)','rgba(80,38,58,1)'],
+  };
+
+  function getIcon(name) {
+    var n = (name||'').toLowerCase();
+    for (var k in ICONS) {
+      if (new RegExp(k).test(n)) return ICONS[k];
+    }
+    return '💪';
+  }
+
+  function getExercises(type) {
+    var card = document.querySelector('.wcard-' + type);
+    if (!card) return [];
+    var exs = [];
+    card.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+      var nameEl = row.querySelector('.ex-name');
+      if (!nameEl) return;
+      var name = nameEl.textContent.trim();
+      var pills = row.querySelectorAll('.set-pill');
+      if (!pills.length) return;
+      var sets = pills.length;
+      var reps = pills[0].dataset.label || pills[0].textContent.replace(/✓/g,'').trim() || '';
+      var uid = row.dataset.uid;
+      var detail = row.nextElementSibling;
+      var restSecs = 90;
+      if (detail && detail.classList.contains('ex-detail')) {
+        var rt = detail.querySelector('[data-seconds]');
+        if (rt) restSecs = parseInt(rt.dataset.seconds) || 90;
+      }
+      exs.push({ uid: uid, name: name, sets: sets, reps: reps, restSecs: restSecs, icon: getIcon(name) });
+    });
+    return exs;
+  }
+
+  var wp = {
+    exercises: [], exIdx: 0, setsDone: [], restInt: null,
+    type: 'a', restSecs: 90, restTotal: 90
+  };
+
+  function saveLog(uid, kg, reps) {
+    if (!uid) return;
+    var key = 'ms_wlog_' + uid;
+    var arr = JSON.parse(localStorage.getItem(key) || '[]');
+    arr.unshift({ kg: kg, reps: reps, date: new Date().toISOString().slice(0,10) });
+    if (arr.length > 10) arr = arr.slice(0,10);
+    localStorage.setItem(key, JSON.stringify(arr));
+  }
+  function getLastLog(uid) {
+    var arr = JSON.parse(localStorage.getItem('ms_wlog_' + uid) || '[]');
+    if (!arr.length) return '';
+    var l = arr[0];
+    var parts = [];
+    if (l.kg) parts.push(l.kg + ' kg');
+    if (l.reps) parts.push(l.reps + ' opak.');
+    return parts.length ? 'Naposledy: ' + parts.join(' × ') : '';
+  }
+
+  function stopRest() {
+    clearInterval(wp.restInt); wp.restInt = null;
+    var restEl = document.getElementById('wpRest');
+    if (restEl) restEl.classList.remove('active');
+    var doneBtn = document.getElementById('wpDone');
+    if (doneBtn) { doneBtn.classList.remove('resting'); doneBtn.textContent = '✓ Dokončit set'; }
+  }
+
+  function startRest(secs) {
+    stopRest();
+    wp.restTotal = secs; var rem = secs;
+    var restEl = document.getElementById('wpRest');
+    var timeEl = document.getElementById('wpRestTime');
+    var fillEl = document.getElementById('wpRestFill');
+    var doneBtn = document.getElementById('wpDone');
+    if (restEl) restEl.classList.add('active');
+    if (doneBtn) { doneBtn.classList.add('resting'); doneBtn.textContent = 'Odpočívej…'; }
+
+    function tick() {
+      var m = Math.floor(rem/60), s = rem % 60;
+      if (timeEl) timeEl.textContent = m + ':' + (s<10?'0':'') + s;
+      if (fillEl) fillEl.style.width = (rem/wp.restTotal*100) + '%';
+      if (rem <= 0) {
+        stopRest();
+        if (navigator.vibrate) navigator.vibrate([200,100,200]);
+        if (doneBtn) { doneBtn.classList.remove('resting'); doneBtn.textContent = '✓ Dokončit set'; }
+        return;
+      }
+      rem--;
+    }
+    tick();
+    wp.restInt = setInterval(tick, 1000);
+  }
+
+  function renderPlayer() {
+    var ex = wp.exercises[wp.exIdx];
+    if (!ex) return;
+    var colors = HERO_COLORS[wp.type] || HERO_COLORS['a'];
+    var bg = document.getElementById('wpHeroBg');
+    if (bg) bg.style.background = 'radial-gradient(ellipse at 30% 50%, ' + colors[0] + ' 0%, ' + colors[1] + ' 100%)';
+    var ico = document.getElementById('wpHeroIco');
+    if (ico) ico.textContent = ex.icon;
+    var nameEl = document.getElementById('wpExName');
+    if (nameEl) nameEl.textContent = ex.name;
+    var hint = document.getElementById('wpRepsHint');
+    if (hint) hint.textContent = ex.reps || '';
+    var last = document.getElementById('wpLogLast');
+    if (last) last.textContent = getLastLog(ex.uid);
+
+    // Set info
+    var doneSets = (wp.setsDone[wp.exIdx] || 0);
+    var info = document.getElementById('wpSetInfo');
+    if (info) info.textContent = doneSets >= ex.sets ? 'Hotovo!' : 'Série ' + (doneSets+1) + ' ze ' + ex.sets;
+
+    // Circles
+    var circ = document.getElementById('wpCircles');
+    if (circ) {
+      circ.innerHTML = '';
+      for (var i = 0; i < ex.sets; i++) {
+        var c = document.createElement('div');
+        c.className = 'wp-circle' + (i < doneSets ? ' done' : (i === doneSets ? ' current' : ''));
+        circ.appendChild(c);
+      }
+    }
+
+    // Progress bar
+    var fill = document.getElementById('wpProgressFill');
+    if (fill) fill.style.width = ((wp.exIdx / wp.exercises.length) * 100) + '%';
+
+    // Counter
+    var ctr = document.getElementById('wpExCounter');
+    if (ctr) ctr.textContent = (wp.exIdx+1) + ' / ' + wp.exercises.length;
+
+    // Workout name
+    var wn = document.getElementById('wpWorkoutName');
+    var names = {a:'Síla A', b:'Síla B', c:'Trénink C', p:'Pilates'};
+    if (wn) wn.textContent = names[wp.type] || 'Trénink';
+
+    // Done button state
+    var doneBtn = document.getElementById('wpDone');
+    if (doneBtn && !wp.restInt) {
+      if (doneSets >= ex.sets) {
+        doneBtn.textContent = 'Další cvik →';
+        doneBtn.classList.remove('resting');
+      } else {
+        doneBtn.textContent = '✓ Dokončit set';
+        doneBtn.classList.remove('resting');
+      }
+    }
+
+    stopRest();
+    // Clear inputs
+    var kgI = document.getElementById('wpKg');
+    var rpI = document.getElementById('wpReps');
+    if (kgI) kgI.value = '';
+    if (rpI) rpI.value = '';
+    // Pre-fill from last log
+    var arr = JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]');
+    if (arr.length && kgI && rpI) {
+      kgI.value = arr[0].kg || '';
+      rpI.value = arr[0].reps || '';
+    }
+  }
+
+  function openPlayer(type) {
+    wp.type = type;
+    wp.exercises = getExercises(type);
+    if (!wp.exercises.length) return;
+    wp.exIdx = 0;
+    wp.setsDone = wp.exercises.map(function() { return 0; });
+    stopRest();
+    var overlay = document.getElementById('workoutPlayer');
+    if (overlay) { overlay.style.display = 'flex'; overlay.style.flexDirection = 'column'; }
+    document.body.style.overflow = 'hidden';
+    renderPlayer();
+  }
+  window.openWorkoutPlayer = openPlayer;
+
+  function closePlayer() {
+    stopRest();
+    var overlay = document.getElementById('workoutPlayer');
+    if (overlay) overlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var closeBtn = document.getElementById('wpClose');
+    if (closeBtn) closeBtn.addEventListener('click', closePlayer);
+
+    var doneBtn = document.getElementById('wpDone');
+    if (doneBtn) doneBtn.addEventListener('click', function() {
+      if (wp.restInt) { stopRest(); return; }
+      var ex = wp.exercises[wp.exIdx];
+      if (!ex) return;
+      var doneSets = wp.setsDone[wp.exIdx] || 0;
+      if (doneSets >= ex.sets) {
+        // Move to next exercise
+        if (wp.exIdx < wp.exercises.length - 1) {
+          wp.exIdx++;
+          renderPlayer();
+        } else {
+          closePlayer();
+          if (typeof showToast === 'function') showToast('Trénink dokončen! 🎉');
+        }
+        return;
+      }
+      // Save log
+      var kg = parseFloat(document.getElementById('wpKg').value) || null;
+      var reps = parseInt(document.getElementById('wpReps').value) || null;
+      if (kg || reps) saveLog(ex.uid, kg, reps);
+      // Mark set done
+      wp.setsDone[wp.exIdx] = doneSets + 1;
+      renderPlayer();
+      // Start rest if more sets
+      if (wp.setsDone[wp.exIdx] < ex.sets) {
+        startRest(ex.restSecs);
+      }
+    });
+
+    var prevBtn = document.getElementById('wpPrev');
+    if (prevBtn) prevBtn.addEventListener('click', function() {
+      if (wp.exIdx > 0) { wp.exIdx--; renderPlayer(); }
+    });
+
+    var nextBtn = document.getElementById('wpNext');
+    if (nextBtn) nextBtn.addEventListener('click', function() {
+      if (wp.exIdx < wp.exercises.length - 1) { wp.exIdx++; renderPlayer(); }
+    });
+
+    var skipBtn = document.getElementById('wpRestSkip');
+    if (skipBtn) skipBtn.addEventListener('click', stopRest);
+
+    // Close on backdrop (none visible, but handle escape key)
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closePlayer();
+    });
+  });
+})();
+
+/* ═══════════ SET CIRCLES TRANSFORM ═══════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  // Transform pills: extract reps label, store as data-label
+  document.querySelectorAll('.set-pills').forEach(function(group) {
+    var pills = group.querySelectorAll('.set-pill');
+    if (!pills.length) return;
+    // Get reps text from first pill (before any session restore)
+    var repsText = (pills[0].dataset.label || pills[0].textContent || '').replace(/✓/g,'').trim();
+    pills.forEach(function(p) {
+      if (!p.dataset.label) p.dataset.label = p.textContent.replace(/✓/g,'').trim() || repsText;
+    });
+    // Add reps label below circles
+    if (repsText && !group.parentNode.querySelector('.set-reps-label')) {
+      var lbl = document.createElement('div');
+      lbl.className = 'set-reps-label';
+      lbl.textContent = repsText;
+      group.parentNode.appendChild(lbl);
+    }
+  });
+
+  // Show "Naposledy" log under each exercise name
+  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+    var uid = row.dataset.uid;
+    var arr = JSON.parse(localStorage.getItem('ms_wlog_' + uid) || '[]');
+    if (!arr.length) return;
+    var l = arr[0];
+    var parts = [];
+    if (l.kg) parts.push(l.kg + ' kg');
+    if (l.reps) parts.push(l.reps + ' opak.');
+    if (!parts.length) return;
+    var nameEl = row.querySelector('.ex-name');
+    if (!nameEl || row.querySelector('.ex-last-log')) return;
+    var logEl = document.createElement('div');
+    logEl.className = 'ex-last-log';
+    logEl.textContent = 'Naposledy: ' + parts.join(' × ');
+    nameEl.insertAdjacentElement('afterend', logEl);
+  });
+});
+
+/* ═══════════ OPEN PLAYER FROM QUICK-START / goToWorkout ═══════════ */
+(function() {
+  // Patch quickStartBtn to open player
+  var btn = document.getElementById('quickStartBtn');
+  if (!btn) return;
+  var origClick = btn.onclick;
+  btn.addEventListener('click', function(e) {
+    // goToWorkout still fires via existing handler; open player after short delay
+    setTimeout(function() {
+      var todayCard = document.querySelector('.today-card.active');
+      var type = todayCard ? todayCard.dataset.type : 'a';
+      if (type && type !== 'rest') openWorkoutPlayer(type);
+    }, 100);
+  });
+})();
+</script>
+
 </body>
 </html>
