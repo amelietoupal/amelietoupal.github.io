@@ -1884,20 +1884,21 @@ body {
    APP-STYLE UPGRADE — INSPIRED BY MODERN FITNESS APPS
    ═══════════════════════════════════════════════════════════ */
 
-/* ── 1. NAV: ICON ONLY — clean, modern ──────────────────────── */
+/* ── 1. NAV: ICON ONLY — 7 tabs, clean ──────────────────────── */
 .nav-lbl { display: none !important; }
-:root { --nav-h: 64px; }
+:root { --nav-h: 62px; }
 .nav {
   align-items: center;
-  padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+  padding: 4px 2px calc(4px + env(safe-area-inset-bottom));
+  gap: 0;
 }
 .nav-btn {
-  padding: 10px 8px;
+  padding: 8px 4px;
   gap: 0;
-  border-radius: 18px;
-  margin: 3px 2px;
+  border-radius: 14px;
+  margin: 2px 1px;
 }
-.nav-ico { font-size: 26px; }
+.nav-ico { font-size: 22px; }
 
 /* light mode active */
 .nav-btn.active {
@@ -2510,8 +2511,11 @@ body {
 <nav class="nav">
   <button class="nav-btn active" data-tab="plan"><span class="nav-ico">🏠</span></button>
   <button class="nav-btn" data-tab="treninky"><span class="nav-ico">💪</span><span class="nav-badge" id="startBadge">!</span></button>
+  <button class="nav-btn" data-tab="rutina"><span class="nav-ico">🧘</span></button>
+  <button class="nav-btn" data-tab="kardio"><span class="nav-ico">🏃‍♀️</span></button>
+  <button class="nav-btn" data-tab="chyby"><span class="nav-ico">💡</span></button>
   <button class="nav-btn" data-tab="tracker"><span class="nav-ico">📅</span></button>
-  <button class="nav-btn" data-tab="jidlo"><span class="nav-ico">📈</span></button>
+  <button class="nav-btn" data-tab="jidlo"><span class="nav-ico">🥗</span></button>
 </nav>
 
 <!-- ===== TAB: PLÁN ===== -->
@@ -3057,12 +3061,7 @@ body {
 
   </div>
 
-<!-- Sub-nav: skryté sekce dostupné z Tréninků -->
-<div class="subnav-chips">
-  <button class="subnav-chip" onclick="switchTab('rutina')">🧘 Rutina & Mobilita</button>
-  <button class="subnav-chip" onclick="switchTab('kardio')">🏃‍♀️ Kardio</button>
-  <button class="subnav-chip" onclick="switchTab('chyby')">💡 Tipy & Mýty</button>
-</div>
+
 
 </div>
 </div>
