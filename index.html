@@ -4499,7 +4499,7 @@ document.addEventListener('DOMContentLoaded', function() {
       if (subEl) subEl.textContent = hist.length ? hist.length + ' záznamů' : 'Zatím žádné záznamy — zapiš první PR';
       if (!hist.length) { if (svgEl) svgEl.innerHTML = ''; if (valRow) valRow.innerHTML = ''; }
       else {
-        var vals = hist.map(function(e) { return typeof e === 'object' ? (parseFloat(e.v) || 0) : parseFloat(e) || 0; });
+        var vals = hist.map(function(e) { return typeof e === 'object' ? (parseFloat(e.kg) || 0) : parseFloat(e) || 0; });
         var dates = hist.map(function(e) { return typeof e === 'object' ? (e.date || '') : ''; });
         var mn = Math.min.apply(null, vals), mx = Math.max.apply(null, vals), range = mx - mn || 1;
         var W = 300, H = 140, pad = 8;
