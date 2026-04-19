@@ -5280,10 +5280,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (dtog) dtog.addEventListener('click', function() {
         var box = document.getElementById('wmDBox');
         var arrow = document.getElementById('wmDArrow');
+        if (!box) return;
         var open = box.style.display === 'block';
         box.style.display = open ? '' : 'block';
         dtog.classList.toggle('open', !open);
-        arrow.textContent = open ? '▾' : '▴';
+        if (arrow) arrow.textContent = open ? '▾' : '▴';
       });
 
       document.getElementById('wmPrev').disabled = idx === 0;
@@ -6329,57 +6330,54 @@ if ('serviceWorker' in navigator) {
     document.body.style.overflow = '';
   }
 
-  document.addEventListener('DOMContentLoaded', function() {
-    var closeBtn = document.getElementById('wpClose');
-    if (closeBtn) closeBtn.addEventListener('click', closePlayer);
+  var closeBtn = document.getElementById('wpClose');
+  if (closeBtn) closeBtn.addEventListener('click', closePlayer);
 
-    var doneBtn = document.getElementById('wpDone');
-    if (doneBtn) doneBtn.addEventListener('click', function() {
-      if (wp.restInt) { stopRest(); return; }
-      var ex = wp.exercises[wp.exIdx];
-      if (!ex) return;
-      var doneSets = wp.setsDone[wp.exIdx] || 0;
-      if (doneSets >= ex.sets) {
-        // Move to next exercise
-        if (wp.exIdx < wp.exercises.length - 1) {
-          wp.exIdx++;
-          renderPlayer();
-        } else {
-          closePlayer();
-          if (typeof showToast === 'function') showToast('Trénink dokončen! 🎉');
-        }
-        return;
+  var doneBtn = document.getElementById('wpDone');
+  if (doneBtn) doneBtn.addEventListener('click', function() {
+    if (wp.restInt) { stopRest(); return; }
+    var ex = wp.exercises[wp.exIdx];
+    if (!ex) return;
+    var doneSets = wp.setsDone[wp.exIdx] || 0;
+    if (doneSets >= ex.sets) {
+      // Move to next exercise
+      if (wp.exIdx < wp.exercises.length - 1) {
+        wp.exIdx++;
+        renderPlayer();
+      } else {
+        closePlayer();
+        if (typeof showToast === 'function') showToast('Trénink dokončen! 🎉');
       }
-      // Save log
-      var kg = parseFloat(document.getElementById('wpKg').value) || null;
-      var reps = parseInt(document.getElementById('wpReps').value) || null;
-      if (kg || reps) saveLog(ex.uid, kg, reps);
-      // Mark set done
-      wp.setsDone[wp.exIdx] = doneSets + 1;
-      renderPlayer();
-      // Start rest if more sets
-      if (wp.setsDone[wp.exIdx] < ex.sets) {
-        startRest(ex.restSecs);
-      }
-    });
+      return;
+    }
+    // Save log
+    var kg = parseFloat(document.getElementById('wpKg').value) || null;
+    var reps = parseInt(document.getElementById('wpReps').value) || null;
+    if (kg || reps) saveLog(ex.uid, kg, reps);
+    // Mark set done
+    wp.setsDone[wp.exIdx] = doneSets + 1;
+    renderPlayer();
+    // Start rest if more sets
+    if (wp.setsDone[wp.exIdx] < ex.sets) {
+      startRest(ex.restSecs);
+    }
+  });
 
-    var prevBtn = document.getElementById('wpPrev');
-    if (prevBtn) prevBtn.addEventListener('click', function() {
-      if (wp.exIdx > 0) { wp.exIdx--; renderPlayer(); }
-    });
+  var prevBtn = document.getElementById('wpPrev');
+  if (prevBtn) prevBtn.addEventListener('click', function() {
+    if (wp.exIdx > 0) { wp.exIdx--; renderPlayer(); }
+  });
 
-    var nextBtn = document.getElementById('wpNext');
-    if (nextBtn) nextBtn.addEventListener('click', function() {
-      if (wp.exIdx < wp.exercises.length - 1) { wp.exIdx++; renderPlayer(); }
-    });
+  var nextBtn = document.getElementById('wpNext');
+  if (nextBtn) nextBtn.addEventListener('click', function() {
+    if (wp.exIdx < wp.exercises.length - 1) { wp.exIdx++; renderPlayer(); }
+  });
 
-    var skipBtn = document.getElementById('wpRestSkip');
-    if (skipBtn) skipBtn.addEventListener('click', stopRest);
+  var skipBtn = document.getElementById('wpRestSkip');
+  if (skipBtn) skipBtn.addEventListener('click', stopRest);
 
-    // Close on backdrop (none visible, but handle escape key)
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closePlayer();
-    });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePlayer();
   });
 })();
 
