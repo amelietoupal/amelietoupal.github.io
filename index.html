@@ -726,6 +726,52 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wm-step-inp::placeholder { color: var(--border2); font-weight: 400; font-size: 22px; }
 .wm-step-unit { font-size: 10px; color: var(--ink3); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
 
+/* ── PER-SET TABLE ─────────────────────────────────────────── */
+.wm-sets-section { margin-top: 16px; }
+.wm-sets-hdr,
+.wm-set-row {
+  display: grid;
+  grid-template-columns: 26px minmax(0,1fr) 62px 62px 44px;
+  gap: 6px; align-items: center;
+}
+.wm-sets-hdr { padding: 0 2px 8px; border-bottom: 1.5px solid var(--border); }
+.wm-sets-hdr span { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); text-align: center; }
+.wm-sets-hdr span:nth-child(2) { text-align: left; }
+.wm-set-row { padding: 5px 2px; border-bottom: 1px solid var(--border); transition: opacity .25s; }
+.wm-set-row:last-child { border-bottom: none; }
+.wm-set-row.set-done { opacity: .38; }
+.wm-set-row.set-done .wm-sinp { border-color: transparent !important; background: transparent !important; }
+.wm-snum { font-size: 13px; font-weight: 700; color: var(--ink3); text-align: center; }
+.wm-sprev { font-size: 11px; color: var(--ink3); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wm-sinp {
+  display: block; box-sizing: border-box; width: 100%; height: 48px;
+  border: 1.5px solid var(--border2); border-radius: 10px;
+  background: var(--surface2); text-align: center;
+  font-size: 19px; font-weight: 800; color: var(--black);
+  font-family: var(--font-display); outline: none; padding: 0;
+  -webkit-appearance: none; appearance: none;
+}
+.wm-sinp:focus { border-color: var(--accent); background: var(--white); }
+.wm-sdone {
+  width: 40px; height: 40px; margin: 0 auto; flex-shrink: 0;
+  border: 2px solid var(--border2); border-radius: 50%; background: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: var(--border2);
+  transition: all .15s; -webkit-tap-highlight-color: transparent;
+}
+.wm-sdone.done { background: var(--green); border-color: var(--green); color: #fff; }
+/* Inline rest timer */
+.wm-rest-inline {
+  display: flex; align-items: center; gap: 12px;
+  margin: 12px 0; background: var(--surface2); border-radius: 14px; padding: 12px 16px;
+}
+.wm-rest-inline-info { flex: 1; min-width: 0; }
+.wm-rest-inline-lbl { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 2px; }
+.wm-rest-inline-time { font-size: 32px; font-weight: 800; font-family: var(--font-display); color: var(--black); line-height: 1; }
+.wm-rest-inline-bar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+.wm-rest-inline-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .9s linear; }
+.wm-rest-skip-btn { flex-shrink: 0; border: 1.5px solid var(--border2); border-radius: 20px; background: none; color: var(--ink3); font-size: 12px; cursor: pointer; padding: 8px 14px; font-family: var(--font-body); }
+
 .schedule-editor { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 20px; }
 .schedule-editor-hd { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
 .schedule-editor-title { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink); }
@@ -5285,17 +5331,101 @@ document.addEventListener('DOMContentLoaded', function() {
       return list;
     }
 
-    function getLastLogText(uid) {
-      if (!uid) return '';
-      var arr = JSON.parse(localStorage.getItem('ms_wlog_' + uid) || '[]');
-      if (!arr.length) return '';
-      var l = arr[0]; var parts = [];
-      if (l.kg) parts.push(l.kg + ' kg');
-      if (l.reps) parts.push(l.reps + ' opak.');
-      return parts.length ? 'Naposledy: ' + parts.join(' × ') : '';
+    // Per-session state: keyed by uid
+    var session = {};
+    var restInt = null, restTotal = 90;
+
+    function getExInfo(ex) {
+      var uid = ex.uid;
+      var cfg = uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') : null;
+      var pills = ex.row ? Array.from(ex.row.querySelectorAll('.set-pill')) : [];
+      var inline = ex.row ? ex.row.querySelector('.ex-sets-inline') : null;
+      var setsCount = cfg && cfg.sets ? cfg.sets : (pills.length || (inline ? 1 : 0));
+      var pillText = pills.length ? (pills[0].dataset.label || pills[0].textContent || '').replace(/✓/g,'').trim() : (inline ? inline.textContent.trim() : '');
+      var plannedRepsNum = (cfg && cfg.reps) ? (cfg.reps.match(/\d+/) || [])[0] || ''
+                         : (pillText.match(/\d+/) || [])[0] || '';
+      var plannedKg = cfg && cfg.kg ? cfg.kg : '';
+      var restSecs = 90;
+      if (ex.row) {
+        var restEl = ex.row.nextElementSibling;
+        if (restEl && restEl.classList.contains('ex-detail')) {
+          var rt = restEl.querySelector('[data-seconds]');
+          if (rt) restSecs = parseInt(rt.dataset.seconds) || 90;
+        }
+      }
+      return { setsCount: setsCount, pillText: pillText, plannedKg: plannedKg, plannedRepsNum: plannedRepsNum, restSecs: restSecs };
+    }
+
+    function initSession(ex) {
+      if (session[ex.uid]) return session[ex.uid];
+      var info = getExInfo(ex);
+      var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
+      var lastSets = lastLog.length && lastLog[0].sets ? lastLog[0].sets : null;
+      var rows = [];
+      for (var i = 0; i < Math.max(info.setsCount, 1); i++) {
+        var lkg  = lastSets && lastSets[i] ? lastSets[i].kg   : info.plannedKg;
+        var lrep = lastSets && lastSets[i] ? lastSets[i].reps : info.plannedRepsNum;
+        rows.push({ kg: lkg, reps: lrep, done: false });
+      }
+      session[ex.uid] = { rows: rows, restSecs: info.restSecs };
+      return session[ex.uid];
+    }
+
+    function stopRest() {
+      if (restInt) { clearInterval(restInt); restInt = null; }
+      var r = document.getElementById('wmRestInline');
+      if (r) r.remove();
+    }
+
+    function startRest(secs, afterEl) {
+      stopRest();
+      restTotal = secs;
+      var rem = secs;
+      var div = document.createElement('div');
+      div.id = 'wmRestInline';
+      div.className = 'wm-rest-inline';
+      div.innerHTML =
+        '<div class="wm-rest-inline-info">' +
+          '<div class="wm-rest-inline-lbl">Pauza</div>' +
+          '<div class="wm-rest-inline-time" id="wmRestTime">' + fmt(rem) + '</div>' +
+          '<div class="wm-rest-inline-bar"><div class="wm-rest-inline-fill" id="wmRestFill" style="width:100%"></div></div>' +
+        '</div>' +
+        '<button class="wm-rest-skip-btn" id="wmRestSkip">Přeskočit</button>';
+      if (afterEl && afterEl.parentNode) afterEl.parentNode.insertBefore(div, afterEl.nextSibling);
+      document.getElementById('wmRestSkip').addEventListener('click', stopRest);
+      function fmt(s) { return Math.floor(s/60) + ':' + (s%60 < 10 ? '0' : '') + (s%60); }
+      function tick() {
+        rem--;
+        var te = document.getElementById('wmRestTime');
+        var fe = document.getElementById('wmRestFill');
+        if (te) te.textContent = fmt(rem);
+        if (fe) fe.style.width = (rem / restTotal * 100) + '%';
+        if (rem <= 0) {
+          stopRest();
+          if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+        }
+      }
+      restInt = setInterval(tick, 1000);
+    }
+
+    function renderSetRow(ex, i, sess) {
+      var row = sess.rows[i];
+      var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
+      var prevSets = lastLog.length && lastLog[0].sets ? lastLog[0].sets : null;
+      var prevText = prevSets && prevSets[i]
+        ? ((prevSets[i].kg ? prevSets[i].kg + 'kg' : '') + (prevSets[i].kg && prevSets[i].reps ? '×' : '') + (prevSets[i].reps ? prevSets[i].reps : '') || '—')
+        : '—';
+      return '<div class="wm-set-row' + (row.done ? ' set-done' : '') + '" data-si="' + i + '">' +
+        '<span class="wm-snum">' + (i + 1) + '</span>' +
+        '<span class="wm-sprev">' + prevText + '</span>' +
+        '<input class="wm-sinp" type="number" step="0.5" min="0" inputmode="decimal" placeholder="kg" value="' + (row.kg || '') + '" data-field="kg" data-si="' + i + '">' +
+        '<input class="wm-sinp" type="number" step="1" min="1" inputmode="numeric" placeholder="opak" value="' + (row.reps || '') + '" data-field="reps" data-si="' + i + '">' +
+        '<button class="wm-sdone' + (row.done ? ' done' : '') + '" data-si="' + i + '">✓</button>' +
+      '</div>';
     }
 
     function render() {
+      stopRest();
       var ex = exercises[idx];
       var total = exercises.length;
       document.getElementById('wmTitle').textContent = TITLES[type] || '';
@@ -5303,6 +5433,8 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('wmFill').style.width = Math.round(idx / total * 100) + '%';
       document.getElementById('wmPhase').textContent = ex.phase;
 
+      var sess = initSession(ex);
+      var info = getExInfo(ex);
       var isDone = ex.row && ex.row.classList.contains('done');
       var rpeH = ex.rpe ? '<div class="wm-rpe">' + ex.rpe + '</div>' : '';
       var subH = ex.sub ? '<div class="wm-sub">' + ex.sub.trim() + '</div>' : '';
@@ -5311,104 +5443,62 @@ document.addEventListener('DOMContentLoaded', function() {
           '<div class="wm-detail-box" id="wmDBox">' + ex.detailHTML + '</div>'
         : '';
 
-      // Pilates hold timer button
-      var holdBtn = '';
-      if (type === 'p') {
-        holdBtn = '<button class="wm-hold-btn" id="wmHoldBtn">⏱ Hold 30s</button>';
-      }
+      var rowsH = '';
+      for (var i = 0; i < sess.rows.length; i++) rowsH += renderSetRow(ex, i, sess);
 
-      // Pre-fill: last log > saved cfg > pill text from exercise row
-      var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
-      var cfg = ex.uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + ex.uid) || 'null') : null;
-      var pillText = ex.row ? (function() {
-        var p = ex.row.querySelector('.set-pill');
-        return p ? (p.dataset.label || p.textContent || '').replace(/✓/g,'').trim() : '';
-      })() : '';
-      var inlineText = ex.row ? (function() {
-        var s = ex.row.querySelector('.ex-sets-inline');
-        return s ? s.textContent.trim() : '';
-      })() : '';
-      var fallbackText = pillText || inlineText;
-      var plannedKg = cfg && cfg.kg ? cfg.kg : '';
-      var plannedReps = (cfg && cfg.reps) ? (cfg.reps.match(/\d+/) || [])[0] || ''
-                      : (fallbackText.match(/\d+/) || [])[0] || '';
-      var fillKg   = lastLog.length && lastLog[0].kg   ? lastLog[0].kg   : plannedKg;
-      var fillReps = lastLog.length && lastLog[0].reps  ? lastLog[0].reps : plannedReps;
-      var lastTxt  = getLastLogText(ex.uid);
-
-      // Sets label from pill count or inline text
-      var setsCount = ex.row ? ex.row.querySelectorAll('.set-pill').length : 0;
-      var setsLbl = setsCount ? setsCount + '\u00a0série · ' : '';
-      var repsLbl = fallbackText || (cfg && cfg.reps ? cfg.reps : '');
-      var planLbl = (setsLbl + repsLbl).trim().replace(/·\s*$/, '');
-
-      var logH = '<div class="wm-log-section">' +
-        (planLbl ? '<div class="wm-log-plan">' + planLbl + '</div>' : '') +
-        (lastTxt  ? '<div class="wm-log-last">' + lastTxt + '</div>' : '') +
-        '<div class="wm-log-fields">' +
-        '<div class="wm-log-field">' +
-          '<span class="wm-log-lbl">Váha</span>' +
-          '<div class="wm-stepper">' +
-            '<button class="wm-step-btn" id="wmKgMinus">−</button>' +
-            '<div class="wm-step-center">' +
-              '<input class="wm-step-inp" id="wmLogKg" type="number" step="2.5" min="0" placeholder="0" inputmode="decimal" value="' + fillKg + '">' +
-              '<span class="wm-step-unit">kg</span>' +
-            '</div>' +
-            '<button class="wm-step-btn" id="wmKgPlus">+</button>' +
-          '</div>' +
-        '</div>' +
-        '<div class="wm-log-field">' +
-          '<span class="wm-log-lbl">Opakování</span>' +
-          '<div class="wm-stepper">' +
-            '<button class="wm-step-btn" id="wmRepsMinus">−</button>' +
-            '<div class="wm-step-center">' +
-              '<input class="wm-step-inp" id="wmLogReps" type="number" step="1" min="1" placeholder="0" inputmode="numeric" value="' + fillReps + '">' +
-              '<span class="wm-step-unit">opak.</span>' +
-            '</div>' +
-            '<button class="wm-step-btn" id="wmRepsPlus">+</button>' +
-          '</div>' +
-        '</div>' +
-        '</div></div>';
+      var planReps = info.pillText || (info.plannedRepsNum ? info.plannedRepsNum + ' opak.' : '');
+      var setsH = '<div class="wm-sets-section">' +
+        (planReps ? '<div style="font-size:12px;color:var(--ink3);margin-bottom:10px;">' + info.setsCount + '\u00a0série\u00a0·\u00a0' + planReps + '</div>' : '') +
+        '<div class="wm-sets-hdr"><span>#</span><span>Minule</span><span>kg</span><span>opak.</span><span></span></div>' +
+        rowsH + '</div>';
 
       document.getElementById('wmBody').innerHTML =
         '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
         '<div class="wm-name">' + ex.name + '</div>' +
-        subH + rpeH + logH + holdBtn + detH + '</div>';
+        subH + rpeH + setsH + detH + '</div>';
 
-      // Wire stepper buttons
-      var kgInp = document.getElementById('wmLogKg');
-      var rpInp = document.getElementById('wmLogReps');
-      function wire(btnId, inp, delta) {
-        var btn = document.getElementById(btnId);
-        if (!btn || !inp) return;
+      // Save input values back to session on change
+      document.querySelectorAll('.wm-sinp').forEach(function(inp) {
+        inp.addEventListener('change', function() {
+          var si = parseInt(this.dataset.si);
+          var field = this.dataset.field;
+          var v = field === 'kg' ? (parseFloat(this.value) || '') : (parseInt(this.value) || '');
+          sess.rows[si][field] = v;
+        });
+      });
+
+      // Done buttons
+      document.querySelectorAll('.wm-sdone').forEach(function(btn) {
         btn.addEventListener('click', function() {
-          var v = parseFloat(inp.value) || 0;
-          var step = Math.abs(delta);
-          var nv = delta > 0 ? v + step : Math.max(0, v - step);
-          inp.value = nv % 1 === 0 ? nv : nv.toFixed(1);
-        });
-      }
-      wire('wmKgMinus', kgInp, -2.5);
-      wire('wmKgPlus',  kgInp,  2.5);
-      wire('wmRepsMinus', rpInp, -1);
-      wire('wmRepsPlus',  rpInp,  1);
-
-      var hBtn = document.getElementById('wmHoldBtn');
-      if (hBtn) {
-        var holdSecs = 30, holdInt = null;
-        hBtn.addEventListener('click', function() {
-          if (holdInt) { clearInterval(holdInt); holdInt = null; hBtn.textContent = '⏱ Hold 30s'; hBtn.classList.remove('wm-hold-active'); return; }
-          var rem = holdSecs;
-          hBtn.classList.add('wm-hold-active');
-          function tick2() {
-            hBtn.textContent = '⏸ ' + rem + 's';
-            if (rem <= 0) { clearInterval(holdInt); holdInt = null; hBtn.textContent = '✓ Hotovo!'; hBtn.classList.remove('wm-hold-active'); if (navigator.vibrate) navigator.vibrate([200,100,200]); return; }
-            rem--;
+          var si = parseInt(this.dataset.si);
+          var row = sess.rows[si];
+          // Read current input values before toggling
+          var kgInp = document.querySelector('.wm-sinp[data-field="kg"][data-si="' + si + '"]');
+          var rpInp = document.querySelector('.wm-sinp[data-field="reps"][data-si="' + si + '"]');
+          if (kgInp) row.kg = parseFloat(kgInp.value) || '';
+          if (rpInp) row.reps = parseInt(rpInp.value) || '';
+          row.done = !row.done;
+          var rowEl = document.querySelector('.wm-set-row[data-si="' + si + '"]');
+          if (rowEl) rowEl.classList.toggle('set-done', row.done);
+          this.classList.toggle('done', row.done);
+          // Start rest timer after marking done
+          if (row.done) {
+            var allDone = sess.rows.every(function(r) { return r.done; });
+            var restEl = document.querySelector('.wm-sets-section');
+            if (!allDone) {
+              startRest(sess.restSecs, rowEl);
+            } else {
+              var doneBtn = document.getElementById('wmDone');
+              if (doneBtn) { doneBtn.style.background = 'var(--green)'; doneBtn.textContent = '✓ Všechny série — Pokračovat'; }
+            }
+            if (navigator.vibrate) navigator.vibrate(40);
+          } else {
+            stopRest();
+            var doneBtn = document.getElementById('wmDone');
+            if (doneBtn) { doneBtn.style.background = ''; doneBtn.textContent = '✓ Hotovo'; }
           }
-          tick2();
-          holdInt = setInterval(tick2, 1000);
         });
-      }
+      });
 
       // Detail toggle
       var dtog = document.getElementById('wmDTog');
@@ -5422,6 +5512,12 @@ document.addEventListener('DOMContentLoaded', function() {
         if (arrow) arrow.textContent = open ? '▾' : '▴';
       });
 
+      var allDone = sess.rows.every(function(r) { return r.done; });
+      var doneBtn = document.getElementById('wmDone');
+      if (doneBtn) {
+        doneBtn.style.background = allDone ? 'var(--green)' : '';
+        doneBtn.textContent = allDone ? '✓ Všechny série — Pokračovat' : '✓ Hotovo';
+      }
       document.getElementById('wmPrev').disabled = idx === 0;
       document.getElementById('wmNext').disabled = idx === total - 1;
       document.getElementById('wmDone').disabled = false;
@@ -5459,12 +5555,15 @@ document.addEventListener('DOMContentLoaded', function() {
       exercises = collect(t);
       if (!exercises.length) return;
       idx = 0;
+      session = {}; // reset per-set session state
+      stopRest();
       render();
       document.getElementById('workoutMode').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
 
     function close() {
+      stopRest();
       document.getElementById('workoutMode').classList.remove('active');
       document.body.style.overflow = '';
     }
@@ -5479,18 +5578,20 @@ document.addEventListener('DOMContentLoaded', function() {
       if (idx < exercises.length - 1) { idx++; render(); }
     });
     document.getElementById('wmDone').addEventListener('click', function() {
+      stopRest();
       var ex = exercises[idx];
-      // Save kg/reps log
-      if (ex.uid) {
-        var kgEl = document.getElementById('wmLogKg');
-        var rpEl = document.getElementById('wmLogReps');
-        var kg = kgEl ? parseFloat(kgEl.value) || null : null;
-        var reps = rpEl ? parseInt(rpEl.value) || null : null;
-        if (kg || reps) {
+      // Save per-set log to localStorage
+      if (ex.uid && session[ex.uid]) {
+        var sess = session[ex.uid];
+        var sets = sess.rows.map(function(r) { return { kg: r.kg || null, reps: r.reps || null }; });
+        var hasSomeData = sets.some(function(s) { return s.kg || s.reps; });
+        if (hasSomeData) {
+          var bestKg = sets.reduce(function(m, s) { return s.kg > m ? s.kg : m; }, 0) || null;
+          var maxReps = sets.reduce(function(m, s) { return (s.reps || 0) > m ? s.reps : m; }, 0) || null;
           var logKey = 'ms_wlog_' + ex.uid;
           var arr = JSON.parse(localStorage.getItem(logKey) || '[]');
-          arr.unshift({ kg: kg, reps: reps, date: new Date().toISOString().slice(0,10) });
-          if (arr.length > 10) arr = arr.slice(0,10);
+          arr.unshift({ date: new Date().toISOString().slice(0,10), sets: sets, kg: bestKg, reps: maxReps });
+          if (arr.length > 20) arr = arr.slice(0, 20);
           localStorage.setItem(logKey, JSON.stringify(arr));
           if (typeof window.refreshExInfoTags === 'function') window.refreshExInfoTags();
         }
@@ -5500,15 +5601,14 @@ document.addEventListener('DOMContentLoaded', function() {
         var doneBtn = ex.row.querySelector('.ex-done-btn');
         if (doneBtn) toggleDone(doneBtn);
       }
-      // Flash green
-      var btn = this;
-      btn.classList.add('green');
-      setTimeout(function() { btn.classList.remove('green'); }, 350);
       // Advance or finish
+      var btn = this;
+      btn.style.background = 'var(--green)';
       setTimeout(function() {
+        btn.style.background = '';
         if (idx < exercises.length - 1) { idx++; render(); }
         else showFinish();
-      }, 380);
+      }, 300);
     });
 
     return { open: open, close: close };
