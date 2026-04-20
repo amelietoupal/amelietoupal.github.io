@@ -2493,37 +2493,45 @@ body {
   height: 100%; background: var(--accent); transition: width .4s ease;
 }
 
-/* ══ COMPACT EXERCISE ROWS ══════════════════════════════════
-   Circles inline-right, one clean line per exercise
-   ══════════════════════════════════════════════════════════ */
-.ex-row { flex-direction: row !important; align-items: stretch !important; }
+/* ══ EXERCISE ROWS — clean info layout ══════════════════════ */
+.ex-row { flex-direction: row !important; align-items: center !important; }
 .ex-row-inner {
   flex: 1; min-width: 0;
-  padding: 11px 6px 11px 16px !important;
+  padding: 12px 12px 12px 14px !important;
   min-height: unset !important;
   border-bottom: none !important;
+  align-items: center !important;
 }
-.ex-sets-block {
-  flex-direction: column !important;
-  flex-wrap: nowrap !important;
-  justify-content: center !important;
-  padding: 0 14px 0 0 !important;
-  background: transparent !important;
-  gap: 5px !important;
-  flex-shrink: 0;
-  align-self: stretch;
-  display: flex;
-  align-items: flex-end;
-}
-/* Compact circles for inline layout */
-.ex-sets-block .set-pill {
-  width: 32px !important; height: 32px !important;
-}
-.ex-sets-block .set-pills { gap: 6px !important; }
-/* Hide noisy lines in compact view */
+/* Hide the old sets block and noisy elements */
+.ex-sets-block { display: none !important; }
 .ex-sub { display: none !important; }
 .ex-chevron { display: none !important; }
 .set-reps-label { display: none !important; }
+/* Info tag: shows sets · reps · kg on the right */
+.ex-info-tag {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  padding-right: 2px;
+}
+.ex-info-sets {
+  font-size: 11px; font-weight: 700;
+  color: var(--ink2); white-space: nowrap;
+  letter-spacing: .3px;
+}
+.ex-info-reps {
+  font-size: 11px; color: var(--ink3);
+  white-space: nowrap;
+}
+.ex-info-kg {
+  font-size: 11px; font-weight: 700;
+  color: var(--accent); white-space: nowrap;
+}
+/* Done state: dim info tag */
+.ex-row.done .ex-info-tag { opacity: .4; }
 
 </style>
 
@@ -5446,6 +5454,7 @@ document.addEventListener('DOMContentLoaded', function() {
           arr.unshift({ kg: kg, reps: reps, date: new Date().toISOString().slice(0,10) });
           if (arr.length > 10) arr = arr.slice(0,10);
           localStorage.setItem(logKey, JSON.stringify(arr));
+          if (typeof window.refreshExInfoTags === 'function') window.refreshExInfoTags();
         }
       }
       // Mark done in source wcard
@@ -6127,6 +6136,7 @@ document.addEventListener('DOMContentLoaded', function() {
       localStorage.setItem('ms_ex_order_' + cardKey, JSON.stringify(order));
     }
     exitEditMode(card, true);
+    if (typeof window.refreshExInfoTags === 'function') window.refreshExInfoTags();
   }
 
   // 9. Exit edit mode
@@ -6485,43 +6495,59 @@ if ('serviceWorker' in navigator) {
   });
 })();
 
-/* ═══════════ SET CIRCLES TRANSFORM ═══════════ */
+/* ═══════════ EXERCISE ROW INFO TAGS ═══════════ */
 document.addEventListener('DOMContentLoaded', function() {
-  // Transform pills: extract reps label, store as data-label
+  // Store data-label on pills for workout player use
   document.querySelectorAll('.set-pills').forEach(function(group) {
     var pills = group.querySelectorAll('.set-pill');
     if (!pills.length) return;
-    // Get reps text from first pill (before any session restore)
     var repsText = (pills[0].dataset.label || pills[0].textContent || '').replace(/✓/g,'').trim();
     pills.forEach(function(p) {
       if (!p.dataset.label) p.dataset.label = p.textContent.replace(/✓/g,'').trim() || repsText;
     });
-    // Add reps label below circles
-    if (repsText && !group.parentNode.querySelector('.set-reps-label')) {
-      var lbl = document.createElement('div');
-      lbl.className = 'set-reps-label';
-      lbl.textContent = repsText;
-      group.parentNode.appendChild(lbl);
-    }
   });
 
-  // Show "Naposledy" log under each exercise name
-  document.querySelectorAll('.ex-row[data-uid]').forEach(function(row) {
+  function buildInfoTag(row) {
     var uid = row.dataset.uid;
-    var arr = JSON.parse(localStorage.getItem('ms_wlog_' + uid) || '[]');
-    if (!arr.length) return;
-    var l = arr[0];
-    var parts = [];
-    if (l.kg) parts.push(l.kg + ' kg');
-    if (l.reps) parts.push(l.reps + ' opak.');
-    if (!parts.length) return;
-    var nameEl = row.querySelector('.ex-name');
-    if (!nameEl || row.querySelector('.ex-last-log')) return;
-    var logEl = document.createElement('div');
-    logEl.className = 'ex-last-log';
-    logEl.textContent = 'Naposledy: ' + parts.join(' × ');
-    nameEl.insertAdjacentElement('afterend', logEl);
-  });
+    var pills = row.querySelectorAll('.set-pill');
+    var inline = row.querySelector('.ex-sets-inline');
+    var inner = row.querySelector('.ex-row-inner');
+    if (!inner) return;
+
+    // Remove existing tag if re-rendering
+    var old = inner.querySelector('.ex-info-tag');
+    if (old) old.remove();
+
+    // Determine sets count and reps label
+    var setsCount = pills.length;
+    var repsText = '';
+    if (pills.length) {
+      var fp = pills[0];
+      repsText = (fp.dataset.label || fp.textContent || '').replace(/✓/g,'').trim();
+    } else if (inline) {
+      repsText = inline.textContent.trim();
+    }
+
+    // Get kg: saved cfg → last log
+    var cfg = uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') : null;
+    var lastLog = uid ? JSON.parse(localStorage.getItem('ms_wlog_' + uid) || '[]') : [];
+    var kg = (cfg && cfg.kg) ? cfg.kg : (lastLog.length && lastLog[0].kg ? lastLog[0].kg : null);
+
+    var tag = document.createElement('div');
+    tag.className = 'ex-info-tag';
+    var html = '';
+    if (setsCount) html += '<span class="ex-info-sets">' + setsCount + '\u00a0série</span>';
+    if (repsText)  html += '<span class="ex-info-reps">' + repsText + '</span>';
+    if (kg)        html += '<span class="ex-info-kg">' + kg + '\u00a0kg</span>';
+    if (!html && !repsText) return;
+    tag.innerHTML = html;
+    inner.appendChild(tag);
+  }
+
+  document.querySelectorAll('.ex-row[data-uid]').forEach(buildInfoTag);
+  window.refreshExInfoTags = function() {
+    document.querySelectorAll('.ex-row[data-uid]').forEach(buildInfoTag);
+  };
 });
 
 /* ═══════════ OPEN PLAYER FROM QUICK-START / goToWorkout ═══════════ */
