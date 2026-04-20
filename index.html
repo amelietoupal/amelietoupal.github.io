@@ -5340,7 +5340,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var cfg = uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') : null;
       var pills = ex.row ? Array.from(ex.row.querySelectorAll('.set-pill')) : [];
       var inline = ex.row ? ex.row.querySelector('.ex-sets-inline') : null;
-      var setsCount = cfg && cfg.sets ? cfg.sets : (pills.length || (inline ? 1 : 0));
+      // Pills are authoritative (applyCfgToRow keeps them in sync with cfg.sets)
+      var setsCount = pills.length > 0 ? pills.length : (cfg && cfg.sets ? parseInt(cfg.sets) : (inline ? 0 : 0));
       var pillText = pills.length ? (pills[0].dataset.label || pills[0].textContent || '').replace(/✓/g,'').trim() : (inline ? inline.textContent.trim() : '');
       var plannedRepsNum = (cfg && cfg.reps) ? (cfg.reps.match(/\d+/) || [])[0] || ''
                          : (pillText.match(/\d+/) || [])[0] || '';
@@ -5362,7 +5363,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
       var lastSets = lastLog.length && lastLog[0].sets ? lastLog[0].sets : null;
       var rows = [];
-      for (var i = 0; i < Math.max(info.setsCount, 1); i++) {
+      for (var i = 0; i < info.setsCount; i++) {
         var lkg  = lastSets && lastSets[i] ? lastSets[i].kg   : info.plannedKg;
         var lrep = lastSets && lastSets[i] ? lastSets[i].reps : info.plannedRepsNum;
         rows.push({ kg: lkg, reps: lrep, done: false });
@@ -5443,14 +5444,18 @@ document.addEventListener('DOMContentLoaded', function() {
           '<div class="wm-detail-box" id="wmDBox">' + ex.detailHTML + '</div>'
         : '';
 
-      var rowsH = '';
-      for (var i = 0; i < sess.rows.length; i++) rowsH += renderSetRow(ex, i, sess);
-
-      var planReps = info.pillText || (info.plannedRepsNum ? info.plannedRepsNum + ' opak.' : '');
-      var setsH = '<div class="wm-sets-section">' +
-        (planReps ? '<div style="font-size:12px;color:var(--ink3);margin-bottom:10px;">' + info.setsCount + '\u00a0série\u00a0·\u00a0' + planReps + '</div>' : '') +
-        '<div class="wm-sets-hdr"><span>#</span><span>Minule</span><span>kg</span><span>opak.</span><span></span></div>' +
-        rowsH + '</div>';
+      var setsH = '';
+      if (sess.rows.length > 0) {
+        var rowsH = '';
+        for (var i = 0; i < sess.rows.length; i++) rowsH += renderSetRow(ex, i, sess);
+        var planReps = info.pillText || (info.plannedRepsNum ? info.plannedRepsNum + ' opak.' : '');
+        setsH = '<div class="wm-sets-section">' +
+          (planReps ? '<div style="font-size:12px;color:var(--ink3);margin-bottom:10px;">' + info.setsCount + '\u00a0série\u00a0·\u00a0' + planReps + '</div>' : '') +
+          '<div class="wm-sets-hdr"><span>#</span><span>Minule</span><span>kg</span><span>opak.</span><span></span></div>' +
+          rowsH + '</div>';
+      } else if (info.pillText) {
+        setsH = '<div style="margin-top:12px;font-size:14px;font-weight:600;color:var(--ink2);">' + info.pillText + '</div>';
+      }
 
       document.getElementById('wmBody').innerHTML =
         '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
@@ -5512,11 +5517,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (arrow) arrow.textContent = open ? '▾' : '▴';
       });
 
-      var allDone = sess.rows.every(function(r) { return r.done; });
+      var allDone = sess.rows.length === 0 || sess.rows.every(function(r) { return r.done; });
       var doneBtn = document.getElementById('wmDone');
       if (doneBtn) {
-        doneBtn.style.background = allDone ? 'var(--green)' : '';
-        doneBtn.textContent = allDone ? '✓ Všechny série — Pokračovat' : '✓ Hotovo';
+        doneBtn.style.background = allDone && sess.rows.length > 0 ? 'var(--green)' : '';
+        doneBtn.textContent = allDone && sess.rows.length > 0 ? '✓ Pokračovat →' : '✓ Hotovo';
       }
       document.getElementById('wmPrev').disabled = idx === 0;
       document.getElementById('wmNext').disabled = idx === total - 1;
