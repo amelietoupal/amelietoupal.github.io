@@ -690,18 +690,41 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .wm-sets .set-pills { gap: 8px; }
 .wm-sets .set-pill { padding: 10px 16px; font-size: 14px; border-radius: 10px; min-width: 44px; text-align: center; }
 /* Log section */
-.wm-log-section { margin-top: 14px; padding-top: 14px; border-top: 1.5px solid var(--border); }
-.wm-log-last { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 12px; min-height: 16px; }
-.wm-log-fields { display: flex; gap: 12px; flex-wrap: wrap; }
-.wm-log-field { flex: 1; min-width: 120px; }
-.wm-log-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink3); margin-bottom: 6px; }
-.wm-stepper { display: flex; align-items: center; gap: 0; border: 1.5px solid var(--border2); border-radius: 12px; overflow: hidden; background: var(--surface2); }
-.wm-step-btn { width: 44px; height: 52px; border: none; background: none; font-size: 22px; font-weight: 300; color: var(--ink2); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background .12s; -webkit-tap-highlight-color: transparent; }
-.wm-step-btn:hover { background: var(--border); }
-.wm-step-btn:active { background: var(--accent-pale); color: var(--accent); }
-.wm-step-inp { flex: 1; border: none; background: none; text-align: center; font-size: 22px; font-weight: 700; color: var(--black); font-family: var(--font-display); padding: 0; min-width: 0; width: 100%; outline: none; }
-.wm-step-inp::placeholder { color: var(--ink3); font-weight: 400; font-size: 16px; }
-.wm-step-unit { display: block; font-size: 10px; color: var(--ink3); font-weight: 600; letter-spacing: 1px; text-align: center; margin-top: 4px; }
+.wm-log-section { margin-top: 16px; padding-top: 16px; border-top: 1.5px solid var(--border); }
+.wm-log-plan { font-size: 12px; color: var(--ink2); font-weight: 600; margin-bottom: 4px; }
+.wm-log-last { font-size: 11px; color: var(--accent); font-weight: 600; margin-bottom: 14px; letter-spacing: .2px; }
+.wm-log-fields { display: flex; gap: 14px; }
+.wm-log-field { flex: 1; }
+.wm-log-lbl { display: block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--ink3); margin-bottom: 8px; padding-left: 2px; }
+.wm-stepper {
+  display: flex; align-items: stretch;
+  border: 2px solid var(--border2);
+  border-radius: 18px; overflow: hidden;
+  background: var(--white);
+  height: 80px;
+}
+.wm-step-btn {
+  width: 64px; flex-shrink: 0;
+  border: none; background: var(--surface2);
+  font-size: 30px; font-weight: 300; line-height: 1;
+  color: var(--ink2); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .1s, color .1s;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+.wm-step-btn:active { background: var(--accent); color: #fff; }
+.wm-step-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; border-left: 1.5px solid var(--border); border-right: 1.5px solid var(--border); }
+.wm-step-inp {
+  border: none; background: none;
+  text-align: center;
+  font-size: 30px; font-weight: 800;
+  color: var(--black); font-family: var(--font-display);
+  width: 100%; padding: 0; outline: none;
+  line-height: 1.1;
+}
+.wm-step-inp::placeholder { color: var(--border2); font-weight: 400; font-size: 22px; }
+.wm-step-unit { font-size: 10px; color: var(--ink3); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
 
 .schedule-editor { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 14px 16px; margin-bottom: 20px; }
 .schedule-editor-hd { display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
@@ -5287,9 +5310,6 @@ document.addEventListener('DOMContentLoaded', function() {
         ? '<button class="wm-detail-toggle" id="wmDTog">📋 Jak na to <span class="wm-detail-arrow" id="wmDArrow">▾</span></button>' +
           '<div class="wm-detail-box" id="wmDBox">' + ex.detailHTML + '</div>'
         : '';
-      var setsH = ex.setsHTML
-        ? '<div class="wm-sets">' + ex.setsHTML + '</div>'
-        : '';
 
       // Pilates hold timer button
       var holdBtn = '';
@@ -5297,45 +5317,63 @@ document.addEventListener('DOMContentLoaded', function() {
         holdBtn = '<button class="wm-hold-btn" id="wmHoldBtn">⏱ Hold 30s</button>';
       }
 
-      // Log inputs — pre-fill: last log > planned cfg > pill text
+      // Pre-fill: last log > saved cfg > pill text from exercise row
       var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
       var cfg = ex.uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + ex.uid) || 'null') : null;
       var pillText = ex.row ? (function() {
         var p = ex.row.querySelector('.set-pill');
         return p ? (p.dataset.label || p.textContent || '').replace(/✓/g,'').trim() : '';
       })() : '';
+      var inlineText = ex.row ? (function() {
+        var s = ex.row.querySelector('.ex-sets-inline');
+        return s ? s.textContent.trim() : '';
+      })() : '';
+      var fallbackText = pillText || inlineText;
       var plannedKg = cfg && cfg.kg ? cfg.kg : '';
-      var plannedReps = cfg && cfg.reps ? (cfg.reps.match(/\d+/) || [])[0] || '' : (pillText.match(/\d+/) || [])[0] || '';
-      var lastKg = lastLog.length && lastLog[0].kg ? lastLog[0].kg : plannedKg;
-      var lastReps = lastLog.length && lastLog[0].reps ? lastLog[0].reps : plannedReps;
-      var lastTxt = getLastLogText(ex.uid);
+      var plannedReps = (cfg && cfg.reps) ? (cfg.reps.match(/\d+/) || [])[0] || ''
+                      : (fallbackText.match(/\d+/) || [])[0] || '';
+      var fillKg   = lastLog.length && lastLog[0].kg   ? lastLog[0].kg   : plannedKg;
+      var fillReps = lastLog.length && lastLog[0].reps  ? lastLog[0].reps : plannedReps;
+      var lastTxt  = getLastLogText(ex.uid);
+
+      // Sets label from pill count or inline text
+      var setsCount = ex.row ? ex.row.querySelectorAll('.set-pill').length : 0;
+      var setsLbl = setsCount ? setsCount + '\u00a0série · ' : '';
+      var repsLbl = fallbackText || (cfg && cfg.reps ? cfg.reps : '');
+      var planLbl = (setsLbl + repsLbl).trim().replace(/·\s*$/, '');
+
       var logH = '<div class="wm-log-section">' +
-        '<div class="wm-log-last">' + lastTxt + '</div>' +
+        (planLbl ? '<div class="wm-log-plan">' + planLbl + '</div>' : '') +
+        (lastTxt  ? '<div class="wm-log-last">' + lastTxt + '</div>' : '') +
         '<div class="wm-log-fields">' +
         '<div class="wm-log-field">' +
           '<span class="wm-log-lbl">Váha</span>' +
           '<div class="wm-stepper">' +
             '<button class="wm-step-btn" id="wmKgMinus">−</button>' +
-            '<input class="wm-step-inp" id="wmLogKg" type="number" step="2.5" min="0" placeholder="—" inputmode="decimal" value="' + lastKg + '">' +
+            '<div class="wm-step-center">' +
+              '<input class="wm-step-inp" id="wmLogKg" type="number" step="2.5" min="0" placeholder="0" inputmode="decimal" value="' + fillKg + '">' +
+              '<span class="wm-step-unit">kg</span>' +
+            '</div>' +
             '<button class="wm-step-btn" id="wmKgPlus">+</button>' +
           '</div>' +
-          '<span class="wm-step-unit">kg</span>' +
         '</div>' +
         '<div class="wm-log-field">' +
           '<span class="wm-log-lbl">Opakování</span>' +
           '<div class="wm-stepper">' +
             '<button class="wm-step-btn" id="wmRepsMinus">−</button>' +
-            '<input class="wm-step-inp" id="wmLogReps" type="number" step="1" min="1" placeholder="—" inputmode="numeric" value="' + lastReps + '">' +
+            '<div class="wm-step-center">' +
+              '<input class="wm-step-inp" id="wmLogReps" type="number" step="1" min="1" placeholder="0" inputmode="numeric" value="' + fillReps + '">' +
+              '<span class="wm-step-unit">opak.</span>' +
+            '</div>' +
             '<button class="wm-step-btn" id="wmRepsPlus">+</button>' +
           '</div>' +
-          '<span class="wm-step-unit">opak.</span>' +
         '</div>' +
         '</div></div>';
 
       document.getElementById('wmBody').innerHTML =
         '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
         '<div class="wm-name">' + ex.name + '</div>' +
-        subH + rpeH + setsH + logH + holdBtn + detH + '</div>';
+        subH + rpeH + logH + holdBtn + detH + '</div>';
 
       // Wire stepper buttons
       var kgInp = document.getElementById('wmLogKg');
