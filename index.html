@@ -760,6 +760,23 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   transition: all .15s; -webkit-tap-highlight-color: transparent;
 }
 .wm-sdone.done { background: var(--green); border-color: var(--green); color: #fff; }
+/* Add/delete set controls */
+.wm-sdel {
+  background: none; border: none; cursor: pointer; padding: 0;
+  width: 26px; height: 26px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--ink3);
+  transition: background .15s, color .15s; -webkit-tap-highlight-color: transparent;
+}
+.wm-sdel:active { background: #fee; color: var(--red, #e53); }
+.wm-add-set-btn {
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  width: 100%; margin-top: 12px; padding: 12px;
+  border: 1.5px dashed var(--border2); border-radius: 12px;
+  background: none; cursor: pointer; font-size: 14px; font-weight: 700;
+  color: var(--accent); letter-spacing: .3px;
+  transition: background .15s; -webkit-tap-highlight-color: transparent;
+}
+.wm-add-set-btn:active { background: var(--surface2); }
 /* Inline rest timer */
 .wm-rest-inline {
   display: flex; align-items: center; gap: 12px;
@@ -5340,8 +5357,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var cfg = uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + uid) || 'null') : null;
       var pills = ex.row ? Array.from(ex.row.querySelectorAll('.set-pill')) : [];
       var inline = ex.row ? ex.row.querySelector('.ex-sets-inline') : null;
-      // Pills are authoritative (applyCfgToRow keeps them in sync with cfg.sets)
-      var setsCount = pills.length > 0 ? pills.length : (cfg && cfg.sets ? parseInt(cfg.sets) : (inline ? 0 : 0));
+      // Pills are authoritative. Inline exercises (5min, 6×) never get a set table.
+      var setsCount = pills.length > 0 ? pills.length : 0;
       var pillText = pills.length ? (pills[0].dataset.label || pills[0].textContent || '').replace(/✓/g,'').trim() : (inline ? inline.textContent.trim() : '');
       var plannedRepsNum = (cfg && cfg.reps) ? (cfg.reps.match(/\d+/) || [])[0] || ''
                          : (pillText.match(/\d+/) || [])[0] || '';
@@ -5414,15 +5431,100 @@ document.addEventListener('DOMContentLoaded', function() {
       var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
       var prevSets = lastLog.length && lastLog[0].sets ? lastLog[0].sets : null;
       var prevText = prevSets && prevSets[i]
-        ? ((prevSets[i].kg ? prevSets[i].kg + 'kg' : '') + (prevSets[i].kg && prevSets[i].reps ? '×' : '') + (prevSets[i].reps ? prevSets[i].reps : '') || '—')
-        : '—';
+        ? ((prevSets[i].kg ? prevSets[i].kg + 'kg' : '') + (prevSets[i].kg && prevSets[i].reps ? '\u00d7' : '') + (prevSets[i].reps || '') || '\u2014')
+        : '\u2014';
       return '<div class="wm-set-row' + (row.done ? ' set-done' : '') + '" data-si="' + i + '">' +
-        '<span class="wm-snum">' + (i + 1) + '</span>' +
+        '<button class="wm-snum wm-sdel" data-si="' + i + '" title="Odebrat sérii">' + (i + 1) + '</button>' +
         '<span class="wm-sprev">' + prevText + '</span>' +
         '<input class="wm-sinp" type="number" step="0.5" min="0" inputmode="decimal" placeholder="kg" value="' + (row.kg || '') + '" data-field="kg" data-si="' + i + '">' +
         '<input class="wm-sinp" type="number" step="1" min="1" inputmode="numeric" placeholder="opak" value="' + (row.reps || '') + '" data-field="reps" data-si="' + i + '">' +
         '<button class="wm-sdone' + (row.done ? ' done' : '') + '" data-si="' + i + '">✓</button>' +
       '</div>';
+    }
+
+    function buildSetsHTML(ex, sess, info) {
+      if (sess.rows.length === 0 && !info.pillText) return '';
+      if (sess.rows.length === 0) {
+        return '<div class="wm-sets-section"><div style="margin-top:4px;font-size:14px;font-weight:600;color:var(--ink2);">' + info.pillText + '</div>' +
+          '<button class="wm-add-set-btn" id="wmAddSet">＋ Přidat sérii</button></div>';
+      }
+      var rowsH = '';
+      for (var i = 0; i < sess.rows.length; i++) rowsH += renderSetRow(ex, i, sess);
+      var planReps = info.pillText || (info.plannedRepsNum ? info.plannedRepsNum + ' opak.' : '');
+      return '<div class="wm-sets-section" id="wmSetsSection">' +
+        (planReps ? '<div style="font-size:12px;color:var(--ink3);margin-bottom:10px;">' + sess.rows.length + '\u00a0série\u00a0\u00b7\u00a0' + planReps + '</div>' : '') +
+        '<div class="wm-sets-hdr"><span title="Klepni pro odebrání">#</span><span>Minule</span><span>kg</span><span>opak.</span><span></span></div>' +
+        rowsH +
+        '<button class="wm-add-set-btn" id="wmAddSet">＋ Přidat sérii</button>' +
+        '</div>';
+    }
+
+    function wireSetsEvents(ex, sess, reRender) {
+      // Input changes → save to session
+      document.querySelectorAll('.wm-sinp').forEach(function(inp) {
+        inp.addEventListener('change', function() {
+          var si = parseInt(this.dataset.si);
+          var field = this.dataset.field;
+          sess.rows[si][field] = field === 'kg' ? (parseFloat(this.value) || '') : (parseInt(this.value) || '');
+        });
+      });
+
+      // Delete row (tap set number)
+      document.querySelectorAll('.wm-sdel').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var si = parseInt(this.dataset.si);
+          if (sess.rows.length <= 1) return; // keep at least 1
+          // Save current inputs first
+          document.querySelectorAll('.wm-sinp[data-si="' + si + '"]').forEach(function(inp) {
+            sess.rows[si][inp.dataset.field] = inp.dataset.field === 'kg' ? (parseFloat(inp.value)||'') : (parseInt(inp.value)||'');
+          });
+          sess.rows.splice(si, 1);
+          stopRest();
+          reRender();
+        });
+      });
+
+      // Add set
+      var addBtn = document.getElementById('wmAddSet');
+      if (addBtn) addBtn.addEventListener('click', function() {
+        // Copy last row's kg/reps as default
+        var last = sess.rows[sess.rows.length - 1] || {};
+        sess.rows.push({ kg: last.kg || '', reps: last.reps || '', done: false });
+        reRender();
+        // Scroll to bottom
+        setTimeout(function() { var b = document.getElementById('wmBody'); if(b) b.scrollTop = b.scrollHeight; }, 50);
+      });
+
+      // Done buttons (mark set complete)
+      document.querySelectorAll('.wm-sdone').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var si = parseInt(this.dataset.si);
+          var row = sess.rows[si];
+          var kgInp = document.querySelector('.wm-sinp[data-field="kg"][data-si="' + si + '"]');
+          var rpInp = document.querySelector('.wm-sinp[data-field="reps"][data-si="' + si + '"]');
+          if (kgInp) row.kg = parseFloat(kgInp.value) || '';
+          if (rpInp) row.reps = parseInt(rpInp.value) || '';
+          row.done = !row.done;
+          var rowEl = document.querySelector('.wm-set-row[data-si="' + si + '"]');
+          if (rowEl) rowEl.classList.toggle('set-done', row.done);
+          this.classList.toggle('done', row.done);
+          if (row.done) {
+            var allDone = sess.rows.every(function(r) { return r.done; });
+            if (!allDone) {
+              startRest(sess.restSecs, rowEl);
+            } else {
+              stopRest();
+              var db = document.getElementById('wmDone');
+              if (db) { db.style.background = 'var(--green)'; db.textContent = '✓ Pokračovat →'; }
+            }
+            if (navigator.vibrate) navigator.vibrate(40);
+          } else {
+            stopRest();
+            var db = document.getElementById('wmDone');
+            if (db) { db.style.background = ''; db.textContent = '✓ Hotovo'; }
+          }
+        });
+      });
     }
 
     function render() {
@@ -5444,66 +5546,28 @@ document.addEventListener('DOMContentLoaded', function() {
           '<div class="wm-detail-box" id="wmDBox">' + ex.detailHTML + '</div>'
         : '';
 
-      var setsH = '';
-      if (sess.rows.length > 0) {
-        var rowsH = '';
-        for (var i = 0; i < sess.rows.length; i++) rowsH += renderSetRow(ex, i, sess);
-        var planReps = info.pillText || (info.plannedRepsNum ? info.plannedRepsNum + ' opak.' : '');
-        setsH = '<div class="wm-sets-section">' +
-          (planReps ? '<div style="font-size:12px;color:var(--ink3);margin-bottom:10px;">' + info.setsCount + '\u00a0série\u00a0·\u00a0' + planReps + '</div>' : '') +
-          '<div class="wm-sets-hdr"><span>#</span><span>Minule</span><span>kg</span><span>opak.</span><span></span></div>' +
-          rowsH + '</div>';
-      } else if (info.pillText) {
-        setsH = '<div style="margin-top:12px;font-size:14px;font-weight:600;color:var(--ink2);">' + info.pillText + '</div>';
+      function refreshSets() {
+        var sec = document.getElementById('wmSetsSection') || document.querySelector('.wm-sets-section');
+        if (sec) sec.outerHTML = buildSetsHTML(ex, sess, info);
+        wireSetsEvents(ex, sess, refreshSets);
+        updateDoneBtn();
+      }
+
+      function updateDoneBtn() {
+        var allDone = sess.rows.length === 0 || sess.rows.every(function(r) { return r.done; });
+        var db = document.getElementById('wmDone');
+        if (db) {
+          db.style.background = allDone && sess.rows.length > 0 ? 'var(--green)' : '';
+          db.textContent = allDone && sess.rows.length > 0 ? '✓ Pokračovat →' : '✓ Hotovo';
+        }
       }
 
       document.getElementById('wmBody').innerHTML =
         '<div class="wm-card' + (isDone ? ' done' : '') + '">' +
         '<div class="wm-name">' + ex.name + '</div>' +
-        subH + rpeH + setsH + detH + '</div>';
+        subH + rpeH + buildSetsHTML(ex, sess, info) + detH + '</div>';
 
-      // Save input values back to session on change
-      document.querySelectorAll('.wm-sinp').forEach(function(inp) {
-        inp.addEventListener('change', function() {
-          var si = parseInt(this.dataset.si);
-          var field = this.dataset.field;
-          var v = field === 'kg' ? (parseFloat(this.value) || '') : (parseInt(this.value) || '');
-          sess.rows[si][field] = v;
-        });
-      });
-
-      // Done buttons
-      document.querySelectorAll('.wm-sdone').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var si = parseInt(this.dataset.si);
-          var row = sess.rows[si];
-          // Read current input values before toggling
-          var kgInp = document.querySelector('.wm-sinp[data-field="kg"][data-si="' + si + '"]');
-          var rpInp = document.querySelector('.wm-sinp[data-field="reps"][data-si="' + si + '"]');
-          if (kgInp) row.kg = parseFloat(kgInp.value) || '';
-          if (rpInp) row.reps = parseInt(rpInp.value) || '';
-          row.done = !row.done;
-          var rowEl = document.querySelector('.wm-set-row[data-si="' + si + '"]');
-          if (rowEl) rowEl.classList.toggle('set-done', row.done);
-          this.classList.toggle('done', row.done);
-          // Start rest timer after marking done
-          if (row.done) {
-            var allDone = sess.rows.every(function(r) { return r.done; });
-            var restEl = document.querySelector('.wm-sets-section');
-            if (!allDone) {
-              startRest(sess.restSecs, rowEl);
-            } else {
-              var doneBtn = document.getElementById('wmDone');
-              if (doneBtn) { doneBtn.style.background = 'var(--green)'; doneBtn.textContent = '✓ Všechny série — Pokračovat'; }
-            }
-            if (navigator.vibrate) navigator.vibrate(40);
-          } else {
-            stopRest();
-            var doneBtn = document.getElementById('wmDone');
-            if (doneBtn) { doneBtn.style.background = ''; doneBtn.textContent = '✓ Hotovo'; }
-          }
-        });
-      });
+      wireSetsEvents(ex, sess, refreshSets);
 
       // Detail toggle
       var dtog = document.getElementById('wmDTog');
@@ -5517,12 +5581,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (arrow) arrow.textContent = open ? '▾' : '▴';
       });
 
-      var allDone = sess.rows.length === 0 || sess.rows.every(function(r) { return r.done; });
-      var doneBtn = document.getElementById('wmDone');
-      if (doneBtn) {
-        doneBtn.style.background = allDone && sess.rows.length > 0 ? 'var(--green)' : '';
-        doneBtn.textContent = allDone && sess.rows.length > 0 ? '✓ Pokračovat →' : '✓ Hotovo';
-      }
+      updateDoneBtn();
       document.getElementById('wmPrev').disabled = idx === 0;
       document.getElementById('wmNext').disabled = idx === total - 1;
       document.getElementById('wmDone').disabled = false;
