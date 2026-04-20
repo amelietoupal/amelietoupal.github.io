@@ -5289,10 +5289,17 @@ document.addEventListener('DOMContentLoaded', function() {
         holdBtn = '<button class="wm-hold-btn" id="wmHoldBtn">⏱ Hold 30s</button>';
       }
 
-      // Log inputs — pre-fill from last session
+      // Log inputs — pre-fill: last log > planned cfg > pill text
       var lastLog = ex.uid ? JSON.parse(localStorage.getItem('ms_wlog_' + ex.uid) || '[]') : [];
-      var lastKg = lastLog.length && lastLog[0].kg ? lastLog[0].kg : '';
-      var lastReps = lastLog.length && lastLog[0].reps ? lastLog[0].reps : '';
+      var cfg = ex.uid ? JSON.parse(localStorage.getItem('ms_ex_cfg_' + ex.uid) || 'null') : null;
+      var pillText = ex.row ? (function() {
+        var p = ex.row.querySelector('.set-pill');
+        return p ? (p.dataset.label || p.textContent || '').replace(/✓/g,'').trim() : '';
+      })() : '';
+      var plannedKg = cfg && cfg.kg ? cfg.kg : '';
+      var plannedReps = cfg && cfg.reps ? (cfg.reps.match(/\d+/) || [])[0] || '' : (pillText.match(/\d+/) || [])[0] || '';
+      var lastKg = lastLog.length && lastLog[0].kg ? lastLog[0].kg : plannedKg;
+      var lastReps = lastLog.length && lastLog[0].reps ? lastLog[0].reps : plannedReps;
       var lastTxt = getLastLogText(ex.uid);
       var logH = '<div class="wm-log-section">' +
         '<div class="wm-log-last">' + lastTxt + '</div>' +
@@ -5459,6 +5466,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     return { open: open, close: close };
   })();
+  window.wm = wm;
 
   // ── WORKOUT CHOICE DIALOG ─────────────────────────────────
   (function() {
@@ -6521,13 +6529,11 @@ document.addEventListener('DOMContentLoaded', function() {
   // Patch quickStartBtn to open player
   var btn = document.getElementById('quickStartBtn');
   if (!btn) return;
-  var origClick = btn.onclick;
-  btn.addEventListener('click', function(e) {
-    // goToWorkout still fires via existing handler; open player after short delay
+  btn.addEventListener('click', function() {
     setTimeout(function() {
       var todayCard = document.querySelector('.today-card.active');
       var type = todayCard ? todayCard.dataset.type : 'a';
-      if (type && type !== 'rest') openWorkoutPlayer(type);
+      if (type && type !== 'rest' && window.wm) window.wm.open(type);
     }, 100);
   });
 })();
