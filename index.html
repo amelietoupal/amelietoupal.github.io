@@ -5351,6 +5351,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Per-session state: keyed by uid
     var session = {};
     var restInt = null, restTotal = 90;
+    var WSTATE_KEY = 'ms_active_wk';
+
+    function saveState() {
+      try { localStorage.setItem(WSTATE_KEY, JSON.stringify({ type: type, idx: idx, session: session })); } catch(e) {}
+    }
+    function clearState() {
+      localStorage.removeItem(WSTATE_KEY);
+    }
 
     function getExInfo(ex) {
       var uid = ex.uid;
@@ -5466,6 +5474,7 @@ document.addEventListener('DOMContentLoaded', function() {
           var si = parseInt(this.dataset.si);
           var field = this.dataset.field;
           sess.rows[si][field] = field === 'kg' ? (parseFloat(this.value) || '') : (parseInt(this.value) || '');
+          saveState();
         });
       });
 
@@ -5480,6 +5489,7 @@ document.addEventListener('DOMContentLoaded', function() {
           });
           sess.rows.splice(si, 1);
           stopRest();
+          saveState();
           reRender();
         });
       });
@@ -5490,6 +5500,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Copy last row's kg/reps as default
         var last = sess.rows[sess.rows.length - 1] || {};
         sess.rows.push({ kg: last.kg || '', reps: last.reps || '', done: false });
+        saveState();
         reRender();
         // Scroll to bottom
         setTimeout(function() { var b = document.getElementById('wmBody'); if(b) b.scrollTop = b.scrollHeight; }, 50);
@@ -5523,6 +5534,7 @@ document.addEventListener('DOMContentLoaded', function() {
             var db = document.getElementById('wmDone');
             if (db) { db.style.background = ''; db.textContent = '✓ Hotovo'; }
           }
+          saveState();
         });
       });
     }
@@ -5589,6 +5601,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function showFinish() {
+      clearState(); // workout complete — clear saved state
       var doneCount = exercises.filter(function(e) {
         return e.row && e.row.classList.contains('done');
       }).length;
@@ -5618,16 +5631,26 @@ document.addEventListener('DOMContentLoaded', function() {
       type = t;
       exercises = collect(t);
       if (!exercises.length) return;
-      idx = 0;
-      session = {}; // reset per-set session state
+      // Restore saved session if same workout type, otherwise start fresh
+      var saved = null;
+      try { saved = JSON.parse(localStorage.getItem(WSTATE_KEY) || 'null'); } catch(e) {}
+      if (saved && saved.type === t && saved.session) {
+        idx = (saved.idx >= 0 && saved.idx < exercises.length) ? saved.idx : 0;
+        session = saved.session;
+      } else {
+        idx = 0;
+        session = {};
+      }
       stopRest();
       render();
       document.getElementById('workoutMode').classList.add('active');
       document.body.style.overflow = 'hidden';
+      saveState();
     }
 
     function close() {
       stopRest();
+      clearState();
       document.getElementById('workoutMode').classList.remove('active');
       document.body.style.overflow = '';
     }
@@ -5636,10 +5659,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('wmClose').addEventListener('click', close);
 
     document.getElementById('wmPrev').addEventListener('click', function() {
-      if (idx > 0) { idx--; render(); }
+      if (idx > 0) { idx--; render(); saveState(); }
     });
     document.getElementById('wmNext').addEventListener('click', function() {
-      if (idx < exercises.length - 1) { idx++; render(); }
+      if (idx < exercises.length - 1) { idx++; render(); saveState(); }
     });
     document.getElementById('wmDone').addEventListener('click', function() {
       stopRest();
@@ -5670,7 +5693,7 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.style.background = 'var(--green)';
       setTimeout(function() {
         btn.style.background = '';
-        if (idx < exercises.length - 1) { idx++; render(); }
+        if (idx < exercises.length - 1) { idx++; render(); saveState(); }
         else showFinish();
       }, 300);
     });
@@ -6764,6 +6787,16 @@ document.addEventListener('DOMContentLoaded', function() {
       if (type && type !== 'rest' && window.wm) window.wm.open(type);
     }, 100);
   });
+})();
+
+/* ═══════════ AUTO-RESTORE ACTIVE WORKOUT AFTER PAGE RELOAD ═══════════ */
+(function() {
+  var saved = null;
+  try { saved = JSON.parse(localStorage.getItem('ms_active_wk') || 'null'); } catch(e) {}
+  if (saved && saved.type && window.wm) {
+    // Short delay so DOM finishes settling
+    setTimeout(function() { window.wm.open(saved.type); }, 400);
+  }
 })();
 </script>
 
