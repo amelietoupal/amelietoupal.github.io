@@ -5680,6 +5680,11 @@ document.addEventListener('DOMContentLoaded', function() {
           arr.unshift({ date: new Date().toISOString().slice(0,10), sets: sets, kg: bestKg, reps: maxReps });
           if (arr.length > 20) arr = arr.slice(0, 20);
           localStorage.setItem(logKey, JSON.stringify(arr));
+          // Sync best kg back to planned config so the card stays current
+          var cfgSync = JSON.parse(localStorage.getItem('ms_ex_cfg_' + ex.uid) || '{}');
+          if (bestKg) cfgSync.kg = bestKg;
+          localStorage.setItem('ms_ex_cfg_' + ex.uid, JSON.stringify(cfgSync));
+          if (ex.row) applyCfgToRow(ex.row);
           if (typeof window.refreshExInfoTags === 'function') window.refreshExInfoTags();
         }
       }
@@ -5698,7 +5703,22 @@ document.addEventListener('DOMContentLoaded', function() {
       }, 300);
     });
 
-    return { open: open, close: close };
+    return {
+      open: open,
+      close: close,
+      // Called from saveEditMode when plan is updated — resets pristine sessions so
+      // the player picks up new cfg values when it next renders that exercise.
+      resyncFromCfg: function(uid) {
+        var s = session[uid];
+        if (!s) return; // not yet visited, initSession will read fresh cfg
+        var pristine = s.rows.every(function(r) { return !r.done; });
+        if (pristine) {
+          delete session[uid];
+          saveState();
+          if (exercises[idx] && exercises[idx].uid === uid) render();
+        }
+      }
+    };
   })();
   window.wm = wm;
 
@@ -6340,6 +6360,8 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!isNaN(kg) && kg >= 0) cfg.kg = kg;
       }
       localStorage.setItem('ms_ex_cfg_' + uid, JSON.stringify(cfg));
+      // Sync change to player session if exercise hasn't been started yet
+      if (window.wm && typeof window.wm.resyncFromCfg === 'function') window.wm.resyncFromCfg(uid);
       // Move ex-row (+ detail) to match edit-row order — er stays as anchor
       var detail = row.nextElementSibling;
       var hasDetail = detail && detail.classList.contains('ex-detail');
