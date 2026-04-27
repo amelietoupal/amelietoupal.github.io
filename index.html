@@ -2677,6 +2677,26 @@ body {
 /* Done state: dim info tag */
 .ex-row.done .ex-info-tag { opacity: .4; }
 
+/* ── HERO PHOTOS ─────────────────────────────────────────── */
+/* mix-blend-mode: multiply removes light/grey photo backgrounds
+   so only the figure stays visible on white page backgrounds  */
+.hero-photo {
+  position: absolute;
+  bottom: -8px;
+  right: -16px;
+  height: 290px;
+  width: auto;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  user-select: none;
+  object-fit: contain;
+  object-position: bottom right;
+  opacity: .92;
+}
+@media (max-width: 500px) {
+  .hero-photo { height: 190px; opacity: .7; right: -8px; }
+}
+
 </style>
 
 <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIk1vZGVsa2EgRml0bmVzcyBHdWlkZSIsCiAgInNob3J0X25hbWUiOiAiTW9kZWxrYSIsCiAgImRlc2NyaXB0aW9uIjogIlR2xa9qIDI0dMO9ZGVubsOtIGZpdG5lc3MgcGzDoW4iLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZkZjZmOSIsCiAgInRoZW1lX2NvbG9yIjogIiNlMDU1ODUiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWwsPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxMDAgMTAwJz48dGV4dCB5PScuOWVtJyBmb250LXNpemU9JzkwJz7wn4y4PC90ZXh0Pjwvc3ZnPiIsICJzaXplcyI6ICJhbnkiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIiB9CiAgXQp9">
@@ -2733,10 +2753,10 @@ body {
   <div class="content">
     <div style="padding:0 0 32px;border-bottom:1px solid var(--black);margin-bottom:32px;position:relative;overflow:hidden;">
       <span class="section-num">01 — Plán</span>
-      <h2 style="font-family:var(--font-display);font-size:clamp(64px,18vw,140px);line-height:.88;letter-spacing:.02em;text-transform:uppercase;color:var(--black);margin-bottom:0;">
+      <h2 style="font-family:var(--font-display);font-size:clamp(64px,18vw,140px);line-height:.88;letter-spacing:.02em;text-transform:uppercase;color:var(--black);margin-bottom:0;position:relative;z-index:1;">
         Tvůj<br><em style="color:var(--accent);font-style:normal;">plán.</em>
       </h2>
-      <div style="position:absolute;right:-4px;top:0;font-family:var(--font-display);font-size:180px;color:rgba(0,0,0,.04);line-height:1;letter-spacing:-4px;pointer-events:none;user-select:none;">PLAN</div>
+      <img class="hero-photo" src="image/stretch.jpg" alt="" loading="lazy">
     </div>
 
 <!-- TODAY'S WORKOUT -->
@@ -2931,11 +2951,12 @@ body {
 
 <div id="treninky" class="section">
   <div class="content">
-    <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;">
+    <div style="padding:0 0 28px;border-bottom:1px solid var(--black);margin-bottom:28px;position:relative;overflow:hidden;">
       <span class="section-num">02 — Tréninky</span>
-      <h2 style="font-family:var(--font-display);font-size:clamp(56px,15vw,120px);line-height:.88;text-transform:uppercase;color:var(--black);">
+      <h2 style="font-family:var(--font-display);font-size:clamp(56px,15vw,120px);line-height:.88;text-transform:uppercase;color:var(--black);position:relative;z-index:1;">
         Tréninky<br><em style="color:var(--accent);font-style:normal;">A &amp; B</em>
       </h2>
+      <img class="hero-photo" src="image/lunge.jpg" alt="" loading="lazy">
     </div>
     <p class="section-intro">Dva silové tréninky pokrývají celé tělo s důrazem na zadek, nohy a vzpřímené držení. Střídej je v rytmu <strong>A–B–A</strong>, příští týden <strong>B–A–B</strong>. Každý cvik má vlastní set-pilulek — klepni na cvičení pro instrukce a zapni timer pauzy.</p>
 
