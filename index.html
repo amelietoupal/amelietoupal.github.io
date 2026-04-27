@@ -16,50 +16,7 @@
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-:root {
-  --today-bg-1: #0d0a18;
-  --today-bg-2: #1a1030;
-  --white:   #ffffff;
-  --black:   #0f0c1a;
-  --ink:     #1c1728;
-  --ink2:    #45395c;
-  --ink3:    #7a6894;
-  --muted:   #b0a4c8;
-  --border:  #e2ddef;
-  --border2: #c4bcd8;
-  --surface: #ffffff;
-  --surface2:#f4f1f9;
-  --accent:      #d63470;
-  --accent2:     #b01f55;
-  --accent-pale: rgba(214,52,112,.07);
-  --accent-bg:   rgba(214,52,112,.1);
-  --bg:       var(--white);
-  --text:     var(--black);
-  --text2:    var(--ink2);
-  --text3:    var(--ink3);
-  --green:    #1d7a50;
-  --green-bg: rgba(29,122,80,.08);
-  --purple:   #5a42b8;
-  --purple-bg:rgba(90,66,184,.08);
-  --brown:    #c07858;
-  --brown-bg: rgba(192,120,88,.08);
-  --orange:   #d97840;
-  --blue:     #2860a8;
-  --red:      #d63470;
-  --card-bg:  var(--surface2);
-  --soft:     var(--border);
-  --light:    var(--ink3);
-  --font-display: 'Syne', 'Arial Black', sans-serif;
-  --font-script:  'Caveat', cursive;
-  --font-body:    'DM Sans', system-ui, sans-serif;
-  --r-xl: 18px; --r-lg: 14px; --r-md: 10px; --r-sm: 7px; --r-xs: 5px;
-  --sh-sm: 0 2px 8px rgba(214,52,112,.1);
-  --sh:    0 4px 20px rgba(214,52,112,.14);
-  --sh-lg: 0 8px 36px rgba(214,52,112,.18);
-  --nav-h: 60px;
-  --sp-xs: 4px; --sp-sm: 8px; --sp-md: 16px;
-  --sp-lg: 24px; --sp-xl: 48px; --sp-2xl: 80px;
-}
+/* ── Design tokens consolidated in vintage :root block below ── */
 
 html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
 body {
@@ -1057,87 +1014,113 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
    kraft brown · baby blue · butter cream · red
    ══════════════════════════════════════════════════════════ */
 
-/* ── PALETTE ─────────────────────────────────────────────── */
+/* ── VINTAGE PALETTE — single source of truth ─────────────── */
 :root {
-  --cream:    #F5EFCC;
-  --white:    #F5EFCC;
-  --surface:  #FAF6E0;
-  --surface2: #EDE7C0;
-  --bg:       #F5EFCC;
+  /* Paper tones */
+  --cream:    #f0e6c0;
+  --white:    #f0e6c0;
+  --surface:  #f5edce;
+  --surface2: #e4d8a8;
+  --bg:       #f0e6c0;
 
-  --black:  #2C1F0E;
-  --ink:    #2C1F0E;
-  --ink2:   #5A4422;
-  --ink3:   #8B6E42;
-  --muted:  #BBA878;
+  /* Ink */
+  --black:  #1e1206;
+  --ink:    #1e1206;
+  --ink2:   #4a3010;
+  --ink3:   #836430;
+  --muted:  #b09060;
 
-  --border:  #DDD4A0;
-  --border2: #CCC090;
-  --soft:    #DDD4A0;
+  --border:  #d0c080;
+  --border2: #bca060;
+  --soft:    #d0c080;
 
-  /* Red accent — T&T signature */
-  --accent:      #C83028;
-  --accent2:     #A82020;
-  --accent-pale: rgba(200,48,40,.09);
-  --accent-bg:   rgba(200,48,40,.14);
+  /* Vintage red — aged Coca-Cola */
+  --accent:      #c02818;
+  --accent2:     #962010;
+  --accent-pale: rgba(192,40,24,.09);
+  --accent-bg:   rgba(192,40,24,.14);
+  --red:         #c02818;
 
-  /* Stripe colors */
-  --kraft:      #A89E7A;
-  --babyblue:   #A8C8D8;
-  --sage:       #A8C8D8;       /* map old sage → baby blue */
-  --sage-dark:  #6A9AB0;
-  --sage-pale:  rgba(168,200,216,.15);
-  --sage-bg:    rgba(168,200,216,.25);
+  /* Stripe / structural */
+  --kraft:    #9a8e68;
+  --babyblue: #88b0c8;
+  --sage:     #88b0c8;
+  --sage-dark:#5a8aaa;
+  --sage-pale:rgba(136,176,200,.15);
+  --sage-bg:  rgba(136,176,200,.25);
 
-  --today-bg-1: #A89E7A;
-  --today-bg-2: #9A9070;
+  /* Today hero — deep espresso */
+  --today-bg-1: #1e1206;
+  --today-bg-2: #342010;
 
-  --sh-sm: 0 2px 14px rgba(44,31,14,.10);
-  --sh:    0 4px 26px rgba(44,31,14,.13);
-  --sh-lg: 0 8px 44px rgba(44,31,14,.18);
+  /* Shadows — warm amber */
+  --sh-sm: 0 2px 14px rgba(30,18,6,.14);
+  --sh:    0 4px 26px rgba(30,18,6,.18);
+  --sh-lg: 0 8px 44px rgba(30,18,6,.24);
 
-  --r-xl: 20px;
-  --r-lg: 16px;
-  --r-md: 12px;
-  --r-sm: 8px;
+  /* Workout type colours — muted vintage */
+  --green:    #3a6428;
+  --green-bg: rgba(58,100,40,.12);
+  --purple:   #583878;
+  --purple-bg:rgba(88,56,120,.12);
+  --brown:    #885030;
+  --brown-bg: rgba(136,80,48,.12);
+  --orange:   #be6e20;
+  --blue:     #285878;
+  --text:    var(--black);
+  --text2:   var(--ink2);
+  --text3:   var(--ink3);
+  --card-bg: var(--surface2);
+  --light:   var(--ink3);
+
+  /* Typography */
+  --font-display: 'Syne', 'Arial Black', sans-serif;
+  --font-script:  'Caveat', cursive;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing & radii */
+  --r-xl: 20px; --r-lg: 16px; --r-md: 12px; --r-sm: 8px; --r-xs: 5px;
+  --nav-h: 60px;
+  --sp-xs: 4px; --sp-sm: 8px; --sp-md: 16px;
+  --sp-lg: 24px; --sp-xl: 48px; --sp-2xl: 80px;
 }
 
 [data-theme="dark"] {
-  --today-bg-1: #080610;
-  --today-bg-2: #0f0c20;
-  --white:   #100e1c;
-  --black:   #f0ecfc;
-  --ink:     #e8e2f8;
-  --ink2:    #a898d0;
-  --ink3:    #6858a0;
-  --muted:   #44385c;
-  --border:  rgba(255,255,255,0.08);
-  --border2: rgba(255,255,255,0.15);
-  --surface: #18162a;
-  --surface2:#201e34;
-  --card-bg: #201e34;
-  --soft:    rgba(255,255,255,0.07);
-  --bg:      #100e1c;
-  --text:    #e8e2f8;
-  --text2:   #a898d0;
-  --text3:   #6858a0;
-  --green:    #22a066;
-  --green-bg: rgba(34,160,102,.22);
-  --purple:   #7a64e0;
-  --purple-bg:rgba(122,100,224,.22);
-  --brown-bg: rgba(192,120,88,.22);
-  --accent:       #e8407c;
-  --accent2:      #c02860;
-  --accent-pale: rgba(232,64,124,.18);
-  --accent-bg:   rgba(232,64,124,.22);
-  --sh-sm: 0 2px 16px rgba(0,0,0,.55);
-  --sh:    0 6px 32px rgba(0,0,0,.65);
-  --sh-lg: 0 14px 60px rgba(0,0,0,.75);
-  --r-xl: 26px;
-  --r-lg: 22px;
-  --r-md: 16px;
-  --r-sm: 10px;
-  --r-xs: 6px;
+  /* Dark vintage — aged newspaper at night */
+  --today-bg-1: #0e0a04;
+  --today-bg-2: #1c1208;
+  --white:   #1a1408;
+  --cream:   #1a1408;
+  --black:   #f0e0b0;
+  --ink:     #e8d4a0;
+  --ink2:    #c0a060;
+  --ink3:    #887040;
+  --muted:   #504030;
+  --border:  rgba(240,224,176,.1);
+  --border2: rgba(240,224,176,.18);
+  --surface: #201808;
+  --surface2:#2a2010;
+  --card-bg: #2a2010;
+  --soft:    rgba(240,224,176,.08);
+  --bg:      #1a1408;
+  --text:    #e8d4a0;
+  --text2:   #c0a060;
+  --text3:   #887040;
+  --kraft:   #3a3020;
+  --babyblue:#305870;
+  --accent:       #e03c28;
+  --accent2:      #b82c18;
+  --accent-pale: rgba(224,60,40,.18);
+  --accent-bg:   rgba(224,60,40,.24);
+  --green:    #5a9040;
+  --green-bg: rgba(90,144,64,.22);
+  --purple:   #8060a0;
+  --purple-bg:rgba(128,96,160,.22);
+  --brown-bg: rgba(136,80,48,.22);
+  --sh-sm: 0 2px 16px rgba(0,0,0,.6);
+  --sh:    0 6px 32px rgba(0,0,0,.7);
+  --sh-lg: 0 14px 60px rgba(0,0,0,.8);
+  --r-xl: 26px; --r-lg: 22px; --r-md: 16px; --r-sm: 10px; --r-xs: 6px;
 }
 
 /* ── BODY: vertical stripe wallpaper ─────────────────────── */
