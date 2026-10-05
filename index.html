@@ -672,7 +672,7 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
 .chart-val-pill strong { color: var(--accent); }
 
 /* ── STORIES EXPORT ──────────────────────────────────────── */
-.stories-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, #c96b88, #a85572); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.stories-btn { width: 100%; padding: 13px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; border-radius: var(--r-md); font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; }
 
 
 /* ── PILATES HOLD TIMER ──────────────────────────────────── */
@@ -1123,16 +1123,9 @@ input:focus, textarea:focus { outline: none; border-color: var(--accent); box-sh
   --r-xl: 26px; --r-lg: 22px; --r-md: 16px; --r-sm: 10px; --r-xs: 6px;
 }
 
-/* ── BODY: vertical stripe wallpaper ─────────────────────── */
+/* ── BODY ────────────────────────────────────────────────── */
 body {
-  background-color: var(--kraft);
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent       0px,
-    transparent       28px,
-    var(--babyblue)   28px,
-    var(--babyblue)   56px
-  );
+  background-color: var(--cream);
 }
 
 /* ── SECTION: cream floating card on stripes ─────────────── */
@@ -1170,36 +1163,45 @@ body {
 /* ── STICKY WEEK ─────────────────────────────────────────── */
 .sticky-week { background: var(--cream); border-bottom-color: var(--border); }
 
-/* ── TODAY HERO: bold stripe card ────────────────────────── */
+/* ── TODAY HERO: dark photo card ─────────────────────────── */
 .today {
-  background-color: var(--kraft);
-  background-image: repeating-linear-gradient(
-    90deg,
-    transparent     0px,
-    transparent     22px,
-    var(--babyblue) 22px,
-    var(--babyblue) 44px
-  );
+  background: #1a0e04;
   position: relative;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 20px;
 }
-/* Cream content area float inside today */
-.today::before {
-  content: none;
+.today-bg-img {
+  position: absolute;
+  right: 0; top: 0;
+  width: 58%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: .28;
+  pointer-events: none;
+  user-select: none;
 }
-.today-date   { color: rgba(255,255,255,.65); text-shadow: 0 1px 3px rgba(0,0,0,.3); }
-.today-rec    { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.3); font-weight: 600; }
-.today-title  { color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,.35); }
-/* Today category cards: cream pills on stripe */
+/* gradient overlay so text stays readable */
+.today::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, #1a0e04 42%, transparent 80%);
+  pointer-events: none;
+}
+.today::before { content: none; }
+.today > * { position: relative; z-index: 1; }
+.today-date   { color: rgba(255,255,255,.5); }
+.today-rec    { color: var(--accent); font-weight: 700; letter-spacing: .5px; }
+.today-title  { color: #fff; font-size: 32px; letter-spacing: 1px; }
+/* Category cards on dark background */
 .today-card {
-  background: rgba(245,239,204,.88);
-  border-color: rgba(245,239,204,.7);
+  background: rgba(255,255,255,.08);
+  border-color: rgba(255,255,255,.14);
 }
-.today-card:hover { background: rgba(245,239,204,1); border-color: var(--accent); }
+.today-card:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.3); }
 .today-card.active { background: var(--accent); border-color: var(--accent); }
-.today-card .tc-name { color: var(--black); }
-.today-card .tc-sub  { color: var(--ink3); }
+.today-card .tc-name { color: #fff; }
+.today-card .tc-sub  { color: rgba(255,255,255,.55); }
 .today-card.active .tc-name { color: #fff; }
 .today-card.active .tc-sub  { color: rgba(255,255,255,.75); }
 /* Week strip */
@@ -2670,11 +2672,12 @@ body {
   height: 290px;
   width: auto;
   mix-blend-mode: multiply;
+  filter: contrast(1.15) brightness(1.18) saturate(1.1);
   pointer-events: none;
   user-select: none;
   object-fit: contain;
   object-position: bottom right;
-  opacity: .92;
+  opacity: .95;
 }
 @media (max-width: 500px) {
   .hero-photo { height: 190px; opacity: .7; right: -8px; }
@@ -2744,6 +2747,7 @@ body {
 
 <!-- TODAY'S WORKOUT -->
 <div class="today">
+  <img class="today-bg-img" src="workout/IMG_9067.jpeg" alt="" loading="lazy">
   <div class="today-date" id="todayDate"></div>
   <div class="today-rec" id="todayRec"></div>
   <div class="today-title">Co dnes trénuješ?</div>
